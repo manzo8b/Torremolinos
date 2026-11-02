@@ -13,3 +13,11 @@ html{scroll-behavior:smooth}body{background:var(--v6-paper);color:var(--v6-ink)}
 .v06-footer-links{display:flex;gap:11px 19px;flex-wrap:wrap;font-size:12px;line-height:1.5}.v06-footer-links a{color:#dcebe5;text-decoration:underline;text-underline-offset:3px}.v06-footer-links a:hover{color:#f3c59e}
 @media(max-width:760px){.torre-home .hero-grid:after{background:linear-gradient(180deg,rgba(15,53,57,.9) 0%,rgba(15,53,57,.78) 51%,rgba(24,63,64,.23) 85%,rgba(17,49,54,.7) 100%)}.torre-home .hero h1 em{color:#f5d6b8}.music-intro{padding-top:52px}.music-shell{grid-template-columns:1fr}.music-body{padding:31px 24px}.music-body h2{font-size:54px}.music-art{min-height:225px;grid-row:1}.music-disc{height:185px}.torre-agenda .highlight{min-height:180px}}
 @media(prefers-reduced-motion:reduce){.torre-preview *, .music-shell *{animation:none!important;transition:none!important}}
+
+/* hero music is immediately visible; playback remains a conscious visitor action */
+.hero-sound-shortcut{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:15px;position:relative;z-index:2}
+.hero-sound-shortcut button{background:rgba(235,245,234,.96);border:1px solid #def2dd;color:#174e50;padding:10px 15px;border-radius:100px;font:900 12px/1.3 "DM Sans",sans-serif;box-shadow:0 5px 17px #143c4030;cursor:pointer;transition:background .15s,transform .15s}
+.hero-sound-shortcut button:hover{background:#fff;transform:translateY(-1px)}
+.hero-sound-shortcut button[aria-pressed=true]{background:#e6c49d;color:#173f41;border-color:#e6c49d}
+.hero-sound-shortcut small{color:#f0eade;font-size:11px;text-shadow:0 1px 6px #0d3739}
+@media(max-width:720px){.hero-sound-shortcut{gap:8px;margin-top:13px}.hero-sound-shortcut button{padding:10px 13px}.hero-sound-shortcut small{font-size:10px}}
