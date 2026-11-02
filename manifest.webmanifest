@@ -1,12 +1,12 @@
 {
-  "name": "TORREMOLINOS — Discover, explore, belong",
+  "name": "TORREMOLINOS — Guía local independiente",
   "short_name": "TORREMOLINOS",
-  "description": "Independent city guide for visitors and locals on the Costa del Sol",
+  "description": "Guía independiente de Torremolinos con gastronomía, cultura, eventos LGBTQ+, historias y música",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#fbfaf6",
-  "theme_color": "#0a4152",
+  "background_color": "#f5f1e8",
+  "theme_color": "#1c5056",
   "icons": [
     {
       "src": "./favicon.svg",
