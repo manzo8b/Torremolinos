@@ -1,0 +1,59 @@
+name: TORREMOLINOS · LGBTQ Events Scanner
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+concurrency:
+  group: torremolinos-events-scan
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout curated agenda
+        uses: actions/checkout@v4
+      - name: Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Test the scanner against known fixtures
+        run: python3 scripts/scan_events.py --fixture-dir scripts/fixtures --out reports/fixture-check --strict
+      - name: Scan public organiser and association sources
+        run: python3 scripts/scan_events.py --out reports/agenda-scan
+      - name: Store report for editorial audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: torremolinos-lgbt-events-scan
+          path: reports/agenda-scan/
+          retention-days: 30
+      - name: Create or update one editorial review issue if sources changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! python3 -c 'import json; assert json.load(open("reports/agenda-scan/scan-result.json"))["reviewRequired"]'; then
+            echo "No discrepancies: no issue required."
+            exit 0
+          fi
+          TITLE="[Agenda] Revisar nuevas fechas LGBTQ+"
+          DIGEST=$(cat reports/agenda-scan/digest.txt)
+          cp reports/agenda-scan/scan-report.md reports/agenda-scan/issue-body.md
+          printf '\n<!-- scanner-digest:%s -->\n' "$DIGEST" >> reports/agenda-scan/issue-body.md
+          NUMBER=$(gh issue list --state open --json number,title --jq '.[] | select(.title=="[Agenda] Revisar nuevas fechas LGBTQ+") | .number' | head -n 1 || true)
+          if [ -z "$NUMBER" ]; then
+            gh issue create --title "$TITLE" --body-file reports/agenda-scan/issue-body.md || echo "Issues are unavailable; report preserved as workflow artifact."
+          else
+            CURRENT=$(gh issue view "$NUMBER" --json body --jq '.body' || true)
+            if ! printf '%s' "$CURRENT" | grep -Fq "scanner-digest:$DIGEST"; then
+              gh issue edit "$NUMBER" --body-file reports/agenda-scan/issue-body.md || true
+              gh issue comment "$NUMBER" --body "El escáner detectó un informe nuevo. Revisa el reporte antes de editar agenda/events.json. Ejecución: $GITHUB_RUN_ID" || true
+            else
+              echo "Existing issue already reflects this source state."
+            fi
+          fi
