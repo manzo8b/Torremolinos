@@ -1,6 +1,6 @@
 # TORREMOLINOS — Fonti, fotografie, licenze
 
-## Fotografia di copertina
+## Fotografia storica precedentemente usata in copertina
 
 - **Playas de Torremolinos** — Adam Cli, 18 aprile 2023
 - Fonte: https://commons.wikimedia.org/wiki/File:Playas_de_Torremolinos.jpg
@@ -23,7 +23,7 @@ Ultima consultazione fonti principali: 2 novembre 2026. Non sono forniti orari, 
 
 - **La Nogalera view.jpg** — Tyk, settembre 2010; fonte https://commons.wikimedia.org/wiki/File:La_Nogalera_view.jpg ; licenza [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/). Immagine storica: **non** descrive lo stato attuale della piazza.
 - **Pasaje.begoña.jpg** — BernardaAlba, 8 agosto 2024; fonte https://commons.wikimedia.org/wiki/File:Pasaje.bego%C3%B1a.jpg ; licenza [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/).
-- **Playas de Torremolinos.jpg** — Adam Cli, aprile 2023; la foto è già accreditata sopra (CC BY-SA 4.0). Usata per la copertina principale e l'articolo sulla città.
+- **Playas de Torremolinos.jpg** — Adam Cli, aprile 2023; credito storico della v0.1–v0.2. La home e le schede editoriali principali della v0.4 impiegano ora foto originali dell'autore.
 
 Le tre fotografie sono caricate da Wikimedia Commons, non archiviate nel repository; il sito dipende dalla raggiungibilità dei servizi esterni. Sulle fotografie con licenza ShareAlike non si applica una dichiarazione di esclusività. Gli screenshot dei tre mockup forniti dall'utente sono riferimenti stilistici e **non** sono utilizzati come asset.
 
@@ -41,7 +41,7 @@ Ultima verifica editoriale: 2 novembre 2026. Nessun evento futuro è presentato 
 
 L'autore degli scatti caricati in conversazione ha confermato di averli realizzati e ha **autorizzato per questo sito le fotografie paesaggistiche senza primi piani riconoscibili**. Il pacchetto preparato contiene otto copie WebP ottimizzate, senza metadati EXIF.
 
-**Stato al 2 novembre 2026:** integrazione frontend completata, **file binari non ancora presenti nel repository**, la pubblicazione delle immagini attende il caricamento. La homepage mantiene il fallback a Wikimedia Commons e non mostra la galleria fotografica locale finché gli asset mancano.
+**Stato aggiornato al 2 novembre 2026:** tutti gli otto WebP sono stati caricati dall'autore e verificati sul repository GitHub. La homepage utilizza direttamente il panorama desktop e quello mobile; la galleria è attiva. La cover dell'articolo principale e la fotografia di contesto di San Miguel sono originali.
 
 - Credito indicato dalla micro-app quando le immagini sono disponibili: © Archivo fotográfico TORREMOLINOS · fotografía original.
 - Diritti: tutti riservati all'autore; nessuna licenza Creative Commons concessa alle fotografie originali.
@@ -50,3 +50,12 @@ L'autore degli scatti caricati in conversazione ha confermato di averli realizza
 - I riferimenti alle foto Wikimedia nei primi articoli restano applicabili fino a sostituzione esplicita della specifica immagine.
 
 Vedi [istruzioni per il caricamento](./assets/photos/README.md).
+
+## Voci eventi verificate il 2 novembre 2026
+
+Selezione redazionale iniziale nella pagina `agenda/`, con schede fonte e date non live:
+- 3 novembre — Taller de yoga para mayores: https://www.torremolinoscultura.es/es/eventos/detail/taller-de-yoga-para-mayores-eiav
+- 4 novembre–3 dicembre — Exposición Club Deportivo Adaptado Al-Andalus: https://www.torremolinoscultura.es/es/eventos/detail/exposicion-club-deportivo-adaptado-al-andalus-torremolinos-daie
+- 4 novembre — Visita al Vivero Municipal: https://www.torremolinoscultura.es/es/eventos/detail/visita-al-vivero-municipal-lcfh
+
+La selezione non costituisce un calendario di disponibilità in tempo reale. Le date trascorse vengono nascoste dal browser. Fonte generale: https://www.torremolinoscultura.es/eventos
