@@ -143,3 +143,13 @@ body{background:var(--paper);color:var(--ink)}
  .agenda-home-copy{padding:31px 25px}.agenda-home h2{font-size:57px}
  .agenda-home-photo{height:215px;min-height:0}
 }
+
+/* v0.5 — culinary directory invitation */
+.directory-teaser{background:#e5eee5;border:1px solid #d7e4da;border-radius:17px;display:flex;align-items:center;gap:20px;text-decoration:none;padding:20px 24px;color:#16474e;transition:box-shadow .15s,transform .15s}
+.directory-teaser:hover{box-shadow:0 17px 30px #12484b19;transform:translateY(-2px)}
+.directory-teaser>span{font-size:35px;line-height:1;flex:0 0 40px}
+.directory-teaser>div{flex:1;min-width:0}
+.directory-teaser strong{display:block;font:600 31px/1 "Cormorant Garamond",Georgia,serif;letter-spacing:-.035em}
+.directory-teaser small{display:block;margin-top:7px;color:#5b7773;font-size:12px}
+.directory-teaser>b{font-size:12px;white-space:nowrap;padding:10px 15px;border-radius:12px;background:#174f53;color:white}
+@media(max-width:720px){.directory-teaser{padding:17px;gap:12px;flex-wrap:wrap}.directory-teaser>span{flex-basis:32px;font-size:29px}.directory-teaser strong{font-size:28px}.directory-teaser small{font-size:11px}.directory-teaser>b{margin-left:44px}}
