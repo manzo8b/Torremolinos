@@ -7,7 +7,7 @@
 ## Qué se ha creado
 
 - `agenda/index.html`: agenda de eventos para visitantes y residentes, búsqueda, categorías, mes, grandes festivales y eventos pendientes de verificación.
-- `agenda/events.json`: fuente editable con 23 fechas contrastadas inicialmente (20 eventos LGBTQ+ y 3 generales) y 5 eventos bajo seguimiento.
+- `agenda/events.json`: fuente editable con 27 fechas contrastadas inicialmente (24 eventos LGBTQ+ y 3 generales) y 5 eventos bajo seguimiento.
 - `agenda/app.js`: navegación y filtros por fecha, enlaces originales, calendario de Google con evento de día completo y opciones multilingües ES/EN/IT/DE/FR/RU.
 - `scripts/scan_events.py`: scanner **de lectura**, con fuentes permitidas y patrones estrictos para los encabezados de fechas de MadBear e Infinity; lista de títulos en ACOGAT. No requiere tokens ni claves de pago.
 - `.github/workflows/event-scanner.yml`: control diario programado a las 06:17 UTC, además de ejecución manual; guarda un informe en un artefacto de Actions por 30 días y abre/actualiza una incidencia editorial si detecta discrepancias o fuentes inaccesibles.
