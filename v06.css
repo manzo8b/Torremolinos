@@ -235,3 +235,16 @@ body, .torre-home, .torre-comer, .torre-agenda, .torre-preview{background:#fff!i
 .torre-home .nogalera-teaser>a{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;text-decoration:none;background:#0d615c;color:#fff;border-radius:11px;padding:13px 17px;min-height:47px;font-size:12px;font-weight:900}
 .torre-home .nogalera-teaser>a:hover{background:#084c49}
 @media(max-width:780px){.torre-home .nogalera-teaser{flex-direction:column;align-items:flex-start}.torre-home .nogalera-teaser>a{width:auto}}
+
+/* Local guide feature · La Nogalera */
+.torre-home .nogalera-feature{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:385px;margin:34px auto 56px;border:1px solid #dce9e6;border-radius:20px;overflow:hidden;background:#f2f8f5}
+.torre-home .nogalera-feature-photo{min-height:370px;position:relative;background:#e2f0ea}
+.torre-home .nogalera-feature-photo img{width:100%;height:100%;min-height:370px;object-fit:cover;display:block}
+.torre-home .nogalera-feature-photo small{position:absolute;left:16px;bottom:16px;color:white;background:#095a60db;border-radius:6px;padding:7px 10px;font-size:10px;font-weight:850;letter-spacing:.08em}
+.torre-home .nogalera-feature-copy{padding:clamp(28px,4vw,54px);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:14px}
+.torre-home .nogalera-feature-copy h2{font:600 clamp(48px,5vw,70px)/.95 "Cormorant Garamond",Georgia,serif;letter-spacing:-.035em;margin:0;color:#124c4f}
+.torre-home .nogalera-feature-copy p{font-size:14px;line-height:1.8;color:#476b6e;margin:0}
+.torre-home .nogalera-feature-copy a{display:inline-flex;padding:12px 18px;color:white;background:#0b625e;font-weight:900;font-size:12px;border-radius:11px;text-decoration:none}
+.torre-home .nogalera-feature-copy a:hover{background:#084c49}
+.torre-home .nogalera-feature-copy small{font-size:11px;color:#617d7a}
+@media(max-width:720px){.torre-home .nogalera-feature{grid-template-columns:1fr;margin:28px auto 45px}.torre-home .nogalera-feature-photo,.torre-home .nogalera-feature-photo img{min-height:240px;max-height:330px}.torre-home .nogalera-feature-copy{padding:28px}.torre-home .nogalera-feature-copy h2{font-size:51px}}
