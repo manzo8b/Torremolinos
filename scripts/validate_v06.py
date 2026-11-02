@@ -21,7 +21,7 @@ MUST_EXIST=[
  "agenda/index.html","agenda/events.json",
  "comer/index.html","comer/data.js",
  "legal/index.html","legal/app.js","legal/data.js","legal/styles.css",
- "legal/editorial-policy.html","legal/event-source-policy.html",
+ "legal/editorial-policy.html","legal/event-source-policy.html","legal/ai-transparency.html",
  "legal/copyright-credits.html","service-worker.js","sitemap.xml","robots.txt",
 ]
 class MiniParser(HTMLParser):
@@ -64,7 +64,7 @@ def validate():
  x=ET.parse(ROOT/"sitemap.xml").getroot()
  namespace="{http://www.sitemaps.org/schemas/sitemap/0.9}"
  urls=[e.text for e in x.findall(".//"+namespace+"loc")]
- assert len(urls)==len(set(urls))==13,("sitemap",len(urls))
+ assert len(urls)==len(set(urls))==14,("sitemap",len(urls))
  assert all(u.startswith(BASE) for u in urls)
  for url in urls:
   route=unquote(urlsplit(url).path.split("/Torremolinos/",1)[-1])
@@ -75,9 +75,9 @@ def validate():
   part=f.replace("index.html","") if f.endswith("/index.html") else f
   assert BASE+part not in urls,("draft listed in sitemap",f)
  manifest=json.loads((ROOT/"manifest.webmanifest").read_text("utf-8"))
- assert manifest["theme_color"]=="#1c5056"
+ assert manifest["theme_color"]=="#07565d"
  sw=(ROOT/"service-worker.js").read_text("utf-8")
- assert "torremolinos-v06" in sw and "'./listen/'" in sw
+ assert "torremolinos-v07" in sw and "'./listen/'" in sw
  assert "Sitemap: "+BASE+"sitemap.xml" in (ROOT/"robots.txt").read_text("utf-8")
- print("TORREMOLINOS v0.6 QA PASS | 13 canonical URLs | 6 language packs | controlled music | draft noindex")
+ print("TORREMOLINOS v0.6 QA PASS | 14 canonical URLs | 6 language packs | controlled music | draft noindex")
 if __name__=="__main__":validate()
