@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://manzo8b.github.io/Torremolinos/sitemap.xml
