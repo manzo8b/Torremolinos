@@ -1,5 +1,5 @@
 // TORREMOLINOS v0.4 — offline shell and key editorial pages
-const CACHE='torremolinos-v04';
+const CACHE='torremolinos-v05';
 const FILES=[
   './','./index.html','./editorial.css','./favicon.svg','./manifest.webmanifest',
   './assets/photos/hero-torremolinos-desktop.webp',
@@ -9,7 +9,7 @@ const FILES=[
   './assets/photos/paseo-palmeras.webp',
   './assets/photos/costa-torremolinos.webp',
   './assets/photos/paseo-centro.webp',
-  './stories/','./stories/article.css','./agenda/',
+  './stories/','./stories/article.css','./agenda/', './agenda/styles.css', './agenda/app.js', './agenda/events.json', './comer/', './comer/styles.css', './comer/data.js', './comer/app.js',
   './stories/torremolinos-mucho-mas-que-sol-y-playa.html',
   './stories/la-nogalera-donde-la-noche-tiene-historia.html',
   './stories/pasaje-begona-memoria-de-libertad.html',
