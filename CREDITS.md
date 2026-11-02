@@ -59,3 +59,17 @@ Selezione redazionale iniziale nella pagina `agenda/`, con schede fonte e date n
 - 4 novembre — Visita al Vivero Municipal: https://www.torremolinoscultura.es/es/eventos/detail/visita-al-vivero-municipal-lcfh
 
 La selezione non costituisce un calendario di disponibilità in tempo reale. Le date trascorse vengono nascoste dal browser. Fonte generale: https://www.torremolinoscultura.es/eventos
+
+## Fonti principali per la directory e l'agenda LGBTQ+ (2 novembre 2026)
+
+- Torremolinos PLUS (ACOGAT), agenda LGBTQ+: https://torremolinosplus.com/en/whats-on/
+- INFINITY Festival, giugno 2027: https://www.infinityfestival.eu/
+- MadBear Beach, agosto 2027: https://madbear.org/madbear-beach-torremolinos
+- Daddy Week, date discordanti nelle descrizioni secondarie, **non confermate**: https://gaymap.es/en/events/torremolinos/daddy-week-torremolinos/
+- Eventi comunali: https://www.torremolinoscultura.es/eventos
+- Guadalupe Bajondillo e Nogalera, guida comunale Ruta de la Tapa 2025: https://turismotorremolinos.es/wp-content/uploads/2025/11/Ruta-Tapa-Torremolinos_2025_Tapas.pdf
+- Cozzy Inn / Cozy Inns, sito operatore: https://torremolinoscozyinns.com/cafeteria-gastro-bar-bajondillo-beach/
+- ANDALUZ, indirizzo verificato da scheda pubblica. **Il concept attuale dichiarato nel progetto non equivale a una verifica del menù.**
+- Altre attività in `comer/data.js`: riferimenti per singola scheda, senza recensire o classificare oggettivamente i locali.
+
+Dati aggiornati editorialmente al 2 novembre 2026; non costituiscono disponibilità, orari o prezzi live.
