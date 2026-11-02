@@ -35,3 +35,18 @@ Le tre fotografie sono caricate da Wikimedia Commons, non archiviate nel reposit
 - Le fonti riportano cifre diverse per la retata: la formulazione iniziale dell'articolo è volutamente prudente e ne esplicita i limiti.
 
 Ultima verifica editoriale: 2 novembre 2026. Nessun evento futuro è presentato come confermato senza fonte ufficiale. Le traduzioni dei tre articoli non sono ancora pubblicate.
+
+
+## Archivio fotografico originale TORREMOLINOS (pronto per il caricamento)
+
+L'autore degli scatti caricati in conversazione ha confermato di averli realizzati e ha **autorizzato per questo sito le fotografie paesaggistiche senza primi piani riconoscibili**. Il pacchetto preparato contiene otto copie WebP ottimizzate, senza metadati EXIF.
+
+**Stato al 2 novembre 2026:** integrazione frontend completata, **file binari non ancora presenti nel repository**, la pubblicazione delle immagini attende il caricamento. La homepage mantiene il fallback a Wikimedia Commons e non mostra la galleria fotografica locale finché gli asset mancano.
+
+- Credito indicato dalla micro-app quando le immagini sono disponibili: © Archivo fotográfico TORREMOLINOS · fotografía original.
+- Diritti: tutti riservati all'autore; nessuna licenza Creative Commons concessa alle fotografie originali.
+- File: `assets/photos/hero-torremolinos-desktop.webp`, `hero-torremolinos-mobile.webp`, `playa-palmeras-panorama.webp`, `el-bajondillo-letrero.webp`, `paseo-palmeras.webp` e altri tre WebP in pacchetto.
+- Persone riconoscibili, drag e processione: **esclusi** dalla pubblicazione automatica, da valutare separatamente.
+- I riferimenti alle foto Wikimedia nei primi articoli restano applicabili fino a sostituzione esplicita della specifica immagine.
+
+Vedi [istruzioni per il caricamento](./assets/photos/README.md).
