@@ -23,7 +23,7 @@ La v0.1 è un unico `index.html` con CSS/JS incorporati: nessuna build, nessuna 
 
 ## Limiti editoriali
 
-Non inventare orari, prezzi, eventi, aperture o recensioni. Questa versione presenta luoghi e quartieri riconoscibili; **non** contiene ancora una directory commerciale verificata né un calendario eventi aggiornato. I dati locali sono statici e i link esterni vanno controllati periodicamente. La traduzione russa è iniziale e prudente; serve revisione madrelingua. Le informazioni LGBTQ+ sono trattate senza profilazione degli utenti.
+Non inventare orari, prezzi, eventi, aperture o recensioni. Questa versione presenta luoghi e quartieri riconoscibili; **non** contiene ancora una directory commerciale verificata; la selezione eventi in agenda è datata e non costituisce monitoraggio in tempo reale. I dati locali sono statici e i link esterni vanno controllati periodicamente. La traduzione russa è iniziale e prudente; serve revisione madrelingua. Le informazioni LGBTQ+ sono trattate senza profilazione degli utenti.
 
 ## Roadmap
 
@@ -58,8 +58,18 @@ Vedere [CREDITS.md](./CREDITS.md). Suggerimenti o correzioni tramite GitHub Issu
 - Confermata l'autorizzazione per paesaggi fotografati dall'autore senza primi piani riconoscibili.
 - Preparate 8 immagini WebP in un pacchetto locale privato, ridimensionate e prive di EXIF.
 - Homepage predisposta per 2 copertine autentiche responsive (desktop e mobile).
-- Nuova sezione fotografica `La ciudad desde dentro` con 3 scene, attivata **solo** quando le foto sono realmente presenti.
-- Fallback automatico alla copertina Wikimedia quando le foto non sono disponibili, senza affermazioni ingannevoli sulla pubblicazione.
+- Nuova sezione fotografica `La ciudad desde dentro` con tre fotografie originali dell'autore, ora presenti su GitHub.
+- Copertina fotografica locale responsive: il sito usa direttamente le due foto originali caricate sul repository.
 - Credito proposto: `© Archivo fotográfico TORREMOLINOS · fotografía original`, diritti riservati.
 - Le fotografie con performer e primi piani sono fuori dall'upload autorizzato.
-- **Upload da completare:** gli 8 file WebP non sono stati caricati automaticamente su GitHub; vedi [assets/photos/README.md](./assets/photos/README.md).
+- **Upload completato e verificato il 2 novembre 2026:** tutti gli 8 file WebP risultano presenti su GitHub, controllati singolarmente.
+
+## v0.4 · Agenda, tradizioni e archivio fotografico attivo (2 novembre 2026)
+
+- Verificato su GitHub il caricamento completo di otto fotografie originali WebP; hero desktop/mobile e galleria funzionano direttamente senza gating JS e senza flash iniziale da Wikimedia.
+- Cover della storia principale ora dall'archivio originale, con credito e diritti riservati.
+- Quarto articolo originale: **San Miguel: la fiesta que saca Torremolinos a la calle** (`stories/san-miguel-la-fiesta-que-saca-torremolinos-a-la-calle.html`), sei sezioni e fonti storiche. Foto di contesto urbano, **non** documentazione della Feria.
+- Nuova pagina `agenda/` con tre iniziative reperite dal calendario ufficiale del Comune il 2 novembre 2026. Ogni voce contiene data, luogo, collegamento originale e filtro automatico degli eventi scaduti.
+- Collegamenti alla nuova agenda e all'articolo da homepage e Stories. Sitemap aggiornata a sette URL.
+- CI ampliata per verificare gli otto file fotografici, i nuovi articoli, l'agenda e la sitemap.
+- **Limiti:** gli eventi non si aggiornano automaticamente; nessuna affermazione di disponibilità in diretta. Pubblicazione GitHub Pages non ancora verificata con un controllo HTTP effettivo. Necessaria una QA visiva responsiva su dispositivi reali e la revisione linguistica delle versioni non spagnole.
