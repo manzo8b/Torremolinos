@@ -34,7 +34,29 @@ jobs:
                 if key=='id':self.ids.append(value)
           p=Parser();p.feed(src)
           assert len(p.ids)==len(set(p.ids)), 'Duplicate HTML IDs'
-          print('TORREMOLINOS: markup checks passed')
+          stories=[
+              'stories/index.html',
+              'stories/torremolinos-mucho-mas-que-sol-y-playa.html',
+              'stories/la-nogalera-donde-la-noche-tiene-historia.html',
+              'stories/pasaje-begona-memoria-de-libertad.html'
+          ]
+          for article in stories:
+              html=Path(article).read_text('utf-8')
+              assert '<!doctype html>' in html.lower(), article
+              assert 'rel="canonical"' in html, article
+              assert '<title>' in html and '<h1>' in html, article
+              assert 'TORREMOLINOS' in html, article
+              assert 'article.css' in html, article
+              if article != 'stories/index.html':
+                  assert 'Redacción TORREMOLINOS' in html, article
+                  assert 'Fuentes y verificación' in html, article
+          assert Path('editorial.css').exists()
+          assert Path('stories/article.css').exists()
+          sitemap=Path('sitemap.xml').read_text('utf-8')
+          for article in stories:
+              loc='https://manzo8b.github.io/Torremolinos/'+article.replace('index.html','')
+              assert loc in sitemap or article in sitemap, article
+          print('TORREMOLINOS: homepage, editorial pages and SEO checks passed')
           PY
           node --check /tmp/torremolinos.js
           python3 -m json.tool manifest.webmanifest >/dev/null
