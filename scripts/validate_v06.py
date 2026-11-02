@@ -19,6 +19,7 @@ MUST_EXIST=[
  "index.html","editorial.css","v06.css",
  "listen/index.html","listen/content.js",
  "gallery/index.html","gallery/data.js","gallery/app.js","gallery/styles.css",
+ "explore/la-nogalera/index.html","explore/la-nogalera/data.js","explore/la-nogalera/app.js","explore/la-nogalera/styles.css",
  "agenda/index.html","agenda/events.json",
  "comer/index.html","comer/data.js",
  "legal/index.html","legal/app.js","legal/data.js","legal/styles.css",
@@ -49,14 +50,14 @@ def validate():
  for f in DRAFTS:
   s,p=page_html(f)
   assert 'noindex' in s,("draft indexed",f)
- for f in ["index.html","listen/index.html","gallery/index.html","legal/index.html","legal/editorial-policy.html","legal/event-source-policy.html","legal/copyright-credits.html"]:
+ for f in ["index.html","listen/index.html","gallery/index.html","explore/la-nogalera/index.html","legal/index.html","legal/editorial-policy.html","legal/event-source-policy.html","legal/copyright-credits.html"]:
   page_html(f)
  home=(ROOT/"index.html").read_text("utf-8")
  assert 'class="torre-home"' in home and 'v06.css' in home
  assert 'id="torremolinos-audio"' in home
  assert 'id="heroMusicBtn"' in home and 'aria-pressed="false"' in home
  assert 'Lune_X/assets/audio/next-stop-torremolinos-preview.mp3' in home
- for url in ['listen/','agenda/','comer/','legal/','gallery/']:
+ for url in ['listen/','agenda/','comer/','legal/','gallery/','explore/la-nogalera/']:
   assert 'href="'+url+'"' in home,("home missing",url)
  listen=(ROOT/"listen/content.js").read_text("utf-8")
  legal=(ROOT/"legal/data.js").read_text("utf-8")
@@ -65,7 +66,7 @@ def validate():
  x=ET.parse(ROOT/"sitemap.xml").getroot()
  namespace="{http://www.sitemaps.org/schemas/sitemap/0.9}"
  urls=[e.text for e in x.findall(".//"+namespace+"loc")]
- assert len(urls)==len(set(urls))==15,("sitemap",len(urls))
+ assert len(urls)==len(set(urls))==16,("sitemap",len(urls))
  assert all(u.startswith(BASE) for u in urls)
  for url in urls:
   route=unquote(urlsplit(url).path.split("/Torremolinos/",1)[-1])
@@ -78,12 +79,15 @@ def validate():
  manifest=json.loads((ROOT/"manifest.webmanifest").read_text("utf-8"))
  assert manifest["theme_color"]=="#07565d"
  sw=(ROOT/"service-worker.js").read_text("utf-8")
- assert "torremolinos-v09" in sw and "'./listen/'" in sw
+ assert "torremolinos-v10" in sw and "'./listen/'" in sw
  gallery=(ROOT/"gallery/data.js").read_text("utf-8")
  assert "TORREMOLINOS_GALLERY" in gallery
  assert "provenance" in gallery and '"ai"' in gallery
  assert "gallery-cover-editorial-ai.webp" in home
  assert "beach-palms-ai.webp" in home
+ nogalera=(ROOT/"explore/la-nogalera/data.js").read_text("utf-8")
+ assert "TORREMOLINOS_NOGALERA" in nogalera and "Bodega Guerola" in nogalera
+ assert "GUÍA INDEPENDIENTE · COSTA DEL SOL" in home
  assert "Sitemap: "+BASE+"sitemap.xml" in (ROOT/"robots.txt").read_text("utf-8")
- print("TORREMOLINOS v0.8 QA PASS | 15 canonical URLs | 6 language packs | controlled music | draft noindex")
+ print("TORREMOLINOS v0.10 QA PASS | 16 canonical URLs | 6 language packs | controlled music | draft noindex")
 if __name__=="__main__":validate()
