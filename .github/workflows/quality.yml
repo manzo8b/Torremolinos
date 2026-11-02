@@ -80,7 +80,32 @@ jobs:
               loc='https://manzo8b.github.io/Torremolinos/'+article.replace('index.html','')
               assert loc in sitemap or article in sitemap, article
           assert 'https://manzo8b.github.io/Torremolinos/agenda/' in sitemap
+          assert Path('comer/index.html').exists()
+          assert Path('comer/data.js').exists()
+          assert Path('comer/app.js').exists()
+          import json,datetime
+          feed=json.loads(Path('agenda/events.json').read_text('utf-8'))
+          assert feed['schemaVersion']==1
+          events=feed['events']
+          assert len(events)>=20
+          assert len({e['id'] for e in events})==len(events)
+          for e in events:
+              assert e['status']=='confirmed'
+              assert e['start']<=e['end']
+              datetime.date.fromisoformat(e['start'])
+              datetime.date.fromisoformat(e['end'])
+              assert e['source'].startswith('https://')
+          assert any(e['id']=='madbear-beach-2027' for e in events)
+          assert any(e['id']=='infinity-2027' for e in events)
+          assert any(e['id']=='navidaddys-20dec26' for e in events)
+          assert any(x['id']=='daddy-week-2027' for x in feed['watchlist'])
           print('TORREMOLINOS: homepage, editorial pages and SEO checks passed')
           PY
           node --check /tmp/torremolinos.js
           python3 -m json.tool manifest.webmanifest >/dev/null
+          node --check agenda/app.js
+          node --check comer/data.js
+          node --check comer/app.js
+          python3 -m py_compile scripts/scan_events.py
+          python3 scripts/scan_events.py --fixture-dir scripts/fixtures --out /tmp/torremolinos-scanner-fixtures --strict
+          
