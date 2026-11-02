@@ -62,3 +62,14 @@ MadBear, INFINITY e Daddy: i marchi possono essere citati con il loro nome testu
 ## Qualità
 
 Controlli automatici: `scripts/validate_v06.py`, `.github/workflows/quality.yml`. Restano da fare test su browser reale e dispostivi mobili, accessibilità WCAG 2.2 e controllo visivo dei contrasti.
+
+## Decisione dell'utente — Hero definitiva · 2 novembre 2026
+
+**Vincolo non modificabile senza approvazione**: Hero principale = immagine **«Cartolina mediterranea di Torremolinos(1).png»** (il collage editoriale con spiaggia, palme e scorci bianchi). L'immagine **«Spiaggia tropicale con palme e mare scintillante(1).png»** è riservata alla Gallery e alle card interne; NON usarla per la Hero.
+
+Percorsi previsti:
+- `assets/gallery/gallery-cover-editorial-ai.webp` = collage approvato, Hero desktop e mobile
+- `assets/gallery/beach-palms-ai.webp` = seconda immagine, Gallery
+- Se usati percorsi foto specifici: `assets/photos/hero-editorial-ai-desktop.webp` e `hero-editorial-ai-mobile.webp` devono derivare esclusivamente dal collage approvato
+
+Il codice `index.html` e `anteprima/index.html` è stato aggiornato in tal senso. I file WebP devono essere realmente presenti nel repository prima di affermare che la nuova Hero è visibile in produzione. Fino ad allora il sito mantiene il vecchio asset come fallback. Visual creati con IA, da segnalare come **immagini illustrative**, non fotografie documentarie.
