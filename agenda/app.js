@@ -20,10 +20,10 @@ function icsUrl(e){
   const esc=s=>String(s||'').replace(/\\/g,'\\\\').replace(/\r?\n/g,'\\n').replace(/,/g,'\\,').replace(/;/g,'\\;');
   const start=e.start.replaceAll('-',''),end=addDays(e.end,1).replaceAll('-');
   const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//TORREMOLINOS//Agenda//ES','CALSCALE:GREGORIAN','BEGIN:VEVENT',
-  'UID:'+esc(e.id)+'@torremolinos-guide','DTSTAMP:'+new Date().toISOString().replace(/[-:]/g,'').replace(/\\.\\d{3}Z/,'Z'),
+  'UID:'+esc(e.id)+'@torremolinos-guide','DTSTAMP:'+new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d{3}Z/,'Z'),
   'DTSTART;VALUE=DATE:'+start,'DTEND;VALUE=DATE:'+end,'SUMMARY:'+esc(e.title),'LOCATION:'+esc(e.venue),
   'DESCRIPTION:'+esc('Verifica los detalles y la hora original: '+e.source),'URL:'+e.source,'END:VEVENT','END:VCALENDAR'];
-  return 'data:text/calendar;charset=utf-8,'+encodeURIComponent(lines.join('\\r\\n')+'\\r\\n');
+  return 'data:text/calendar;charset=utf-8,'+encodeURIComponent(lines.join('\r\n')+'\r\n');
 }
 function dateBadge(date){const el=elem('div','','date');const dt=new Date(date+'T12:00:00Z');el.append(elem('strong',String(dt.getUTCDate()).padStart(2,'0')),elem('small',new Intl.DateTimeFormat(lang==='es'?'es-ES':lang==='it'?'it-IT':lang==='de'?'de-DE':lang==='fr'?'fr-FR':lang==='ru'?'ru-RU':'en-GB',{month:'short',timeZone:'UTC'}).format(dt).toUpperCase()));return el}
 function eventCard(e){const article=elem('article','','event');article.append(dateBadge(e.start));const body=elem('div','','detail');const badges=elem('div');badges.append(elem('span',e.kind==='lgbtq'?'LGBTQ+':trans('culture'),'badge '+(e.kind==='lgbtq'?'confirmed':'general')));badges.append(elem('span',' · '+(e.category==='culture'?trans('culture'):trans(e.category)),'badge'));if(e.ageRestricted)badges.append(elem('span',' · 18+','badge'));body.append(badges);body.append(elem('h4',e.title));body.append(elem('span','📅 '+formatDate(e.start)+(e.end!==e.start?' — '+formatDate(e.end):'')+(e.time?' · '+e.time:' · '+trans('noTime')),'meta'));body.append(elem('span','📍 '+e.venue,'meta'));if(e.note)body.append(elem('p',e.note,'event-note'));const acts=elem('div','','actionlinks');link(acts,trans('source'),e.source);link(acts,trans('add'),calendarUrl(e));const ics=elem('a','Apple / Outlook .ics ↧');ics.href=icsUrl(e);ics.download='torremolinos-'+e.id+'.ics';acts.append(ics);body.append(acts);article.append(body);return article}
