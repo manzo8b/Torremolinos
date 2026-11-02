@@ -227,3 +227,11 @@ body, .torre-home, .torre-comer, .torre-agenda, .torre-preview{background:#fff!i
    font-size:13px!important;letter-spacing:.09em!important;
  }
 }
+
+/* Explore La Nogalera — inclusive neighborhood highlight */
+.torre-home .nogalera-teaser{display:flex;align-items:center;justify-content:space-between;gap:18px 36px;border:1px solid #cfe6de;border-radius:17px;padding:clamp(23px,3.4vw,40px);margin:24px 0 28px;background:linear-gradient(110deg,#eaf6f0,#f9fcfa 80%);box-shadow:0 9px 29px #093e4311}
+.torre-home .nogalera-teaser h3{font:750 clamp(29px,3.7vw,47px)/1.08 Outfit,"DM Sans",sans-serif;letter-spacing:-.045em;color:#0e4e50;margin:9px 0 11px}
+.torre-home .nogalera-teaser p{font-size:14px;line-height:1.6;max-width:685px;color:#4c6c6b;margin:0}
+.torre-home .nogalera-teaser>a{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;text-decoration:none;background:#0d615c;color:#fff;border-radius:11px;padding:13px 17px;min-height:47px;font-size:12px;font-weight:900}
+.torre-home .nogalera-teaser>a:hover{background:#084c49}
+@media(max-width:780px){.torre-home .nogalera-teaser{flex-direction:column;align-items:flex-start}.torre-home .nogalera-teaser>a{width:auto}}
