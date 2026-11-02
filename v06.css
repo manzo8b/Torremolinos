@@ -160,3 +160,30 @@ body, .torre-home, .torre-comer, .torre-agenda, .torre-preview{background:#fff!i
  .torre-home .hero-cta-row a{width:100%}
 }
 @media(prefers-reduced-motion:reduce){.torre-home .hero-cta-row a{transition:none!important}}
+
+/* v0.9 · preview mirrors the approved live Hero, no in-photo text */
+.torre-preview .preview-hero-heading{padding:10px 2px 25px;color:#083d43}
+.torre-preview .preview-hero-heading .eyebrow{color:#b05c49;font-weight:900}
+.torre-preview .preview-hero-heading h1{font:850 clamp(31px,8vw,98px)/1.04 Outfit,"DM Sans",sans-serif!important;letter-spacing:-.061em!important;white-space:nowrap;overflow-wrap:normal;word-break:normal;color:#083d43;margin:12px 0 5px!important}
+.torre-preview .preview-hero-heading p{font:italic 500 clamp(28px,3.45vw,47px)/1.12 "Cormorant Garamond",Georgia,serif;color:#226c68;margin:0}
+.torre-preview .hero-stage{height:auto!important;aspect-ratio:2.18 / 1;min-height:0!important;border-radius:19px!important;box-shadow:0 15px 37px #113f4516}
+.torre-preview .hero-stage img{width:100%;height:100%;object-fit:cover}
+.torre-preview .hero-stage:after{content:none!important;display:none!important}
+.torre-preview .preview-hero-bottom{display:flex;align-items:center;justify-content:space-between;gap:22px;padding:29px 0 0}
+.torre-preview .preview-hero-bottom h2{font:750 clamp(23px,2.7vw,36px)/1.08 Outfit,"DM Sans",sans-serif!important;letter-spacing:-.04em;color:#083d43;margin:0 0 10px}
+.torre-preview .preview-hero-bottom p{font-size:14px;color:#516e70;margin:0;max-width:620px}
+.torre-preview .preview-hero-actions{display:flex;gap:10px;flex-wrap:wrap}
+.torre-preview .preview-hero-actions .button{display:inline-flex;min-height:44px;align-items:center;justify-content:center;text-decoration:none;background:#0b625e;color:white;padding:11px 16px;border-radius:10px;font-size:12px;font-weight:850;white-space:nowrap}
+.torre-preview .preview-hero-actions .button.secondary{background:#e9f4ef;color:#175c57}
+.torre-preview .preview-ai-credit{font-size:11px;color:#698180;margin:12px 0 0}
+.torre-preview .preview-ai-credit a{color:#326f69;text-underline-offset:3px}
+.torre-preview .hero .ribbon{margin-top:22px}
+@media(max-width:970px){.torre-preview .preview-hero-bottom{align-items:flex-start;flex-direction:column}}
+@media(max-width:720px){
+ .torre-preview .preview-hero-heading h1{font-size:clamp(28px,8.6vw,59px)!important}
+ .torre-preview .preview-hero-heading p{font-size:clamp(26px,6.8vw,38px)}
+ .torre-preview .hero-stage{aspect-ratio:1.28 / 1}
+ .torre-preview .preview-hero-bottom{padding:20px 0 0}
+ .torre-preview .preview-hero-bottom h2{font-size:26px}
+ .torre-preview .preview-ai-credit{font-size:10px}
+}
