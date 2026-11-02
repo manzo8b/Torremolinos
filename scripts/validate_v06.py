@@ -82,8 +82,8 @@ def validate():
  gallery=(ROOT/"gallery/data.js").read_text("utf-8")
  assert "TORREMOLINOS_GALLERY" in gallery
  assert "provenance" in gallery and '"ai"' in gallery
- assert "hero-editorial-ai-desktop.webp" in home
  assert "gallery-cover-editorial-ai.webp" in home
+ assert "beach-palms-ai.webp" in home
  assert "Sitemap: "+BASE+"sitemap.xml" in (ROOT/"robots.txt").read_text("utf-8")
  print("TORREMOLINOS v0.8 QA PASS | 15 canonical URLs | 6 language packs | controlled music | draft noindex")
 if __name__=="__main__":validate()
