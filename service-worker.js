@@ -1,5 +1,5 @@
 // TORREMOLINOS v0.4 — offline shell and key editorial pages
-const CACHE='torremolinos-v08';
+const CACHE='torremolinos-v09';
 const FILES=[
   './','./index.html','./editorial.css','./favicon.svg','./manifest.webmanifest',
   './brand/torremolinos-logo.svg','./brand/torremolinos-logo-light.svg','./brand/torremolinos-symbol.svg','./assets/illustrations/pride-flag-ai.svg','./legal/ai-transparency.html',
