@@ -73,8 +73,13 @@ jobs:
           for file in photos:
               path=Path('assets/photos')/file
               assert path.is_file() and path.stat().st_size>1000, path
-          assert 'hero-torremolinos-desktop.webp' in src
-          assert 'hero-torremolinos-mobile.webp' in src
+          assert 'assets/gallery/beach-palms-ai.webp' in src
+          hero=Path('assets/gallery/beach-palms-ai.webp')
+          assert hero.is_file() and hero.stat().st_size>1000, hero
+          assert 'class="hero-main-title">TORREMOLINOS</h1>' in src
+          assert 'La tua guida libera sulla Costa del Sol' in src
+          assert 'class="hero-tools shell"' in src
+          assert 'href="legal/ai-transparency.html"' in src
 
           assert Path('stories/article.css').exists()
           sitemap=Path('sitemap.xml').read_text('utf-8')
