@@ -49,3 +49,14 @@ body, .torre-home, .torre-comer, .torre-agenda, .torre-preview{background:#fff!i
 .brand-logo-link:hover .brand-logo-img{filter:drop-shadow(0 2px 5px #1a656522)}
 @media(max-width:860px){.brand-logo-img{width:clamp(160px,26vw,225px)!important}}
 @media(max-width:560px){.brand-logo-img{width:190px!important;max-height:44px}.torre-home .topbar .brand-logo-link{max-width:192px}}
+
+/* v0.7 photography and transparency */
+.torre-home .feature-art.pride-visual{overflow:hidden;position:relative;display:block;background:#b5dff8!important;min-height:300px}
+.torre-home .feature-art.pride-visual:before,.torre-home .feature-art.pride-visual:after{display:none!important}
+.pride-visual img{display:block;width:100%;height:100%;min-height:310px;object-fit:cover}
+.ai-visual-caption{position:absolute;bottom:12px;left:12px;right:12px;max-width:max-content;padding:7px 11px;background:rgba(7,61,67,.9);color:#fff;font:700 11px/1.4 "DM Sans",sans-serif;border-radius:8px}
+.music-art .music-album-art{position:relative!important;display:block!important;width:100%;height:100%;min-height:330px;object-fit:cover;object-position:center;background:#fff}
+.music-art:has(.music-album-art):before{display:none}
+.music-art .music-album-art+small{z-index:2}
+.ai-footer-note{max-width:460px;color:#bdd9d4;font-size:12px;line-height:1.6}
+@media(max-width:760px){.torre-home .feature-art.pride-visual{min-height:230px}.pride-visual img{min-height:230px}.music-art .music-album-art{min-height:280px;max-height:440px;object-fit:contain}}
