@@ -87,6 +87,18 @@ def validate():
  assert "beach-palms-ai.webp" in home
  nogalera=(ROOT/"explore/la-nogalera/data.js").read_text("utf-8")
  assert "TORREMOLINOS_NOGALERA" in nogalera and "Bodega Guerola" in nogalera
+ guide=json.loads(nogalera.split("=",1)[1].rstrip().rstrip(";"))
+ langs=("es","en","it","de","fr","ru")
+ assert all(k in guide["translations"] for k in langs),"La Nogalera languages missing"
+ public=[v for v in guide["venues"] if v.get("publicationStatus")=="listed"]
+ assert len(public)>=10,"too few sourced listings"
+ assert all(v.get("evidence","").startswith("https://") for v in public),"public listing without source"
+ assert all(all(v["description"].get(l) for l in langs) for v in public),"missing venue translation"
+ assert len({v["id"] for v in guide["venues"]})==len(guide["venues"]),"duplicate venue id"
+ assert any(v["name"]=="Bodega Guerola" and v["area"]=="neighbor" for v in public),"Guerola must stay outside La Nogalera"
+ assert "data-filter=\"outside\"" in (ROOT/"explore/la-nogalera/index.html").read_text("utf-8")
+ assert "--editorial-coral-strong:#B44719" in (ROOT/"v06.css").read_text("utf-8"),"coral contrast styling"
+
  assert "GUÍA INDEPENDIENTE · COSTA DEL SOL" in home
  assert "Sitemap: "+BASE+"sitemap.xml" in (ROOT/"robots.txt").read_text("utf-8")
  print("TORREMOLINOS v0.10 QA PASS | 16 canonical URLs | 6 language packs | controlled music | draft noindex")
