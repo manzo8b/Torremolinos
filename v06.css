@@ -21,3 +21,14 @@ html{scroll-behavior:smooth}body{background:var(--v6-paper);color:var(--v6-ink)}
 .hero-sound-shortcut button[aria-pressed=true]{background:#e6c49d;color:#173f41;border-color:#e6c49d}
 .hero-sound-shortcut small{color:#f0eade;font-size:11px;text-shadow:0 1px 6px #0d3739}
 @media(max-width:720px){.hero-sound-shortcut{gap:8px;margin-top:13px}.hero-sound-shortcut button{padding:10px 13px}.hero-sound-shortcut small{font-size:10px}}
+
+/* Agenda 2027: category-specific accents, never fabricated star ratings */
+.torre-agenda .event .badge{border-radius:99px;padding:3px 8px;letter-spacing:.045em;font-size:10px;background:#e7f1eb;color:#246657}
+.torre-agenda .event[data-category="pride"]{border-left-color:#c96485}.torre-agenda .event[data-category="pride"] .date{background:#f4dce7}
+.torre-agenda .event[data-category="festival"]{border-left-color:#ca9955}.torre-agenda .event[data-category="festival"] .date{background:#f5e7c7}
+.torre-agenda .event[data-category="bear"]{border-left-color:#ab7f56}.torre-agenda .event[data-category="bear"] .date{background:#eddfca}
+.torre-agenda .event[data-category="daddy"]{border-left-color:#8a789f}.torre-agenda .event[data-category="daddy"] .date{background:#e9e0ef}
+.torre-agenda .event[data-category="nightlife"]{border-left-color:#537d9c}.torre-agenda .event[data-category="nightlife"] .date{background:#dce8f2}
+.torre-agenda .event[data-category="show"]{border-left-color:#c9789f}.torre-agenda .event[data-category="show"] .date{background:#f4deec}
+.torre-agenda .event[data-category="party"]{border-left-color:#c77e5d}.torre-agenda .event[data-category="party"] .date{background:#f5e3d7}
+.torre-agenda .event[data-category="culture"]{border-left-color:#539a86}.torre-agenda .event[data-category="culture"] .date{background:#e2efdf}
