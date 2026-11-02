@@ -144,12 +144,12 @@ $('#year').textContent=new Date().getFullYear();setLang();updateHeroMusic();
  var hero=document.querySelector('.hero-photo'),credit=document.getElementById('authoredCredit'),teaser=document.getElementById('galleryTeaserImg'),teaserLabel=document.getElementById('galleryTeaserProvenance');
  function tryImage(url,onSuccess){var img=new Image();img.onload=function(){onSuccess(url)};img.src=url}
  if(hero){var isNarrow=window.matchMedia&&window.matchMedia('(max-width:720px)').matches;
-  var url=isNarrow?'assets/photos/hero-editorial-ai-mobile.webp':'assets/photos/hero-editorial-ai-desktop.webp';
+  var url=isNarrow?'assets/gallery/gallery-cover-editorial-ai.webp':'assets/gallery/gallery-cover-editorial-ai.webp';
   tryImage(url,function(src){hero.style.setProperty('--hero-upgrade','url("'+src+'")');hero.classList.add('hero-ai-ready');
   hero.setAttribute('aria-label','Illustrative Mediterranean beach visual generated with AI, not a documentary photo');
   if(credit)credit.textContent=msg('galleryAI')+' · TORREMOLINOS';});
  }
- if(teaser){tryImage('assets/gallery/gallery-cover-editorial-ai.webp',function(src){
+ if(teaser){tryImage('assets/gallery/beach-palms-ai.webp',function(src){
   teaser.src=src;teaser.alt=msg('heroAiAlt');
   if(teaserLabel)teaserLabel.textContent=msg('galleryAI');
   teaser.dataset.isAI='true';
