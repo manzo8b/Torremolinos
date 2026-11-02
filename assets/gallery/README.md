@@ -6,8 +6,8 @@ Questa cartella contiene i visual editoriali usati dal sito. Le immagini generat
 
 | File | Uso |
 | --- | --- |
-| `gallery-cover-editorial-ai.webp` | **Hero principale approvata dall'utente:** collage mediterraneo Torremolinos |
-| `beach-palms-ai.webp` | Gallery e riquadro secondario: panorama palme e mare |
+| `gallery-cover-editorial-ai.webp` | Gallery: collage editoriale |
+| `beach-palms-ai.webp` | **Hero principale scelta dall'utente:** immagine panoramica con palme, mare e ruscello |
 
 Per caricare: apri `assets/gallery/` → **Add file** → **Upload files** → trascina i due file → **Commit changes** su `main`.
 
