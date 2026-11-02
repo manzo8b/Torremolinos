@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://manzo8b.github.io/Torremolinos/</loc><lastmod>2026-11-02</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://manzo8b.github.io/Torremolinos/comer/</loc><lastmod>2026-11-02</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://manzo8b.github.io/Torremolinos/agenda/</loc><lastmod>2026-11-02</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://manzo8b.github.io/Torremolinos/stories/</loc><lastmod>2026-11-02</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://manzo8b.github.io/Torremolinos/stories/torremolinos-mucho-mas-que-sol-y-playa.html</loc><lastmod>2026-11-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://manzo8b.github.io/Torremolinos/stories/la-nogalera-donde-la-noche-tiene-historia.html</loc><lastmod>2026-11-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://manzo8b.github.io/Torremolinos/stories/pasaje-begona-memoria-de-libertad.html</loc><lastmod>2026-11-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://manzo8b.github.io/Torremolinos/stories/san-miguel-la-fiesta-que-saca-torremolinos-a-la-calle.html</loc><lastmod>2026-11-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://manzo8b.github.io/Torremolinos/</loc><lastmod>2026-11-02</lastmod></url>
+  <url><loc>https://manzo8b.github.io/Torremolinos/comer/</loc><lastmod>2026-11-02</lastmod></url>
+  <url><loc>https://manzo8b.github.io/Torremolinos/agenda/</loc><lastmod>2026-11-02</lastmod></url>
+  <url><loc>https://manzo8b.github.io/Torremolinos/stories/</loc><lastmod>2026-11-02</lastmod></url>
+  <url><loc>https://manzo8b.github.io/Torremolinos/stories/torremolinos-mucho-mas-que-sol-y-playa.html</loc><lastmod>2026-11-02</lastmod></url>
+  <url><loc>https://manzo8b.github.io/Torremolinos/stories/la-nogalera-donde-la-noche-tiene-historia.html</loc><lastmod>2026-11-02</lastmod></url>
+  <url><loc>https://manzo8b.github.io/Torremolinos/stories/pasaje-begona-memoria-de-libertad.html</loc><lastmod>2026-11-02</lastmod></url>
+  <url><loc>https://manzo8b.github.io/Torremolinos/stories/san-miguel-la-fiesta-que-saca-torremolinos-a-la-calle.html</loc><lastmod>2026-11-02</lastmod></url>
+  <url><loc>https://manzo8b.github.io/Torremolinos/listen/</loc><lastmod>2026-11-02</lastmod></url>
+  <url><loc>https://manzo8b.github.io/Torremolinos/legal/</loc><lastmod>2026-11-02</lastmod></url>
+  <url><loc>https://manzo8b.github.io/Torremolinos/legal/editorial-policy.html</loc><lastmod>2026-11-02</lastmod></url>
+  <url><loc>https://manzo8b.github.io/Torremolinos/legal/event-source-policy.html</loc><lastmod>2026-11-02</lastmod></url>
+  <url><loc>https://manzo8b.github.io/Torremolinos/legal/copyright-credits.html</loc><lastmod>2026-11-02</lastmod></url>
 </urlset>
