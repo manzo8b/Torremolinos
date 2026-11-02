@@ -59,3 +59,19 @@ Il programma 2024 documenta anche la processione del **29 settembre** e il relat
 ## 2 novembre 2026 — avanzamento autorizzazioni
 
 Il fotografo ha confermato di essere l'autore degli scatti e ha autorizzato le sole immagini paesaggistiche senza primi piani riconoscibili. Il pacchetto contiene otto immagini WebP. Il codice del sito è pronto, ma i WebP **non sono ancora nel repository**. I contenuti di performer e processioni rimangono in verifica.
+
+## Lotto 02 · Archivio di 7 immagini (numerazione 10–16)
+
+Stato: **in staging, fotografie non ancora caricate/pubblicate**. Catalogo: `gallery/batches/lotto-02.json`. Consegna utente: pacchetto WebP ottimizzato.
+
+| ID | Scena | Categoria | Nota editoriale |
+|---|---|---|---|
+| batch-02-10 | Paraíso Beach visto dal lungomare | lgbtq-sea | Contesto e autorizzazioni da verificare; non inferire eventi. |
+| batch-02-11 | Il cielo tra le palme | beach | Veduta fotografica, non inferire posizione esatta. |
+| batch-02-12 | Piccoli vasi, tante bandiere | details | Dettaglio di parete con vasi dipinti come bandiere. |
+| batch-02-13 | Architettura bianca e portone in legno | traditions | Identificazione ufficiale dell'edificio da verificare. |
+| batch-02-14 | Solo el amor engendra la maravilla | details | Non inferire l'identità della figura sul balcone. |
+| batch-02-15 | Plaza San Miguel, la panchina | district | Stessa scena della 16; foto ampia preferita per Gallery. |
+| batch-02-16 | Plaza San Miguel, fiori sulla parete | details | Alternativa ravvicinata alla 15, preferibile per un articolo. |
+
+La fotografia 15 e la 16 ritraggono la stessa parete di Plaza San Miguel: usare l'immagine 15 come prima scelta e la 16 come dettaglio secondario. Niente indicazioni di anno o evento senza conferma. Conservare la distinzione fra fotografia fornita e immagini illustrative IA.
