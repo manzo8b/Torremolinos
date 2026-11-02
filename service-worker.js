@@ -1,7 +1,8 @@
 // TORREMOLINOS v0.4 — offline shell and key editorial pages
-const CACHE='torremolinos-v05';
+const CACHE='torremolinos-v06';
 const FILES=[
   './','./index.html','./editorial.css','./favicon.svg','./manifest.webmanifest',
+  './v06.css','./listen/','./listen/content.js','./legal/','./legal/styles.css','./legal/app.js','./legal/data.js',
   './assets/photos/hero-torremolinos-desktop.webp',
   './assets/photos/hero-torremolinos-mobile.webp',
   './assets/photos/playa-palmeras-panorama.webp',
