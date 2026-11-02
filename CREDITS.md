@@ -73,3 +73,18 @@ La selezione non costituisce un calendario di disponibilità in tempo reale. Le 
 - Altre attività in `comer/data.js`: riferimenti per singola scheda, senza recensire o classificare oggettivamente i locali.
 
 Dati aggiornati editorialmente al 2 novembre 2026; non costituiscono disponibilità, orari o prezzi live.
+
+## Music credit · Sound of Torremolinos (v0.6)
+
+- Artista / progetto: **LUNE_X** · progetto digitale indipendente con direzione creativa umana e produzione musicale assistita da IA.
+- Anteprima **Next Stop: Torremolinos** caricata dal progetto LUNE_X (file presente nel repository `manzo8b/Lune_X`): https://manzo8b.github.io/Lune_X/assets/audio/next-stop-torremolinos-preview.mp3
+- Album **Welcome to the Paradise**: collegamento di distribuzione https://distrokid.com/hyperfollow/lunex9/welcome-to-the-paradise ; l'album completo non è ospitato dal progetto TORREMOLINOS.
+- La cover decorativa del player su TORREMOLINOS è un'illustrazione CSS a forma di vinile sovrapposta a una fotografia originale autorizzata della città. Non è la cover ufficiale dell'album.
+- Dichiarazione di conflitto editoriale: LUNE_X è un progetto collegato alla direzione creativa di questa guida. L'articolo musicale non è una recensione indipendente.
+
+## Riferimenti per la sezione legal
+
+- BOE Ley 34/2002: https://www.boe.es/buscar/act.php?id=BOE-A-2002-13758
+- AEPD diritto di informazione: https://www.aepd.es/derechos-y-deberes/conoce-tus-derechos/derecho-de-informacion
+- AEPD Guía cookies: https://www.aepd.es/es/documento/guia-cookies.pdf
+- W3C WCAG 2.2: https://www.w3.org/TR/WCAG22/
