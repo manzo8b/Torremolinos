@@ -95,3 +95,25 @@ body{background:var(--paper);color:var(--ink)}
 .mobilebar button{font-size:9px;min-height:50px}
 }
 @media(max-width:370px){.hero .hero-name{font-size:35px}.hero-left{padding-left:18px;padding-right:18px}.logo{font-size:18px}}
+
+/* TORREMOLINOS proprietary image pack: activated only after assets are present */
+body.has-local-photos .hero-photo:before {
+ background:linear-gradient(180deg,#113c4210,#0d394333),url("assets/photos/hero-torremolinos-desktop.webp") center / cover no-repeat;
+}
+.hero-author-credit {display:block;font:600 10px/1.4 "DM Sans",sans-serif;margin-top:6px;color:#fff;text-shadow:0 1px 9px #112e3e}
+.photo-diary{padding:78px 0 0}
+.photo-diary-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:22px}
+.photo-diary-head h2{font:600 clamp(44px,5.5vw,70px)/.95 "Cormorant Garamond",Georgia,serif;letter-spacing:-.045em;margin:12px 0}
+.photo-diary-head p{max-width:365px;color:#537174;font-size:14px;margin:0}
+.photo-diary-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px}
+.photo-diary-grid figure{padding:0;margin:0;background:#fff;border:1px solid #e3e5dc;border-radius:18px;overflow:hidden}
+.photo-diary-grid img{height:245px;width:100%;object-fit:cover;display:block}
+.photo-diary-grid figcaption{font:800 15px/1.25 "DM Sans",sans-serif;padding:17px 17px 20px}
+.photo-diary-grid small{display:block;margin-top:7px;font:500 11px/1.5 "DM Sans",sans-serif;color:#6b8180}
+.photo-diary-note{font-size:12px;color:#6a7d7d;padding:14px 0}
+@media(max-width:720px){
+ body.has-local-photos .hero-photo:before{background:linear-gradient(180deg,#123f4112,#154a4a25),url("assets/photos/hero-torremolinos-mobile.webp") center / cover no-repeat}
+ .photo-diary{padding-top:54px}.photo-diary-head{display:block}.photo-diary-grid{grid-template-columns:1fr 1fr;gap:10px}
+ .photo-diary-grid figure:first-child{grid-column:1 / -1}.photo-diary-grid figure:first-child img{height:220px}
+ .photo-diary-grid img{height:205px}.photo-diary-grid figcaption{font-size:13px;padding:13px}
+}
