@@ -40,7 +40,8 @@ def page_html(path):
  assert "<!doctype html>" in s.lower(),path
  p=MiniParser();p.feed(s)
  assert len(p.ids)==len(set(p.ids)),(path,"duplicate IDs")
- assert "<title>" in s and 'rel="canonical"' in s,(path,"metadata")
+ assert "<title>" in s,(path,"missing title")
+ if 'noindex' not in s:assert 'rel="canonical"' in s,(path,"missing canonical")
  return s,p
 def validate():
  for f in MUST_EXIST:assert (ROOT/f).is_file(),("missing",f)
