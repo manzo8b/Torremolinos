@@ -1,5 +1,14 @@
 name: TORREMOLINOS · LGBTQ Events Scanner
 on:
+  # Run once immediately on this workflow update; continue testing curated-source edits.
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/event-scanner.yml'
+      - 'scripts/scan_events.py'
+      - 'scripts/fixtures/**'
+      - 'agenda/events.json'
+      - 'agenda/scanner-baseline.json'
   schedule:
     - cron: "17 6 * * *"
   workflow_dispatch:
