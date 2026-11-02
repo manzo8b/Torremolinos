@@ -72,7 +72,7 @@ function item(entry){
  const article=document.createElement("article");article.className="gallery-card";article.dataset.type=entry.category;
  article.hidden=true;state.set(entry.id,"loading");
  const button=document.createElement("button");button.type="button";button.className="image-button";button.setAttribute("aria-label",label(entry,"title"));
- const img=document.createElement("img");img.alt=label(entry,"alt");img.loading="lazy";img.decoding="async";
+ const img=document.createElement("img");img.alt=label(entry,"alt");img.loading="eager";img.decoding="async";
  img.addEventListener("load",()=>{state.set(entry.id,"ready");update()});
  img.addEventListener("error",()=>{state.set(entry.id,"missing");update()});
  button.append(img);button.addEventListener("click",()=>open(entry));
