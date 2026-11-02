@@ -24,6 +24,7 @@ import urllib.request
 ROOT=Path(__file__).resolve().parents[1]
 URLS={
  "madbear":"https://madbear.org/madbear-beach-torremolinos",
+ "madbearhub":"https://madbear.org/en",
  "infinity":"https://www.infinityfestival.eu/",
  "acogat":"https://torremolinosplus.com/en/whats-on/",
 }
@@ -113,6 +114,13 @@ def scan(fixtures=None):
                 if check["status"]!="same":issues.append(f"{key}: official date detection differs from curated record ({check['status']}).")
                 if key=="madbear" and ("2025" in text or "2026" in text):
                     results[key]["warning"]="Page includes old-year programme material; only festival header dates are checked."
+            elif key=="madbearhub":
+                # Public hub: event families are not individual confirmed dates.
+                tokens=["WET POOL PARTIES TORREMOLINOS","MADBEAR BEACH TORREMOLINOS","DADDY XMAS"]
+                found=[label for label in tokens if label.casefold() in text.casefold()]
+                results[key]["discovery"]={"headings":found,"unrecognized_headings":[],"type":"official_hub","datesInferred":False}
+                if not found:
+                    issues.append("MADBEAR hub sections not detected, manual review needed.")
             else:
                 results[key]["discovery"]=review_acogat(headings,feed["events"])
                 if results[key]["discovery"]["unrecognized_headings"]:
