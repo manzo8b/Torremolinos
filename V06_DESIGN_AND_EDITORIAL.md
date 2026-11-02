@@ -73,3 +73,7 @@ Percorsi previsti:
 - Se usati percorsi foto specifici: `assets/photos/hero-editorial-ai-desktop.webp` e `hero-editorial-ai-mobile.webp` devono derivare esclusivamente dal collage approvato
 
 Il codice `index.html` e `anteprima/index.html` è stato aggiornato in tal senso. I file WebP devono essere realmente presenti nel repository prima di affermare che la nuova Hero è visibile in produzione. Fino ad allora il sito mantiene il vecchio asset come fallback. Visual creati con IA, da segnalare come **immagini illustrative**, non fotografie documentarie.
+
+## Rettifica sulla scelta della Hero
+
+L’immagine pubblicata dall’utente nel messaggio «la Hero principale è questa» è **Spiaggia tropicale con palme e mare scintillante(2).png**: panorama con palme, mare e ruscello. Questa va usata per la Hero, attraverso `assets/gallery/beach-palms-ai.webp`. Il collage di Torremolinos usa `assets/gallery/gallery-cover-editorial-ai.webp` e resta per Gallery. La precedente nota che attribuiva la scelta principale al collage era un errore di interpretazione e viene qui rettificata.
