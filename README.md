@@ -73,3 +73,17 @@ Vedere [CREDITS.md](./CREDITS.md). Suggerimenti o correzioni tramite GitHub Issu
 - Collegamenti alla nuova agenda e all'articolo da homepage e Stories. Sitemap aggiornata a sette URL.
 - CI ampliata per verificare gli otto file fotografici, i nuovi articoli, l'agenda e la sitemap.
 - **Limiti:** gli eventi non si aggiornano automaticamente; nessuna affermazione di disponibilità in diretta. Pubblicazione GitHub Pages non ancora verificata con un controllo HTTP effettivo. Necessaria una QA visiva responsiva su dispositivi reali e la revisione linguistica delle versioni non spagnole.
+
+## v0.5 · Directory gastronomica, agenda LGBTQ+ e scanner (2 novembre 2026)
+
+- **Dónde comer**: nuova pagina `comer/` con filtri per categoria, zona, ricerca, preferiti locali e otto schede con fonte; in evidenza Guadalupe Bajondillo, Guadalupe La Nogalera, Cozzy Inn Gastro Bar e ANDALUZ.
+- **ANDALUZ**: concept tapas con influenza italiana comunicato al progetto, menù e lancio da verificare.
+- **Bozza grafica del futuro sito**: `anteprima/`, esplicitamente `noindex`, con fotografica originale, gastronomia, Stories e agenda LGBTQ+.
+- **Agenda completa v0.5**: pagina `agenda/` ricostruita con filtri per mese e tema, 23 appuntamenti iniziali (20 LGBTQ+ e 3 culturali), 5 eventi monitorati senza date pienamente verificate, link ufficiali e aggiunta a Google Calendar.
+- **Fonti prioritarie**: ACOGAT/Torremolinos PLUS, INFINITY Festival e MADBEAR. Le date di Infinity giugno 2027 e MadBear agosto 2027 provengono da siti degli organizzatori; programma giornaliero MadBear contiene riferimenti ad anni precedenti e non viene importato automaticamente.
+- **Daddy**: NaviDaddy’s del 20 dicembre 2026 è datato da Torremolinos PLUS; Daddy Week 2027, Daddy Xmas e altre edizioni sono sotto verifica, senza attribuire false date.
+- **Scanner quotidiano** `.github/workflows/event-scanner.yml`: controlla le fonti pubbliche alle 06:17 UTC, salva un rapporto e propone una issue se rileva nuove date, titoli o errori. **Non modifica automaticamente le date pubbliche.** L'effettiva esecuzione su GitHub Actions deve ancora essere confermata.
+- **Test**: `scripts/fixtures/`, `agenda/scanner-baseline.json` e workflow QA esteso per controllare fonte, integrità dei dati, nuove pagine e JavaScript.
+- **SEO**: sitemap con 8 URL indicizzabili; anteprima esclusa dai motori.
+- **Limiti**: l'agenda non è esaustiva di tutte le serate private/social, non controlla vendite, prezzi o capienze in tempo reale; i nuovi eventi sono pubblicati dopo revisione.
+- Manuale operativo: [agenda/SCANNER.md](./agenda/SCANNER.md).
