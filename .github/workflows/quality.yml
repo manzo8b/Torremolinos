@@ -53,9 +53,11 @@ jobs:
                   assert 'Fuentes y verificación' in html, article
           agenda=Path('agenda/index.html').read_text('utf-8')
           assert 'rel="canonical"' in agenda
-          assert 'noEvents' in agenda
-          assert 'www.torremolinoscultura.es' in agenda
-          assert '2026-11-03' in agenda and '2026-12-03' in agenda
+          assert 'id="events"' in agenda
+          assert 'id="watchlist"' in agenda
+          assert 'app.js' in agenda and 'styles.css' in agenda
+          assert 'torremolinosplus.com' in agenda
+          assert 'agenda/' in src
           assert 'agenda/' in src
           assert Path('editorial.css').exists()
           photos=[
@@ -83,11 +85,16 @@ jobs:
           assert Path('comer/index.html').exists()
           assert Path('comer/data.js').exists()
           assert Path('comer/app.js').exists()
+          assert Path('anteprima/index.html').exists()
+          preview=Path('anteprima/index.html').read_text('utf-8')
+          assert 'noindex,nofollow' in preview
+          assert 'href="../comer/"' in preview
+          assert 'href="../agenda/"' in preview
           import json,datetime
           feed=json.loads(Path('agenda/events.json').read_text('utf-8'))
           assert feed['schemaVersion']==1
           events=feed['events']
-          assert len(events)>=20
+          assert len(events)>=27
           assert len({e['id'] for e in events})==len(events)
           for e in events:
               assert e['status']=='confirmed'
@@ -97,8 +104,11 @@ jobs:
               assert e['source'].startswith('https://')
           assert any(e['id']=='madbear-beach-2027' for e in events)
           assert any(e['id']=='infinity-2027' for e in events)
+          assert len([e for e in events if e['kind']=='lgbtq'])>=24
           assert any(e['id']=='navidaddys-20dec26' for e in events)
           assert any(x['id']=='daddy-week-2027' for x in feed['watchlist'])
+          assert Path('agenda/scanner-baseline.json').exists()
+          assert 'scanner-baseline.json' in Path('scripts/scan_events.py').read_text('utf-8')
           print('TORREMOLINOS: homepage, editorial pages and SEO checks passed')
           PY
           node --check /tmp/torremolinos.js
