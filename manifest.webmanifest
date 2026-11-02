@@ -1,0 +1,18 @@
+{
+  "name": "TORREMOLINOS — Discover, explore, belong",
+  "short_name": "TORREMOLINOS",
+  "description": "Independent city guide for visitors and locals on the Costa del Sol",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fbfaf6",
+  "theme_color": "#0a4152",
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
