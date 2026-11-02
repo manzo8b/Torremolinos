@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 560" role="img" aria-labelledby="title desc">
+<title id="title">Bandera del Orgullo bajo el sol mediterráneo</title><desc id="desc">Ilustración generada con asistencia de IA: bandera arcoíris ondeando bajo un cielo azul, sin personas</desc>
+<defs>
+<linearGradient id="sky" x1="0" x2=".08" y1="0" y2="1"><stop stop-color="#49B7F3"/><stop offset="1" stop-color="#CDF2FF"/></linearGradient>
+<radialGradient id="glow"><stop stop-color="#FFF9D4" stop-opacity=".96"/><stop offset=".3" stop-color="#FFF3BC" stop-opacity=".54"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+<linearGradient id="metal" x1="0" x2="1"><stop stop-color="#738B99"/><stop offset=".32" stop-color="#F3FAFC"/><stop offset=".6" stop-color="#718997"/><stop offset="1" stop-color="#415B6B"/></linearGradient>
+<linearGradient id="fabric" x1="0" x2="1"><stop stop-color="#082837" stop-opacity=".2"/><stop offset=".16" stop-color="#fff" stop-opacity=".16"/><stop offset=".46" stop-color="#021F2A" stop-opacity=".21"/><stop offset=".7" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#123440" stop-opacity=".17"/></linearGradient>
+<clipPath id="flag"><path d="M101 101C236 58 320 142 463 113C605 77 655 163 792 133L783 404C641 446 588 342 456 387C321 433 238 339 105 397Z"/></clipPath>
+</defs>
+<rect width="850" height="560" fill="url(#sky)"/><circle cx="773" cy="71" r="175" fill="url(#glow)"/>
+<g fill="#fff" opacity=".62"><ellipse cx="160" cy="485" rx="180" ry="24"/><ellipse cx="625" cy="520" rx="215" ry="27"/></g>
+<rect x="70" y="46" width="28" height="514" rx="12" fill="url(#metal)"/><circle cx="84" cy="48" r="29" fill="#E9BB5B"/><circle cx="77" cy="39" r="13" fill="#FFF7D8" opacity=".78"/>
+<g clip-path="url(#flag)">
+<rect x="96" y="65" width="715" height="58" fill="#E8364D"/>
+<rect x="96" y="120" width="715" height="58" fill="#FB882C"/>
+<rect x="96" y="176" width="715" height="58" fill="#FBDD3D"/>
+<rect x="96" y="232" width="715" height="58" fill="#22A46E"/>
+<rect x="96" y="288" width="715" height="58" fill="#2588D0"/>
+<rect x="96" y="344" width="715" height="80" fill="#7334A1"/>
+<rect x="95" y="77" width="720" height="357" fill="url(#fabric)"/>
+<path d="M265 73C285 198 254 268 293 407M454 84C413 184 479 325 449 407M662 101C629 220 705 314 681 412" stroke="#fff" stroke-opacity=".20" stroke-width="29" fill="none"/>
+</g>
+<path d="M101 101C236 58 320 142 463 113C605 77 655 163 792 133L783 404C641 446 588 342 456 387C321 433 238 339 105 397Z" fill="none" stroke="#0A4560" stroke-opacity=".23" stroke-width="3"/>
+</svg>
