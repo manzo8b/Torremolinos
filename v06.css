@@ -60,3 +60,33 @@ body, .torre-home, .torre-comer, .torre-agenda, .torre-preview{background:#fff!i
 .music-art .music-album-art+small{z-index:2}
 .ai-footer-note{max-width:460px;color:#bdd9d4;font-size:12px;line-height:1.6}
 @media(max-width:760px){.torre-home .feature-art.pride-visual{min-height:230px}.pride-visual img{min-height:230px}.music-art .music-album-art{min-height:280px;max-height:440px;object-fit:contain}}
+
+/* v0.8 · cinematic editorial hero and Photo Gallery teaser */
+.torre-home .hero-grid{display:block;position:relative;overflow:hidden;min-height:560px;border-radius:27px;isolation:isolate;background:#145968}
+.torre-home .hero-grid:after{display:none!important}
+.torre-home .hero-left{position:relative;z-index:2;width:min(64%,760px);min-height:560px;border-radius:0;padding:clamp(32px,6vw,83px);background:transparent!important;color:#fff}
+.torre-home .hero-left:before{display:none}
+.torre-home .hero-photo{position:absolute!important;inset:0;width:100%;height:100%;min-height:560px;border-radius:0!important;background:#15758a;z-index:0}
+.torre-home .hero-photo:before{content:"";position:absolute;inset:0;z-index:0;background-image:linear-gradient(90deg,rgba(5,42,49,.94),rgba(5,48,54,.79) 42%,rgba(10,55,61,.12) 82%),url('assets/photos/hero-torremolinos-desktop.webp')!important;background-size:cover;background-position:center}
+.torre-home .hero-photo.hero-ai-ready:before{background-image:linear-gradient(90deg,rgba(5,42,49,.92),rgba(5,48,54,.76) 40%,rgba(10,55,61,.09) 84%),var(--hero-upgrade)!important}
+.torre-home .hero-photo .circle{display:none}
+.torre-home .hero-photo .photo-copy{right:24px;bottom:21px;left:auto;z-index:2;text-align:right;max-width:30%}
+.torre-home .hero-photo .photo-copy strong{font-size:clamp(14px,1.8vw,26px)}
+.torre-home .hero-photo .photo-copy small{color:#f2faf8}
+.torre-home .hero-photo #authoredCredit{display:block;color:#e1f5ed;font-size:10px;line-height:1.4}
+.torre-home .hero h1{font-size:clamp(48px,6.7vw,100px);overflow-wrap:anywhere}
+.torre-home .hero-name{display:block;white-space:normal;line-height:1.05}
+.torre-home .hero-sub{max-width:510px}
+.torre-home .trust{margin-top:17px}
+.gallery-feature{margin:58px auto 15px;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(280px,.88fr);border:1px solid #e0eae8;border-radius:19px;overflow:hidden;background:#f4faf8}
+.gallery-feature-img{position:relative;min-height:330px;overflow:hidden;background:#d7e9e2}
+.gallery-feature-img img{display:block;width:100%;height:100%;min-height:330px;object-fit:cover}
+.gallery-feature-img span{position:absolute;left:15px;bottom:15px;padding:7px 10px;border-radius:7px;background:rgba(7,61,67,.89);color:#fff;font-size:10px;font-weight:800}
+.gallery-feature-body{padding:clamp(27px,4vw,50px);display:flex;flex-direction:column;justify-content:center}
+.gallery-feature-body h2{font:600 clamp(42px,5vw,69px)/.96 "Cormorant Garamond",Georgia,serif;letter-spacing:-.04em;color:#153f45;margin:15px 0}
+.gallery-feature-body p{font-size:14px;line-height:1.7;color:#517270}
+.gallery-feature-body a,.gallery-promo-link a{align-self:flex-start;margin-top:17px;background:#135e59;color:#fff;font-size:12px;font-weight:900;text-decoration:none;border-radius:10px;padding:12px 17px}
+.gallery-promo-link{display:flex;justify-content:center;padding:21px 0 4px}
+.gallery-promo-link a{margin:0}
+@media(max-width:970px){.torre-home .hero-left{width:75%}.torre-home .hero-photo .photo-copy{max-width:38%}.gallery-feature{grid-template-columns:1fr 1fr}}
+@media(max-width:720px){.torre-home .hero-grid{min-height:630px;border-radius:19px}.torre-home .hero-left{width:100%;min-height:630px;justify-content:flex-start;padding:48px 25px 120px}.torre-home .hero-photo{min-height:630px}.torre-home .hero-photo:before{background-image:linear-gradient(180deg,rgba(5,45,53,.88),rgba(6,45,51,.64) 56%,rgba(5,54,58,.10) 90%),url('assets/photos/hero-torremolinos-mobile.webp')!important;background-position:center center}.torre-home .hero-photo.hero-ai-ready:before{background-image:linear-gradient(180deg,rgba(5,45,53,.86),rgba(6,45,51,.66) 57%,rgba(5,54,58,.12) 88%),var(--hero-upgrade)!important;background-position:center center}.torre-home .hero h1{font-size:clamp(39px,10.2vw,64px)}.torre-home .hero-photo .photo-copy{left:23px;right:23px;bottom:17px;max-width:none;text-align:left}.torre-home .hero-photo .photo-copy strong{font-size:17px}.gallery-feature{grid-template-columns:1fr;margin-top:44px}.gallery-feature-img{min-height:230px}.gallery-feature-img img{min-height:230px;max-height:350px}.gallery-feature-body{padding:28px}.gallery-feature-body h2{font-size:51px}}
