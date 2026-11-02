@@ -53,6 +53,7 @@ def validate():
  home=(ROOT/"index.html").read_text("utf-8")
  assert 'class="torre-home"' in home and 'v06.css' in home
  assert 'id="torremolinos-audio"' in home
+ assert 'id="heroMusicBtn"' in home and 'aria-pressed="false"' in home
  assert 'Lune_X/assets/audio/next-stop-torremolinos-preview.mp3' in home
  for url in ['listen/','agenda/','comer/','legal/']:
   assert 'href="'+url+'"' in home,("home missing",url)
