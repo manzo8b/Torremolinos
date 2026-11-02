@@ -90,3 +90,73 @@ body, .torre-home, .torre-comer, .torre-agenda, .torre-preview{background:#fff!i
 .gallery-promo-link a{margin:0}
 @media(max-width:970px){.torre-home .hero-left{width:75%}.torre-home .hero-photo .photo-copy{max-width:38%}.gallery-feature{grid-template-columns:1fr 1fr}}
 @media(max-width:720px){.torre-home .hero-grid{min-height:630px;border-radius:19px}.torre-home .hero-left{width:100%;min-height:630px;justify-content:flex-start;padding:48px 25px 120px}.torre-home .hero-photo{min-height:630px}.torre-home .hero-photo:before{background-image:linear-gradient(180deg,rgba(5,45,53,.88),rgba(6,45,51,.64) 56%,rgba(5,54,58,.10) 90%),url('assets/photos/hero-torremolinos-mobile.webp')!important;background-position:center center}.torre-home .hero-photo.hero-ai-ready:before{background-image:linear-gradient(180deg,rgba(5,45,53,.86),rgba(6,45,51,.66) 57%,rgba(5,54,58,.12) 88%),var(--hero-upgrade)!important;background-position:center center}.torre-home .hero h1{font-size:clamp(39px,10.2vw,64px)}.torre-home .hero-photo .photo-copy{left:23px;right:23px;bottom:17px;max-width:none;text-align:left}.torre-home .hero-photo .photo-copy strong{font-size:17px}.gallery-feature{grid-template-columns:1fr;margin-top:44px}.gallery-feature-img{min-height:230px}.gallery-feature-img img{min-height:230px;max-height:350px}.gallery-feature-body{padding:28px}.gallery-feature-body h2{font-size:51px}}
+
+/* TORREMOLINOS v0.9 · deliberate editorial Hero
+   Photo-first, no oppressive overlay, brand on one uninterrupted line.
+   Search, music, AI media credit and inclusive claim are OUTSIDE the photo. */
+.torre-home .hero{padding:29px 0 0}
+.torre-home .hero-heading{background:#fff;color:#083d43;padding:0 4px 26px}
+.torre-home .hero-heading .eyebrow{color:#b05c49;font-size:11px;letter-spacing:.16em;font-weight:850}
+.torre-home .hero .hero-main-title{font-family:Outfit,"DM Sans",sans-serif;font-weight:850;color:#083d43;font-size:clamp(31px,8vw,98px);letter-spacing:-.061em;white-space:nowrap;overflow-wrap:normal;word-break:normal;line-height:1.04;margin:13px 0 6px;max-width:100%}
+.torre-home .hero-tagline{font:italic 500 clamp(28px,3.45vw,47px)/1.12 "Cormorant Garamond",Georgia,serif;letter-spacing:-.017em;color:#226c68;margin:0;max-width:1100px}
+.torre-home .hero-grid{display:block!important;position:relative;isolation:isolate;min-height:0!important;height:auto!important;overflow:hidden;border-radius:20px!important;background:#d7f1ea;box-shadow:0 15px 37px #113f4516}
+.torre-home .hero-grid:after{content:none!important;display:none!important}
+.torre-home .hero-photo{position:relative!important;inset:auto!important;z-index:auto!important;display:block!important;width:100%!important;min-height:0!important;height:auto!important;aspect-ratio:2.18 / 1;border-radius:0!important;overflow:hidden;background:#31a5bc}
+.torre-home .hero-photo:before{content:"";position:absolute;inset:0;z-index:0;background-image:url("assets/gallery/beach-palms-ai.webp")!important;background-position:center 50%!important;background-size:cover!important;background-repeat:no-repeat!important;opacity:1}
+.torre-home .hero-photo.hero-ai-ready:before{background-image:var(--hero-upgrade)!important;background-position:center 50%!important}
+.torre-home .hero-photo:after{content:none!important;display:none!important}
+.torre-home .hero-after{display:flex;justify-content:space-between;align-items:center;gap:25px 40px;padding:30px 4px 5px}
+.torre-home .hero-after-copy{flex:1 1 510px;min-width:0}
+.torre-home .hero-after-copy h2{font:750 clamp(23px,2.65vw,36px)/1.08 Outfit,sans-serif;letter-spacing:-.04em;color:#083d43;margin:0 0 8px}
+.torre-home .hero-after .hero-sub{max-width:630px;margin:0;color:#516e70;font-size:14px;line-height:1.7;text-shadow:none}
+.torre-home .hero-cta-row{display:flex;gap:11px;flex-wrap:wrap;align-items:center}
+.torre-home .hero-cta-row a{font-size:12px;font-weight:850;padding:13px 17px;border-radius:11px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;min-height:46px;transition:background .15s,transform .15s}
+.torre-home .hero-cta-row a:hover{transform:translateY(-1px)}
+.torre-home .hero-cta-main{color:#fff;background:#0b625e}
+.torre-home .hero-cta-main:hover{background:#084c49}
+.torre-home .hero-cta-secondary{background:#e9f4ef;color:#175c57;border:1px solid #d2e6df}
+.torre-home .hero-media-credit{margin:13px 4px 0;color:#698180;font-size:11px;line-height:1.45}
+.torre-home .hero-media-credit a{text-decoration:underline;text-underline-offset:3px;color:#326f69}
+.torre-home .hero-tools{display:flex;align-items:center;justify-content:space-between;gap:16px 28px;margin-top:30px;padding:17px 22px;background:#f3f8f6;border:1px solid #e1eeea;border-radius:16px}
+.torre-home .hero-tools .searchbar{flex:1 1 425px;min-width:240px;max-width:570px;margin:0;border:1px solid #e3ece9;background:#fff;box-shadow:none}
+.torre-home .hero-tools .searchbar button{background:#0b625e;color:#fff}
+.torre-home .hero-tools .searchbar button:hover{background:#084c49}
+.torre-home .hero-tools .hero-sound-shortcut{display:flex;flex:0 1 auto;margin:0;align-items:center;gap:10px}
+.torre-home .hero-tools .hero-sound-shortcut button{background:#fff;color:#185b58;border:1px solid #cce2db;white-space:normal;box-shadow:none}
+.torre-home .hero-tools .hero-sound-shortcut button:hover{background:#e8f5ef}
+.torre-home .hero-tools .hero-sound-shortcut button[aria-pressed=true]{background:#dcf0e5;color:#074942}
+.torre-home .hero-tools .hero-sound-shortcut small{color:#4c7370;text-shadow:none;font-size:10px;max-width:145px;line-height:1.5}
+.torre-home .trust{margin-top:10px;padding:13px 4px 5px}
+@media(max-width:970px){
+ .torre-home .hero-after{flex-direction:column;align-items:flex-start;gap:16px}
+ .torre-home .hero-after-copy{flex-basis:auto}
+ .torre-home .hero-tools{flex-direction:column;align-items:stretch}
+ .torre-home .hero-tools .searchbar{flex:auto;width:100%;max-width:none}
+ .torre-home .hero-tools .hero-sound-shortcut{justify-content:flex-start}
+}
+@media(max-width:720px){
+ .torre-home .hero{padding:21px 0 0}
+ .torre-home .hero-heading{padding:0 2px 20px}
+ .torre-home .hero .hero-main-title{font-size:clamp(28px,8.6vw,59px);letter-spacing:-.065em;margin:9px 0 10px;white-space:nowrap;overflow-wrap:normal;word-break:normal}
+ .torre-home .hero-tagline{font-size:clamp(26px,6.8vw,38px)}
+ .torre-home .hero-grid{min-height:0!important;border-radius:14px!important}
+ .torre-home .hero-photo{min-height:0!important;aspect-ratio:1.28 / 1;height:auto!important}
+ .torre-home .hero-photo:before{background-image:url("assets/gallery/beach-palms-ai.webp")!important;background-position:center center!important}
+ .torre-home .hero-photo.hero-ai-ready:before{background-image:var(--hero-upgrade)!important;background-position:center center!important}
+ .torre-home .hero-after{padding:21px 1px 3px;gap:17px}
+ .torre-home .hero-after-copy h2{font-size:26px}
+ .torre-home .hero-after .hero-sub{font-size:14px}
+ .torre-home .hero-cta-row{gap:9px}
+ .torre-home .hero-cta-row a{font-size:12px;padding:11px 13px}
+ .torre-home .hero-tools{margin-top:19px;padding:13px;gap:12px;border-radius:14px}
+ .torre-home .hero-tools .searchbar{min-width:0;width:100%;padding-left:11px}
+ .torre-home .hero-tools .hero-sound-shortcut{flex-wrap:wrap;align-items:center}
+ .torre-home .hero-tools .hero-sound-shortcut small{max-width:none}
+ .torre-home .hero-media-credit{font-size:10px;margin-top:10px}
+ .torre-home .trust{gap:6px 16px;font-size:11px}
+}
+@media(max-width:360px){
+ .torre-home .hero .hero-main-title{font-size:clamp(27px,8vw,32px)}
+ .torre-home .hero-cta-row a{width:100%}
+}
+@media(prefers-reduced-motion:reduce){.torre-home .hero-cta-row a{transition:none!important}}
