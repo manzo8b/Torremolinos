@@ -101,3 +101,13 @@ Vedere [CREDITS.md](./CREDITS.md). Suggerimenti o correzioni tramite GitHub Issu
 - Documentazione operativa: `V06_DESIGN_AND_EDITORIAL.md`, `SEO_V06.md`, `LEGAL_RELEASE_CHECKLIST.md`.
 
 **Limiti di release:** i test statici non dimostrano la resa su dispositivi reali. GitHub Pages e GitHub Actions devono confermare l'ultimo deployment. Le policy legali in bozza non sostituiscono l'informativa definitiva. Le versioni linguistiche dei reportages originali (Stories) non sono ancora disponibili.
+
+## v0.7 · White-first logo, AI disclosure e fonti eventi
+
+- Logo proprietario in `brand/torremolinos-logo.svg`, simbolo compatto in `brand/torremolinos-symbol.svg` e nuova favicon SVG dedicata; applicato a homepage, Agenda, Comer, Listen, Stories, Legal e anteprima.
+- Nuova identità white-first e miglioramento del contrasto in `v06.css`; tema PWA bianco e petrolio.
+- Cover promozionale ufficiale LUNE_X collegata alla sezione Sound e all'articolo musicale; player con avvio a scelta dell'utente.
+- Sezione Pride con illustrazione descritta e identificata come IA, non documento fotografico.
+- Politica di trasparenza IA in sei lingue e collegamento dal footer; 14 URL in sitemap (privacy e altri documenti ancora in bozza restano noindex).
+- Fonti ufficiali aggiuntive: `madbear.org/en` (scanner), `instagram.com/infinity_festival_/` (solo controllo editoriale manuale).
+- Scanner con fixture `scripts/fixtures/madbearhub.html`; nessuna data dedotta dagli elenchi di eventi.
