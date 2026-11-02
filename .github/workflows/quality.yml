@@ -1,0 +1,40 @@
+name: TORREMOLINOS static quality checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify HTML, accessibility basics and JavaScript syntax
+        run: |
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          import re
+          src=Path('index.html').read_text('utf-8')
+          assert '<!DOCTYPE html>' in src
+          assert '<html lang="es">' in src
+          assert 'TORREMOLINOS' in src
+          assert 'lang="ru"' not in src  # content switched dynamically
+          assert 'aria-label' in src
+          assert 'https://www.renfe.com' in src
+          assert '112' in src
+          assert src.count('<script>') == 1
+          scripts=re.findall(r'<script>(.*?)</script>',src,re.S)
+          assert len(scripts)==1
+          Path('/tmp/torremolinos.js').write_text(scripts[0],encoding='utf-8')
+          class Parser(HTMLParser):
+            def __init__(self): super().__init__();self.ids=[]
+            def handle_starttag(self,tag,attrs):
+              for key,value in attrs:
+                if key=='id':self.ids.append(value)
+          p=Parser();p.feed(src)
+          assert len(p.ids)==len(set(p.ids)), 'Duplicate HTML IDs'
+          print('TORREMOLINOS: markup checks passed')
+          PY
+          node --check /tmp/torremolinos.js
+          python3 -m json.tool manifest.webmanifest >/dev/null
