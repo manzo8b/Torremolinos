@@ -88,3 +88,13 @@ Dati aggiornati editorialmente al 2 novembre 2026; non costituiscono disponibili
 - AEPD diritto di informazione: https://www.aepd.es/derechos-y-deberes/conoce-tus-derechos/derecho-de-informacion
 - AEPD Guía cookies: https://www.aepd.es/es/documento/guia-cookies.pdf
 - W3C WCAG 2.2: https://www.w3.org/TR/WCAG22/
+
+## Brand TORREMOLINOS v0.7 · Logo e AI transparency
+
+- Marchio vettoriale originale TORREMOLINOS: `brand/torremolinos-logo.svg`, con denominazione estesa, sole mediterraneo, palma e onde. Variante icona: `brand/torremolinos-symbol.svg`; favicon: `favicon.svg`.
+- Direzione visiva principale: bianco puro per gli sfondi, petrolio/teal contemporaneo e dettagli corallo e tramonto.
+- Grafica Pride: `assets/illustrations/pride-flag-ai.svg`, **illustrazione creata con assistenza IA**, non foto documentaria né immagine di una manifestazione realmente avvenuta. Presentata con un'etichetta nell'interfaccia.
+- LUNE_X: `https://manzo8b.github.io/Lune_X/assets/images/welcome-to-paradise-promo.webp`, artwork promozionale proveniente dal repository collegato LUNE_X. Non rappresenta una collaborazione con le piattaforme musicali mostrate nella locandina.
+- MadBear directory ufficiale: https://madbear.org/en ; permette di identificare categorie di appuntamenti di Torremolinos, **non prova da sola nuove date**.
+- INFINITY Instagram segnalato dall'utente: https://www.instagram.com/infinity_festival_/ ; può aiutare la verifica editoriale, ma non viene sottoposto a scraping automatico o a inferenze di date.
+- Trasparenza su elementi IA ai sensi del Regolamento (UE) 2024/1689, art. 50: `legal/ai-transparency.html`. L'indicazione è editoriale, non una certificazione giuridica.
