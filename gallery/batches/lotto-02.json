@@ -1,0 +1,64 @@
+{
+  "batch": "02",
+  "status": "staging_only_not_published",
+  "date": "2026-11-02",
+  "notes": "Sette fotografie ricevute; WebP ottimizzati nel pacchetto consegnato all'utente ma NON caricati su GitHub. Non aggiungere a gallery/data.js prima del caricamento e della verifica editoriale. IMG_2533/IMG_2534 sono due inquadrature della stessa scena.",
+  "items": [
+    {
+      "id": "batch-02-10",
+      "asset": "../assets/gallery/batch-02/g10-paraiso-beach-panorama.webp",
+      "category": "lgbtq-sea",
+      "draft_title_it": "Paraíso Beach visto dal lungomare",
+      "verification": "supplied_photo_rights_and_context_to_verify",
+      "note": "Contesto e autorizzazioni da verificare; non inferire eventi."
+    },
+    {
+      "id": "batch-02-11",
+      "asset": "../assets/gallery/batch-02/g11-palme-contro-il-cielo.webp",
+      "category": "beach",
+      "draft_title_it": "Il cielo tra le palme",
+      "verification": "supplied_photo_rights_and_context_to_verify",
+      "note": "Veduta fotografica, non inferire posizione esatta."
+    },
+    {
+      "id": "batch-02-12",
+      "asset": "../assets/gallery/batch-02/g12-vasi-bandiere-europa.webp",
+      "category": "details",
+      "draft_title_it": "Piccoli vasi, tante bandiere",
+      "verification": "supplied_photo_rights_and_context_to_verify",
+      "note": "Dettaglio di parete con vasi dipinti come bandiere."
+    },
+    {
+      "id": "batch-02-13",
+      "asset": "../assets/gallery/batch-02/g13-facciata-bianca-portone.webp",
+      "category": "traditions",
+      "draft_title_it": "Architettura bianca e portone in legno",
+      "verification": "supplied_photo_rights_and_context_to_verify",
+      "note": "Identificazione ufficiale dell'edificio da verificare."
+    },
+    {
+      "id": "batch-02-14",
+      "asset": "../assets/gallery/batch-02/g14-facciata-rossa-messaggio-amore.webp",
+      "category": "details",
+      "draft_title_it": "Solo el amor engendra la maravilla",
+      "verification": "supplied_photo_rights_and_context_to_verify",
+      "note": "Non inferire l'identità della figura sul balcone."
+    },
+    {
+      "id": "batch-02-15",
+      "asset": "../assets/gallery/batch-02/g15-plaza-san-miguel-panchina.webp",
+      "category": "district",
+      "draft_title_it": "Plaza San Miguel, la panchina",
+      "verification": "supplied_photo_rights_and_context_to_verify",
+      "note": "Stessa scena della 16; foto ampia preferita per Gallery."
+    },
+    {
+      "id": "batch-02-16",
+      "asset": "../assets/gallery/batch-02/g16-plaza-san-miguel-fiori.webp",
+      "category": "details",
+      "draft_title_it": "Plaza San Miguel, fiori sulla parete",
+      "verification": "supplied_photo_rights_and_context_to_verify",
+      "note": "Alternativa ravvicinata alla 15, preferibile per un articolo."
+    }
+  ]
+}
