@@ -118,4 +118,8 @@ jobs:
           node --check comer/app.js
           python3 -m py_compile scripts/scan_events.py
           python3 scripts/scan_events.py --fixture-dir scripts/fixtures --out /tmp/torremolinos-scanner-fixtures --strict
+          node --check listen/content.js
+          node --check legal/data.js
+          node --check legal/app.js
+          python3 scripts/validate_v06.py
           
