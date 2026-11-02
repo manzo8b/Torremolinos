@@ -1,7 +1,7 @@
 {
   "source": "https://torremolinosplus.com/en/whats-on/",
   "capturedOn": "2026-11-02",
-  "description": "Initial visible event headings, as published by ACOGAT/Torremolinos PLUS; scanner detects titles newly appearing relative to this baseline, without automatically publishing them.",
+  "description": "Human-reviewed ACOGAT headings, including the alias Pipazo Party for the already catalogued Pipazo Weekend. New titles still trigger manual review; this baseline is not an authoritative event schedule.",
   "acogatHeadings": [
     "Apolo Adrii · Thursday at Exxxtreme",
     "Biparty · Friday at Conexxxtion",
@@ -19,6 +19,7 @@
     "Puppy play date",
     "Pride 2027 Cultural Week",
     "Pride Torremolinos 2027",
-    "Werewolf party"
+    "Werewolf party",
+    "Pipazo Party"
   ]
 }
