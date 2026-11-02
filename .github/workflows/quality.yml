@@ -38,7 +38,8 @@ jobs:
               'stories/index.html',
               'stories/torremolinos-mucho-mas-que-sol-y-playa.html',
               'stories/la-nogalera-donde-la-noche-tiene-historia.html',
-              'stories/pasaje-begona-memoria-de-libertad.html'
+              'stories/pasaje-begona-memoria-de-libertad.html',
+              'stories/san-miguel-la-fiesta-que-saca-torremolinos-a-la-calle.html'
           ]
           for article in stories:
               html=Path(article).read_text('utf-8')
@@ -50,12 +51,35 @@ jobs:
               if article != 'stories/index.html':
                   assert 'Redacción TORREMOLINOS' in html, article
                   assert 'Fuentes y verificación' in html, article
+          agenda=Path('agenda/index.html').read_text('utf-8')
+          assert 'rel="canonical"' in agenda
+          assert 'noEvents' in agenda
+          assert 'www.torremolinoscultura.es' in agenda
+          assert '2026-11-03' in agenda and '2026-12-03' in agenda
+          assert 'agenda/' in src
           assert Path('editorial.css').exists()
+          photos=[
+              'hero-torremolinos-desktop.webp',
+              'hero-torremolinos-mobile.webp',
+              'playa-palmeras-panorama.webp',
+              'el-bajondillo-letrero.webp',
+              'paseo-palmeras.webp',
+              'mar-mediterraneo.webp',
+              'costa-torremolinos.webp',
+              'paseo-centro.webp'
+          ]
+          for file in photos:
+              path=Path('assets/photos')/file
+              assert path.is_file() and path.stat().st_size>1000, path
+          assert 'hero-torremolinos-desktop.webp' in src
+          assert 'hero-torremolinos-mobile.webp' in src
+
           assert Path('stories/article.css').exists()
           sitemap=Path('sitemap.xml').read_text('utf-8')
           for article in stories:
               loc='https://manzo8b.github.io/Torremolinos/'+article.replace('index.html','')
               assert loc in sitemap or article in sitemap, article
+          assert 'https://manzo8b.github.io/Torremolinos/agenda/' in sitemap
           print('TORREMOLINOS: homepage, editorial pages and SEO checks passed')
           PY
           node --check /tmp/torremolinos.js
