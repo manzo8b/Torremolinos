@@ -52,3 +52,14 @@ Vedere [CREDITS.md](./CREDITS.md). Suggerimenti o correzioni tramite GitHub Issu
 **Stato della pubblicazione:** file caricati su GitHub / ramo `main`; verificare GitHub Pages (Settings → Pages → Source: GitHub Actions) e l'URL pubblico. Non dichiarare operativo un deployment senza prova HTTP.
 
 **Prossime attività:** controlli responsive in browser reale, controllo WCAG, fotografie proprie, revisione multilingue completa, directory commerciale verificata con data e fonte, agenda eventi reale, pagine privacy e trasparenza commerciali aggiornate.
+
+## v0.3 · Archivio fotografico originale pronto (2 novembre 2026)
+
+- Confermata l'autorizzazione per paesaggi fotografati dall'autore senza primi piani riconoscibili.
+- Preparate 8 immagini WebP in un pacchetto locale privato, ridimensionate e prive di EXIF.
+- Homepage predisposta per 2 copertine autentiche responsive (desktop e mobile).
+- Nuova sezione fotografica `La ciudad desde dentro` con 3 scene, attivata **solo** quando le foto sono realmente presenti.
+- Fallback automatico alla copertina Wikimedia quando le foto non sono disponibili, senza affermazioni ingannevoli sulla pubblicazione.
+- Credito proposto: `© Archivo fotográfico TORREMOLINOS · fotografía original`, diritti riservati.
+- Le fotografie con performer e primi piani sono fuori dall'upload autorizzato.
+- **Upload da completare:** gli 8 file WebP non sono stati caricati automaticamente su GitHub; vedi [assets/photos/README.md](./assets/photos/README.md).
