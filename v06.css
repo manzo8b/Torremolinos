@@ -187,3 +187,43 @@ body, .torre-home, .torre-comer, .torre-agenda, .torre-preview{background:#fff!i
  .torre-preview .preview-hero-bottom h2{font-size:26px}
  .torre-preview .preview-ai-credit{font-size:10px}
 }
+
+/* Editorial overline accessibility pass · November 2026
+   Deep vivid coral #B44719 = 5.45:1 on pure white; legible even at 12px.
+   Light apricot reserved for labels on petrol/dark surfaces. */
+:root{--editorial-coral-strong:#B44719;--editorial-coral-on-dark:#FFBF91}
+.torre-home .eyebrow.coral,
+.torre-home .hero-heading .eyebrow,
+.torre-comer .eyebrow,
+.torre-agenda .eyebrow,
+.torre-preview .preview-hero-heading .eyebrow,
+.torre-preview .secthead .eyebrow,
+.torre-preview .photostory .eyebrow,
+.torre-preview .eyebrow.coral{
+  color:var(--editorial-coral-strong)!important;
+  font-size:clamp(12px,1vw,13px)!important;
+  font-weight:900!important;
+  letter-spacing:.125em!important;
+  line-height:1.55!important;
+  text-transform:uppercase;
+}
+.torre-home .hero-heading .eyebrow,
+.torre-preview .preview-hero-heading .eyebrow{
+ font-size:clamp(13px,1.12vw,15px)!important;
+ letter-spacing:.125em!important;
+}
+.torre-home .music-body .eyebrow,
+.torre-home .feature-copy .eyebrow,
+.torre-preview .music-body .eyebrow,
+.torre-preview .agenda .eyebrow{
+ color:var(--editorial-coral-on-dark)!important;
+ font-size:clamp(12px,1vw,13px)!important;
+ font-weight:900!important;
+ letter-spacing:.13em!important;
+}
+@media(max-width:520px){
+ .torre-home .hero-heading .eyebrow,
+ .torre-preview .preview-hero-heading .eyebrow{
+   font-size:13px!important;letter-spacing:.09em!important;
+ }
+}
