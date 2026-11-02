@@ -38,3 +38,17 @@ Non inventare orari, prezzi, eventi, aperture o recensioni. Questa versione pres
 ## Fonti e crediti
 
 Vedere [CREDITS.md](./CREDITS.md). Suggerimenti o correzioni tramite GitHub Issues.
+
+## v0.2 · Redesign editoriale e Stories (2 novembre 2026)
+
+- Copertina fotografica a larghezza piena, stile rivista mediterranea e navigazione mobile a cinque schede
+- Foglio `editorial.css` dedicato: preserva il codice applicativo v0.1
+- Tre articoli originali completi e indicizzabili in `stories/`: città, La Nogalera, Pasaje Begoña
+- Indice editorial `stories/index.html` e stile condiviso `stories/article.css`
+- Ogni articolo: titolo e descrizione SEO, canonical, schema Article, immagine con licenza e credito, sezioni, riferimenti, approfondimenti correlati
+- UI della homepage tradotta per Stories in ES / EN / IT / DE / FR / RU; testi degli articoli **solo in spagnolo**, chiaramente etichettati
+- Aggiornata `sitemap.xml` con homepage, indice editoriale e tre articoli
+
+**Stato della pubblicazione:** file caricati su GitHub / ramo `main`; verificare GitHub Pages (Settings → Pages → Source: GitHub Actions) e l'URL pubblico. Non dichiarare operativo un deployment senza prova HTTP.
+
+**Prossime attività:** controlli responsive in browser reale, controllo WCAG, fotografie proprie, revisione multilingue completa, directory commerciale verificata con data e fonte, agenda eventi reale, pagine privacy e trasparenza commerciali aggiornate.
