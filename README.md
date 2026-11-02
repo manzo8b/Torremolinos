@@ -87,3 +87,17 @@ Vedere [CREDITS.md](./CREDITS.md). Suggerimenti o correzioni tramite GitHub Issu
 - **SEO**: sitemap con 8 URL indicizzabili; anteprima esclusa dai motori.
 - **Limiti**: l'agenda non è esaustiva di tutte le serate private/social, non controlla vendite, prezzi o capienze in tempo reale; i nuovi eventi sono pubblicati dopo revisione.
 - Manuale operativo: [agenda/SCANNER.md](./agenda/SCANNER.md).
+
+## v0.6 · Mediterranean design, Sound of Torremolinos, SEO e legal (2 novembre 2026)
+
+- Nuova palette grafica centralizzata `v06.css`: Sea Paper `#F5F1E8`, Soft Sand `#E8DDCA`, Modern Palm `#4D8A74`, Deep Teal `#1C5056`, Sunset Coral `#DF886A`.
+- Homepage con contrasto fotografico più profondo e mini lettore reale di **Next Stop: Torremolinos**, che parte su scelta del visitatore (senza autoplay sonoro).
+- Pagina `listen/`: articolo `Welcome to the Paradise` e anteprima ufficiale LUNE_X, **interamente tradotti** in ES, EN, IT, DE, FR, RU. Il player trasmette dal progetto LUNE_X e non contiene l'intero album.
+- Hub `legal/`: otto policy in sei lingue; regole editoriali, controllo eventi e crediti pubblicabili. Informative privacy/cookies/termini/contatto/accessibilità marcate **BOZZA, noindex**, da validare con dati del titolare e audit.
+- Stili coerenti per agenda, gastronomia e anteprima, con navigazione integrata verso Listen e Legal.
+- Stories mostra il nuovo editoriale musicale. I quattro articoli storici restano in spagnolo; traduzioni ancora da fare e revisionare.
+- Sitemap con **13 URL canonici**, anteprima e policy in bozza escluse; nuova specifica `WebSite` e anteprima social sulla homepage; nessuna garanzia di sitelink Google.
+- Cache PWA `torremolinos-v06`, manifest aggiornato; workflow QA include `scripts/validate_v06.py`.
+- Documentazione operativa: `V06_DESIGN_AND_EDITORIAL.md`, `SEO_V06.md`, `LEGAL_RELEASE_CHECKLIST.md`.
+
+**Limiti di release:** i test statici non dimostrano la resa su dispositivi reali. GitHub Pages e GitHub Actions devono confermare l'ultimo deployment. Le policy legali in bozza non sostituiscono l'informativa definitiva. Le versioni linguistiche dei reportages originali (Stories) non sono ancora disponibili.
