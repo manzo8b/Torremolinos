@@ -86,10 +86,14 @@ def review_acogat(headings,curated):
     now=dt.datetime.now(dt.timezone.utc).date().isoformat()
     ac_names=acogat_headings(headings)
     expected=[x for x in curated if x["kind"]=="lgbtq" and x["end"]>=now and "torremolinosplus.com" in x["source"]]
-    # This is a fuzzy discovery list; avoid treating absent historical events as a new event.
-    tokens=("apolo","biparty","pipazo","drag","fetish","ellas","daddy","new year","pride","puppy","werewolf","rockabilly")
-    unexpected=[name for name in ac_names if not any(v in normalized(name) for v in tokens)]
-    return {"headings":ac_names,"expected_future_count":len(expected),"unrecognized_headings":unexpected}
+    # Compare against a known human-reviewed snapshot. Never exempt a new event
+    # merely because its title includes "Daddy", "Pride" or "Infinity".
+    baseline=json.loads((ROOT/"agenda/scanner-baseline.json").read_text("utf-8"))
+    initial={normalized(name) for name in baseline.get("acogatHeadings",[])}
+    unexpected=[name for name in ac_names if normalized(name) not in initial]
+    previous={normalized(name) for name in ac_names}
+    no_longer_visible=[name for name in baseline.get("acogatHeadings",[]) if normalized(name) not in previous]
+    return {"headings":ac_names,"expected_future_count":len(expected),"unrecognized_headings":unexpected,"no_longer_visible":no_longer_visible}
 def scan(fixtures=None):
     feed=json.loads((ROOT/"agenda/events.json").read_text("utf-8"))
     results={};issues=[]
@@ -112,7 +116,7 @@ def scan(fixtures=None):
             else:
                 results[key]["discovery"]=review_acogat(headings,feed["events"])
                 if results[key]["discovery"]["unrecognized_headings"]:
-                    issues.append("ACOGAT has headings not on the minimal recognised roster; review manually.")
+                    issues.append("ACOGAT has newly listed event headings not in the editorial baseline; review dates and sources manually.")
         except (OSError,ValueError,urllib.error.URLError) as err:
             results[key]={"url":url,"reachable":False,"error":str(err)[:240]}
             issues.append(f"{key}: source not reachable; retain existing editorial dates.")
@@ -132,7 +136,7 @@ def write_report(report,outdir):
             lines.append(f"- Estado: {z['status']}")
         if "discovery" in r:
             lines.append(f"- Títulos visibles: {len(r['discovery']['headings'])}")
-            lines.append("- Candidatos a revisar (no publicar sin comprobar): "+", ".join(r["discovery"]["unrecognized_headings"] or ["ninguno"]))
+            lines.append("- Nuevos títulos frente a la línea base (no publicar sin verificar): "+", ".join(r["discovery"]["unrecognized_headings"] or ["ninguno"]))
         if "warning" in r:lines.append("- Advertencia: "+r["warning"])
         if "error" in r:lines.append("- Error: "+r["error"])
         lines.append("")
