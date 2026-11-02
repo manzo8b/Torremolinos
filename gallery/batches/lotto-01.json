@@ -1,0 +1,71 @@
+{
+  "batch": "01",
+  "status": "staging_only_not_published",
+  "date": "2026-11-02",
+  "notes": "Primo gruppo di 9 immagini allegato dall'utente; i file WebP non sono ancora caricati nel repository. Non importare in gallery/data.js prima del caricamento, della verifica dei diritti e della classificazione AI.",
+  "items": [
+    {
+      "id": "batch-01-01",
+      "asset": "../assets/gallery/batch-01/g01-san-miguel-collage.webp",
+      "category": "traditions",
+      "draft_title_it": "San Miguel · Collage editoriale",
+      "verification": "collage_provenance_to_verify"
+    },
+    {
+      "id": "batch-01-02",
+      "asset": "../assets/gallery/batch-01/g02-incontro-festa-centro.webp",
+      "category": "local-life",
+      "draft_title_it": "Incontro e festa nel centro",
+      "verification": "supplied_photo_rights_to_verify"
+    },
+    {
+      "id": "batch-01-03",
+      "asset": "../assets/gallery/batch-01/g03-musica-tradizione-chiesa.webp",
+      "category": "traditions",
+      "draft_title_it": "Musica e tradizione in chiesa",
+      "verification": "supplied_photo_context_to_verify"
+    },
+    {
+      "id": "batch-01-04",
+      "asset": "../assets/gallery/batch-01/g04-strass-neon-diversidad.webp",
+      "category": "nightlife",
+      "draft_title_it": "La diversità in una luce",
+      "verification": "supplied_photo_rights_to_verify"
+    },
+    {
+      "id": "batch-01-05",
+      "asset": "../assets/gallery/batch-01/g05-san-miguel-creative-poster.webp",
+      "category": "traditions",
+      "draft_title_it": "San Miguel · Visual creativo",
+      "verification": "illustrative_ai_to_verify"
+    },
+    {
+      "id": "batch-01-06",
+      "asset": "../assets/gallery/batch-01/g06-spiaggia-chiringuitos.webp",
+      "category": "beaches",
+      "draft_title_it": "La spiaggia e i chiringuitos",
+      "verification": "supplied_photo_rights_to_verify"
+    },
+    {
+      "id": "batch-01-07",
+      "asset": "../assets/gallery/batch-01/g07-spiaggia-palme-passeggiata.webp",
+      "category": "beaches",
+      "draft_title_it": "Palme, spiaggia e passeggiata",
+      "verification": "supplied_photo_rights_to_verify"
+    },
+    {
+      "id": "batch-01-08",
+      "asset": "../assets/gallery/batch-01/g08-segno-m-spiaggia.webp",
+      "category": "beaches",
+      "draft_title_it": "La grande M sulla sabbia",
+      "verification": "supplied_photo_rights_to_verify"
+    },
+    {
+      "id": "batch-01-09",
+      "asset": "../assets/gallery/batch-01/g09-paraiso-beach-pride.webp",
+      "category": "lgbtq-and-sea",
+      "draft_title_it": "Paraíso Beach e bandiere Pride",
+      "verification": "supplied_photo_rights_to_verify"
+    }
+  ]
+}
