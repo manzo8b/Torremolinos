@@ -2,7 +2,7 @@
 const CACHE='torremolinos-v07';
 const FILES=[
   './','./index.html','./editorial.css','./favicon.svg','./manifest.webmanifest',
-  './brand/torremolinos-logo.svg','./brand/torremolinos-symbol.svg','./assets/illustrations/pride-flag-ai.svg','./legal/ai-transparency.html',
+  './brand/torremolinos-logo.svg','./brand/torremolinos-logo-light.svg','./brand/torremolinos-symbol.svg','./assets/illustrations/pride-flag-ai.svg','./legal/ai-transparency.html',
   './v06.css','./listen/','./listen/content.js','./legal/','./legal/styles.css','./legal/app.js','./legal/data.js',
   './assets/photos/hero-torremolinos-desktop.webp',
   './assets/photos/hero-torremolinos-mobile.webp',
