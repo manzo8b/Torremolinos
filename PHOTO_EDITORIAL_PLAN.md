@@ -41,13 +41,13 @@ Il programma 2024 documenta anche la processione del **29 settembre** e il relat
 
 ## Checklist prima della messa online
 
-- [ ] Titolarità e permesso di pubblicare le fotografie confermati dall'autore
+- [x] Titolarità e permesso per fotografie paesaggistiche senza primi piani confermati dall'autore
 - [ ] Scelta del credito fotografico e delle condizioni d'uso
 - [ ] Contesto e anno delle fotografie della festa confermati
 - [ ] Valutazione privacy per persone riconoscibili; autorizzazioni dove necessarie
 - [ ] Fotografie dei performer pubblicate solo dopo la verifica dei diritti d'immagine
-- [ ] Alt text descrittivi e dimensioni responsive
-- [ ] JPEG/WebP senza EXIF per protezione di metadati sensibili
+- [x] Alt text e immagini responsive preparati nel kit e nel frontend (in attesa di upload asset)
+- [x] WebP senza EXIF preparati; originali conservati separatamente
 - [ ] Copertina desktop adeguata (le fotografie originali fornite sono verticali)
 - [ ] Data editoriale di verifica e fonti riportate negli articoli
 - [ ] Nessuna foto usata come testimonianza di un evento con data non confermata
@@ -55,3 +55,7 @@ Il programma 2024 documenta anche la processione del **29 settembre** e il relat
 ## Regola editoriale
 
 **La fotografia autentica è una fonte visuale, non un permesso automatico di pubblicazione e non una prova della data dell'evento.**
+
+## 2 novembre 2026 — avanzamento autorizzazioni
+
+Il fotografo ha confermato di essere l'autore degli scatti e ha autorizzato le sole immagini paesaggistiche senza primi piani riconoscibili. Il pacchetto contiene otto immagini WebP. Il codice del sito è pronto, ma i WebP **non sono ancora nel repository**. I contenuti di performer e processioni rimangono in verifica.
