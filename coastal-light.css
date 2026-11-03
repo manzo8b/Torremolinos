@@ -1,0 +1,49 @@
+/* Brand-derived, light-only coastal system. Blue is the requested Mykonos extension. */
+:root{--brand-ink:#083d43;--brand-wave:#36baaf;--brand-sun:#ffc84d;--brand-coral:#ff894a;--brand-rose:#ea4d88;--page-accent:#07666c;--page-tint:#e8f8f3;--glass:rgba(255,255,255,.88);--glass-border:rgba(7,102,108,.18)}
+body[data-coast="blue"]{--page-accent:#155ca2;--page-tint:#edf5ff;--glass-border:rgba(21,92,162,.18)}
+body[data-coast="coral"]{--page-accent:#95431f;--page-tint:#fff2e8}
+body[data-coast="rose"]{--page-accent:#9b3465;--page-tint:#fff0f6}
+body[data-coast="sand"]{--page-accent:#775819;--page-tint:#fff9e8}
+body{background:#fff!important;color:var(--brand-ink)}
+body :is(.footer,.foot,.bottom){background:var(--page-tint)!important;color:var(--brand-ink)!important;border-top:1px solid var(--glass-border)}
+body :is(.footer,.foot,.bottom) :is(a,p,small,strong,span){color:var(--brand-ink)!important}
+body :is(.topbar,.mast,.top){background:var(--glass)!important;border-bottom:1px solid var(--glass-border);box-shadow:0 4px 22px #083d4308}
+body :is(.feature,.music-shell,.music,.experience,.community,.mapbox,.identity){background:var(--page-tint)!important;color:var(--brand-ink)!important;box-shadow:none}
+body :is(.feature-copy,.music-body,.music,.experience,.community,.identity) :is(h1,h2,h3,p,small,label,.eyebrow){color:var(--brand-ink)!important;text-shadow:none!important}
+body :is(.feature-copy,.music-body) .eyebrow{color:var(--page-accent)!important}
+body :is(.hero-copy,.intro-copy) h1,body .intro h1,body .hero h1,body .kicker{color:var(--page-accent)!important}
+body :is(.btn,.cta,.buttons a,.cardlinks a.primary,.feature-copy button,.agenda-home-btn,.nogalera-feature-copy a,.music-links a,.searchbar button,.hero-sound-shortcut button){background:var(--page-tint)!important;color:var(--page-accent)!important;border:1px solid var(--glass-border)!important;box-shadow:0 3px 10px #083d4307;min-height:44px}
+body :is(.filterbar,.filters,.chips,.pill-row,.filterline,.moods) button[aria-pressed=true]{background:var(--page-tint)!important;color:var(--page-accent)!important;border-color:var(--page-accent)!important;box-shadow:inset 0 -2px var(--page-accent)}
+body :is(.hero-photo span,.hero-media figcaption,.ai-visual-caption,.photoattribution,.music-art small,.nogalera-feature-photo small,.agenda-home-photo small){background:rgba(255,255,255,.94)!important;color:var(--brand-ink)!important;border:1px solid var(--glass-border)}
+body :is(.tools,.toolbox,.hero-tools,.filterbar,.panel,.notice,.identity){background:var(--glass)!important;border:1px solid var(--glass-border);box-shadow:0 10px 30px #083d4308}
+body .viewer{background:#fff!important;color:var(--brand-ink)!important;border:1px solid var(--glass-border)}
+body .viewer::backdrop{background:#e7f4f0d9;backdrop-filter:blur(9px)}
+body :is(button,a,input,select):focus-visible{outline:3px solid var(--page-accent);outline-offset:4px}
+body :is(button,.btn,.cta){transition:transform .16s ease,box-shadow .16s ease,background .16s ease}
+body :is(button,.btn,.cta):active{transform:scale(.98)}
+@supports(backdrop-filter:blur(12px)){body :is(.topbar,.mast,.top,.tools,.toolbox,.hero-tools,.filterbar,.mobilebar){backdrop-filter:blur(14px) saturate(125%);-webkit-backdrop-filter:blur(14px) saturate(125%)}}
+@media(prefers-reduced-motion:reduce){body *,body *:before,body *:after{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+@media(prefers-reduced-transparency:reduce){body :is(.topbar,.mast,.top,.tools,.toolbox,.hero-tools,.filterbar,.mobilebar){background:#fff!important;backdrop-filter:none!important}}
+/* The cover uses a bright photograph with narrative outside the image. */
+.torre-home .hero{display:flex;flex-direction:column;background:#fff!important;overflow:visible;margin-top:24px;border-radius:0}
+.torre-home .hero-heading{padding:8px 0 26px!important;background:transparent;pointer-events:auto}
+.torre-home .hero .hero-main-title{color:var(--brand-ink)!important;margin:12px 0!important;font-size:clamp(28px,7.7vw,100px)!important}
+.torre-home .hero-heading .eyebrow{color:var(--page-accent)!important}
+.torre-home .hero-tagline{color:var(--page-accent)!important;margin:14px 0 0!important;max-width:1000px;font-size:clamp(36px,4.8vw,64px)!important}
+.torre-home .hero-grid{min-height:0!important;height:auto!important;border-radius:18px!important;background:var(--page-tint);overflow:hidden}
+.torre-home .hero-photo{min-height:0!important;height:auto!important;aspect-ratio:2.18/1!important}
+.torre-home .hero-photo:after{display:none!important}
+.torre-home .hero-after{padding:26px 0 12px!important;pointer-events:auto;align-items:center}
+.torre-home .hero-after-copy h2{color:var(--brand-ink)!important}
+.torre-home .hero-after .hero-sub{color:#3e6467!important}
+.torre-home .hero-cta-main{background:#c3fff0!important;color:#083d43!important;border:1px solid #94dacf}
+.torre-home .hero-cta-secondary{background:#fff8e6!important;color:#775819!important;border:1px solid #eed8a5}
+.torre-home .hero-media-credit{background:#fff!important;color:#47696c!important;padding:0!important;font-size:11px}
+.torre-home .music-body .music-links a{color:var(--page-accent)!important}
+.torre-home .feature-art.pride-visual{background:#e8f8f3!important}
+@media(max-width:760px){.torre-home .hero-heading{padding:4px 0 22px!important}.torre-home .hero-photo{aspect-ratio:1.28!important}.torre-home .hero-after{align-items:flex-start;padding:24px 0 12px!important}.torre-home .hero-tagline{font-size:clamp(34px,8vw,48px)!important}}
+body[data-coast] :is(.hero-body,.intro,.torre-agenda .hero){background:var(--page-tint)!important}
+.torre-comer .hero-body,.torre-agenda .hero{background:var(--page-tint)!important}
+body[data-coast] h1 em{color:var(--page-accent)!important}
+body[data-coast] .intro{border-radius:18px;padding:clamp(24px,4vw,48px)}
+body[data-coast] .hero-media,body[data-coast] .hero-photo{background-color:var(--page-tint)}

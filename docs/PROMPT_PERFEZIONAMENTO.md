@@ -4,7 +4,7 @@ Agisci come responsabile di UX, direzione artistica, contenuti e sviluppo del si
 
 Applica i principi integrati nel Web Architect Master v3: Impeccable per distinguere superfici Experience/Persuade, lettura e funzioni operative; Design Taste per ricavare la direzione dal luogo e verificare il risultato renderizzato; Apple Design per feedback, interazioni native, focus e movimento ridotto. Non dichiarare installati i pacchetti originali senza verificarne la presenza.
 
-Il concetto è “Il mare apre il racconto; i quartieri gli danno una voce; la musica accompagna la notte”. Il riferimento Wix DJ Scuro ispira scala tipografica, composizione immersiva, ritmo e spazio; nessun contenuto, marchio o asset deve essere copiato. Mantieni l’identità costiera: bianco, verde petrolio, sabbia e accenti corallo. Usa atmosfere scure per notte e musica senza compromettere la lettura dei contenuti pratici.
+Il concetto è “Il mare apre il racconto; i quartieri gli danno una voce; la musica accompagna la notte”. Il riferimento Wix DJ Scuro ispira scala tipografica, composizione immersiva, ritmo e spazio; nessun contenuto, marchio o asset deve essere copiato. Mantieni l’identità costiera: bianco, verde petrolio, sabbia e accenti corallo. Nessuno sfondo o riquadro scuro. Usa colori del logo, superfici bianche e traslucenze leggere: verde per home/quartieri, blu Mykonos per gallery/musica, corallo per gastronomia, rosa per agenda e sabbia per storie. Il blu Mykonos è un’estensione richiesta dal proprietario.
 
 Abbina tre registri:
 - Narrativo evocativo in hero, aperture di quartiere, storie e musica. Scrittura concreta, sensoriale e inclusiva; niente promesse assolute o formule turistiche generiche.

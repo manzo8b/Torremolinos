@@ -2,7 +2,7 @@
 3 novembre 2026 · Brief operativo per la prossima selezione di immagini.
 
 ## Direzione
-Il mare apre il racconto; i quartieri gli danno una voce; la musica accompagna la notte. Conservare bianco, verde petrolio e identità TORREMOLINOS. Dal riferimento Wix DJ Scuro riprendere scala tipografica, apertura immersiva, spazio e ritmo; applicare il buio soprattutto a musica e notte. Niente video automatici necessari per comprendere la pagina.
+Il mare apre il racconto; i quartieri gli danno una voce; la musica accompagna la notte. Conservare bianco, verde petrolio e identità TORREMOLINOS. Dal riferimento Wix DJ Scuro riprendere scala tipografica, apertura immersiva, spazio e ritmo; mantenere ogni superficie chiara, inclusi musica e notte. Niente sfondi o riquadri scuri. Vetro leggero su navigazione e strumenti, feedback nativi e rispetto di reduced motion/transparency. Niente video automatici necessari per comprendere la pagina.
 
 ## Inventario: cosa serve davvero
 Le otto fotografie WebP del progetto sono già disponibili e autorizzate secondo assets/photos/README.md: non occorre richiederle di nuovo. Hero e copertina Gallery includono oggi illustrazioni IA, dichiarate come tali. Le foto storiche Commons conservano i propri crediti e date.
