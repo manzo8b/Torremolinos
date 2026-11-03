@@ -1,11 +1,11 @@
 // TORREMOLINOS v0.4 — offline shell and key editorial pages
-const CACHE='torremolinos-v10';
+const CACHE='torremolinos-v11';
 const FILES=[
   './','./index.html','./editorial.css','./favicon.svg','./manifest.webmanifest',
   './brand/torremolinos-logo.svg','./brand/torremolinos-logo-light.svg','./brand/torremolinos-symbol.svg','./assets/illustrations/pride-flag-ai.svg','./legal/ai-transparency.html',
   './gallery/','./gallery/styles.css','./gallery/data.js','./gallery/app.js',
   './explore/la-nogalera/','./explore/la-nogalera/styles.css','./explore/la-nogalera/data.js','./explore/la-nogalera/app.js',
-  './v06.css','./listen/','./listen/content.js','./legal/','./legal/styles.css','./legal/app.js','./legal/data.js',
+  './refinement.css','./v06.css','./listen/','./listen/content.js','./legal/','./legal/styles.css','./legal/app.js','./legal/data.js',
   './assets/photos/hero-torremolinos-desktop.webp',
   './assets/photos/hero-torremolinos-mobile.webp',
   './assets/photos/playa-palmeras-panorama.webp',
