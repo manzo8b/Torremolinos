@@ -47,3 +47,4 @@ body[data-coast] :is(.hero-body,.intro,.torre-agenda .hero){background:var(--pag
 body[data-coast] h1 em{color:var(--page-accent)!important}
 body[data-coast] .intro{border-radius:18px;padding:clamp(24px,4vw,48px)}
 body[data-coast] .hero-media,body[data-coast] .hero-photo{background-color:var(--page-tint)}
+@media(max-width:600px){body[data-coast] .header-links{display:flex;flex-wrap:wrap;gap:10px 16px;min-width:0;max-width:100%}body[data-coast] header .wrap{flex-wrap:wrap}}
