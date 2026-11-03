@@ -48,3 +48,38 @@ body[data-coast] h1 em{color:var(--page-accent)!important}
 body[data-coast] .intro{border-radius:18px;padding:clamp(24px,4vw,48px)}
 body[data-coast] .hero-media,body[data-coast] .hero-photo{background-color:var(--page-tint)}
 @media(max-width:600px){body[data-coast] .header-links{display:flex;flex-wrap:wrap;gap:10px 16px;min-width:0;max-width:100%}body[data-coast] header .wrap{flex-wrap:wrap}}
+/* Album rhythm: alternating luminous washes from the logo palette. */
+.torre-home main>section:not(.hero){border-radius:22px;margin-top:32px;padding:clamp(26px,4vw,48px);border:1px solid #ffffffb3}
+.torre-home main>section:nth-of-type(6n+2){background:linear-gradient(125deg,#e7fbf4,#f8fffc)!important}
+.torre-home main>section:nth-of-type(6n+3){background:linear-gradient(125deg,#fff5dc,#fffdf5)!important}
+.torre-home main>section:nth-of-type(6n+4){background:linear-gradient(125deg,#e9f4ff,#f8fbff)!important}
+.torre-home main>section:nth-of-type(6n+5){background:linear-gradient(125deg,#fff0f5,#fffafb)!important}
+.torre-home main>section:nth-of-type(6n+6){background:linear-gradient(125deg,#fff0e6,#fffaf4)!important}
+.torre-home main>section:nth-of-type(6n+1):not(.hero){background:linear-gradient(125deg,#eaf9fa,#faffff)!important}
+.torre-home main>section :is(.music-shell,.feature,.nogalera-feature-copy){background:transparent!important}
+.torre-home main>section .sectop{margin-top:0}
+.torre-home .hero-photo:before{background-image:url('assets/photos/album/palmeras-sol.webp')!important}
+body main :is(.photo-diary-grid img,.magazine-card .cover img,.magazine-extra img,.nogalera-feature-photo img,.agenda-home-photo img,.music-album-art,.gallery-feature-img img,.hero-media img,.hero-photo img){aspect-ratio:16/9!important;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;object-fit:cover!important}
+body main :is(.nogalera-feature-photo,.agenda-home-photo,.music-art,.gallery-feature-img,.hero-media,.hero-photo){min-height:0!important}
+body .photo-diary-grid figure{min-width:0}
+body .magazine-card .cover{height:auto!important;aspect-ratio:16/9}
+body :is(.ai-visual-caption,.hero-media-credit){display:none!important}
+.ai-badge{position:absolute;right:12px;bottom:12px;background:#ffffffec!important;color:#083d43!important;border:1px solid #83c4ba;border-radius:7px;padding:4px 7px;font:800 10px/1.2 system-ui;letter-spacing:.08em;z-index:2}
+.ai-footer{padding:12px 24px;font-size:12px;color:#3e6467}
+.ai-footer a{color:inherit}
+body :is(button,.btn,.cta,.hero-cta-row a,.directory-teaser,.gallery-card){transition:transform .22s cubic-bezier(.2,.8,.2,1),box-shadow .22s,background .22s}
+@media(hover:hover){body :is(button,.btn,.cta,.hero-cta-row a):hover{transform:translateY(-2px);box-shadow:0 7px 18px #07666c18}}
+body :is(button,.btn,.cta,.hero-cta-row a):active{transform:translateY(1px) scale(.97);box-shadow:0 1px 3px #07666c18}
+.chapter{opacity:1;transform:translateY(18px);transition:transform .7s cubic-bezier(.2,.75,.2,1)}
+.chapter-visible{transform:none}
+@view-transition{navigation:auto}
+::view-transition-old(root){animation:album-out .24s ease both}
+::view-transition-new(root){animation:album-in .4s cubic-bezier(.2,.75,.2,1) both}
+@keyframes album-out{to{opacity:0;transform:translateX(-1.5%)}}
+@keyframes album-in{from{opacity:0;transform:translateX(2.5%)}to{opacity:1;transform:none}}
+@media(max-width:760px){.torre-home main>section:not(.hero){padding:24px 18px;margin-top:24px;border-radius:18px}.torre-home .hero-photo{aspect-ratio:16/9!important}.torre-home .hero-tools .searchbar{min-width:0}.torre-home .photo-diary-grid{grid-template-columns:1fr}.torre-home .nogalera-feature{display:block}.torre-home .music-art{min-height:0!important}}
+@media(prefers-reduced-motion:reduce){.chapter{transform:none;transition:none}::view-transition-old(root),::view-transition-new(root){animation:none}}
+/* Landscape-only editorial frames across every public page. */
+body main img:not(.brand-logo-img):not([src*="brand/"]){aspect-ratio:16/9!important;width:100%!important;height:auto!important;min-height:0!important;object-fit:cover!important}
+body .viewer #viewerImage{object-fit:contain!important;max-height:72dvh!important}
+@media(max-width:420px){.torre-home .shortcuts{grid-template-columns:repeat(2,minmax(0,1fr))}.torre-home .shortcut{padding:14px 10px;min-width:0}.torre-home .shortcut strong{font-size:20px;overflow-wrap:anywhere}.torre-home .shortcut small{overflow-wrap:anywhere}}

@@ -98,3 +98,6 @@ Dati aggiornati editorialmente al 2 novembre 2026; non costituiscono disponibili
 - MadBear directory ufficiale: https://madbear.org/en ; permette di identificare categorie di appuntamenti di Torremolinos, **non prova da sola nuove date**.
 - INFINITY Instagram segnalato dall'utente: https://www.instagram.com/infinity_festival_/ ; può aiutare la verifica editoriale, ma non viene sottoposto a scraping automatico o a inferenze di date.
 - Trasparenza su elementi IA ai sensi del Regolamento (UE) 2024/1689, art. 50: `legal/ai-transparency.html`. L'indicazione è editoriale, non una certificazione giuridica.
+
+## Aggiornamento album — 3 novembre 2026
+La copertina della home usa ora la fotografia originale soleggiata `assets/photos/album/palmeras-sol.webp`, fornita dal proprietario per questo aggiornamento. I nuovi scatti e le due illustrazioni fornite sono registrati in `assets/photos/album/README.md`. Le immagini pubblicate hanno tagli orizzontali, senza ricostruzione delle fotografie. La Gallery conserva la provenienza di ciascun asset nei dati, distingue le illustrazioni con il piccolo indicatore AI e rimanda alla trasparenza nel footer. Le precedenti note sulla copertina IA non descrivono la copertina attuale.

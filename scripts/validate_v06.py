@@ -79,12 +79,12 @@ def validate():
  manifest=json.loads((ROOT/"manifest.webmanifest").read_text("utf-8"))
  assert manifest["theme_color"]=="#07565d"
  sw=(ROOT/"service-worker.js").read_text("utf-8")
- assert "torremolinos-v12" in sw and "'./listen/'" in sw
+ assert "torremolinos-v13" in sw and "'./listen/'" in sw
  gallery=(ROOT/"gallery/data.js").read_text("utf-8")
  assert "TORREMOLINOS_GALLERY" in gallery
  assert "provenance" in gallery and '"ai"' in gallery
- assert "gallery-cover-editorial-ai.webp" in home
- assert "beach-palms-ai.webp" in home
+ assert "blue-hour-ai.webp" in home
+ assert "palmeras-sol.webp" in home
  nogalera=(ROOT/"explore/la-nogalera/data.js").read_text("utf-8")
  assert "TORREMOLINOS_NOGALERA" in nogalera and "Bodega Guerola" in nogalera
  guide=json.loads(nogalera.split("=",1)[1].rstrip().rstrip(";"))

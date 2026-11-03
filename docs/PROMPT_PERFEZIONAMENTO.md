@@ -20,3 +20,7 @@ Prepara la futura monetizzazione senza attivarla automaticamente: schede sponsor
 Verifica navigazione, ricerca e stato vuoto, filtri e preferiti, cambio lingua, itinerari, audio solo su richiesta, link locali, cache offline e console. Controlla mobile e desktop, tastiera, contrasto, zoom e reduced motion. Esegui i controlli già presenti nel progetto e registra prove e limiti. Per performance misura prima di promettere risultati: Lighthouse è laboratorio; i Core Web Vitals sul campo richiedono dati reali. Non dichiarare conformità o “sito ottimale” senza evidenze.
 
 Consegna modifiche concrete, screenshot osservati, elenco immagini e prompt, report di verifica e stato esatto del rilascio. Conserva una revisione Git per rollback. Non migrare hosting né acquistare servizi per svolgere questo incarico.
+
+
+## Preferenze aggiornate — 3 novembre, revisione album
+Niente immagini verticali nell’interfaccia; scegliere scatti soleggiati senza sostituire autonomamente le foto nuvolose con ricostruzioni AI. Gallery come album cinematografico chiaro, poche scritte, foto ampie, sfoglio con frecce e tastiera. Piccolo indicatore AI sulle illustrazioni e trasparenza completa nel footer, senza ripetere avvisi lunghi nelle sezioni. Rimuovere numeri ornamentali 01/02. Differenziare sfumature delle sezioni. Movimento leggero da capitoli, scrolling nativo e rispetto di reduced motion.
