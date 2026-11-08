@@ -1,5 +1,9 @@
 # TORREMOLINOS 🌞
 
+**[Esplora la guida](https://manzo8b.github.io/Torremolinos/)** · [Sorgenti](https://github.com/manzo8b/Torremolinos) · [Segnala informazioni da aggiornare](https://github.com/manzo8b/Torremolinos/issues)
+
+Guida editoriale indipendente, multilingue e mobile-first. Le schede di eventi, attività e località sono da verificare con fonti aggiornate: il progetto non garantisce disponibilità, orari o prezzi in tempo reale.
+
 **Your city. Your way.** Micro-app indipendente mobile-first per turisti e residenti a Torremolinos, Spagna. **Non è il sito istituzionale del Comune.**
 
 ## MVP v0.1 · 2 novembre 2026
