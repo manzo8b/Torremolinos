@@ -144,16 +144,16 @@ body.torre-home .place-art::before{
   pointer-events:none;
 }
 body.torre-home .place .articon{display:none!important;}
-body.torre-home .place[data-place="nogalera"] .place-art{background-image:url("assets/photos/album/plaza.webp")!important;}
-body.torre-home .place[data-place="bajondillo"] .place-art{background-image:url("assets/photos/el-bajondillo-letrero.webp")!important;}
-body.torre-home .place[data-place="carihuela"] .place-art{background-image:url("assets/photos/album/espetos.webp")!important;}
-body.torre-home .place[data-place="pasaje"] .place-art{background-image:url("assets/photos/album/barca-flores.webp")!important;}
-body.torre-home .place[data-place="playamar"] .place-art{background-image:url("assets/photos/playa-palmeras-panorama.webp")!important;}
-body.torre-home .place[data-place="alamos"] .place-art{background-image:url("assets/photos/album/blue-hour-ai.webp")!important;}
-body.torre-home .place[data-place="bateria"] .place-art{background-image:url("assets/photos/paseo-palmeras.webp")!important;}
-body.torre-home .place[data-place="pimentel"] .place-art{background-image:url("assets/photos/paseo-centro.webp")!important;}
-body.torre-home .place[data-place="sanmiguel"] .place-art{background-image:url("assets/photos/album/plaza.webp")!important;}
-body.torre-home .place[data-place="c1"] .place-art{background-image:url("assets/photos/album/estacion.webp")!important;}
+body.torre-home .place[data-place-id="nogalera"] .place-art{background-image:url("assets/photos/album/plaza.webp")!important;}
+body.torre-home .place[data-place-id="bajondillo"] .place-art{background-image:url("assets/photos/el-bajondillo-letrero.webp")!important;}
+body.torre-home .place[data-place-id="carihuela"] .place-art{background-image:url("assets/photos/album/espetos.webp")!important;}
+body.torre-home .place[data-place-id="pasaje"] .place-art{background-image:url("assets/photos/album/barca-flores.webp")!important;}
+body.torre-home .place[data-place-id="playamar"] .place-art{background-image:url("assets/photos/playa-palmeras-panorama.webp")!important;}
+body.torre-home .place[data-place-id="alamos"] .place-art{background-image:url("assets/photos/album/blue-hour-ai.webp")!important;}
+body.torre-home .place[data-place-id="bateria"] .place-art{background-image:url("assets/photos/paseo-palmeras.webp")!important;}
+body.torre-home .place[data-place-id="pimentel"] .place-art{background-image:url("assets/photos/paseo-centro.webp")!important;}
+body.torre-home .place[data-place-id="sanmiguel"] .place-art{background-image:url("assets/photos/album/plaza.webp")!important;}
+body.torre-home .place[data-place-id="c1"] .place-art{background-image:url("assets/photos/album/estacion.webp")!important;}
 body.torre-home .place .chip{
   z-index:2;top:15px!important;left:15px!important;
   border:0!important;border-radius:100px!important;
