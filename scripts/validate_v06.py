@@ -77,9 +77,9 @@ def validate():
   part=f.replace("index.html","") if f.endswith("/index.html") else f
   assert BASE+part not in urls,("draft listed in sitemap",f)
  manifest=json.loads((ROOT/"manifest.webmanifest").read_text("utf-8"))
- assert manifest["theme_color"]=="#07565d"
+ assert manifest["theme_color"]=="#16865A"
  sw=(ROOT/"service-worker.js").read_text("utf-8")
- assert "torremolinos-v13" in sw and "'./listen/'" in sw
+ assert "torremolinos-v15" in sw and "'./listen/'" in sw
  gallery=(ROOT/"gallery/data.js").read_text("utf-8")
  assert "TORREMOLINOS_GALLERY" in gallery
  assert "provenance" in gallery and '"ai"' in gallery
