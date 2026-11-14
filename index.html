@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#1c5056"><meta name="color-scheme" content="light">
+<meta name="theme-color" content="#16865A"><meta name="color-scheme" content="light">
 <title>TORREMOLINOS | Guía local, agenda, restaurantes y LGBTQ+</title>
 <meta name="description" content="TORREMOLINOS: guía independiente y multilingüe de playas, cultura LGBTQ+, barrios, vida nocturna y servicios en la Costa del Sol.">
 <meta name="robots" content="index,follow"><meta property="og:title" content="TORREMOLINOS · A tu manera"><meta property="og:type" content="website"><meta property="og:description" content="A city guide made for everyone. Beaches, culture, nightlife and practical tips.">
@@ -210,7 +210,7 @@ try{
   var storedStops=urlStops===null?JSON.parse(localStorage.getItem('torremolinos.plan')||'null'):urlStops.split(',');
   if(Array.isArray(storedStops)){
     var safeStops=storedStops.filter(function(id,i){return typeof id==='string'&&places.some(function(p){return p.id===id})&&storedStops.indexOf(id)===i}).slice(0,8);
-    if(safeStops.length)selectedStops=safeStops;
+    if(safeStops.length||storedStops.length===0||urlStops!==null)selectedStops=safeStops;
   }
 }catch(e){}
 function planText(key){return (planCopy[lang]||planCopy.en)[key]||planCopy.en[key]||key;}
@@ -218,6 +218,7 @@ function planStatus(key){var el=$('#planStatus');if(el)el.textContent=key?planTe
 function planItems(){return (selectedStops===null?routeSets[mood]:selectedStops).map(function(id){return places.find(function(p){return p.id===id})}).filter(Boolean);}
 function persistPlan(){
  try{if(selectedStops===null)localStorage.removeItem('torremolinos.plan');else localStorage.setItem('torremolinos.plan',JSON.stringify(selectedStops));}catch(e){}
+ try{var url=new URL(location.href);if(selectedStops===null)url.searchParams.delete('plan');else url.searchParams.set('plan',selectedStops.join(','));history.replaceState(null,'',url);}catch(e){}
 }
 function editPlan(ids){selectedStops=ids.slice(0,8);persistPlan();route();planStatus('saved');}
 function addToPlan(id){
