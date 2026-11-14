@@ -892,3 +892,10 @@ body.torre-home main > section.gallery-feature.shell {
 body.torre-home main > section.gallery-feature.shell .gallery-feature-body{
   background:rgba(22,134,90,.07)!important;background-image:none!important;
 }
+
+/* Copyright and provenance captions must remain legible on the green music scene */
+body.torre-home main #sound .music-shell .music-art small,
+body.torre-home main #sound .music-shell .music-art :is(span,.photo-credit) {
+  color:#FFFFFF!important;opacity:.94!important;text-shadow:none!important;
+  background:transparent!important;border:0!important;
+}
