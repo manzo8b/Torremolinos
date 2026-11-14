@@ -99,6 +99,57 @@ try{
     }
 
     assert.ok(whiteCraft.craftCss,'craft stylesheet missing at '+width);
+
+    // V7: test actual layout relationships instead of just color tokens.
+    const v7=await page.evaluate(()=>{
+      const q=sel=>document.querySelector(sel);
+      const box=sel=>q(sel)?.getBoundingClientRect();
+      const gap=(a,b)=>{
+        const p=box(a),n=box(b);
+        return p&&n?Math.round(n.top-p.bottom):null;
+      };
+      const stylesheet=[...document.styleSheets].some(sheet=>sheet.href?.includes('narrative-v7.css'));
+      const sourceCards=q('#cards'),figs=[...document.querySelectorAll('#photodiary .photo-diary-grid figure img')];
+      const featured=q('#stories .magazine-card.primary'),small=q('#stories .magazine-card:not(.primary)');
+      const action=q('.editorial-bridge-action'),aCss=action&&getComputedStyle(action);
+      const rail=q('.v7-rail-controls');
+      return {
+        stylesheet,
+        spaceDiscover:gap('#discover','#explore'),
+        spaceExplore:gap('#explore','.nogalera-feature'),
+        spaceSound:gap('.gallery-feature','#sound'),
+        spaceStories:gap('#sound','#stories'),
+        spaceAgenda:gap('#stories','#agenda-home'),
+        photoLead:figs[0]?.getBoundingClientRect().height||0,
+        photoDetail:figs[1]?.getBoundingClientRect().height||0,
+        sourceWidth:sourceCards?.scrollWidth||0,
+        viewerWidth:sourceCards?.clientWidth||0,
+        featureWidth:featured?.getBoundingClientRect().width||0,
+        storyWidth:small?.getBoundingClientRect().width||0,
+        actions:document.querySelectorAll('main .v7-action-arrow[aria-hidden="true"]').length,
+        reading:!!q('.v7-reading-track .v7-reading-bar'),
+        rail:rail?getComputedStyle(rail).display:null,
+        ctaRadius:aCss?.borderTopLeftRadius||null
+      };
+    });
+    assert.ok(v7.stylesheet,'v7 final stylesheet absent at '+width);
+    for(const [key,value] of Object.entries({
+      discover:v7.spaceDiscover,explore:v7.spaceExplore,sound:v7.spaceSound,
+      stories:v7.spaceStories,agenda:v7.spaceAgenda
+    })){
+      assert.ok(value>=50,'chapters visually stuck together at '+width+' '+key+' '+value+'px');
+    }
+    assert.ok(v7.photoLead>v7.photoDetail,'photo hierarchy collapsed at '+width);
+    assert.ok(v7.actions>=5,'coordinated arrows missing at '+width);
+    assert.ok(v7.reading,'scroll progress indicator absent at '+width);
+    assert.ok(parseFloat(v7.ctaRadius)>20,'oval CTA lost at '+width);
+    if(width<=760){
+      assert.ok(v7.sourceWidth>v7.viewerWidth+80,'native places rail missing at '+width);
+      assert.equal(v7.rail,'flex','thumb rail controls hidden at '+width);
+    }else if(width>=1200){
+      assert.ok(v7.featureWidth>v7.storyWidth*1.5,'editorial story spotlight not larger at '+width);
+    }
+
     assert.deepEqual(await titleAudit(page),[],'headings ending with periods at '+width);
     assert.deepEqual(errors,[],'runtime errors on '+width);
     const ctas=await page.evaluate(()=>{
@@ -134,11 +185,18 @@ try{
         return (img?.naturalWidth>0&&!img.hidden) || (fallback&&!fallback.hidden);
       });
       assert.ok(mediaOk,'music cover and offline poster both missing at '+width);
+      await page.locator('#cards').evaluate(el=>el.scrollLeft=0);
       await page.evaluate(()=>window.scrollTo(0,0));
       assert.equal(await page.locator('#cards .place-photo').count(),10,'broken place photo');
     }
     await page.screenshot({path:'artifacts/screenshots/home-'+width+'.png',fullPage:true,animations:'disabled'});
     if(width===390){
+      const next=page.locator('.v7-rail-next'),prev=page.locator('.v7-rail-prev');
+      await next.click();
+      const offset=await page.locator('#cards').evaluate(el=>el.scrollLeft);
+      assert.ok(offset>0,'Next place arrow does not move the rail');
+      await prev.click();
+      await page.locator('#cards').evaluate(el=>el.scrollLeft=0);
       await page.locator('[data-mood="taste"]').click();
       assert.ok((await page.locator('#route').innerText()).includes('La Carihuela'),'mood route did not change');
       const steps=await page.locator('#route li').count();
