@@ -125,7 +125,7 @@ test('narrative copy and punctuation-free titles in all six languages', () => {
 
 test('offline cache contains the modern UI and two actual hero photographs', () => {
   const sw=file('service-worker.js');
-  assert.match(sw,/torremolinos-v18/);
+  assert.match(sw,/torremolinos-v19/);
   ['apple-premium.css','apple-runtime.js','hero-apple-2026.webp','hero-apple-2026-mobile.webp'].forEach(x=>assert.ok(sw.includes(x),x+' missing from offline cache'));
   assert.doesNotThrow(()=>new Script(sw));
 });
@@ -139,7 +139,7 @@ test('craft refinements are last, consistent, and offline-available',()=>{
     assert.match(page,/craft-refinement\.css/,path+' refinement not loaded');
     assert.ok(page.indexOf('craft-refinement.css')>page.indexOf('craft-finish.css'),path+' craft css must override prior craft layer');
   }
-  assert.match(file('service-worker.js'),/torremolinos-v18/);
+  assert.match(file('service-worker.js'),/torremolinos-v19/);
   assert.match(file('service-worker.js'),/craft-refinement\.css/);
   assert.equal((craft.match(/\{/g)||[]).length,(craft.match(/\}/g)||[]).length);
   assert.match(craft,/prefers-reduced-motion/);
@@ -182,4 +182,66 @@ test('all static section headings are punctuation-free at source',()=>{
     }
   }
   assert.match(file('apple-runtime.js'),/cleanHeading/);
+});
+
+
+test('commercial product chapters lead visitors from discovery into itinerary creation',()=>{
+ const html=file('index.html');
+ assert.ok(html.indexOf('id="discover"') < html.indexOf('id="plan"'));
+ assert.ok(html.indexOf('id="plan"') < html.indexOf('id="explore"'));
+ assert.equal((html.match(/id="plan"/g)||[]).length,1);
+ assert.match(html,/href="#plan" data-plan-t="planCta"/);
+ const css=file('product-chapters.css');
+ assert.match(css,/\.navlinks a\[href="#plan"\]/);
+});
+
+test('six languages carry warm editorial and itinerary narratives',()=>{
+ const html=file('index.html');
+ const copy=html.slice(html.indexOf('var productStoryCopy='),html.indexOf('Object.keys(productStoryCopy)'));
+ const plans=html.slice(html.indexOf('var productPlanStory='),html.indexOf('Object.keys(productPlanStory)'));
+ for(const language of ['es','en','it','de','fr','ru']){
+   assert.match(copy,new RegExp('"'+language+'":\\{'));
+   assert.match(plans,new RegExp('"'+language+'":\\{'));
+ }
+ assert.match(copy,/Luoghi che diventano ricordi/);
+ assert.match(plans,/La tua Torremolinos/);
+ assert.match(html,/apple-runtime\.js/);
+});
+
+test('rounded chapter contracts apply to every major section without black backgrounds',()=>{
+ const css=file('product-chapters.css');
+ for(const chapter of ['#discover','#plan','#explore','#pride','#sound','#stories','#agenda-home','#useful']){
+   assert.ok(css.includes(chapter),chapter+' has no dedicated styling');
+ }
+ for(const radius of ['--p-panel-radius','--p-card-radius','--p-pill']){
+   assert.ok(css.includes(radius),radius+' missing');
+ }
+ assert.match(css,/border-radius:var\(--p-pill\)!important/);
+ assert.match(css,/background:var\(--p-orange\)!important/);
+ assert.match(css,/background:var\(--p-green\)!important/);
+ assert.match(css,/\.footer[\s\S]{0,100}background:var\(--p-white\)!important/);
+ assert.equal((css.match(/\{/g)||[]).length,(css.match(/\}/g)||[]).length);
+});
+
+test('all 21 site entrypoints use the final design layer',()=>{
+ const paths=[
+ 'index.html','agenda/index.html','comer/index.html','gallery/index.html',
+ 'listen/index.html','stories/index.html','explore/la-nogalera/index.html',
+ 'legal/index.html','legal/privacy-policy.html','legal/cookie-policy.html',
+ 'legal/terms-of-use.html','legal/contact.html','legal/accessibility.html',
+ 'legal/editorial-policy.html','legal/event-source-policy.html',
+ 'legal/ai-transparency.html','legal/copyright-credits.html',
+ 'stories/torremolinos-mucho-mas-que-sol-y-playa.html',
+ 'stories/la-nogalera-donde-la-noche-tiene-historia.html',
+ 'stories/pasaje-begona-memoria-de-libertad.html',
+ 'stories/san-miguel-la-fiesta-que-saca-torremolinos-a-la-calle.html'
+ ];
+ for(const path of paths){
+   const html=file(path);
+   assert.match(html,/product-chapters\.css/,path+' missing product layer');
+   assert.ok(html.indexOf('product-chapters.css')>html.indexOf('craft-finish.css'),path+' wrong CSS order');
+ }
+ const sw=file('service-worker.js');
+ assert.match(sw,/torremolinos-v19/);
+ assert.match(sw,/\.\/product-chapters\.css/);
 });
