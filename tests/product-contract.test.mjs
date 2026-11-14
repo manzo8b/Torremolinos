@@ -183,3 +183,57 @@ test('all static section headings are punctuation-free at source',()=>{
   }
   assert.match(file('apple-runtime.js'),/cleanHeading/);
 });
+
+
+test('commercial experience is consistently loaded last across 21 public entrypoints',()=>{
+  const paths=['index.html','agenda/index.html','comer/index.html','gallery/index.html','listen/index.html','stories/index.html','explore/la-nogalera/index.html',
+    'legal/index.html','legal/privacy-policy.html','legal/cookie-policy.html','legal/terms-of-use.html','legal/contact.html','legal/accessibility.html',
+    'legal/editorial-policy.html','legal/event-source-policy.html','legal/ai-transparency.html','legal/copyright-credits.html',
+    'stories/torremolinos-mucho-mas-que-sol-y-playa.html','stories/la-nogalera-donde-la-noche-tiene-historia.html',
+    'stories/pasaje-begona-memoria-de-libertad.html','stories/san-miguel-la-fiesta-que-saca-torremolinos-a-la-calle.html'];
+  for(const path of paths){
+    const src=file(path);
+    assert.match(src,/commercial-experience\.css/,path+' missing commercial stylesheet');
+    assert.ok(src.indexOf('commercial-experience.css')>src.indexOf('craft-refinement.css'),path+' commercial CSS is not last');
+  }
+});
+
+test('distinctive commercial sections, exclusively rounded content and oval actions',()=>{
+ const css=file('commercial-experience.css');
+ assert.equal((css.match(/\{/g)||[]).length,(css.match(/\}/g)||[]).length);
+ ['--story-white:#FFFFFF','--story-ink:#111111','--story-green:#16865A','--story-orange:#F58A17'].forEach(v=>assert.ok(css.includes(v),v));
+ const zones=['#discover','#explore','.nogalera-feature','#pride','.photo-diary','.directory-teaser','.gallery-feature','.music-shell','.magazine','.agenda-home','.plan-workspace','#useful','.community','.editorial-bridge'];
+ for(const key of zones)assert.ok(css.includes(key),key+' section has no identity');
+ assert.match(css,/--story-pill:999px/);
+ assert.match(css,/--story-box:clamp/);
+ assert.match(css,/prefers-reduced-motion/);
+ assert.match(css,/prefers-contrast:more/);
+ assert.match(css,/\.music-body[\s\S]*?background:var\(--story-green\)!important/);
+ assert.match(css,/\.directory-teaser[\s\S]*?background:var\(--story-orange\)!important/);
+ assert.match(css,/\.nogalera-feature-copy[\s\S]*?background:var\(--story-green\)!important/);
+ assert.match(css,/footer[^}]+background:var\(--story-white\)!important/);
+});
+
+test('commercial storytelling is authored in all six locales and the action is functional',()=>{
+ const home=file('index.html');
+ const start=home.indexOf('var editorialCopy=');
+ const end=home.indexOf('Object.keys(editorialCopy)',start);
+ assert.ok(start>0&&end>start);
+ const json=home.slice(start+'var editorialCopy='.length,end).trim().replace(/;\s*$/,'');
+ const copy=JSON.parse(json);
+ const keys=['bridgeEyebrow','bridgeTitle','bridgeText','bridgeAction','heroSub','discoverLead','exploreLead','nogaleraHomeIntro','prideText','soundDesc','storiesLead','agendaLead','usefulLead'];
+ for(const lang of ['es','en','it','de','fr','ru']){
+   for(const key of keys)assert.ok(copy[lang]?.[key]?.length>12,lang+' missing '+key);
+   assert.doesNotMatch(copy[lang].bridgeTitle,/[.．]\s*$/);
+ }
+ assert.match(home,/class="editorial-bridge shell"/);
+ assert.match(home,/class="editorial-bridge-action" data-t="bridgeAction"/);
+ assert.match(home,/href="#plan" class="editorial-bridge-action"/);
+});
+
+test('commercial stylesheet is present in offline shell',()=>{
+ const sw=file('service-worker.js');
+ assert.match(sw,/torremolinos-v19/);
+ assert.match(sw,/commercial-experience\.css/);
+ assert.match(file('index.html'),/apple-runtime\.js/);
+});
