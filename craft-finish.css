@@ -446,3 +446,43 @@ body.torre-home .footerinner .footer-photo-credit{font-size:12px!important;color
  body.torre-home .directory-teaser>b{width:100%!important;}
  body.torre-home .directory-teaser{display:flex!important;flex-wrap:wrap;gap:18px;}
 }
+
+
+/* Screenshot QA pass 2: explicit CTA contrast and documentary fallback diversity. */
+body.torre-home .gallery-feature-body a,
+body.torre-home .gallery-feature-body a:visited{
+ display:inline-flex!important;align-items:center;justify-content:center;
+ min-height:48px!important;padding:12px 21px!important;
+ border:1px solid var(--craft-green)!important;border-radius:999px!important;
+ background:var(--craft-green)!important;color:var(--craft-white)!important;
+ text-decoration:none!important;font:650 14px/1.25 var(--craft-type)!important;
+ box-shadow:none!important;
+}
+body.torre-home .gallery-feature-body a:hover{
+ background:var(--craft-white)!important;color:var(--craft-green)!important;
+}
+body.torre-home .community .darkbtn,
+body.torre-home .community .darkbtn:visited{
+ background:var(--craft-orange)!important;color:var(--craft-ink)!important;
+ border:1px solid var(--craft-orange)!important;border-radius:999px!important;
+ font-weight:670!important;
+}
+body.torre-home .music-art small{
+ background:rgba(255,255,255,.93)!important;color:var(--craft-ink)!important;
+ display:inline-block;left:14px!important;right:14px!important;bottom:14px!important;
+ padding:8px 12px!important;border-radius:var(--craft-r-sm)!important;
+ width:auto;max-width:calc(100% - 28px);z-index:3;
+ font-size:12px!important;line-height:1.45!important;
+}
+body.torre-home .magazine-card.primary .cover{
+ background-image:url("assets/photos/costa-torremolinos.webp")!important;
+}
+body.torre-home .magazine-card[href*="la-nogalera"] .cover{
+ background-image:url("assets/photos/album/plaza.webp")!important;
+}
+body.torre-home .magazine-card[href*="pasaje-begona"] .cover{
+ background-image:url("assets/photos/paseo-centro.webp")!important;
+}
+body.torre-home .place{
+ transition:transform .25s cubic-bezier(.22,.72,.2,1),box-shadow .25s ease!important;
+}
