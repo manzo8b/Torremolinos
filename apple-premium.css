@@ -514,3 +514,69 @@ body[data-coast]:not(.torre-home) :is(.card,.event,.tile,.gallery-card):hover{bo
 /* Light wordmark keeps orange and green curves visible on dark footer */
 body.torre-home .footer .brand-logo-img,
 body[data-coast]:not(.torre-home) :is(.footer,.foot,.bottom) .brand-logo-img{filter:none!important;}
+
+
+/* Visual screenshot audit — fixes from real Chromium responsive capture */
+body.torre-home .hero .hero-main-title{
+  font-size:clamp(43px,6.7vw,91px)!important;
+  max-width:100%;overflow-wrap:normal!important;
+  text-wrap:nowrap!important;white-space:nowrap!important;
+}
+body.torre-home .hero .hero-heading .eyebrow.coral,
+body.torre-home .hero .hero-heading .eyebrow{
+  color:#FFFFFF!important;opacity:1!important;
+  text-shadow:0 2px 12px rgba(17,17,17,.58)!important;
+}
+body.torre-home .hero-tools .hero-sound-shortcut button{
+  background:#FFFFFF!important;color:#16865A!important;
+  font:700 14px/1.35 var(--ui-font)!important;
+  border:1px solid rgba(17,17,17,.14)!important;
+  border-radius:999px!important;
+  min-height:48px!important;
+  padding:12px 18px!important;
+  white-space:normal!important;
+  opacity:1!important;
+}
+body.torre-home .hero-tools .hero-sound-shortcut small{
+  color:#111111!important;font-size:12px!important;
+}
+body.torre-home .community{
+  color:#111111!important;
+}
+body.torre-home .community :is(h2,p,.eyebrow,span){
+  color:#111111!important;opacity:1!important;
+}
+body.torre-home .community .darkbtn{
+  color:#FFFFFF!important;
+}
+body.torre-home .feature .feature-art.pride-visual{
+  position:relative;overflow:hidden;background:#16865A!important;
+  min-height:365px!important;padding:clamp(25px,4vw,62px)!important;
+  display:flex!important;flex-direction:column;justify-content:flex-end!important;
+  align-items:flex-start!important;gap:30px!important;
+}
+body.torre-home .feature .feature-art.pride-visual::before,
+body.torre-home .feature .feature-art.pride-visual::after{display:none!important;}
+body.torre-home .pride-visual-word{
+  color:#FFFFFF!important;
+  font:750 clamp(43px,5.9vw,90px)/.99 var(--ui-font)!important;
+  letter-spacing:-.075em!important;max-width:640px!important;
+  text-wrap:balance!important;
+}
+body.torre-home .pride-visual-detail{
+  color:#FFFFFF!important;opacity:.9!important;
+  font:650 12px/1.5 var(--ui-font)!important;letter-spacing:.07em!important;
+}
+@media(max-width:760px){
+  body.torre-home .hero .hero-main-title{
+    font-size:clamp(36px,9.6vw,58px)!important;
+    letter-spacing:-.075em!important;
+    white-space:nowrap!important;overflow-wrap:normal!important;
+  }
+  body.torre-home .feature .feature-art.pride-visual{min-height:250px!important;}
+  body.torre-home .pride-visual-word{font-size:clamp(35px,10vw,59px)!important;}
+  body.torre-home .hero-tools .hero-sound-shortcut button{min-height:48px!important;}
+}
+@media(max-width:370px){
+ body.torre-home .hero .hero-main-title{font-size:36px!important;}
+}
