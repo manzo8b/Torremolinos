@@ -125,7 +125,7 @@ test('narrative copy and punctuation-free titles in all six languages', () => {
 
 test('offline cache contains the modern UI and two actual hero photographs', () => {
   const sw=file('service-worker.js');
-  assert.match(sw,/torremolinos-v21/);
+  assert.match(sw,/torremolinos-v22/);
   ['apple-premium.css','apple-runtime.js','hero-apple-2026.webp','hero-apple-2026-mobile.webp'].forEach(x=>assert.ok(sw.includes(x),x+' missing from offline cache'));
   assert.doesNotThrow(()=>new Script(sw));
 });
@@ -139,7 +139,7 @@ test('craft refinements are last, consistent, and offline-available',()=>{
     assert.match(page,/craft-refinement\.css/,path+' refinement not loaded');
     assert.ok(page.indexOf('craft-refinement.css')>page.indexOf('craft-finish.css'),path+' craft css must override prior craft layer');
   }
-  assert.match(file('service-worker.js'),/torremolinos-v21/);
+  assert.match(file('service-worker.js'),/torremolinos-v22/);
   assert.match(file('service-worker.js'),/craft-refinement\.css/);
   assert.equal((craft.match(/\{/g)||[]).length,(craft.match(/\}/g)||[]).length);
   assert.match(craft,/prefers-reduced-motion/);
@@ -233,7 +233,7 @@ test('commercial storytelling is authored in all six locales and the action is f
 
 test('commercial stylesheet is present in offline shell',()=>{
  const sw=file('service-worker.js');
- assert.match(sw,/torremolinos-v21/);
+ assert.match(sw,/torremolinos-v22/);
  assert.match(sw,/commercial-experience\.css/);
  assert.match(file('index.html'),/apple-runtime\.js/);
 });
@@ -271,7 +271,7 @@ test('v6 hierarchy and critical screenshot contrast repairs exist',()=>{
 });
 test('v6 offline shell includes its stylesheet and original supplied hero',()=>{
  const sw=file('service-worker.js');
- assert.match(sw,/torremolinos-v21/);
+ assert.match(sw,/torremolinos-v22/);
  assert.match(sw,/product-v6\.css/);
  assert.match(sw,/product-v6\.js/);
  assert.match(file('index.html'),/product-v6\.js/);
