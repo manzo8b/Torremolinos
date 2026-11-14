@@ -138,6 +138,24 @@ try{
         }
         check();
       }));
+      
+      if(width===1440){
+        const detail=await page.locator('#sound .music-art').evaluate(el=>{
+          const css=e=>{
+            const st=getComputedStyle(e),r=e.getBoundingClientRect();
+            return {node:e.tagName,cls:String(e.className),bg:st.backgroundColor,
+              borderRadius:st.borderRadius,display:st.display,position:st.position,
+              z:st.zIndex,opacity:st.opacity,width:r.width,height:r.height,
+              transform:st.transform,clip:st.clipPath,objectFit:st.objectFit};
+          };
+          return {container:css(el),
+            before:{display:getComputedStyle(el,'::before').display,content:getComputedStyle(el,'::before').content},
+            after:{display:getComputedStyle(el,'::after').display,content:getComputedStyle(el,'::after').content},
+            children:[...el.children].map(css)};
+        });
+        console.log('MUSIC_STYLE_AUDIT '+JSON.stringify(detail));
+      }
+
       await page.evaluate(()=>window.scrollTo(0,0));
       assert.equal(await page.locator('#cards .place-photo').count(),10,'broken place photo');
     }
