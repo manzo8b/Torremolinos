@@ -78,7 +78,7 @@ jobs:
           assert 'assets/photos/hero-apple-2026.webp' in src
           hero=Path('assets/photos/hero-apple-2026.webp')
           assert hero.is_file() and hero.stat().st_size>1000, hero
-          assert 'class="hero-main-title">TORREMOLINOS</h1>' in src
+          assert 'class="hero-main-title">Torremolinos</h1>' in src
           assert 'La tua guida libera sulla Costa del Sol' in src
           assert 'class="hero-tools shell"' in src
           assert 'href="legal/ai-transparency.html"' in src
