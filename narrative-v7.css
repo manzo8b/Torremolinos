@@ -1120,3 +1120,49 @@ body[data-coast="blue"] .gallery-grid{
  }
  body[data-coast] .v7-action-arrow{border-width:2px!important;}
 }
+
+
+/* Guided interaction — the rail has native scroll, genuine navigation, no scroll-jacking */
+body.torre-home .v7-rail-note,body.torre-home .v7-rail-controls{display:none!important;}
+body.torre-home #explore .v7-rail-icon{
+ width:32px;height:32px;display:grid;place-items:center;
+ background:var(--v7-white);color:var(--v7-green);
+ border-radius:50%;font-size:18px;line-height:1;
+}
+body.torre-home .v7-reading-track{
+ position:absolute;bottom:0;left:0;right:0;
+ height:3px!important;background:transparent;overflow:hidden;
+ pointer-events:none;z-index:100;
+}
+body.torre-home .v7-reading-bar{
+ display:block;height:100%;width:100%;
+ background:var(--v7-green);
+ transform:scaleX(0);transform-origin:left center;
+ will-change:transform;
+}
+body.torre-home #explore .v7-rail-controls button{
+ border:1px solid var(--v7-soft-rule)!important;border-radius:50%!important;
+ width:48px;height:48px;min-width:48px;min-height:48px;
+ display:grid;place-items:center;
+ background:var(--v7-white)!important;color:var(--v7-green)!important;
+ font:600 24px/1 var(--v7-font)!important;
+ cursor:pointer;
+}
+body.torre-home #explore .v7-rail-controls button:disabled{
+ opacity:.35!important;cursor:default;
+}
+body.torre-home #explore .cards:focus-visible{
+ outline:3px solid var(--v7-orange)!important;outline-offset:3px!important;
+ border-radius:var(--v7-small-radius)!important;
+}
+@media(max-width:760px){
+ body.torre-home #explore .v7-rail-note{
+  display:flex!important;
+  align-items:center!important;gap:10px!important;
+  padding:3px 3px 17px!important;
+ }
+ body.torre-home #explore .v7-rail-controls{
+  display:flex!important;justify-content:flex-end!important;
+  gap:9px!important;margin-top:13px!important;
+ }
+}
