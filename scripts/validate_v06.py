@@ -4,6 +4,7 @@ from pathlib import Path
 from html.parser import HTMLParser
 from urllib.parse import urlsplit, unquote
 import json
+import re
 import xml.etree.ElementTree as ET
 ROOT=Path(__file__).resolve().parents[1]
 BASE="https://manzo8b.github.io/Torremolinos/"
@@ -79,7 +80,8 @@ def validate():
  manifest=json.loads((ROOT/"manifest.webmanifest").read_text("utf-8"))
  assert manifest["theme_color"]=="#16865A"
  sw=(ROOT/"service-worker.js").read_text("utf-8")
- assert "torremolinos-v15" in sw and "'./listen/'" in sw
+ assert re.search(r"torremolinos-v[0-9]+",sw) and "'./listen/'" in sw
+ assert "'./craft-finish.css'" in sw and "'./craft-runtime.js'" in sw
  gallery=(ROOT/"gallery/data.js").read_text("utf-8")
  assert "TORREMOLINOS_GALLERY" in gallery
  assert "provenance" in gallery and '"ai"' in gallery
