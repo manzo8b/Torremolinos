@@ -262,6 +262,13 @@ try{
       });
       assert.ok(shape.radius>=16 && shape.radius<=65,'gallery images became oval controls: '+JSON.stringify(shape));
       assert.ok(shape.ratio>=1.3,'gallery photograph not a landscape frame: '+JSON.stringify(shape));
+
+      const broken=await page.locator('#galleryGrid img').evaluateAll(async images=>{
+        await Promise.all(images.map(async image=>{try{await image.decode()}catch{}}));
+        return images.filter(image=>image.naturalWidth===0).map(image=>image.src);
+      });
+      assert.deepEqual(broken,[],'broken Gallery source images');
+
     }
 
     if(['comer/','agenda/','gallery/'].includes(path)){
