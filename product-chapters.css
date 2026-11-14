@@ -570,3 +570,27 @@ body.torre-comer :is(.card,.tile){background:var(--p-leafwash)!important;}
     outline:1px solid var(--p-ink)!important;
   }
 }
+
+/* The itinerary is the app's primary action in desktop navigation. */
+body.torre-home .navlinks a[href="#plan"]{
+  display:inline-flex!important;align-items:center;justify-content:center;
+  padding:11px 19px!important;min-height:44px;
+  background:var(--p-green)!important;color:var(--p-white)!important;
+  border:0!important;border-radius:var(--p-pill)!important;
+  font-weight:750!important;
+}
+body.torre-home .navlinks a[href="#plan"]:hover{
+  background:var(--p-orange)!important;color:var(--p-ink)!important;
+}
+body.torre-home .navlinks a:not([href="#plan"]){
+  border-radius:var(--p-pill)!important;
+}
+/* Strong, consistent oval link treatments on secondary destination pages. */
+body[data-coast]:not(.torre-home) :is(.primary,.secondary,.action,.action-link,
+ .book-btn,.more-link,.back-link,.external-link,.nav-cta){
+  border-radius:var(--p-pill)!important;
+}
+body[data-coast]:not(.torre-home) :is(.card,.panel,.tile,.event,.gallery-card,.feature,
+ .experience,.notice,.info-card,.highlight,.cover,.story-card){
+  border-radius:var(--p-card-radius)!important;
+}
