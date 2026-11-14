@@ -70,9 +70,45 @@ try{
       }
       return {gallery:props('.gallery-feature-body a'),feedback:props('.community .darkbtn'),credit:props('.music-art small')};
     });
-    assert.deepEqual(ctas.gallery,{text:'rgb(255, 255, 255)',bg:'rgb(22, 134, 90)'},'gallery contrast '+width);
-    assert.deepEqual(ctas.feedback,{text:'rgb(17, 17, 17)',bg:'rgb(245, 138, 23)'},'feedback CTA contrast '+width);
+    assert.deepEqual(ctas.gallery,{text:'rgb(17, 17, 17)',bg:'rgb(255, 255, 255)'},'gallery contrast '+width);
+    assert.deepEqual(ctas.feedback,{text:'rgb(255, 255, 255)',bg:'rgb(22, 134, 90)'},'feedback CTA contrast '+width);
     assert.equal(ctas.credit.text,'rgb(17, 17, 17)','album credit unreadable at '+width);
+
+    const chapter=await page.evaluate(()=>{
+      const background=selector=>getComputedStyle(document.querySelector(selector)).backgroundColor;
+      const radius=selector=>parseFloat(getComputedStyle(document.querySelector(selector)).borderTopLeftRadius);
+      return {
+        discover:background('#discover'),plan:background('#plan'),
+        agenda:background('#agenda-home'),pride:background('#pride .feature'),
+        prideCopy:background('#pride .feature-copy'),prideArt:background('#pride .feature-art.pride-visual'),
+        prideWordColor:getComputedStyle(document.querySelector('#pride .pride-visual-word')).color,
+        planWorkspace:background('#plan .plan-workspace'),
+        heroButtonRadius:radius('.hero-cta-main'),
+        sceneRadius:radius('#discover'),
+        cardRadius:radius('#explore .place-art'),
+        plannerBeforePlaces:!!(document.querySelector('#plan').compareDocumentPosition(document.querySelector('#explore')) & Node.DOCUMENT_POSITION_FOLLOWING),
+        pwaStyles:[...document.styleSheets].some(sheet=>sheet.href?.includes('product-chapters.css')),
+        musicImageSrc:document.querySelector('#sound .music-album-art').getAttribute('src'),
+        
+        musicDiscPseudo:getComputedStyle(document.querySelector('#sound .music-art'),'::before').display
+      };
+    });
+    assert.equal(chapter.discover,'rgb(245, 138, 23)','discovery chapter not orange at '+width);
+    assert.equal(chapter.plan,'rgb(22, 134, 90)','planner chapter not green at '+width);
+    assert.equal(chapter.agenda,'rgb(22, 134, 90)','agenda chapter not green at '+width);
+    assert.equal(chapter.pride,'rgb(22, 134, 90)','pride story not green at '+width);
+    assert.equal(chapter.prideCopy,'rgb(22, 134, 90)','pride body lost its green surface at '+width);
+    assert.equal(chapter.prideArt,'rgb(245, 138, 23)','pride story card not orange at '+width);
+    assert.equal(chapter.prideWordColor,'rgb(17, 17, 17)','pride statement is not legible on orange at '+width);
+    assert.equal(chapter.planWorkspace,'rgb(255, 255, 255)','plan reading surface must be white at '+width);
+    assert.ok(chapter.heroButtonRadius>=24,'main button not pill-shaped at '+width);
+    assert.ok(chapter.sceneRadius>=25,'discovery section not oval at '+width);
+    assert.ok(chapter.cardRadius>=22,'photo cards not rounded at '+width);
+    assert.ok(chapter.plannerBeforePlaces,'plan should appear before catalogue');
+    assert.ok(chapter.pwaStyles,'product chapters CSS missing at '+width);
+    assert.equal(chapter.musicDiscPseudo,'none','legacy music decoration still visible at '+width);
+    assert.ok(chapter.musicImageSrc.endsWith('palmeras-sol.webp'),'music photo not local at '+width);
+
     if(width===390||width===1440){
       // Full-page screenshots do not automatically reveal lazy images. Simulate
       // a real visitor scrolling through the whole catalog, then validate.
@@ -89,6 +125,36 @@ try{
           check();
         }));
       }
+      
+      const musicPhoto=page.locator('#sound .music-album-art');
+      await musicPhoto.scrollIntoViewIfNeeded();
+      await musicPhoto.evaluate(node=>new Promise((resolve,reject)=>{
+        const deadline=Date.now()+7500;
+        function check(){
+          if(node.complete&&node.naturalWidth>0){resolve();return;}
+          if(Date.now()>deadline){reject(new Error('Music photo did not load: '+node.src));return;}
+          setTimeout(check,75);
+        }
+        check();
+      }));
+      
+      if(width===1440){
+        const detail=await page.locator('#sound .music-art').evaluate(el=>{
+          const css=e=>{
+            const st=getComputedStyle(e),r=e.getBoundingClientRect();
+            return {node:e.tagName,cls:String(e.className),bg:st.backgroundColor,
+              borderRadius:st.borderRadius,display:st.display,position:st.position,
+              z:st.zIndex,opacity:st.opacity,width:r.width,height:r.height,
+              transform:st.transform,clip:st.clipPath,objectFit:st.objectFit};
+          };
+          return {container:css(el),
+            before:{display:getComputedStyle(el,'::before').display,content:getComputedStyle(el,'::before').content},
+            after:{display:getComputedStyle(el,'::after').display,content:getComputedStyle(el,'::after').content},
+            children:[...el.children].map(css)};
+        });
+        console.log('MUSIC_STYLE_AUDIT '+JSON.stringify(detail));
+      }
+
       await page.evaluate(()=>window.scrollTo(0,0));
       assert.equal(await page.locator('#cards .place-photo').count(),10,'broken place photo');
     }
