@@ -62,8 +62,8 @@ body.torre-home .hero-photo{
   border-radius:0!important;background:var(--ui-green)!important;
 }
 body.torre-home .hero-photo:before{
-  background-image:url("assets/photos/hero-apple-2026.webp"),url("assets/photos/hero-torremolinos-desktop.webp")!important;
-  background-size:cover!important;background-position:center 53%!important;
+  background-image:url("assets/photos/hero-apple-2026.webp")!important;
+  background-size:cover!important;background-position:center 38%!important;
   transform:none!important;
 }
 body.torre-home .hero-photo:after{
@@ -437,7 +437,7 @@ body[data-coast]:not(.torre-home) :is(.card,.event,.tile,.gallery-card):hover{bo
  body.torre-home .hero{min-height:580px!important;border-radius:26px!important;}
  body.torre-home .hero-grid,body.torre-home .hero-photo{min-height:580px!important;}
  body.torre-home .hero-photo:before{
-   background-image:url("assets/photos/hero-apple-2026-mobile.webp"),url("assets/photos/hero-torremolinos-mobile.webp")!important;
+   background-image:url("assets/photos/hero-apple-2026-mobile.webp")!important;
    background-position:center 50%!important;
  }
  body.torre-home .hero-photo:after{
