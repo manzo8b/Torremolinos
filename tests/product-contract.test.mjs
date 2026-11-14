@@ -137,7 +137,7 @@ test('craft refinements are last, consistent, and offline-available',()=>{
   for(const path of sections){
     const page=file(path);
     assert.match(page,/craft-refinement\.css/,path+' refinement not loaded');
-    assert.ok(page.indexOf('craft-refinement.css')>page.indexOf('apple-premium.css'),path+' craft css not last');
+    assert.ok(page.indexOf('craft-refinement.css')>page.indexOf('craft-finish.css'),path+' craft css must override prior craft layer');
   }
   assert.match(file('service-worker.js'),/torremolinos-v18/);
   assert.match(file('service-worker.js'),/craft-refinement\.css/);
