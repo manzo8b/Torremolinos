@@ -70,9 +70,35 @@ try{
       }
       return {gallery:props('.gallery-feature-body a'),feedback:props('.community .darkbtn'),credit:props('.music-art small')};
     });
-    assert.deepEqual(ctas.gallery,{text:'rgb(255, 255, 255)',bg:'rgb(22, 134, 90)'},'gallery contrast '+width);
-    assert.deepEqual(ctas.feedback,{text:'rgb(17, 17, 17)',bg:'rgb(245, 138, 23)'},'feedback CTA contrast '+width);
+    assert.deepEqual(ctas.gallery,{text:'rgb(17, 17, 17)',bg:'rgb(255, 255, 255)'},'gallery contrast '+width);
+    assert.deepEqual(ctas.feedback,{text:'rgb(255, 255, 255)',bg:'rgb(22, 134, 90)'},'feedback CTA contrast '+width);
     assert.equal(ctas.credit.text,'rgb(17, 17, 17)','album credit unreadable at '+width);
+
+    const chapter=await page.evaluate(()=>{
+      const background=selector=>getComputedStyle(document.querySelector(selector)).backgroundColor;
+      const radius=selector=>parseFloat(getComputedStyle(document.querySelector(selector)).borderTopLeftRadius);
+      return {
+        discover:background('#discover'),plan:background('#plan'),
+        agenda:background('#agenda-home'),pride:background('#pride .feature'),
+        planWorkspace:background('#plan .plan-workspace'),
+        heroButtonRadius:radius('.hero-cta-main'),
+        sceneRadius:radius('#discover'),
+        cardRadius:radius('#explore .place-art'),
+        plannerBeforePlaces:!!(document.querySelector('#plan').compareDocumentPosition(document.querySelector('#explore')) & Node.DOCUMENT_POSITION_FOLLOWING),
+        pwaStyles:[...document.styleSheets].some(sheet=>sheet.href?.includes('product-chapters.css'))
+      };
+    });
+    assert.equal(chapter.discover,'rgb(245, 138, 23)','discovery chapter not orange at '+width);
+    assert.equal(chapter.plan,'rgb(22, 134, 90)','planner chapter not green at '+width);
+    assert.equal(chapter.agenda,'rgb(22, 134, 90)','agenda chapter not green at '+width);
+    assert.equal(chapter.pride,'rgb(22, 134, 90)','pride story not green at '+width);
+    assert.equal(chapter.planWorkspace,'rgb(255, 255, 255)','plan reading surface must be white at '+width);
+    assert.ok(chapter.heroButtonRadius>=24,'main button not pill-shaped at '+width);
+    assert.ok(chapter.sceneRadius>=25,'discovery section not oval at '+width);
+    assert.ok(chapter.cardRadius>=22,'photo cards not rounded at '+width);
+    assert.ok(chapter.plannerBeforePlaces,'plan should appear before catalogue');
+    assert.ok(chapter.pwaStyles,'product chapters CSS missing at '+width);
+
     if(width===390||width===1440){
       // Full-page screenshots do not automatically reveal lazy images. Simulate
       // a real visitor scrolling through the whole catalog, then validate.
