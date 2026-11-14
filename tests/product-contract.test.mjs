@@ -249,8 +249,8 @@ test('all 21 site entrypoints use the final design layer',()=>{
 test('music chapter uses the real local coastline image with product signature',()=>{
   const html=file('index.html');
   assert.match(html,/class="music-album-art" src="assets\/photos\/album\/palmeras-sol\.webp"/);
-  assert.match(html,/class="music-photo-identity"/);
+  assert.doesNotMatch(html,/class="music-photo-identity"/);
   const css=file('product-chapters.css');
-  assert.match(css,/\.music-photo-identity/);
+  assert.match(css,/\.music-album-art/);
   assert.match(css,/\.music-album-art/);
 });
