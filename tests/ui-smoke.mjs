@@ -229,9 +229,42 @@ try{
     assert.ok(style,'premium CSS not loaded on '+path);
     const color=await page.evaluate(()=>getComputedStyle(document.querySelector('footer')).backgroundColor);
     assert.equal(color,'rgb(255, 255, 255)','dark footer remains on '+path);
+
+    const layout=await page.evaluate(()=>({
+      viewport:window.innerWidth,
+      full:document.documentElement.scrollWidth,
+      hasFinalStyles:[...document.styleSheets].some(sheet=>sheet.href?.includes('narrative-v7.css'))
+    }));
+    assert.ok(layout.full<=layout.viewport+3,'horizontal overflow on '+path+': '+layout.full+' > '+layout.viewport);
+    assert.ok(layout.hasFinalStyles,'narrative v7 styling absent on '+path);
+    if(['comer/','agenda/','gallery/'].includes(path)){
+      await page.screenshot({
+        path:'artifacts/screenshots/inner-'+path.replaceAll('/','-')+'390.png',
+        fullPage:true,animations:'disabled'
+      });
+    }
+
     console.log('PASS route '+path);
   }
   await context.close();
+
+  const desktop=await browser.newContext({
+    viewport:{width:1440,height:900},
+    deviceScaleFactor:1,reducedMotion:'reduce',locale:'it-IT'
+  });
+  const desktopPage=await desktop.newPage();
+  for(const path of ['comer/','agenda/','gallery/']){
+    const response=await desktopPage.goto(base+'/'+path,{waitUntil:'domcontentloaded',timeout:30000});
+    assert.equal(response.status(),200,'desktop route unavailable '+path);
+    await desktopPage.waitForTimeout(140);
+    const result=await desktopPage.evaluate(()=>({width:window.innerWidth,scroll:document.documentElement.scrollWidth}));
+    assert.ok(result.scroll<=result.width+3,'desktop overflow on '+path);
+    await desktopPage.screenshot({
+      path:'artifacts/screenshots/inner-'+path.replaceAll('/','-')+'1440.png',
+      fullPage:true,animations:'disabled'
+    });
+  }
+  await desktop.close();
   console.log('PASS all UI smoke tests');
 }finally{
   if(browser)await browser.close();
