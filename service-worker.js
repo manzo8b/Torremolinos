@@ -1,7 +1,7 @@
 // TORREMOLINOS v0.4 — offline shell and key editorial pages
-const CACHE='torremolinos-v13';
+const CACHE='torremolinos-v14';
 const FILES=[
-  './','./index.html','./editorial.css','./favicon.svg','./manifest.webmanifest',
+  './','./index.html','./design-system-2026.css','./editorial.css','./favicon.svg','./manifest.webmanifest',
   './brand/torremolinos-logo.svg','./brand/torremolinos-logo-light.svg','./brand/torremolinos-symbol.svg','./assets/illustrations/pride-flag-ai.svg','./legal/ai-transparency.html',
   './gallery/','./gallery/styles.css','./gallery/data.js','./gallery/app.js',
   './explore/la-nogalera/','./explore/la-nogalera/styles.css','./explore/la-nogalera/data.js','./explore/la-nogalera/app.js',

@@ -1,0 +1,27 @@
+name: Torremolinos product contract
+on:
+  push:
+    branches:
+      - design/mediterranean-ux-2026-11
+  pull_request:
+    paths:
+      - '**/*.html'
+      - '**/*.css'
+      - '**/*.js'
+      - 'manifest.webmanifest'
+      - 'tests/**'
+      - '.github/workflows/torremolinos-product-checks.yml'
+  workflow_dispatch:
+jobs:
+  product-contract:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify UI contract, routes, languages and PWA
+        run: node --test tests/product-contract.test.mjs
