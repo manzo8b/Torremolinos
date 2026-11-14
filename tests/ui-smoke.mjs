@@ -124,10 +124,8 @@ try{
     assert.deepEqual(await titleAudit(page),[],'title punctuation on '+path);
     const style=await page.evaluate(()=>[...document.styleSheets].some(sheet=>sheet.href?.includes('apple-premium.css')));
     assert.ok(style,'premium CSS not loaded on '+path);
-    if(!path.startsWith('legal/')&&!path.startsWith('stories/torremolinos-')){
-      const color=await page.evaluate(()=>getComputedStyle(document.querySelector('footer')).backgroundColor);
-      assert.equal(color,'rgb(255, 255, 255)','dark footer remains on '+path);
-    }
+    const color=await page.evaluate(()=>getComputedStyle(document.querySelector('footer')).backgroundColor);
+    assert.equal(color,'rgb(255, 255, 255)','dark footer remains on '+path);
     console.log('PASS route '+path);
   }
   await context.close();
