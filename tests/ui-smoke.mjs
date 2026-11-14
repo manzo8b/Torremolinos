@@ -44,6 +44,23 @@ try{
     assert.ok(doc.page<=doc.viewport+3,'horizontal overflow '+width+': doc='+doc.page);
     assert.ok(doc.hero.includes('hero-apple-2026'),'hero image missing at '+width);
     assert.equal(doc.lang,'it');
+    const whiteCraft=await page.evaluate(()=>{
+      const footer=document.querySelector('footer.footer');
+      const musicTitle=document.querySelector('.music-body h2');
+      const nogaleraTitle=document.querySelector('.nogalera-feature-copy h2');
+      return {
+        footer:footer?getComputedStyle(footer).backgroundColor:null,
+        music:musicTitle?getComputedStyle(musicTitle).color:null,
+        nogalera:nogaleraTitle?getComputedStyle(nogaleraTitle).color:null,
+        photos:document.querySelectorAll('#cards .place-photo').length,
+        craftCss:[...document.styleSheets].some(sheet=>sheet.href?.includes('craft-finish.css'))
+      };
+    });
+    assert.equal(whiteCraft.footer,'rgb(255, 255, 255)','footer is not white at '+width);
+    assert.equal(whiteCraft.music,'rgb(17, 17, 17)','music title illegible on white at '+width);
+    assert.equal(whiteCraft.nogalera,'rgb(17, 17, 17)','Nogalera title illegible at '+width);
+    assert.equal(whiteCraft.photos,10,'place gallery should have 10 documentary photos at '+width);
+    assert.ok(whiteCraft.craftCss,'craft stylesheet missing at '+width);
     assert.deepEqual(await titleAudit(page),[],'headings ending with periods at '+width);
     assert.deepEqual(errors,[],'runtime errors on '+width);
     await page.screenshot({path:'artifacts/screenshots/home-'+width+'.png',fullPage:true,animations:'disabled'});
@@ -78,6 +95,10 @@ try{
     assert.deepEqual(await titleAudit(page),[],'title punctuation on '+path);
     const style=await page.evaluate(()=>[...document.styleSheets].some(sheet=>sheet.href?.includes('apple-premium.css')));
     assert.ok(style,'premium CSS not loaded on '+path);
+    if(!path.startsWith('legal/')&&!path.startsWith('stories/torremolinos-')){
+      const color=await page.evaluate(()=>getComputedStyle(document.querySelector('footer')).backgroundColor);
+      assert.equal(color,'rgb(255, 255, 255)','dark footer remains on '+path);
+    }
     console.log('PASS route '+path);
   }
   await context.close();
