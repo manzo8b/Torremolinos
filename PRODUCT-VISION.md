@@ -52,9 +52,27 @@ DM Sans is the principal sans-serif family (system fallback). Use a disciplined 
 9. Consistent product system across every inner route and mobile navigation.
 10. Run browser screenshot comparisons, functional regression checks, a11y and Lighthouse before merging.
 
-## Implementation status
+## Implementation status — November 14, 2026
 
-Design phase 1 uses `design-system-2026.css` to consolidate visual styles in a reversible branch and recolours the original logo, preserving brand iconography. It does **not** yet claim full browser QA or a completed product redesign. Iterations should be tested visually, refined and merged only after review.
+**Implemented in draft PR #2** (not merged into the public site):
+
+- Unified four-colour identity across home and six destinations with the additive `design-system-2026.css`.
+- Updated the sun/palm/wave logo, favicon, maskable icon, light logo, PWA theme and service-worker cache.
+- Reframed the home as a practical discovery product: documentary image, clear hierarchy, search and quick category entry.
+- Built **Tu Torremolinos** in the home as a real interactive product workspace, not a decorative mockup.
+- Four themed route presets use only already catalogued places; visitors can add from Explore, remove and reorder, reset, persist locally, share a URL, and open the walking route in Google Maps.
+- All new product copy supports ES, EN, IT, DE, FR and RU. No invented ratings, venue availability, opening hours, estimates or real-time route metrics.
+- Added eight dependency-free Node product-contract tests and a GitHub Actions workflow. A separate source-level verification confirmed 11 structural conditions, including script parsing, unique IDs, six languages and colour-token correctness.
+
+**Not yet verified:** visual browser screenshots at 360/390/768/1024/1440 px, complete interaction journeys on touch and keyboard, Lighthouse/Core Web Vitals, and GitHub Actions execution result. These are merge gates, not claims of completed testing.
+
+## Release criteria before merge
+
+1. Review screenshots and interactions on a real phone and desktop; fix any overflow, text-wrap or contrast regression.
+2. Run `node --test tests/product-contract.test.mjs`; confirm GitHub Actions succeeds.
+3. Confirm all six language transitions, shared URL routes, reorder/remove/reset, bookmarks, search, audio, all footer/legal links, and back navigation.
+4. Check page weight, icon contrast, accessible focus, 44px controls and reduced-motion behavior.
+5. Only then merge PR #2 into `main` and confirm GitHub Pages deployment. Do not represent the draft as live.
 
 ## Reference and method
 
