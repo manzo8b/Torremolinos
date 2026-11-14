@@ -34,7 +34,7 @@
     </div>
     <div class="hero-cta-row">
       <a class="hero-cta-main" href="#discover" data-t="heroExplore">Encuentra tu Torremolinos</a>
-      <a class="hero-cta-secondary" href="#sound" data-t="heroListen">Ponle música a tu viaje</a>
+      <a class="hero-cta-secondary" href="#plan" data-plan-t="planCta">Ponle música a tu viaje</a>
     </div>
   </div>
 
@@ -97,7 +97,46 @@ Tu navegador no admite la reproducción de audio
 <section class="agenda-home shell" id="agenda-home">
 <div class="agenda-home-copy"><span class="eyebrow coral">LIVE THE CITY / AGENDA</span><h2 data-t="agendaTitle">La ciudad no se detiene</h2><p data-t="agendaLead">Cultura, actividades y encuentros con fuentes oficiales. Descubre una selección de próximos eventos con fecha de comprobación y acceso al programa completo.</p><a href="agenda/" class="agenda-home-btn" data-t="agendaCTA">Ver eventos y agenda ↗</a><small data-t="agendaDisclaimer">Selección editorial consultada el 2 de noviembre de 2026. Comprueba los detalles con los organizadores.</small></div>
 <div class="agenda-home-photo"><img src="assets/photos/album/palmeras-sol.webp" loading="lazy" width="864" height="1536" alt="Paseo con palmeras junto al mar en Torremolinos, fotografía original"><small>© Archivo fotográfico TORREMOLINOS</small></div>
-</section><section class="section shell" id="plan"><div class="sectop"><div><span class="eyebrow coral">YOUR PLAN</span><h2 data-t="planTitle">Tu día, a tu manera</h2></div><p data-t="planLead">Tres paradas inspiradoras para caminar sin prisa. Comprueba los horarios, accesos y trayectos antes de salir.</p></div><div class="planner"><div class="panel"><h3 data-t="chooseMood">¿Qué plan eliges?</h3><p data-t="moodLead">Elige un ambiente y prepararemos un recorrido orientativo.</p><div class="moods" id="moods"><button class="mood-btn" data-mood="sea" aria-pressed="true" data-t="moodSea">🌊 Mar y paseo</button><button class="mood-btn" data-mood="pride" aria-pressed="false" data-t="moodPride">🌈 Cultura y orgullo</button><button class="mood-btn" data-mood="taste" aria-pressed="false" data-t="moodTaste">🍽️ Sabores locales</button><button class="mood-btn" data-mood="slow" aria-pressed="false" data-t="moodSlow">🌿 A mi ritmo</button></div></div><div class="panel"><span class="eyebrow coral">MINI ROUTE</span><h3 data-t="myRoute">Mi pequeño itinerario</h3><ol class="route-list" id="route"></ol><a class="darkbtn" id="directions" href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer" data-t="openRoute">Abrir ruta en Maps ↗</a><p class="note-small" data-t="routeNote">Ruta sugerida, no representa tiempos ni disponibilidad en vivo.</p></div></div></section>
+</section>
+<section class="section shell product-planner" id="plan" aria-labelledby="plan-title">
+  <div class="plan-head">
+    <div class="plan-lead">
+      <span class="plan-section-kicker" data-plan-t="edition">La città, come vuoi tu</span>
+      <h2 id="plan-title" data-plan-t="title">Tu Torremolinos.</h2>
+      <p data-plan-t="lead">Non una lista da seguire. Un percorso da inventare: scegli un'atmosfera, modifica le tappe, salva il tuo itinerario.</p>
+    </div>
+    <div class="plan-promise"><strong>LOCAL, NOT GENERIC.</strong><span data-plan-t="promise">Luoghi della guida, senza login e senza disponibilità inventate.</span></div>
+  </div>
+  <div class="plan-workspace">
+    <div class="plan-choice" aria-labelledby="plan-choice-title">
+      <h3 id="plan-choice-title" data-plan-t="choose">Da dove vuoi cominciare?</h3>
+      <p data-plan-t="chooseLead">Quattro modi di vivere la città. Il percorso cambia subito, senza attese.</p>
+      <div class="moods" id="moods" role="group" aria-label="Temi del percorso">
+        <button class="mood-btn" type="button" data-mood="sea" aria-pressed="true" data-plan-t="sea">Mare & passeggiate</button>
+        <button class="mood-btn" type="button" data-mood="pride" aria-pressed="false" data-plan-t="pride">Cultura LGBTQ+</button>
+        <button class="mood-btn" type="button" data-mood="taste" aria-pressed="false" data-plan-t="taste">Sapori locali</button>
+        <button class="mood-btn" type="button" data-mood="slow" aria-pressed="false" data-plan-t="slow">Senza fretta</button>
+      </div>
+      <p class="plan-choice-tip" data-plan-t="tip">Vuoi una tappa diversa? Aggiungila direttamente dai luoghi nella sezione Esplora.</p>
+      <a class="plan-explore-link" href="#explore" data-plan-t="browse">Esplora tutti i luoghi ↗</a>
+    </div>
+    <div class="plan-journey" aria-labelledby="plan-journey-title">
+      <div class="plan-journey-header">
+        <div><span class="plan-journey-label" data-plan-t="journey">Il tuo percorso</span><h3 id="plan-journey-title" data-plan-t="routeTitle">La giornata prende forma.</h3></div>
+        <output id="planCount" aria-live="polite">3 tappe</output>
+      </div>
+      <ol class="route-list" id="route" aria-label="Tappe del percorso"></ol>
+      <p id="planEmpty" class="plan-empty" data-plan-t="empty" hidden>Il percorso è vuoto. Scegli un'atmosfera o aggiungi luoghi da Esplora.</p>
+      <div class="plan-actions">
+        <a id="directions" class="plan-map-link darkbtn" href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer" data-plan-t="openMap">Apri in Maps ↗</a>
+        <button id="sharePlan" class="plan-share" type="button" data-plan-t="share">Condividi percorso</button>
+        <button id="resetPlan" class="plan-reset" type="button" data-plan-t="reset">Ricomincia</button>
+      </div>
+      <p id="planStatus" class="plan-status" role="status" aria-live="polite"></p>
+      <p class="plan-disclaimer" data-plan-t="disclaimer">Itinerario orientativo. Verifica accessibilità, orari e trasporti prima di partire.</p>
+    </div>
+  </div>
+</section>
 <section class="section shell" id="useful"><div class="sectop"><div><span class="eyebrow coral">ESSENTIALS</span><h2 data-t="usefulTitle">Lo importante, sin rodeos</h2></div><p data-t="usefulLead">Información que conviene tener a mano, respaldada por fuentes oficiales. Los servicios pueden cambiar.</p></div><div class="info-grid"><article class="infocard"><span class="big">🚆</span><h3 data-t="airportTitle">Desde el aeropuerto</h3><p data-t="airportText">La línea C1 de Cercanías enlaza el aeropuerto de Málaga con Torremolinos y otras localidades.</p><a href="https://www.renfe.com/es/es/cercanias/cercanias-malaga" target="_blank" rel="noopener noreferrer" data-t="airportLink">Consulta Renfe ↗</a></article><article class="infocard"><span class="big">🆘</span><h3 data-t="emergencyTitle">Emergencias</h3><p data-t="emergencyText">En España, el 112 es el número gratuito de emergencias. Solo para situaciones reales.</p><a href="tel:112" data-t="emergencyLink">Llamar al 112</a></article><article class="infocard"><span class="big">♿</span><h3 data-t="accessTitle">Moverse por la ciudad</h3><p data-t="accessText">Del centro a la playa hay desniveles y escaleras. Consulta los accesos disponibles antes de bajar.</p><a href="https://turismotorremolinos.es/es/" target="_blank" rel="noopener noreferrer" data-t="accessLink">Turismo oficial ↗</a></article></div></section>
 <section class="section shell"><div class="mapbox"><div><span class="eyebrow coral">CITY MAP</span><h3 data-t="mapTitle">Torremolinos en el mapa</h3><p data-t="mapLead">Activa el mapa cuando lo necesites. Usamos OpenStreetMap, sin rastrear tu ubicación desde esta app.</p><button class="darkbtn" id="loadMap" data-t="loadMap">Mostrar mapa ↗</button><p class="note-small" data-t="mapPrivacy">Al activarlo se cargarán contenidos de OpenStreetMap.</p></div><div id="mapHolder" class="map-placeholder"><button id="mapStart" data-t="mapStart">🗺️ Ver mapa de la ciudad</button></div></div></section>
 <section class="section shell"><div class="community"><div><span class="eyebrow coral">LOCAL CONNECTION</span><h2 data-t="communityTitle">La ciudad también es tuya</h2><p data-t="communityText">Esta guía independiente quiere sumar voces locales, información comprobada y recomendaciones transparentes. Los acuerdos comerciales nunca se presentarán como reseñas imparciales.</p></div><a class="darkbtn" href="https://github.com/manzo8b/Torremolinos/issues" target="_blank" rel="noopener noreferrer" data-t="feedback">Enviar sugerencias ↗</a></div></section>
@@ -154,14 +193,80 @@ var lang='es',filter='all',query='',mood='sea',favs=[];
 try{lang=new URLSearchParams(location.search).get('lang')||localStorage.getItem('torremolinos.lang')||'es';if(!base[lang]&&!other[lang])lang='es';favs=JSON.parse(localStorage.getItem('torremolinos.favs')||'[]');if(!Array.isArray(favs))favs=[]}catch(e){lang='es';favs=[]}
 var $=function(s){return document.querySelector(s)}, all=function(s){return Array.from(document.querySelectorAll(s))}, msg=function(k){return (base[lang]||other[lang]||{})[k]||base.en[k]||base.es[k]||k};
 function setLang(){document.documentElement.lang=lang;$('#lang').value=lang;all('[data-t]').forEach(function(el){el.textContent=msg(el.dataset.t)});all('[data-ph]').forEach(function(el){el.placeholder=msg(el.dataset.ph)});render();route();document.title=({"es":"TORREMOLINOS | Guía local, agenda, restaurantes y LGBTQ+","en":"TORREMOLINOS | City guide, events, dining and LGBTQ+","it":"TORREMOLINOS | Guida alla città, eventi, ristoranti e LGBTQ+","de":"TORREMOLINOS | Stadtführer, Events, Essen und LGBTQ+","fr":"TORREMOLINOS | Guide, événements, restaurants et LGBTQ+","ru":"TORREMOLINOS | Путеводитель, события, рестораны и ЛГБТК+"})[lang]||"TORREMOLINOS | City guide, events, dining and LGBTQ+"}
-function render(){all('#filters button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.filter===filter))});var list=places.filter(function(p){return(filter==='all'||filter===p.cat||(filter==='saved'&&favs.indexOf(p.id)>-1))&&(!query||[p.name,p.zone,p.d[lang]||p.d.en].join(' ').toLocaleLowerCase().includes(query))});$('#count').textContent=list.length+' '+msg('results');var host=$('#cards');host.replaceChildren();if(!list.length){var empty=document.createElement('div');empty.className='empty';empty.textContent=msg('empty');host.append(empty);return}list.forEach(function(p){var article=document.createElement('article');article.className='place';article.dataset.category=p.cat;var art=document.createElement('div');art.className='place-art';var chip=document.createElement('span');chip.className='chip';chip.textContent=p.cat==='lgbt'?'LGBTQ+':msg(p.cat);var icon=document.createElement('span');icon.className='articon';icon.textContent=p.icon;icon.setAttribute('aria-hidden','true');var heart=document.createElement('button');heart.className='heart';heart.type='button';heart.textContent=favs.includes(p.id)?'♥':'♡';heart.setAttribute('aria-label',msg('savePlace')+' '+p.name);heart.setAttribute('aria-pressed',String(favs.includes(p.id)));heart.addEventListener('click',function(){favs=favs.includes(p.id)?favs.filter(function(x){return x!==p.id}):favs.concat(p.id);try{localStorage.setItem('torremolinos.favs',JSON.stringify(favs))}catch(e){}render()});art.append(chip,icon,heart);var body=document.createElement('div');body.className='place-body';var zone=document.createElement('span');zone.className='zone';zone.textContent=p.zone;var heading=document.createElement('h3');heading.textContent=p.name;var desc=document.createElement('p');desc.textContent=p.d[lang]||p.d.en;var foot=document.createElement('div');foot.className='placefoot';var src=document.createElement('a');src.href=p.src;src.target='_blank';src.rel='noopener noreferrer';src.className='source';src.textContent=msg('sourceInfo')+' ↗';var map=document.createElement('a');map.href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(p.name+' Torremolinos España');map.target='_blank';map.rel='noopener noreferrer';map.textContent=msg('mapPlace');foot.append(src,map);body.append(zone,heading,desc,foot);article.append(art,body);host.append(article)})}
+function render(){all('#filters button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.filter===filter))});var list=places.filter(function(p){return(filter==='all'||filter===p.cat||(filter==='saved'&&favs.indexOf(p.id)>-1))&&(!query||[p.name,p.zone,p.d[lang]||p.d.en].join(' ').toLocaleLowerCase().includes(query))});$('#count').textContent=list.length+' '+msg('results');var host=$('#cards');host.replaceChildren();if(!list.length){var empty=document.createElement('div');empty.className='empty';empty.textContent=msg('empty');host.append(empty);return}list.forEach(function(p){var article=document.createElement('article');article.className='place';article.dataset.category=p.cat;var art=document.createElement('div');art.className='place-art';var chip=document.createElement('span');chip.className='chip';chip.textContent=p.cat==='lgbt'?'LGBTQ+':msg(p.cat);var icon=document.createElement('span');icon.className='articon';icon.textContent=p.icon;icon.setAttribute('aria-hidden','true');var heart=document.createElement('button');heart.className='heart';heart.type='button';heart.textContent=favs.includes(p.id)?'♥':'♡';heart.setAttribute('aria-label',msg('savePlace')+' '+p.name);heart.setAttribute('aria-pressed',String(favs.includes(p.id)));heart.addEventListener('click',function(){favs=favs.includes(p.id)?favs.filter(function(x){return x!==p.id}):favs.concat(p.id);try{localStorage.setItem('torremolinos.favs',JSON.stringify(favs))}catch(e){}render()});art.append(chip,icon,heart);var body=document.createElement('div');body.className='place-body';var zone=document.createElement('span');zone.className='zone';zone.textContent=p.zone;var heading=document.createElement('h3');heading.textContent=p.name;var desc=document.createElement('p');desc.textContent=p.d[lang]||p.d.en;var foot=document.createElement('div');foot.className='placefoot';var src=document.createElement('a');src.href=p.src;src.target='_blank';src.rel='noopener noreferrer';src.className='source';src.textContent=msg('sourceInfo')+' ↗';var map=document.createElement('a');map.href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(p.name+' Torremolinos España');map.target='_blank';map.rel='noopener noreferrer';map.textContent=msg('mapPlace');var add=document.createElement('button');add.className='place-add';add.type='button';add.textContent=planText('add');add.setAttribute('aria-label',planText('add')+' '+p.name);add.addEventListener('click',function(){addToPlan(p.id)});foot.append(src,map,add);body.append(zone,heading,desc,foot);article.append(art,body);host.append(article)})}
 function setFilter(x){filter=x;render();$('#explore').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}
-function route(){all('[data-mood]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.mood===mood))});var arr=routeSets[mood].map(function(id){return places.find(function(p){return p.id===id})});var ol=$('#route');ol.replaceChildren();arr.forEach(function(p){var li=document.createElement('li');li.textContent=p.name;ol.append(li)});$('#directions').href='https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(arr[arr.length-1].name+' Torremolinos España')+'&waypoints='+encodeURIComponent(arr.slice(0,-1).map(function(p){return p.name+' Torremolinos España'}).join('|'))+'&travelmode=walking'}
+/* Product signature: Tu Torremolinos. Same catalog as the Explorer. */
+var planCopy={
+ es:{planCta:'Crea tu recorrido',edition:'La ciudad, a tu manera',title:'Tu Torremolinos.',lead:'No es una lista para seguir. Es un recorrido para hacer tuyo: elige un ambiente, modifica las paradas y guarda tu plan.',promise:'Lugares reales de la guía. Sin registro ni disponibilidad inventada.',choose:'¿Por dónde empezamos?',chooseLead:'Cuatro formas de vivir la ciudad. Tu recorrido cambia al instante.',sea:'Mar y paseo',pride:'Cultura LGBTQ+',taste:'Sabores locales',slow:'Sin prisa',tip:'¿Quieres otra parada? Añádela desde los lugares en Explora.',browse:'Explorar todos los lugares ↗',journey:'Tu recorrido',routeTitle:'El día empieza aquí.',empty:'Aún no hay paradas. Elige un ambiente o añade lugares desde Explora.',openMap:'Abrir en Maps ↗',share:'Compartir plan',reset:'Empezar de nuevo',disclaimer:'Recorrido orientativo. Confirma horarios, accesibilidad y transporte antes de salir.',stops:'paradas',oneStop:'parada',add:'Añadir al plan',added:'Añadido al plan',remove:'Quitar',up:'Subir',down:'Bajar',saved:'Plan actualizado.',copied:'Enlace copiado.',copyError:'No se pudo copiar. Usa la barra de direcciones.',limit:'Máximo 8 paradas.'},
+ en:{planCta:'Build your day',edition:'The city, your way',title:'Your Torremolinos.',lead:'Not a checklist. A journey to make your own: choose a mood, edit stops and save your plan.',promise:'Real places from the guide. No signup or invented availability.',choose:'Where shall we start?',chooseLead:'Four ways to experience the city. Your route changes instantly.',sea:'Sea & promenade',pride:'LGBTQ+ heritage',taste:'Local flavours',slow:'Slow discovery',tip:'Want a different stop? Add it from the Explore directory.',browse:'Explore all places ↗',journey:'Your route',routeTitle:'Your day starts here.',empty:'No stops yet. Choose a mood or add places from Explore.',openMap:'Open in Maps ↗',share:'Share plan',reset:'Start again',disclaimer:'Suggested route only. Confirm opening times, access and transport before setting out.',stops:'stops',oneStop:'stop',add:'Add to plan',added:'Added to plan',remove:'Remove',up:'Move up',down:'Move down',saved:'Plan updated.',copied:'Link copied.',copyError:'Could not copy the link. Use the address bar.',limit:'Maximum 8 stops.'},
+ it:{planCta:'Crea il tuo percorso',edition:'La città, a modo tuo',title:'La tua Torremolinos.',lead:'Non una lista da seguire. Un percorso da costruire: scegli un’atmosfera, modifica le tappe e salva il tuo piano.',promise:'Luoghi reali della guida. Senza registrazione né disponibilità inventate.',choose:'Da dove cominciamo?',chooseLead:'Quattro modi di vivere la città. Il percorso cambia immediatamente.',sea:'Mare e passeggiate',pride:'Cultura LGBTQ+',taste:'Sapori locali',slow:'Senza fretta',tip:'Vuoi una tappa diversa? Aggiungila dalla sezione Esplora.',browse:'Esplora tutti i luoghi ↗',journey:'Il tuo percorso',routeTitle:'La giornata prende forma.',empty:'Nessuna tappa. Scegli un’atmosfera o aggiungi luoghi da Esplora.',openMap:'Apri in Maps ↗',share:'Condividi percorso',reset:'Ricomincia',disclaimer:'Itinerario indicativo. Verifica orari, accessibilità e trasporti prima di uscire.',stops:'tappe',oneStop:'tappa',add:'Aggiungi al piano',added:'Aggiunto al piano',remove:'Rimuovi',up:'Sposta su',down:'Sposta giù',saved:'Percorso aggiornato.',copied:'Link copiato.',copyError:'Impossibile copiare. Usa la barra degli indirizzi.',limit:'Massimo 8 tappe.'},
+ de:{planCta:'Plane deinen Tag',edition:'Deine Stadt, dein Weg',title:'Dein Torremolinos.',lead:'Keine starre Liste: Wähle eine Stimmung, bearbeite Stationen und speichere deine Route.',promise:'Echte Orte aus dem Guide. Ohne Anmeldung oder erfundene Verfügbarkeit.',choose:'Womit fangen wir an?',chooseLead:'Vier Arten, die Stadt zu erleben. Die Route passt sich sofort an.',sea:'Meer & Promenade',pride:'LGBTQ+-Kultur',taste:'Lokale Küche',slow:'Ganz entspannt',tip:'Noch ein Ort? Füge ihn direkt aus Entdecken hinzu.',browse:'Alle Orte entdecken ↗',journey:'Deine Route',routeTitle:'Dein Tag beginnt hier.',empty:'Noch keine Stationen. Wähle ein Thema oder füge Orte hinzu.',openMap:'In Maps öffnen ↗',share:'Route teilen',reset:'Neu starten',disclaimer:'Unverbindlicher Vorschlag. Öffnungszeiten, Zugang und Verkehr prüfen.',stops:'Stationen',oneStop:'Station',add:'Zur Route hinzufügen',added:'Zur Route hinzugefügt',remove:'Entfernen',up:'Nach oben',down:'Nach unten',saved:'Route aktualisiert.',copied:'Link kopiert.',copyError:'Kopieren nicht möglich. Nutze die Adressleiste.',limit:'Maximal 8 Stationen.'},
+ fr:{planCta:'Créez votre parcours',edition:'La ville à votre façon',title:'Votre Torremolinos.',lead:'Pas de liste imposée. Choisissez une ambiance, modifiez les étapes et gardez votre parcours.',promise:'Des lieux réels du guide, sans inscription ni disponibilité inventée.',choose:'Par où commencer ?',chooseLead:'Quatre façons de vivre la ville. Le parcours change immédiatement.',sea:'Mer & promenade',pride:'Culture LGBTQ+',taste:'Saveurs locales',slow:'À votre rythme',tip:'Un autre arrêt ? Ajoutez-le depuis Explorer.',browse:'Explorer tous les lieux ↗',journey:'Votre parcours',routeTitle:'La journée commence ici.',empty:'Aucune étape. Choisissez une ambiance ou ajoutez des lieux.',openMap:'Ouvrir dans Maps ↗',share:'Partager',reset:'Recommencer',disclaimer:'Parcours indicatif. Vérifiez horaires, accès et transports.',stops:'étapes',oneStop:'étape',add:'Ajouter au parcours',added:'Ajouté au parcours',remove:'Retirer',up:'Monter',down:'Descendre',saved:'Parcours mis à jour.',copied:'Lien copié.',copyError:'Impossible de copier. Utilisez la barre d’adresse.',limit:'8 étapes maximum.'},
+ ru:{planCta:'Создать маршрут',edition:'Город по-вашему',title:'Ваш Торремолинос.',lead:'Не готовый список: выберите настроение, изменяйте остановки и сохраняйте маршрут.',promise:'Реальные места из путеводителя. Без регистрации и выдуманных данных.',choose:'С чего начнём?',chooseLead:'Четыре способа узнать город. Маршрут меняется сразу.',sea:'Море и прогулки',pride:'ЛГБТК+ культура',taste:'Местная кухня',slow:'Без спешки',tip:'Нужно другое место? Добавьте его из раздела «Исследовать».',browse:'Смотреть все места ↗',journey:'Ваш маршрут',routeTitle:'Ваш день начинается здесь.',empty:'Остановок пока нет. Выберите тему или добавьте места.',openMap:'Открыть в Maps ↗',share:'Поделиться',reset:'Начать заново',disclaimer:'Примерный маршрут. Уточняйте часы работы, доступность и транспорт.',stops:'остановок',oneStop:'остановка',add:'Добавить в маршрут',added:'Добавлено',remove:'Удалить',up:'Выше',down:'Ниже',saved:'Маршрут обновлён.',copied:'Ссылка скопирована.',copyError:'Не удалось скопировать ссылку.',limit:'Не более 8 остановок.'}
+};
+var selectedStops=null;
+try{
+  var urlStops=new URLSearchParams(location.search).get('plan');
+  var storedStops=urlStops===null?JSON.parse(localStorage.getItem('torremolinos.plan')||'null'):urlStops.split(',');
+  if(Array.isArray(storedStops)){
+    var safeStops=storedStops.filter(function(id,i){return typeof id==='string'&&places.some(function(p){return p.id===id})&&storedStops.indexOf(id)===i}).slice(0,8);
+    if(safeStops.length)selectedStops=safeStops;
+  }
+}catch(e){}
+function planText(key){return (planCopy[lang]||planCopy.en)[key]||planCopy.en[key]||key;}
+function planStatus(key){var el=$('#planStatus');if(el)el.textContent=key?planText(key):'';}
+function planItems(){return (selectedStops===null?routeSets[mood]:selectedStops).map(function(id){return places.find(function(p){return p.id===id})}).filter(Boolean);}
+function persistPlan(){
+ try{if(selectedStops===null)localStorage.removeItem('torremolinos.plan');else localStorage.setItem('torremolinos.plan',JSON.stringify(selectedStops));}catch(e){}
+}
+function editPlan(ids){selectedStops=ids.slice(0,8);persistPlan();route();planStatus('saved');}
+function addToPlan(id){
+ var ids=planItems().map(function(p){return p.id;});
+ if(ids.includes(id)){planStatus('added');return;}
+ if(ids.length>=8){planStatus('limit');return;}
+ ids.push(id);editPlan(ids);$('#plan').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+}
+function route(){
+ all('[data-mood]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.mood===mood));});
+ all('[data-plan-t]').forEach(function(el){el.textContent=planText(el.dataset.planT);});
+ var arr=planItems(),ol=$('#route');ol.replaceChildren();
+ var count=$('#planCount');if(count)count.textContent=arr.length+' '+planText(arr.length===1?'oneStop':'stops');
+ var empty=$('#planEmpty');if(empty)empty.hidden=arr.length!==0;
+ arr.forEach(function(p,i){
+   var li=document.createElement('li');li.className='route-stop';
+   var nr=document.createElement('span');nr.className='route-number';nr.textContent=String(i+1).padStart(2,'0');nr.setAttribute('aria-hidden','true');
+   var info=document.createElement('div');info.className='route-stop-info';
+   var name=document.createElement('strong');name.textContent=p.name;
+   var zone=document.createElement('small');zone.textContent=p.zone;
+   info.append(name,zone);
+   var actions=document.createElement('div');actions.className='route-stop-controls';
+   function control(label,symbol,disabled,fn){
+     var b=document.createElement('button');b.type='button';b.className='route-control';b.textContent=symbol;b.setAttribute('aria-label',label+' '+p.name);b.disabled=disabled;b.addEventListener('click',fn);return b;
+   }
+   actions.append(
+     control(planText('up'),'↑',i===0,function(){var ids=arr.map(function(x){return x.id});var t=ids[i-1];ids[i-1]=ids[i];ids[i]=t;editPlan(ids);}),
+     control(planText('down'),'↓',i===arr.length-1,function(){var ids=arr.map(function(x){return x.id});var t=ids[i+1];ids[i+1]=ids[i];ids[i]=t;editPlan(ids);}),
+     control(planText('remove'),'×',false,function(){editPlan(arr.filter(function(x){return x.id!==p.id}).map(function(x){return x.id}));})
+   );
+   li.append(nr,info,actions);ol.append(li);
+ });
+ var maps=$('#directions');
+ if(arr.length){
+  var stops=arr.map(function(p){return p.name+' Torremolinos España';});
+  maps.href='https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(stops[stops.length-1])+(stops.length>1?'&waypoints='+encodeURIComponent(stops.slice(0,-1).join('|')):'')+'&travelmode=walking';
+  maps.removeAttribute('aria-disabled');maps.tabIndex=0;
+ }else{
+  maps.removeAttribute('href');maps.setAttribute('aria-disabled','true');maps.tabIndex=-1;
+ }
+}
+
 function loadMap(){if($('#mapHolder iframe'))return;var iframe=document.createElement('iframe');iframe.loading='lazy';iframe.title='OpenStreetMap Torremolinos';iframe.referrerPolicy='no-referrer';iframe.src='https://www.openstreetmap.org/export/embed.html?bbox=-4.535%2C36.601%2C-4.461%2C36.650&layer=mapnik&marker=36.624%2C-4.502';$('#mapHolder').replaceChildren(iframe)}
 $('#lang').addEventListener('change',function(e){lang=e.target.value;try{localStorage.setItem('torremolinos.lang',lang)}catch(e){}var url=new URL(location.href);url.searchParams.set('lang',lang);history.replaceState(null,'',url);setLang();updateHeroMusic()});
 all('[data-filter]').forEach(function(b){b.addEventListener('click',function(){setFilter(b.dataset.filter)})});
 all('[data-shortcut]').forEach(function(b){b.addEventListener('click',function(){setFilter(b.dataset.shortcut)})});
-all('[data-mood]').forEach(function(b){b.addEventListener('click',function(){mood=b.dataset.mood;route()})});
+all('[data-mood]').forEach(function(b){b.addEventListener('click',function(){mood=b.dataset.mood;selectedStops=null;persistPlan();planStatus('');route()})});
+$('#resetPlan').addEventListener('click',function(){selectedStops=null;persistPlan();planStatus('');route()});
+$('#sharePlan').addEventListener('click',function(){var url=new URL(location.href);url.searchParams.set('lang',lang);url.searchParams.set('plan',planItems().map(function(p){return p.id}).join(','));var link=url.toString();if(navigator.share){navigator.share({title:'Tu Torremolinos',url:link}).catch(function(){});}else if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(link).then(function(){planStatus('copied');}).catch(function(){planStatus('copyError');});}else{planStatus('copyError');}});
 $('#prideBtn').addEventListener('click',function(){setFilter('lgbt')});
 $('#search').addEventListener('input',function(e){query=e.target.value.trim().toLocaleLowerCase();filter='all';render()});
 $('#searchForm').addEventListener('submit',function(e){e.preventDefault();$('#explore').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})});
