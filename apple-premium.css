@@ -510,3 +510,7 @@ body[data-coast]:not(.torre-home) :is(.card,.event,.tile,.gallery-card):hover{bo
 @media(prefers-reduced-transparency:reduce){
  body.torre-home .topbar,body.torre-home .mobilebar{background:var(--ui-surface)!important;backdrop-filter:none!important;}
 }
+
+/* Light wordmark keeps orange and green curves visible on dark footer */
+body.torre-home .footer .brand-logo-img,
+body[data-coast]:not(.torre-home) :is(.footer,.foot,.bottom) .brand-logo-img{filter:none!important;}
