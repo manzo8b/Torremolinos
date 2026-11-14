@@ -867,3 +867,28 @@ body.torre-home .community .darkbtn{
 body.torre-home .agenda-home .agenda-home-copy :is(h2,p,small,.eyebrow){
   color:#111111!important;opacity:1!important;
 }
+
+
+/* Component-root authority: old theme rules use ID selectors and !important */
+body.torre-home main #sound .music-shell,
+body.torre-home main #sound .music-body,
+body.torre-home main #sound .music-art {
+  background-color:#16865A!important;background-image:none!important;
+  color:#FFFFFF!important;
+}
+body.torre-home main #sound .music-shell .music-body :is(h2,p,small,label,span,a:not(.music-links a)){
+  color:#FFFFFF!important;
+}
+body.torre-home main #agenda-home.agenda-home.shell,
+body.torre-home main #agenda-home .agenda-home-copy {
+  background:#F58A17!important;background-image:none!important;
+}
+body.torre-home main #agenda-home .agenda-home-copy :is(h2,p,small,.eyebrow) {
+  color:#111111!important;
+}
+body.torre-home main > section.gallery-feature.shell {
+  background:rgba(22,134,90,.07)!important;background-image:none!important;
+}
+body.torre-home main > section.gallery-feature.shell .gallery-feature-body{
+  background:rgba(22,134,90,.07)!important;background-image:none!important;
+}
