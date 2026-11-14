@@ -125,7 +125,7 @@ test('narrative copy and punctuation-free titles in all six languages', () => {
 
 test('offline cache contains the modern UI and two actual hero photographs', () => {
   const sw=file('service-worker.js');
-  assert.match(sw,/torremolinos-v15/);
+  assert.match(sw,/torremolinos-v17/);
   ['apple-premium.css','apple-runtime.js','hero-apple-2026.webp','hero-apple-2026-mobile.webp'].forEach(x=>assert.ok(sw.includes(x),x+' missing from offline cache'));
   assert.doesNotThrow(()=>new Script(sw));
 });

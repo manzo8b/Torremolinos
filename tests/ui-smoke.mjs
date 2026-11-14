@@ -44,8 +44,54 @@ try{
     assert.ok(doc.page<=doc.viewport+3,'horizontal overflow '+width+': doc='+doc.page);
     assert.ok(doc.hero.includes('hero-apple-2026'),'hero image missing at '+width);
     assert.equal(doc.lang,'it');
+    const whiteCraft=await page.evaluate(()=>{
+      const footer=document.querySelector('footer.footer');
+      const musicTitle=document.querySelector('.music-body h2');
+      const nogaleraTitle=document.querySelector('.nogalera-feature-copy h2');
+      return {
+        footer:footer?getComputedStyle(footer).backgroundColor:null,
+        music:musicTitle?getComputedStyle(musicTitle).color:null,
+        nogalera:nogaleraTitle?getComputedStyle(nogaleraTitle).color:null,
+        photos:document.querySelectorAll('#cards .place-photo').length,
+        craftCss:[...document.styleSheets].some(sheet=>sheet.href?.includes('craft-finish.css'))
+      };
+    });
+    assert.equal(whiteCraft.footer,'rgb(255, 255, 255)','footer is not white at '+width);
+    assert.equal(whiteCraft.music,'rgb(17, 17, 17)','music title illegible on white at '+width);
+    assert.equal(whiteCraft.nogalera,'rgb(17, 17, 17)','Nogalera title illegible at '+width);
+    assert.equal(whiteCraft.photos,10,'place gallery should have 10 documentary photos at '+width);
+    assert.ok(whiteCraft.craftCss,'craft stylesheet missing at '+width);
     assert.deepEqual(await titleAudit(page),[],'headings ending with periods at '+width);
     assert.deepEqual(errors,[],'runtime errors on '+width);
+    const ctas=await page.evaluate(()=>{
+      function props(selector){
+        const el=document.querySelector(selector),css=el&&getComputedStyle(el);
+        return css?{text:css.color,bg:css.backgroundColor}:null;
+      }
+      return {gallery:props('.gallery-feature-body a'),feedback:props('.community .darkbtn'),credit:props('.music-art small')};
+    });
+    assert.deepEqual(ctas.gallery,{text:'rgb(255, 255, 255)',bg:'rgb(22, 134, 90)'},'gallery contrast '+width);
+    assert.deepEqual(ctas.feedback,{text:'rgb(17, 17, 17)',bg:'rgb(245, 138, 23)'},'feedback CTA contrast '+width);
+    assert.equal(ctas.credit.text,'rgb(17, 17, 17)','album credit unreadable at '+width);
+    if(width===390||width===1440){
+      // Full-page screenshots do not automatically reveal lazy images. Simulate
+      // a real visitor scrolling through the whole catalog, then validate.
+      for(let i=0;i<10;i++){
+        const img=page.locator('#cards .place-photo').nth(i);
+        await img.scrollIntoViewIfNeeded();
+        await img.evaluate(node=>new Promise((resolve,reject)=>{
+          const deadline=Date.now()+7500;
+          function check(){
+            if(node.complete&&node.naturalWidth>0){resolve();return;}
+            if(Date.now()>deadline){reject(new Error('Place photo did not load: '+node.src));return;}
+            setTimeout(check,75);
+          }
+          check();
+        }));
+      }
+      await page.evaluate(()=>window.scrollTo(0,0));
+      assert.equal(await page.locator('#cards .place-photo').count(),10,'broken place photo');
+    }
     await page.screenshot({path:'artifacts/screenshots/home-'+width+'.png',fullPage:true,animations:'disabled'});
     if(width===390){
       await page.locator('[data-mood="taste"]').click();
@@ -78,6 +124,8 @@ try{
     assert.deepEqual(await titleAudit(page),[],'title punctuation on '+path);
     const style=await page.evaluate(()=>[...document.styleSheets].some(sheet=>sheet.href?.includes('apple-premium.css')));
     assert.ok(style,'premium CSS not loaded on '+path);
+    const color=await page.evaluate(()=>getComputedStyle(document.querySelector('footer')).backgroundColor);
+    assert.equal(color,'rgb(255, 255, 255)','dark footer remains on '+path);
     console.log('PASS route '+path);
   }
   await context.close();

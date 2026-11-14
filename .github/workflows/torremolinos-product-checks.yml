@@ -4,6 +4,7 @@ on:
     branches:
       - design/mediterranean-ux-2026-11
       - design/apple-premium-narrative-2026-11
+      - design/white-craft-2026-11
       - main
   pull_request:
     paths:
@@ -26,7 +27,7 @@ jobs:
         with:
           node-version: '22'
       - name: Verify UI contract, routes, languages and PWA
-        run: node --test tests/product-contract.test.mjs
+        run: node --test tests/*.test.mjs
 
   browser-smoke:
     runs-on: ubuntu-latest
