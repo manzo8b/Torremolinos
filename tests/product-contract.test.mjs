@@ -245,3 +245,12 @@ test('all 21 site entrypoints use the final design layer',()=>{
  assert.match(sw,/torremolinos-v19/);
  assert.match(sw,/\.\/product-chapters\.css/);
 });
+
+test('music chapter uses the real local coastline image with product signature',()=>{
+  const html=file('index.html');
+  assert.match(html,/class="music-album-art" src="assets\/photos\/album\/palmeras-sol\.webp"/);
+  assert.match(html,/class="music-photo-identity"/);
+  const css=file('product-chapters.css');
+  assert.match(css,/\.music-photo-identity/);
+  assert.match(css,/\.music-album-art/);
+});
