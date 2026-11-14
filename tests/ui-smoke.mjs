@@ -80,6 +80,8 @@ try{
       return {
         discover:background('#discover'),plan:background('#plan'),
         agenda:background('#agenda-home'),pride:background('#pride .feature'),
+        prideCopy:background('#pride .feature-copy'),prideArt:background('#pride .feature-art.pride-visual'),
+        prideWordColor:getComputedStyle(document.querySelector('#pride .pride-visual-word')).color,
         planWorkspace:background('#plan .plan-workspace'),
         heroButtonRadius:radius('.hero-cta-main'),
         sceneRadius:radius('#discover'),
@@ -92,6 +94,9 @@ try{
     assert.equal(chapter.plan,'rgb(22, 134, 90)','planner chapter not green at '+width);
     assert.equal(chapter.agenda,'rgb(22, 134, 90)','agenda chapter not green at '+width);
     assert.equal(chapter.pride,'rgb(22, 134, 90)','pride story not green at '+width);
+    assert.equal(chapter.prideCopy,'rgb(22, 134, 90)','pride body lost its green surface at '+width);
+    assert.equal(chapter.prideArt,'rgb(245, 138, 23)','pride story card not orange at '+width);
+    assert.equal(chapter.prideWordColor,'rgb(17, 17, 17)','pride statement is not legible on orange at '+width);
     assert.equal(chapter.planWorkspace,'rgb(255, 255, 255)','plan reading surface must be white at '+width);
     assert.ok(chapter.heroButtonRadius>=24,'main button not pill-shaped at '+width);
     assert.ok(chapter.sceneRadius>=25,'discovery section not oval at '+width);
