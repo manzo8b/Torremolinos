@@ -837,3 +837,33 @@ body[data-coast]:not(.torre-home) :is(.btn,.cta,.hero-actions a,.event a,.cardli
     scroll-behavior:auto!important;transition:none!important;animation:none!important;
   }
 }
+
+
+/* FINAL CASCADE LOCKS — visual defects identified in the user screenshots */
+body.torre-home main > section.editorial-bridge.shell {
+  background-color:#16865A!important;background-image:none!important;
+  opacity:1!important;filter:none!important;
+}
+body.torre-home main > section.editorial-bridge.shell::before,
+body.torre-home main > section.editorial-bridge.shell::after {
+  display:none!important;content:none!important;
+}
+body.torre-home main > section.editorial-bridge.shell :is(h2,p,span){
+  color:#FFFFFF!important;opacity:1!important;mix-blend-mode:normal!important;
+}
+body.torre-home .music-shell .music-body :is(h2,p,small,span,label,.eyebrow,.music-status,.player-label),
+body.torre-home .music-shell .music-art small {
+  color:#FFFFFF!important;opacity:1!important;text-shadow:none!important;
+}
+body.torre-home .nogalera-feature .nogalera-feature-copy :is(h2,p,small,span,.eyebrow){
+  color:#FFFFFF!important;opacity:1!important;
+}
+body.torre-home .gallery-feature .gallery-feature-body a{
+  color:#FFFFFF!important;background:#16865A!important;border:0!important;
+}
+body.torre-home .community .darkbtn{
+  color:#16865A!important;background:#FFFFFF!important;border:0!important;
+}
+body.torre-home .agenda-home .agenda-home-copy :is(h2,p,small,.eyebrow){
+  color:#111111!important;opacity:1!important;
+}
