@@ -594,3 +594,38 @@ body[data-coast]:not(.torre-home) :is(.card,.panel,.tile,.event,.gallery-card,.f
  .experience,.notice,.info-card,.highlight,.cover,.story-card){
   border-radius:var(--p-card-radius)!important;
 }
+
+
+/* Screenshot-driven correction — the earlier craft layer painted pride copy white.
+   Restore a true two-tone statement: white on palm green, black on solar orange. */
+body.torre-home #pride .feature .feature-copy{
+  background:var(--p-green)!important;color:var(--p-white)!important;
+  border:0!important;box-shadow:none!important;
+}
+body.torre-home #pride .feature .feature-copy :is(h2,p,.eyebrow,span){
+  color:var(--p-white)!important;opacity:1!important;text-shadow:none!important;
+}
+body.torre-home #pride .feature .feature-art.pride-visual{
+  background:var(--p-orange)!important;color:var(--p-ink)!important;
+  display:flex!important;flex-direction:column!important;
+  justify-content:flex-end!important;align-items:flex-start!important;
+  min-height:395px!important;padding:clamp(28px,4vw,64px)!important;
+}
+body.torre-home #pride .feature .feature-art.pride-visual .pride-visual-word{
+  display:block!important;visibility:visible!important;opacity:1!important;
+  color:var(--p-ink)!important;font-size:clamp(38px,5.4vw,77px)!important;
+  font-weight:760!important;line-height:1.04!important;letter-spacing:-.052em!important;
+  max-width:520px!important;margin:0!important;
+}
+body.torre-home #pride .feature .feature-art.pride-visual .pride-visual-detail{
+  display:block!important;color:var(--p-ink)!important;opacity:.84!important;
+  font-size:12px!important;letter-spacing:.02em!important;
+}
+@media(max-width:760px){
+  body.torre-home #pride .feature .feature-art.pride-visual{
+    min-height:295px!important;padding:30px 24px!important;
+  }
+  body.torre-home #pride .feature .feature-art.pride-visual .pride-visual-word{
+    font-size:clamp(41px,10vw,57px)!important;
+  }
+}
