@@ -513,3 +513,30 @@ body.torre-home .photo-diary .gallery-promo-link a{
 @media(max-width:620px){
  body.torre-home #galleryTeaserProvenance.ai-badge{bottom:14px!important;left:14px!important;}
 }
+
+
+/* Legal microsite: same white product surface, no ivory or old teal ink. */
+body[data-coast][data-page] :is(.legal-card,.notice,.notice.pending){
+ background:var(--craft-white)!important;color:var(--craft-ink)!important;
+ border:1px solid var(--craft-ring)!important;border-radius:var(--craft-r)!important;
+ box-shadow:none!important;
+}
+body[data-coast][data-page] :is(.intro,.content) :is(h1,h2,h3){
+ font-family:var(--craft-type)!important;color:var(--craft-ink)!important;
+ font-weight:680!important;line-height:1.1!important;
+}
+body[data-coast][data-page] :is(.intro,.content,.legal-card) :is(p,small){
+ color:var(--craft-ink)!important;opacity:1!important;
+}
+body[data-coast][data-page] :is(.kicker,.eyebrow){color:var(--craft-green)!important;letter-spacing:0!important;font-size:13px!important;}
+body[data-coast][data-page] :is(.status,.status.pending){
+ background:rgba(22,134,90,.08)!important;color:var(--craft-ink)!important;
+ border-radius:999px!important;font-size:12px!important;
+}
+body[data-coast][data-page] .btn{
+ background:var(--craft-green)!important;color:var(--craft-white)!important;
+ border-radius:999px!important;min-height:44px!important;
+}
+body[data-coast][data-page] .footer{
+ background:var(--craft-white)!important;color:var(--craft-ink)!important;
+}
