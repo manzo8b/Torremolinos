@@ -7,6 +7,7 @@ on:
       - design/white-craft-2026-11
       - design/commercial-story-experience-2026-11
       - design/product-v6-iphone-craft
+      - design/final-craft-v7-narrative-ux
       - main
   pull_request:
     paths:
