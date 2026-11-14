@@ -85,3 +85,23 @@ test("PWA revs its version and caches the finishing assets",()=>{
  assert.match(sw,/\.\/craft-finish\.css/);
  assert.match(sw,/\.\/craft-runtime\.js/);
 });
+
+
+test("all legal and published editorial footers inherit the white visual contract",()=>{
+  const extra=[
+    "legal/index.html","legal/privacy-policy.html","legal/cookie-policy.html",
+    "legal/terms-of-use.html","legal/contact.html","legal/accessibility.html",
+    "legal/editorial-policy.html","legal/event-source-policy.html",
+    "legal/ai-transparency.html","legal/copyright-credits.html",
+    "stories/torremolinos-mucho-mas-que-sol-y-playa.html",
+    "stories/la-nogalera-donde-la-noche-tiene-historia.html",
+    "stories/pasaje-begona-memoria-de-libertad.html",
+    "stories/san-miguel-la-fiesta-que-saca-torremolinos-a-la-calle.html"
+  ];
+  for(const path of extra){
+    const source=read(path);
+    assert.match(source,/craft-finish\.css/,path+" light stylesheet missing");
+    assert.match(source,/apple-runtime\.js/,path+" heading normalization missing");
+    assert.match(source,/data-coast=/,path+" no body theme binding");
+  }
+});
