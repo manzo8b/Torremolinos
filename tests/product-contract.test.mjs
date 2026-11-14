@@ -66,3 +66,66 @@ test('destination pages share the design system', () => {
   const paths=['agenda/index.html','comer/index.html','gallery/index.html','listen/index.html','stories/index.html','explore/la-nogalera/index.html'];
   paths.forEach(path => assert.match(file(path), /design-system-2026\.css/,path+' missing stylesheet'));
 });
+
+
+test('new Apple product layer is loaded last on every destination', () => {
+  const paths=['index.html','agenda/index.html','comer/index.html','gallery/index.html','listen/index.html','stories/index.html','explore/la-nogalera/index.html'];
+  paths.forEach(path=>{
+    const source=file(path);
+    assert.match(source,/apple-premium\.css/,path+' premium CSS missing');
+    assert.match(source,/apple-runtime\.js/,path+' title rule missing');
+    assert.ok(source.indexOf('apple-premium.css')>source.indexOf('design-system-2026.css'),path+' wrong stylesheet order');
+  });
+});
+
+test('the user-supplied hero is installed as two optimized WebP photos', () => {
+  for (const [path,limit] of [['assets/photos/hero-apple-2026.webp',500000],['assets/photos/hero-apple-2026-mobile.webp',250000]]) {
+    const image=readFileSync(new URL('../'+path,import.meta.url));
+    assert.ok(image.length>30000&&image.length<limit,path+' size out of budget');
+    assert.equal(image.toString('ascii',0,4),'RIFF',path+' invalid RIFF header');
+    assert.equal(image.toString('ascii',8,12),'WEBP',path+' invalid WebP image');
+  }
+  const ui=file('apple-premium.css');
+  assert.match(ui,/hero-apple-2026\.webp/);
+  assert.match(ui,/hero-apple-2026-mobile\.webp/);
+  assert.match(html,/rel="preload" as="image" href="assets\/photos\/hero-apple-2026\.webp"/);
+});
+
+test('readable UI colours and guarded photo overlays', () => {
+  const apple=file('apple-premium.css');
+  const colors=[...new Set([...apple.matchAll(/#[0-9a-fA-F]{3,8}(?![0-9a-fA-F])/g)].map(x=>x[0].toUpperCase()))];
+  colors.forEach(c=>assert.ok(['#FFFFFF','#111111','#F58A17','#16865A'].includes(c),'extra UI colour '+c));
+  const luminance=hex=>{
+    const channels=[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)/255);
+    const rgb=channels.map(c=>c<=0.04045?c/12.92:((c+0.055)/1.055)**2.4);
+    return rgb[0]*0.2126+rgb[1]*0.7152+rgb[2]*0.0722;
+  };
+  const contrast=(a,b)=>{
+    const l1=luminance(a),l2=luminance(b);
+    return (Math.max(l1,l2)+0.05)/(Math.min(l1,l2)+0.05);
+  };
+  assert.ok(contrast('#FFFFFF','#16865A')>=4.5,'white on green must meet AA body contrast');
+  assert.ok(contrast('#111111','#F58A17')>=4.5,'black on orange must meet AA body contrast');
+  assert.ok(contrast('#111111','#FFFFFF')>=7);
+  assert.match(apple,/hero-photo:after/);
+  assert.match(apple,/prefers-reduced-motion/);
+});
+
+test('narrative copy and punctuation-free titles in all six languages', () => {
+  const copy=html.slice(html.indexOf('var editorialCopy='),html.indexOf('Object.keys(editorialCopy)'));
+  ['es','en','it','de','fr','ru'].forEach(l=>assert.ok(copy.includes('"'+l+'":{'),l+' copy missing'));
+  assert.match(copy,/Dove il mare incontra la luce/);
+  const runtime=file('apple-runtime.js');
+  assert.doesNotThrow(()=>new Script(runtime));
+  assert.match(runtime,/cleanHeading/);
+  assert.match(runtime,/MutationObserver/);
+  assert.match(runtime,/NodeFilter\.SHOW_TEXT/);
+  assert.match(html,/data-plan-t="promiseTitle"/);
+});
+
+test('offline cache contains the modern UI and two actual hero photographs', () => {
+  const sw=file('service-worker.js');
+  assert.match(sw,/torremolinos-v15/);
+  ['apple-premium.css','apple-runtime.js','hero-apple-2026.webp','hero-apple-2026-mobile.webp'].forEach(x=>assert.ok(sw.includes(x),x+' missing from offline cache'));
+  assert.doesNotThrow(()=>new Script(sw));
+});

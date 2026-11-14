@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - design/mediterranean-ux-2026-11
+      - design/apple-premium-narrative-2026-11
+      - main
   pull_request:
     paths:
       - '**/*.html'
@@ -25,3 +27,28 @@ jobs:
           node-version: '22'
       - name: Verify UI contract, routes, languages and PWA
         run: node --test tests/product-contract.test.mjs
+
+  browser-smoke:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser test runner
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.57.0
+          npx playwright install --with-deps chromium
+      - name: Verify responsive micro-app in real Chromium
+        run: node tests/ui-smoke.mjs
+      - name: Preserve desktop and mobile screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: torremolinos-visual-review
+          path: artifacts/screenshots
+          if-no-files-found: ignore
+          retention-days: 7
