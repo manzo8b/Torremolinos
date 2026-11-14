@@ -125,7 +125,7 @@ test('narrative copy and punctuation-free titles in all six languages', () => {
 
 test('offline cache contains the modern UI and two actual hero photographs', () => {
   const sw=file('service-worker.js');
-  assert.match(sw,/torremolinos-v21/);
+  assert.match(sw,/torremolinos-v22/);
   ['apple-premium.css','apple-runtime.js','hero-apple-2026.webp','hero-apple-2026-mobile.webp'].forEach(x=>assert.ok(sw.includes(x),x+' missing from offline cache'));
   assert.doesNotThrow(()=>new Script(sw));
 });
@@ -139,7 +139,7 @@ test('craft refinements are last, consistent, and offline-available',()=>{
     assert.match(page,/craft-refinement\.css/,path+' refinement not loaded');
     assert.ok(page.indexOf('craft-refinement.css')>page.indexOf('craft-finish.css'),path+' craft css must override prior craft layer');
   }
-  assert.match(file('service-worker.js'),/torremolinos-v21/);
+  assert.match(file('service-worker.js'),/torremolinos-v22/);
   assert.match(file('service-worker.js'),/craft-refinement\.css/);
   assert.equal((craft.match(/\{/g)||[]).length,(craft.match(/\}/g)||[]).length);
   assert.match(craft,/prefers-reduced-motion/);
@@ -233,7 +233,7 @@ test('commercial storytelling is authored in all six locales and the action is f
 
 test('commercial stylesheet is present in offline shell',()=>{
  const sw=file('service-worker.js');
- assert.match(sw,/torremolinos-v21/);
+ assert.match(sw,/torremolinos-v22/);
  assert.match(sw,/commercial-experience\.css/);
  assert.match(file('index.html'),/apple-runtime\.js/);
 });
@@ -271,10 +271,64 @@ test('v6 hierarchy and critical screenshot contrast repairs exist',()=>{
 });
 test('v6 offline shell includes its stylesheet and original supplied hero',()=>{
  const sw=file('service-worker.js');
- assert.match(sw,/torremolinos-v21/);
+ assert.match(sw,/torremolinos-v22/);
  assert.match(sw,/product-v6\.css/);
  assert.match(sw,/product-v6\.js/);
  assert.match(file('index.html'),/product-v6\.js/);
  assert.match(file('apple-premium.css'),/hero-apple-2026\.webp/);
  assert.match(file('index.html'),/hero-apple-2026\.webp/);
+});
+
+
+test('v7 narrative system is loaded last on all core and editorial pages',()=>{
+ const pages=['index.html','agenda/index.html','comer/index.html','gallery/index.html',
+ 'listen/index.html','stories/index.html','explore/la-nogalera/index.html',
+ 'legal/index.html','legal/privacy-policy.html','legal/cookie-policy.html',
+ 'legal/terms-of-use.html','legal/contact.html','legal/accessibility.html',
+ 'legal/editorial-policy.html','legal/event-source-policy.html','legal/ai-transparency.html',
+ 'legal/copyright-credits.html','stories/torremolinos-mucho-mas-que-sol-y-playa.html',
+ 'stories/la-nogalera-donde-la-noche-tiene-historia.html',
+ 'stories/pasaje-begona-memoria-de-libertad.html',
+ 'stories/san-miguel-la-fiesta-que-saca-torremolinos-a-la-calle.html'];
+ for(const path of pages){
+  const html=file(path);
+  const head=html.split(/<\/head>/i)[0];
+  assert.match(head,/narrative-v7\.css/,path+' missing stylesheet');
+  assert.ok(head.indexOf('narrative-v7.css')>head.indexOf('product-v6.css'),path+' stylesheet order');
+ }
+ assert.match(file('index.html'),/narrative-v7\.js/);
+ const sw=file('service-worker.js');
+ assert.match(sw,/torremolinos-v22/);
+ assert.match(sw,/narrative-v7\.css/);
+ assert.match(sw,/narrative-v7\.js/);
+});
+test('final craft enforces four colours, readable scenes and genuine responsive differentiation',()=>{
+ const css=file('narrative-v7.css');
+ assert.equal((css.match(/\{/g)||[]).length,(css.match(/\}/g)||[]).length);
+ ['--v7-white:#FFFFFF','--v7-ink:#111111','--v7-green:#16865A','--v7-orange:#F58A17']
+   .forEach(t=>assert.ok(css.includes(t),t));
+ for(const scene of ['#discover','#explore','.nogalera-feature','#pride','#photodiary',
+   '.gallery-feature','.music-shell','#stories','#agenda-home','.editorial-bridge',
+   '#plan','#useful','.community'])
+   assert.ok(css.includes(scene),'missing scene '+scene);
+ assert.match(css,/grid-column:span 2!important/);
+ assert.match(css,/scroll-snap-type:x mandatory/);
+ assert.match(css,/prefers-reduced-motion:reduce/);
+ assert.match(css,/prefers-contrast:more/);
+ assert.match(css,/--v7-gap:clamp/);
+ assert.match(css,/\.v7-action-arrow/);
+ assert.match(css,/\.v7-reading-track/);
+});
+test('native thumb discovery and consistent accessible arrows are operational',()=>{
+ const js=file('narrative-v7.js');
+ for(const language of ['it','es','en','fr','de','ru'])
+   assert.ok(js.includes(language+':{rail:'),'missing rail localization '+language);
+ assert.match(js,/scrollBy\(/);
+ assert.match(js,/ArrowLeft/);
+ assert.match(js,/ArrowRight/);
+ assert.match(js,/aria-hidden/);
+ assert.match(js,/MutationObserver/);
+ assert.match(js,/requestAnimationFrame/);
+ assert.match(js,/prefers-reduced-motion/);
+ new Script(js,{filename:'narrative-v7.js'});
 });

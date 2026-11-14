@@ -99,6 +99,57 @@ try{
     }
 
     assert.ok(whiteCraft.craftCss,'craft stylesheet missing at '+width);
+
+    // V7: test actual layout relationships instead of just color tokens.
+    const v7=await page.evaluate(()=>{
+      const q=sel=>document.querySelector(sel);
+      const box=sel=>q(sel)?.getBoundingClientRect();
+      const gap=(a,b)=>{
+        const p=box(a),n=box(b);
+        return p&&n?Math.round(n.top-p.bottom):null;
+      };
+      const stylesheet=[...document.styleSheets].some(sheet=>sheet.href?.includes('narrative-v7.css'));
+      const sourceCards=q('#cards'),figs=[...document.querySelectorAll('#photodiary .photo-diary-grid figure img')];
+      const featured=q('#stories .magazine-card.primary'),small=q('#stories .magazine-card:not(.primary)');
+      const action=q('.editorial-bridge-action'),aCss=action&&getComputedStyle(action);
+      const rail=q('.v7-rail-controls');
+      return {
+        stylesheet,
+        spaceDiscover:gap('#discover','#explore'),
+        spaceExplore:gap('#explore','.nogalera-feature'),
+        spaceSound:gap('.gallery-feature','#sound'),
+        spaceStories:gap('#sound','#stories'),
+        spaceAgenda:gap('#stories','#agenda-home'),
+        photoLead:figs[0]?.getBoundingClientRect().height||0,
+        photoDetail:figs[1]?.getBoundingClientRect().height||0,
+        sourceWidth:sourceCards?.scrollWidth||0,
+        viewerWidth:sourceCards?.clientWidth||0,
+        featureWidth:featured?.getBoundingClientRect().width||0,
+        storyWidth:small?.getBoundingClientRect().width||0,
+        actions:document.querySelectorAll('main .v7-action-arrow[aria-hidden="true"]').length,
+        reading:!!q('.v7-reading-track .v7-reading-bar'),
+        rail:rail?getComputedStyle(rail).display:null,
+        ctaRadius:aCss?.borderTopLeftRadius||null
+      };
+    });
+    assert.ok(v7.stylesheet,'v7 final stylesheet absent at '+width);
+    for(const [key,value] of Object.entries({
+      discover:v7.spaceDiscover,explore:v7.spaceExplore,sound:v7.spaceSound,
+      stories:v7.spaceStories,agenda:v7.spaceAgenda
+    })){
+      assert.ok(value>=50,'chapters visually stuck together at '+width+' '+key+' '+value+'px');
+    }
+    assert.ok(v7.photoLead>v7.photoDetail,'photo hierarchy collapsed at '+width);
+    assert.ok(v7.actions>=5,'coordinated arrows missing at '+width);
+    assert.ok(v7.reading,'scroll progress indicator absent at '+width);
+    assert.ok(parseFloat(v7.ctaRadius)>20,'oval CTA lost at '+width);
+    if(width<=760){
+      assert.ok(v7.sourceWidth>v7.viewerWidth+80,'native places rail missing at '+width);
+      assert.equal(v7.rail,'flex','thumb rail controls hidden at '+width);
+    }else if(width>=1200){
+      assert.ok(v7.featureWidth>v7.storyWidth*1.5,'editorial story spotlight not larger at '+width);
+    }
+
     assert.deepEqual(await titleAudit(page),[],'headings ending with periods at '+width);
     assert.deepEqual(errors,[],'runtime errors on '+width);
     const ctas=await page.evaluate(()=>{
@@ -134,11 +185,18 @@ try{
         return (img?.naturalWidth>0&&!img.hidden) || (fallback&&!fallback.hidden);
       });
       assert.ok(mediaOk,'music cover and offline poster both missing at '+width);
+      await page.locator('#cards').evaluate(el=>el.scrollLeft=0);
       await page.evaluate(()=>window.scrollTo(0,0));
       assert.equal(await page.locator('#cards .place-photo').count(),10,'broken place photo');
     }
     await page.screenshot({path:'artifacts/screenshots/home-'+width+'.png',fullPage:true,animations:'disabled'});
     if(width===390){
+      const next=page.locator('.v7-rail-next'),prev=page.locator('.v7-rail-prev');
+      await next.click();
+      const offset=await page.locator('#cards').evaluate(el=>el.scrollLeft);
+      assert.ok(offset>0,'Next place arrow does not move the rail');
+      await prev.click();
+      await page.locator('#cards').evaluate(el=>el.scrollLeft=0);
       await page.locator('[data-mood="taste"]').click();
       assert.ok((await page.locator('#route').innerText()).includes('La Carihuela'),'mood route did not change');
       const steps=await page.locator('#route li').count();
@@ -171,9 +229,76 @@ try{
     assert.ok(style,'premium CSS not loaded on '+path);
     const color=await page.evaluate(()=>getComputedStyle(document.querySelector('footer')).backgroundColor);
     assert.equal(color,'rgb(255, 255, 255)','dark footer remains on '+path);
+
+    const layout=await page.evaluate(()=>({
+      viewport:window.innerWidth,
+      full:document.documentElement.scrollWidth,
+      hasFinalStyles:[...document.styleSheets].some(sheet=>sheet.href?.includes('narrative-v7.css'))
+    }));
+    assert.ok(layout.full<=layout.viewport+3,'horizontal overflow on '+path+': '+layout.full+' > '+layout.viewport);
+    assert.ok(layout.hasFinalStyles,'narrative v7 styling absent on '+path);
+
+    if(path==='comer/'||path==='agenda/'){
+      const hero=await page.evaluate(()=>{
+        const outer=document.querySelector('body.torre-comer .hero-body,body.torre-agenda .hero.wrap');
+        const copy=outer?.querySelector('.hero-copy'),photo=outer?.querySelector('.hero-photo');
+        if(!copy||!photo||!outer)return null;
+        const a=copy.getBoundingClientRect(),b=photo.getBoundingClientRect(),h=outer.getBoundingClientRect();
+        const mobile=window.innerWidth<=760;
+        const gap=mobile?Math.min(Math.abs(a.top-b.bottom),Math.abs(b.top-a.bottom)):
+          Math.min(Math.abs(a.left-b.right),Math.abs(b.left-a.right));
+        return {gap,height:b.height,width:b.width,frame:h.width,mobile};
+      });
+      assert.ok(hero,'page hero not found '+path);
+      assert.ok(hero.gap<9,'photo and editorial copy detached on '+path+' ('+hero.gap+'px)');
+      assert.ok(hero.height>=245,'photo hero collapses on '+path);
+    }
+    if(path==='gallery/'){
+      const photo=page.locator('#galleryGrid .gallery-card:not([hidden]) .image-button').first();
+      await photo.waitFor({timeout:15000});
+      const shape=await photo.evaluate(el=>{
+        const b=el.getBoundingClientRect(),style=getComputedStyle(el);
+        return {radius:parseFloat(style.borderTopLeftRadius),ratio:b.width/Math.max(1,b.height)};
+      });
+      assert.ok(shape.radius>=16 && shape.radius<=65,'gallery images became oval controls: '+JSON.stringify(shape));
+      assert.ok(shape.ratio>=1.3,'gallery photograph not a landscape frame: '+JSON.stringify(shape));
+
+      const broken=await page.locator('#galleryGrid img').evaluateAll(async images=>{
+        await Promise.all(images.map(async image=>{try{await image.decode()}catch{}}));
+        return images.filter(image=>image.naturalWidth===0).map(image=>image.src);
+      });
+      assert.deepEqual(broken,[],'broken Gallery source images');
+
+    }
+
+    if(['comer/','agenda/','gallery/'].includes(path)){
+      await page.screenshot({
+        path:'artifacts/screenshots/inner-'+path.replaceAll('/','-')+'390.png',
+        fullPage:true,animations:'disabled'
+      });
+    }
+
     console.log('PASS route '+path);
   }
   await context.close();
+
+  const desktop=await browser.newContext({
+    viewport:{width:1440,height:900},
+    deviceScaleFactor:1,reducedMotion:'reduce',locale:'it-IT'
+  });
+  const desktopPage=await desktop.newPage();
+  for(const path of ['comer/','agenda/','gallery/']){
+    const response=await desktopPage.goto(base+'/'+path,{waitUntil:'domcontentloaded',timeout:30000});
+    assert.equal(response.status(),200,'desktop route unavailable '+path);
+    await desktopPage.waitForTimeout(140);
+    const result=await desktopPage.evaluate(()=>({width:window.innerWidth,scroll:document.documentElement.scrollWidth}));
+    assert.ok(result.scroll<=result.width+3,'desktop overflow on '+path);
+    await desktopPage.screenshot({
+      path:'artifacts/screenshots/inner-'+path.replaceAll('/','-')+'1440.png',
+      fullPage:true,animations:'disabled'
+    });
+  }
+  await desktop.close();
   console.log('PASS all UI smoke tests');
 }finally{
   if(browser)await browser.close();
