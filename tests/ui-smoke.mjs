@@ -87,7 +87,10 @@ try{
         sceneRadius:radius('#discover'),
         cardRadius:radius('#explore .place-art'),
         plannerBeforePlaces:!!(document.querySelector('#plan').compareDocumentPosition(document.querySelector('#explore')) & Node.DOCUMENT_POSITION_FOLLOWING),
-        pwaStyles:[...document.styleSheets].some(sheet=>sheet.href?.includes('product-chapters.css'))
+        pwaStyles:[...document.styleSheets].some(sheet=>sheet.href?.includes('product-chapters.css')),
+        musicCaptionWidth:document.querySelector('#sound .music-photo-identity').getBoundingClientRect().width,
+        musicCaptionHeight:document.querySelector('#sound .music-photo-identity').getBoundingClientRect().height,
+        musicDiscPseudo:getComputedStyle(document.querySelector('#sound .music-art'),'::before').display
       };
     });
     assert.equal(chapter.discover,'rgb(245, 138, 23)','discovery chapter not orange at '+width);
@@ -103,6 +106,9 @@ try{
     assert.ok(chapter.cardRadius>=22,'photo cards not rounded at '+width);
     assert.ok(chapter.plannerBeforePlaces,'plan should appear before catalogue');
     assert.ok(chapter.pwaStyles,'product chapters CSS missing at '+width);
+    assert.ok(chapter.musicCaptionWidth<=430,'music signature too wide at '+width+': '+chapter.musicCaptionWidth);
+    assert.ok(chapter.musicCaptionHeight<=170,'music signature too tall at '+width+': '+chapter.musicCaptionHeight);
+    assert.equal(chapter.musicDiscPseudo,'none','legacy music decoration still visible at '+width);
 
     if(width===390||width===1440){
       // Full-page screenshots do not automatically reveal lazy images. Simulate
