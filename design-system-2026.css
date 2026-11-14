@@ -695,7 +695,7 @@ body.torre-home .route-stop-info small{
 body.torre-home .route-stop-controls{display:flex;gap:5px;flex-shrink:0;}
 body.torre-home .route-control{
   display:inline-grid;place-items:center;
-  min-width:37px;min-height:43px;background:var(--tm-white)!important;
+  min-width:44px;min-height:44px;background:var(--tm-white)!important;
   border:2px solid var(--tm-black)!important;border-radius:0!important;
   color:var(--tm-black)!important;font:700 20px/1 var(--tm-font);
   padding:4px 7px!important;box-shadow:none!important;
@@ -772,7 +772,7 @@ body.torre-home .placefoot .place-add:active{transform:scale(.98);}
   body.torre-home .route-number{font-size:20px;min-width:23px;}
   body.torre-home .route-stop-info strong{font-size:17px!important;}
   body.torre-home .route-stop-controls{gap:3px;}
-  body.torre-home .route-control{min-width:34px;min-height:44px;font-size:18px;}
+  body.torre-home .route-control{min-width:44px;min-height:44px;font-size:18px;}
   body.torre-home .plan-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));}
   body.torre-home .plan-actions a{grid-column:1/-1;}
   body.torre-home .plan-actions :is(a,button){width:100%;}
