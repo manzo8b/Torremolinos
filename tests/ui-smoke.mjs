@@ -120,6 +120,18 @@ try{
           check();
         }));
       }
+      
+      const musicPhoto=page.locator('#sound .music-album-art');
+      await musicPhoto.scrollIntoViewIfNeeded();
+      await musicPhoto.evaluate(node=>new Promise((resolve,reject)=>{
+        const deadline=Date.now()+7500;
+        function check(){
+          if(node.complete&&node.naturalWidth>0){resolve();return;}
+          if(Date.now()>deadline){reject(new Error('Music photo did not load: '+node.src));return;}
+          setTimeout(check,75);
+        }
+        check();
+      }));
       await page.evaluate(()=>window.scrollTo(0,0));
       assert.equal(await page.locator('#cards .place-photo').count(),10,'broken place photo');
     }
