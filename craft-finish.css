@@ -486,3 +486,30 @@ body.torre-home .magazine-card[href*="pasaje-begona"] .cover{
 body.torre-home .place{
  transition:transform .25s cubic-bezier(.22,.72,.2,1),box-shadow .25s ease!important;
 }
+
+
+/* Last visual detail pass: provenance is a small badge, not a full-width bar. */
+body.torre-home .gallery-feature-img{position:relative!important;overflow:hidden;}
+body.torre-home #galleryTeaserProvenance.ai-badge{
+ display:inline-flex!important;align-items:center;justify-content:center;
+ width:auto!important;min-width:0!important;max-width:calc(100% - 36px)!important;
+ position:absolute!important;left:18px!important;right:auto!important;
+ bottom:18px!important;top:auto!important;
+ margin:0!important;padding:7px 13px!important;
+ background:rgba(255,255,255,.94)!important;
+ color:var(--craft-ink)!important;border:0!important;
+ border-radius:999px!important;font:680 12px/1.25 var(--craft-type)!important;
+ letter-spacing:0!important;box-shadow:none!important;
+}
+body.torre-home .photo-diary{
+ background:rgba(22,134,90,.045)!important;
+ border-radius:var(--craft-r-xl)!important;
+}
+body.torre-home .photo-diary .gallery-promo-link a{
+ background:var(--craft-green)!important;color:var(--craft-white)!important;
+ border-radius:999px!important;min-height:46px!important;
+ padding:12px 20px!important;text-decoration:none!important;
+}
+@media(max-width:620px){
+ body.torre-home #galleryTeaserProvenance.ai-badge{bottom:14px!important;left:14px!important;}
+}
