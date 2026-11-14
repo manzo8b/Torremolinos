@@ -25,7 +25,7 @@
   }
   function init(){
     cleanAll();
-    var root=document.querySelector('main')||document.body;
+    var root=document.body;
     if(root && 'MutationObserver' in window){
       var observer=new MutationObserver(function(changes){
         if(changes.some(function(change){return change.type==='childList'||change.type==='characterData';}))schedule();
