@@ -677,3 +677,23 @@ body.torre-home #sound .music-art>small{
   }
   body.torre-home #sound .music-photo-identity strong{font-size:29px!important;}
 }
+
+/* Retire inherited vinyl/decorative pseudo elements: the archival photograph
+   and the compact oval identity are the only intended music imagery. */
+body.torre-home #sound .music-art::before,
+body.torre-home #sound .music-art::after{
+  content:none!important;display:none!important;
+  background:none!important;border:0!important;
+}
+body.torre-home #sound .music-art .music-photo-identity{
+  position:absolute!important;inset:auto auto clamp(24px,3vw,45px) clamp(20px,3vw,44px)!important;
+  width:max-content!important;height:auto!important;min-height:0!important;
+  max-width:min(420px,calc(100% - 40px))!important;
+  border-radius:28px!important;
+  transform:none!important;aspect-ratio:auto!important;
+  box-shadow:none!important;
+}
+body.torre-home #sound .music-art .music-photo-identity::before,
+body.torre-home #sound .music-art .music-photo-identity::after{
+  content:none!important;display:none!important;
+}
