@@ -6,6 +6,7 @@ on:
       - design/apple-premium-narrative-2026-11
       - design/white-craft-2026-11
       - design/commercial-story-experience-2026-11
+      - design/product-v6-iphone-craft
       - main
   pull_request:
     paths:

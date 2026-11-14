@@ -125,7 +125,7 @@ test('narrative copy and punctuation-free titles in all six languages', () => {
 
 test('offline cache contains the modern UI and two actual hero photographs', () => {
   const sw=file('service-worker.js');
-  assert.match(sw,/torremolinos-v19/);
+  assert.match(sw,/torremolinos-v21/);
   ['apple-premium.css','apple-runtime.js','hero-apple-2026.webp','hero-apple-2026-mobile.webp'].forEach(x=>assert.ok(sw.includes(x),x+' missing from offline cache'));
   assert.doesNotThrow(()=>new Script(sw));
 });
@@ -139,7 +139,7 @@ test('craft refinements are last, consistent, and offline-available',()=>{
     assert.match(page,/craft-refinement\.css/,path+' refinement not loaded');
     assert.ok(page.indexOf('craft-refinement.css')>page.indexOf('craft-finish.css'),path+' craft css must override prior craft layer');
   }
-  assert.match(file('service-worker.js'),/torremolinos-v19/);
+  assert.match(file('service-worker.js'),/torremolinos-v21/);
   assert.match(file('service-worker.js'),/craft-refinement\.css/);
   assert.equal((craft.match(/\{/g)||[]).length,(craft.match(/\}/g)||[]).length);
   assert.match(craft,/prefers-reduced-motion/);
@@ -233,7 +233,48 @@ test('commercial storytelling is authored in all six locales and the action is f
 
 test('commercial stylesheet is present in offline shell',()=>{
  const sw=file('service-worker.js');
- assert.match(sw,/torremolinos-v19/);
+ assert.match(sw,/torremolinos-v21/);
  assert.match(sw,/commercial-experience\.css/);
  assert.match(file('index.html'),/apple-runtime\.js/);
+});
+
+
+test('v6 product scenes load last on every published page',()=>{
+ const pages=['index.html','agenda/index.html','comer/index.html','gallery/index.html','listen/index.html','stories/index.html','explore/la-nogalera/index.html',
+ 'legal/index.html','legal/privacy-policy.html','legal/cookie-policy.html','legal/terms-of-use.html','legal/contact.html','legal/accessibility.html',
+ 'legal/editorial-policy.html','legal/event-source-policy.html','legal/ai-transparency.html','legal/copyright-credits.html',
+ 'stories/torremolinos-mucho-mas-que-sol-y-playa.html','stories/la-nogalera-donde-la-noche-tiene-historia.html',
+ 'stories/pasaje-begona-memoria-de-libertad.html','stories/san-miguel-la-fiesta-che-saca-torremolinos-a-la-calle.html'];
+ const last=pages.pop();pages.push(last.replace('fiesta-che','fiesta-que'));
+ for(const path of pages){
+  const source=file(path);
+  assert.match(source,/product-v6\.css/,path+' is missing product stylesheet');
+  const head=source.split(/<\/head>/i)[0];
+  assert.ok(head.lastIndexOf('product-v6.css')>head.lastIndexOf('commercial-experience.css'),path+' premium override order wrong');
+ }
+});
+test('v6 hierarchy and critical screenshot contrast repairs exist',()=>{
+ const css=file('product-v6.css');
+ assert.equal((css.match(/\{/g)||[]).length,(css.match(/\}/g)||[]).length);
+ assert.match(css,/\.editorial-bridge\.shell/);
+ assert.match(css,/\.gallery-feature\.shell/);
+ assert.match(css,/\.agenda-home\.shell/);
+ assert.match(css,/\.music-body/);
+ assert.match(css,/background-image:none!important/);
+ assert.match(css,/--v6-green:#16865A/);
+ assert.match(css,/--v6-orange:#F58A17/);
+ assert.match(css,/\.music-body :is\(h2,p,small,span,label/);
+ assert.match(css,/\.agenda-home-photo img/);
+ assert.match(css,/\.photo-diary-grid figcaption/);
+ assert.match(css,/body\.torre-comer \.card/);
+ assert.match(css,/prefers-reduced-motion:reduce/);
+});
+test('v6 offline shell includes its stylesheet and original supplied hero',()=>{
+ const sw=file('service-worker.js');
+ assert.match(sw,/torremolinos-v21/);
+ assert.match(sw,/product-v6\.css/);
+ assert.match(sw,/product-v6\.js/);
+ assert.match(file('index.html'),/product-v6\.js/);
+ assert.match(file('apple-premium.css'),/hero-apple-2026\.webp/);
+ assert.match(file('index.html'),/hero-apple-2026\.webp/);
 });

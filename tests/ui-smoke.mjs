@@ -57,9 +57,47 @@ try{
       };
     });
     assert.equal(whiteCraft.footer,'rgb(255, 255, 255)','footer is not white at '+width);
-    assert.equal(whiteCraft.music,'rgb(17, 17, 17)','music title illegible on white at '+width);
-    assert.equal(whiteCraft.nogalera,'rgb(17, 17, 17)','Nogalera title illegible at '+width);
+    assert.equal(whiteCraft.music,'rgb(255, 255, 255)','music title lacks contrast on green at '+width);
+    assert.equal(whiteCraft.nogalera,'rgb(255, 255, 255)','Nogalera title lacks contrast on green at '+width);
     assert.equal(whiteCraft.photos,10,'place gallery should have 10 documentary photos at '+width);
+
+    const premium=await page.evaluate(()=>{
+      function css(sel){const e=document.querySelector(sel);return e?getComputedStyle(e):null;}
+      function touch(sel){const e=document.querySelector(sel);if(!e)return null;const b=e.getBoundingClientRect();return {w:b.width,h:b.height};}
+      function seam(root,a,b){
+        const host=document.querySelector(root),x=document.querySelector(a),y=document.querySelector(b);
+        if(!host||!x||!y)return null;
+        const h=host.getBoundingClientRect(),p=x.getBoundingClientRect(),q=y.getBoundingClientRect();
+        return {outer:h.width,one:p.width,two:q.width,gap:Math.abs(q.left-p.right)};
+      }
+      const bridge=css('.editorial-bridge'),bridgeText=css('.editorial-bridge h2'),
+        agenda=css('.agenda-home'),music=css('.music-shell'),gallery=css('.gallery-feature');
+      return {
+        v6:[...document.styleSheets].some(x=>x.href?.includes('product-v6.css')),
+        bridgeBg:bridge?.backgroundColor,bridgeText:bridgeText?.color,
+        agendaBg:agenda?.backgroundColor,musicBg:music?.backgroundColor,
+        galleryImg:touch('.gallery-feature-img'),musicCover:touch('.music-album-art:not([hidden])')||touch('.music-album-fallback:not([hidden])'),
+        agendaPhoto:touch('.agenda-home-photo'),restaurantStyle:css('.directory-teaser')?.borderTopLeftRadius,
+        gallerySeam:seam('.gallery-feature','.gallery-feature-img','.gallery-feature-body'),
+        agendaSeam:seam('.agenda-home','.agenda-home-copy','.agenda-home-photo'),
+        ctaRadius:css('.editorial-bridge-action')?.borderTopLeftRadius,
+        galleryBg:gallery?.backgroundColor
+      };
+    });
+    assert.ok(premium.v6,'product v6 stylesheet missing at '+width);
+    assert.equal(premium.bridgeBg,'rgb(22, 134, 90)','narrative bridge washed out at '+width);
+    assert.equal(premium.bridgeText,'rgb(255, 255, 255)','narrative bridge title illegible at '+width);
+    assert.equal(premium.agendaBg,'rgb(245, 138, 23)','agenda scene has no color at '+width);
+    assert.equal(premium.musicBg,'rgb(22, 134, 90)','music scene missing green at '+width);
+    assert.ok(premium.galleryImg?.h>=240,'gallery image collapsed at '+width);
+    assert.ok(premium.agendaPhoto?.h>=240,'agenda photograph collapsed at '+width);
+    assert.ok(premium.musicCover?.h>=100,'music artwork collapsed at '+width);
+    assert.ok(parseFloat(premium.ctaRadius)>=20,'action lost pill shape at '+width);
+    if(width>=768){
+      assert.ok(premium.gallerySeam?.gap<8,'gallery disconnected halves at '+width+': '+JSON.stringify(premium.gallerySeam));
+      assert.ok(premium.agendaSeam?.gap<8,'agenda disconnected halves at '+width+': '+JSON.stringify(premium.agendaSeam));
+    }
+
     assert.ok(whiteCraft.craftCss,'craft stylesheet missing at '+width);
     assert.deepEqual(await titleAudit(page),[],'headings ending with periods at '+width);
     assert.deepEqual(errors,[],'runtime errors on '+width);
@@ -71,8 +109,8 @@ try{
       return {gallery:props('.gallery-feature-body a'),feedback:props('.community .darkbtn'),credit:props('.music-art small')};
     });
     assert.deepEqual(ctas.gallery,{text:'rgb(255, 255, 255)',bg:'rgb(22, 134, 90)'},'gallery contrast '+width);
-    assert.deepEqual(ctas.feedback,{text:'rgb(17, 17, 17)',bg:'rgb(245, 138, 23)'},'feedback CTA contrast '+width);
-    assert.equal(ctas.credit.text,'rgb(17, 17, 17)','album credit unreadable at '+width);
+    assert.deepEqual(ctas.feedback,{text:'rgb(22, 134, 90)',bg:'rgb(255, 255, 255)'},'feedback CTA contrast '+width);
+    assert.equal(ctas.credit.text,'rgb(255, 255, 255)','album credit unreadable at '+width);
     if(width===390||width===1440){
       // Full-page screenshots do not automatically reveal lazy images. Simulate
       // a real visitor scrolling through the whole catalog, then validate.
@@ -89,6 +127,13 @@ try{
           check();
         }));
       }
+      await page.locator('.music-art').scrollIntoViewIfNeeded();
+      await page.waitForTimeout(450);
+      const mediaOk=await page.evaluate(()=>{
+        const img=document.querySelector('.music-album-art'),fallback=document.querySelector('.music-album-fallback');
+        return (img?.naturalWidth>0&&!img.hidden) || (fallback&&!fallback.hidden);
+      });
+      assert.ok(mediaOk,'music cover and offline poster both missing at '+width);
       await page.evaluate(()=>window.scrollTo(0,0));
       assert.equal(await page.locator('#cards .place-photo').count(),10,'broken place photo');
     }
