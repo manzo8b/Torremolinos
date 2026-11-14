@@ -63,6 +63,35 @@ try{
     assert.ok(whiteCraft.craftCss,'craft stylesheet missing at '+width);
     assert.deepEqual(await titleAudit(page),[],'headings ending with periods at '+width);
     assert.deepEqual(errors,[],'runtime errors on '+width);
+    const ctas=await page.evaluate(()=>{
+      function props(selector){
+        const el=document.querySelector(selector),css=el&&getComputedStyle(el);
+        return css?{text:css.color,bg:css.backgroundColor}:null;
+      }
+      return {gallery:props('.gallery-feature-body a'),feedback:props('.community .darkbtn'),credit:props('.music-art small')};
+    });
+    assert.deepEqual(ctas.gallery,{text:'rgb(255, 255, 255)',bg:'rgb(22, 134, 90)'},'gallery contrast '+width);
+    assert.deepEqual(ctas.feedback,{text:'rgb(17, 17, 17)',bg:'rgb(245, 138, 23)'},'feedback CTA contrast '+width);
+    assert.equal(ctas.credit.text,'rgb(17, 17, 17)','album credit unreadable at '+width);
+    if(width===390||width===1440){
+      // Full-page screenshots do not automatically reveal lazy images. Simulate
+      // a real visitor scrolling through the whole catalog, then validate.
+      for(let i=0;i<10;i++){
+        const img=page.locator('#cards .place-photo').nth(i);
+        await img.scrollIntoViewIfNeeded();
+        await img.evaluate(node=>new Promise((resolve,reject)=>{
+          const deadline=Date.now()+7500;
+          function check(){
+            if(node.complete&&node.naturalWidth>0){resolve();return;}
+            if(Date.now()>deadline){reject(new Error('Place photo did not load: '+node.src));return;}
+            setTimeout(check,75);
+          }
+          check();
+        }));
+      }
+      await page.evaluate(()=>window.scrollTo(0,0));
+      assert.equal(await page.locator('#cards .place-photo').count(),10,'broken place photo');
+    }
     await page.screenshot({path:'artifacts/screenshots/home-'+width+'.png',fullPage:true,animations:'disabled'});
     if(width===390){
       await page.locator('[data-mood="taste"]').click();
