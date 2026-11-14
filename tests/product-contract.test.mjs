@@ -125,7 +125,61 @@ test('narrative copy and punctuation-free titles in all six languages', () => {
 
 test('offline cache contains the modern UI and two actual hero photographs', () => {
   const sw=file('service-worker.js');
-  assert.match(sw,/torremolinos-v17/);
+  assert.match(sw,/torremolinos-v18/);
   ['apple-premium.css','apple-runtime.js','hero-apple-2026.webp','hero-apple-2026-mobile.webp'].forEach(x=>assert.ok(sw.includes(x),x+' missing from offline cache'));
   assert.doesNotThrow(()=>new Script(sw));
+});
+
+
+test('craft refinements are last, consistent, and offline-available',()=>{
+  const sections=['index.html','agenda/index.html','comer/index.html','gallery/index.html','listen/index.html','stories/index.html','explore/la-nogalera/index.html'];
+  const craft=file('craft-refinement.css');
+  for(const path of sections){
+    const page=file(path);
+    assert.match(page,/craft-refinement\.css/,path+' refinement not loaded');
+    assert.ok(page.indexOf('craft-refinement.css')>page.indexOf('craft-finish.css'),path+' craft css must override prior craft layer');
+  }
+  assert.match(file('service-worker.js'),/torremolinos-v18/);
+  assert.match(file('service-worker.js'),/craft-refinement\.css/);
+  assert.equal((craft.match(/\{/g)||[]).length,(craft.match(/\}/g)||[]).length);
+  assert.match(craft,/prefers-reduced-motion/);
+  assert.match(craft,/prefers-contrast:more/);
+});
+
+test('white is the footer surface across every site section',()=>{
+  const craft=file('craft-refinement.css');
+  assert.match(craft,/body\.torre-home \.footer,[\s\S]{0,120}body\[data-coast\]:not\(\.torre-home\) :is\(\.footer,\.foot,\.bottom\)/);
+  assert.match(craft,/background:var\(--craft-paper\)!important;color:var\(--craft-ink\)!important/);
+  assert.match(craft,/\.footerinner[\s\S]{0,170}grid-template-columns/);
+  assert.match(craft,/\.footer \.brand-logo-img/);
+});
+
+test('editorial place cards use ten verified existing photo assets',()=>{
+  const craft=file('craft-refinement.css');
+  const placeIds=['nogalera','bajondillo','carihuela','pasaje','playamar','alamos','bateria','pimentel','sanmiguel','c1'];
+  const expected=[
+    'assets/photos/album/plaza.webp','assets/photos/el-bajondillo-letrero.webp',
+    'assets/photos/album/espetos.webp','assets/photos/album/barca-flores.webp',
+    'assets/photos/playa-palmeras-panorama.webp','assets/photos/album/blue-hour-ai.webp',
+    'assets/photos/paseo-palmeras.webp','assets/photos/paseo-centro.webp',
+    'assets/photos/album/estacion.webp'
+  ];
+  for(const id of placeIds)assert.ok(craft.includes('data-place-id="'+id+'"'),id+' has no photo presentation');
+  for(const name of expected){
+    assert.ok(craft.includes(name),name+' missing from craft css');
+    assert.ok(readFileSync(new URL('../'+name,import.meta.url)).length>0,name+' asset missing');
+  }
+  assert.match(craft,/\.place \.articon\{display:none!important/);
+});
+
+test('all static section headings are punctuation-free at source',()=>{
+  const paths=['index.html','agenda/index.html','comer/index.html','gallery/index.html','listen/index.html','stories/index.html','explore/la-nogalera/index.html'];
+  for(const path of paths){
+    const src=file(path);
+    for(const match of src.matchAll(/<h[1-6]\b[^>]*>([\s\S]*?)<\/h[1-6]>/gi)){
+      const text=match[1].replace(/<[^>]+>/g,'').trim();
+      assert.ok(!text.endsWith('.'),path+': trailing headline punctuation '+text.slice(-60));
+    }
+  }
+  assert.match(file('apple-runtime.js'),/cleanHeading/);
 });

@@ -1,0 +1,446 @@
+/* TORREMOLINOS / Product craft pass, 14 Nov 2026
+   White-ground visual identity, original destination photography, compositional rhythm.
+   Principles applied from supplied Apple Design and Design Taste Frontend:
+   purpose, agency, typographic optical balance, readable contrast, consistent geometry,
+   direct tactile feedback, restraint, reduced-motion and responsive symmetry.
+   No black background surfaces anywhere. Black is typographic ink only. */
+:root{
+  --craft-paper:#FFFFFF;
+  --craft-ink:#111111;
+  --craft-leaf:#16865A;
+  --craft-sun:#F58A17;
+  --craft-light-leaf:rgba(22,134,90,.065);
+  --craft-light-sun:rgba(245,138,23,.08);
+  --craft-line:rgba(17,17,17,.12);
+  --craft-space:clamp(68px,9vw,132px);
+  --craft-radius:20px;
+  --craft-card-radius:22px;
+  --craft-curve:cubic-bezier(.22,1,.36,1);
+}
+
+/* Typography is optical, not a uniform bold scale. Text on white stays full ink. */
+html{font-size:100%;-webkit-text-size-adjust:100%}
+body[data-coast]{background:var(--craft-paper)!important;color:var(--craft-ink)!important;}
+body[data-coast] :is(p,li,figcaption){text-rendering:optimizeLegibility;}
+body[data-coast] :is(h1,h2,h3,h4,h5,h6){font-optical-sizing:auto;text-wrap:balance;hyphens:none;}
+body.torre-home :is(.sectop h2,.photo-diary h2,.magazine-top h2,.gallery-feature-body h2,.music-body h2,.feature h2,.community h2){
+  font-weight:730!important;letter-spacing:-.045em!important;line-height:1.08!important;
+}
+body.torre-home :is(.sectop p,.photo-diary-head p,.magazine-top p,.magazine-text p,.gallery-feature-body p,.music-body p,.feature-copy p,.community p,.info-grid p){
+  color:var(--craft-ink)!important;opacity:1!important;
+  font-weight:430!important;line-height:1.64!important;
+}
+body.torre-home :is(.eyebrow,.plan-section-kicker,.plan-journey-label){
+  letter-spacing:.008em!important;text-transform:none!important;font-weight:700!important;
+  font-size:clamp(13px,1.05vw,15px)!important;
+}
+body.torre-home :is(button,a,input,select){touch-action:manipulation;}
+body.torre-home :is(button,a):focus-visible{
+  outline:3px solid var(--craft-sun)!important;outline-offset:4px!important;
+}
+body.torre-home :is(button,a):active{transform:scale(.975);}
+body[data-coast] a{ text-underline-offset:4px;}
+
+/* Header is quiet and spatially precise: no decorative glass panel. */
+body.torre-home .topbar{
+  background:var(--craft-paper)!important;
+  box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+  border-bottom:0!important;
+}
+body.torre-home .topinner{min-height:82px!important;gap:clamp(16px,2.5vw,36px)!important;}
+body.torre-home .navlinks{gap:clamp(15px,2vw,30px)!important;}
+body.torre-home .navlinks a{font-weight:590!important;font-size:14px!important;}
+body.torre-home .navlinks a:hover{color:var(--craft-leaf)!important;}
+body.torre-home .langwrap{
+  background:var(--craft-paper)!important;border:1px solid var(--craft-line)!important;
+  border-radius:100px!important;box-shadow:none!important;min-height:46px!important;
+}
+body.torre-home .langwrap select{font-weight:650!important;}
+
+/* Consistent frame: the hero is immersive but its edges align with every section. */
+body.torre-home .shell{width:calc(100% - clamp(32px,5.4vw,100px));max-width:1360px;}
+body.torre-home .hero{
+  min-height:clamp(560px,53vw,720px)!important;
+  box-shadow:none!important;border-radius:clamp(18px,2.3vw,28px)!important;
+}
+body.torre-home .hero-grid,body.torre-home .hero-photo{
+  min-height:clamp(560px,53vw,720px)!important;
+}
+body.torre-home .hero-heading{padding:clamp(39px,6.8vw,90px) clamp(28px,6vw,86px) 0!important;}
+body.torre-home .hero .hero-main-title{
+  font-weight:760!important;letter-spacing:-.055em!important;
+  text-shadow:0 2px 15px rgba(17,17,17,.18);
+}
+body.torre-home .hero .hero-tagline{font-weight:580!important;letter-spacing:-.035em!important;}
+body.torre-home .hero-after{padding:0 clamp(28px,6vw,86px) clamp(32px,5vw,62px)!important;}
+body.torre-home .hero .hero-sub{font-weight:500!important;letter-spacing:0!important;}
+body.torre-home .hero-cta-row{gap:12px!important;}
+body.torre-home .hero-cta-row a{
+  border-radius:100px!important;font-size:15px!important;min-height:54px!important;
+  box-shadow:none!important;transition:transform .28s var(--craft-curve),background-color .2s ease!important;
+}
+body.torre-home .hero-cta-main{background:var(--craft-sun)!important;color:var(--craft-ink)!important;}
+body.torre-home .hero-cta-secondary{background:var(--craft-paper)!important;color:var(--craft-leaf)!important;}
+body.torre-home .searchbar{box-shadow:none!important;border:1px solid var(--craft-line)!important;}
+body.torre-home .hero-sound-shortcut button{box-shadow:none!important;}
+body.torre-home .trust{padding-bottom:15px!important;}
+
+/* Layout rhythm follows a single frame and meaningful section-to-section shifts. */
+body.torre-home .section.shell{padding-top:var(--craft-space)!important;}
+body.torre-home :is(.photo-diary,.magazine,.music-intro){margin-top:var(--craft-space)!important;}
+body.torre-home :is(.sectop,.photo-diary-head,.magazine-top){
+  align-items:end!important;gap:clamp(24px,5vw,80px)!important;
+  margin-bottom:clamp(27px,3vw,42px)!important;
+}
+body.torre-home :is(.sectop h2,.photo-diary-head h2,.magazine-top h2){
+  font-size:clamp(39px,4.3vw,68px)!important;
+  font-weight:730!important;line-height:1.04!important;
+}
+body.torre-home :is(.sectop p,.photo-diary-head p,.magazine-top p){
+  font-size:16px!important;max-width:390px!important;
+  text-align:left!important;line-height:1.6!important;
+}
+
+/* Four discovery photographs stay visually distinct without tinted tiles or emoji. */
+body.torre-home .shortcuts{gap:clamp(12px,1.4vw,20px)!important;}
+body.torre-home .shortcut{
+  border:0!important;border-radius:var(--craft-card-radius)!important;
+  box-shadow:none!important;min-height:270px!important;
+  padding:24px!important;
+  transition:transform .35s var(--craft-curve),filter .3s ease!important;
+}
+body.torre-home .shortcut:before{
+  background:linear-gradient(180deg,rgba(17,17,17,.02) 10%,rgba(17,17,17,.79) 100%)!important;
+}
+body.torre-home .shortcut strong{font-size:clamp(20px,2.1vw,28px)!important;font-weight:710!important;}
+body.torre-home .shortcut small{font-size:14px!important;max-width:92%!important;opacity:1!important;}
+body.torre-home .shortcut:after{width:39px!important;height:39px!important;right:19px!important;top:19px!important;}
+@media (hover:hover){
+ body.torre-home .shortcut:hover{transform:translateY(-4px)!important;filter:saturate(1.045);box-shadow:none!important;}
+}
+
+/* Places are editorial picture entries, not ten copies of a feature tile. */
+body.torre-home .cards{
+  display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:clamp(20px,2.6vw,36px)!important;align-items:stretch;
+}
+body.torre-home .place{
+  border:0!important;border-radius:0!important;
+  box-shadow:none!important;overflow:visible!important;
+  background:var(--craft-paper)!important;min-width:0;
+  transition:none!important;
+}
+body.torre-home .place:hover{box-shadow:none!important;}
+body.torre-home .place-art,body.torre-home .place[data-category] .place-art{
+  height:auto!important;min-height:0!important;aspect-ratio:1.63/1!important;
+  background-color:rgba(22,134,90,.065)!important;
+  background-size:cover!important;background-position:center!important;
+  border-radius:var(--craft-card-radius)!important;border:0!important;
+  overflow:hidden;isolation:isolate;position:relative;
+}
+body.torre-home .place-art::before{
+  content:"";display:block;position:absolute;inset:0;z-index:0;
+  background:linear-gradient(180deg,rgba(17,17,17,.30) 0%,transparent 55%)!important;
+  pointer-events:none;
+}
+body.torre-home .place .articon{display:none!important;}
+body.torre-home .place[data-place-id="nogalera"] .place-art{background-image:url("assets/photos/album/plaza.webp")!important;}
+body.torre-home .place[data-place-id="bajondillo"] .place-art{background-image:url("assets/photos/el-bajondillo-letrero.webp")!important;}
+body.torre-home .place[data-place-id="carihuela"] .place-art{background-image:url("assets/photos/album/espetos.webp")!important;}
+body.torre-home .place[data-place-id="pasaje"] .place-art{background-image:url("assets/photos/album/barca-flores.webp")!important;}
+body.torre-home .place[data-place-id="playamar"] .place-art{background-image:url("assets/photos/playa-palmeras-panorama.webp")!important;}
+body.torre-home .place[data-place-id="alamos"] .place-art{background-image:url("assets/photos/album/blue-hour-ai.webp")!important;}
+body.torre-home .place[data-place-id="bateria"] .place-art{background-image:url("assets/photos/paseo-palmeras.webp")!important;}
+body.torre-home .place[data-place-id="pimentel"] .place-art{background-image:url("assets/photos/paseo-centro.webp")!important;}
+body.torre-home .place[data-place-id="sanmiguel"] .place-art{background-image:url("assets/photos/album/plaza.webp")!important;}
+body.torre-home .place[data-place-id="c1"] .place-art{background-image:url("assets/photos/album/estacion.webp")!important;}
+body.torre-home .place .chip{
+  z-index:2;top:15px!important;left:15px!important;
+  border:0!important;border-radius:100px!important;
+  background:var(--craft-paper)!important;color:var(--craft-leaf)!important;
+  font-size:12px!important;font-weight:750!important;padding:8px 13px!important;
+}
+body.torre-home .place .heart{
+  right:15px!important;top:14px!important;min-width:44px!important;
+  width:44px!important;height:44px!important;border:0!important;
+  background:var(--craft-paper)!important;color:var(--craft-leaf)!important;
+  border-radius:50%!important;
+}
+body.torre-home .place-body{
+  padding:19px 1px 0!important;display:flex;flex-direction:column;
+}
+body.torre-home .place .zone{
+  font-size:13px!important;letter-spacing:0!important;text-transform:none!important;
+  color:var(--craft-leaf)!important;font-weight:700!important;
+}
+body.torre-home .place h3{
+  font-size:clamp(23px,2.1vw,30px)!important;line-height:1.14!important;
+  font-weight:710!important;margin:8px 0!important;
+}
+body.torre-home .place p{
+  color:var(--craft-ink)!important;opacity:1!important;
+  font-size:15px!important;line-height:1.55!important;margin-bottom:17px!important;
+}
+body.torre-home .placefoot{
+  display:flex!important;flex-wrap:wrap;gap:8px!important;
+  border:0!important;padding:0!important;align-items:center;
+  margin-top:auto;
+}
+body.torre-home .placefoot a{
+  background:var(--craft-paper)!important;color:var(--craft-leaf)!important;
+  border:0!important;border-radius:0!important;
+  text-decoration:underline!important;text-decoration-thickness:1px!important;
+  padding:8px 0!important;font-size:13px!important;
+}
+body.torre-home .placefoot .place-add{
+  flex:1 1 100%!important;background:var(--craft-leaf)!important;
+  color:var(--craft-paper)!important;border:0!important;border-radius:100px!important;
+  min-height:44px!important;font-size:13px!important;font-weight:720!important;
+  margin-top:4px;
+}
+
+/* Signature product: accessible editable itinerary, no decorative fake data. */
+body.torre-home .plan-head{align-items:end!important;}
+body.torre-home .plan-workspace{
+  border:0!important;border-radius:26px!important;
+  box-shadow:none!important;
+  background:var(--craft-light-leaf)!important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  gap:0!important;
+}
+body.torre-home .plan-choice{
+  background:var(--craft-light-leaf)!important;
+  border:0!important;padding:clamp(28px,4vw,58px)!important;
+}
+body.torre-home .plan-journey{
+  background:var(--craft-paper)!important;margin:clamp(14px,2.5vw,34px)!important;
+  border:0!important;border-radius:20px!important;
+  padding:clamp(24px,3.3vw,44px)!important;
+  box-shadow:none!important;
+}
+body.torre-home .plan-promise{
+  box-shadow:none!important;background:var(--craft-light-leaf)!important;
+  border:0!important;max-width:280px!important;
+}
+body.torre-home .plan-choice h3{font-weight:720!important;line-height:1.14!important;}
+body.torre-home .plan-choice .mood-btn{
+  border:0!important;border-radius:100px!important;
+  background:var(--craft-paper)!important;color:var(--craft-ink)!important;
+  box-shadow:none!important;min-height:50px!important;
+  transition:transform .25s var(--craft-curve),background-color .2s ease!important;
+}
+body.torre-home .plan-choice .mood-btn[aria-pressed=true]{
+  background:var(--craft-leaf)!important;color:var(--craft-paper)!important;
+}
+body.torre-home .plan-journey .route-stop,
+body.torre-home .plan-journey .route-stop:first-child{
+  border-top:0!important;border-bottom:1px solid var(--craft-line)!important;
+}
+body.torre-home .route-control{
+  border:0!important;border-radius:50%!important;
+  background:var(--craft-light-leaf)!important;
+}
+body.torre-home .route-stop-info strong{font-weight:680!important;}
+body.torre-home .plan-map-link{background:var(--craft-sun)!important;color:var(--craft-ink)!important;}
+
+/* Secondary sections: no heavy dark panel, clear visual hierarchy instead. */
+body.torre-home #pride .feature{
+  background:var(--craft-light-leaf)!important;color:var(--craft-ink)!important;
+  border:0!important;border-radius:22px!important;box-shadow:none!important;
+}
+body.torre-home #pride .feature-copy :is(h2,p,.eyebrow){color:var(--craft-ink)!important;}
+body.torre-home #pride .feature-art{background:var(--craft-light-leaf)!important;}
+body.torre-home .nogalera-feature-copy{
+  background:var(--craft-light-leaf)!important;color:var(--craft-ink)!important;
+}
+body.torre-home .nogalera-feature-copy :is(h2,p,small,.eyebrow){
+  color:var(--craft-ink)!important;
+}
+body.torre-home :is(.nogalera-feature,.gallery-feature,.agenda-home,.music-shell){
+  border:0!important;box-shadow:none!important;border-radius:22px!important;
+}
+body.torre-home .music-shell{
+  background:var(--craft-light-leaf)!important;color:var(--craft-ink)!important;
+}
+body.torre-home .music-shell :is(.music-body,.music-body h2,.music-body p,.music-body small,.music-body .eyebrow,.player-label,.music-status,.music-art small){
+  color:var(--craft-ink)!important;text-shadow:none!important;
+}
+body.torre-home .music-art{background:var(--craft-light-leaf)!important;}
+body.torre-home .directory-teaser{
+  background:var(--craft-light-sun)!important;color:var(--craft-ink)!important;
+  border:0!important;border-radius:20px!important;box-shadow:none!important;
+}
+body.torre-home .directory-teaser>b{
+  background:var(--craft-sun)!important;color:var(--craft-ink)!important;
+  border-radius:100px!important;
+}
+body.torre-home .story-banner{background:var(--craft-light-leaf)!important;box-shadow:none!important;}
+body.torre-home .community{
+  background:var(--craft-light-sun)!important;border:0!important;box-shadow:none!important;
+}
+body.torre-home .magazine-card{
+  box-shadow:none!important;border:0!important;
+}
+body.torre-home .magazine-card .cover{border-radius:18px!important;overflow:hidden;}
+body.torre-home .magazine-card .magazine-text{padding:20px 2px!important;}
+body.torre-home .magazine-extra{box-shadow:none!important;border:0!important;}
+body.torre-home .mapbox{background:var(--craft-light-leaf)!important;border:0!important;box-shadow:none!important;}
+body.torre-home .map-placeholder{background:var(--craft-paper)!important;}
+body.torre-home .infocard{
+  background:var(--craft-paper)!important;border:0!important;
+  box-shadow:none!important;border-radius:20px!important;
+  padding:32px!important;
+}
+body.torre-home .infocard:nth-child(odd){background:var(--craft-light-leaf)!important;}
+body.torre-home .infocard:nth-child(even){background:var(--craft-light-sun)!important;}
+body.torre-home .infocard .big{font-size:29px!important;}
+
+/* Critical user preference: ZERO black/near-black background, including every footer.
+   White surfaces retain dark readable ink; green links retain the brand accent. */
+body.torre-home .footer,
+body[data-coast]:not(.torre-home) :is(.footer,.foot,.bottom){
+  background:var(--craft-paper)!important;color:var(--craft-ink)!important;
+  border:0!important;box-shadow:none!important;
+}
+body.torre-home .footer{
+  margin-top:clamp(70px,8vw,116px)!important;
+  padding:clamp(43px,5vw,70px) 0 max(80px,env(safe-area-inset-bottom))!important;
+  border-top:2px solid var(--craft-leaf)!important;
+}
+body.torre-home .footerinner{
+  display:grid!important;grid-template-columns:minmax(0,1.2fr) minmax(270px,.8fr)!important;
+  gap:clamp(32px,6vw,96px)!important;align-items:start;
+}
+body.torre-home .footer :is(p,small,span,strong,a,.logo),
+body[data-coast]:not(.torre-home) :is(.footer,.foot,.bottom) :is(p,small,span,strong,a,h1,h2,h3,h4){
+  color:var(--craft-ink)!important;opacity:1!important;
+}
+body.torre-home .footer :is(.links a,.v06-footer-links a),
+body[data-coast]:not(.torre-home) :is(.footer,.foot,.bottom) a{
+  color:var(--craft-leaf)!important;text-decoration:none!important;
+}
+body.torre-home .footer :is(.links a,.v06-footer-links a):hover,
+body[data-coast]:not(.torre-home) :is(.footer,.foot,.bottom) a:hover{
+  color:var(--craft-ink)!important;text-decoration:underline!important;
+}
+body.torre-home .footer .links{
+  display:flex;flex-direction:column;gap:12px!important;align-items:flex-start;
+}
+body.torre-home .footer .brand-logo-img,
+body[data-coast]:not(.torre-home) :is(.footer,.foot,.bottom) .brand-logo-img{
+  filter:none!important;opacity:1!important;
+}
+body.torre-home .footer .v06-footer-links{
+  display:flex;flex-wrap:wrap;gap:12px 25px;
+  margin-top:36px!important;padding:26px 0 0!important;
+  border-top:1px solid var(--craft-line);
+}
+body[data-coast]:not(.torre-home) :is(.footer,.foot,.bottom){
+  padding:clamp(35px,5vw,68px) max(20px,3vw)!important;
+  border-top:2px solid var(--craft-leaf)!important;
+}
+body[data-coast]:not(.torre-home) :is(.footer,.foot,.bottom) .ai-footer{
+  color:var(--craft-ink)!important;background:var(--craft-paper)!important;
+}
+
+/* Be consistent everywhere: no solid dark background inherited from legacy cards/sections. */
+body[data-coast]:not(.torre-home) :is(.hero-body,.intro,.cover,.feature,.experience,.identity,.notice,.highlight,.stat,.card,.event,.tile,.gallery-card,.info-card){
+  box-shadow:none!important;border-radius:18px!important;
+}
+body[data-coast]:not(.torre-home) :is(.btn,.cta,.hero-actions a,.music-links a,.cardlinks a.primary,.agenda-home-btn){
+  background:var(--craft-leaf)!important;color:var(--craft-paper)!important;
+  border:0!important;border-radius:100px!important;min-height:46px!important;
+}
+body[data-coast]:not(.torre-home) :is(.filterbar,.filters,.chips,.pill-row,.filterline) button[aria-pressed=true]{
+  background:var(--craft-leaf)!important;color:var(--craft-paper)!important;
+}
+
+/* Mobile has its own considered geometry: not desktop boxes stacked blindly. */
+@media(max-width:1100px){
+  body.torre-home .cards{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
+  body.torre-home .plan-workspace{grid-template-columns:1fr!important;}
+  body.torre-home .plan-journey{margin:0 20px 20px!important;}
+}
+@media(max-width:760px){
+  :root{--craft-space:70px;}
+  body.torre-home .shell{width:calc(100% - 32px)!important;}
+  body.torre-home .topbar{background:var(--craft-paper)!important;}
+  body.torre-home .hero.shell{width:calc(100% - 20px)!important;}
+  body.torre-home .hero,.torre-home .hero-grid,.torre-home .hero-photo{
+    min-height:560px!important;
+  }
+  body.torre-home .hero-heading{padding:40px 22px 0!important;}
+  body.torre-home .hero .hero-main-title{
+    font-size:clamp(39px,10.6vw,61px)!important;
+    letter-spacing:-.055em!important;
+  }
+  body.torre-home .hero .hero-tagline{
+    font-size:clamp(23px,6vw,33px)!important;
+    font-weight:590!important;
+  }
+  body.torre-home .hero-after{padding:0 22px 29px!important;}
+  body.torre-home .hero-cta-row a{min-height:49px!important;}
+  body.torre-home :is(.sectop,.photo-diary-head,.magazine-top){
+    display:block!important;margin-bottom:24px!important;
+  }
+  body.torre-home :is(.sectop h2,.photo-diary-head h2,.magazine-top h2){
+    font-size:clamp(34px,8.8vw,47px)!important;
+  }
+  body.torre-home .shortcuts{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:11px!important;}
+  body.torre-home .shortcut{min-height:202px!important;border-radius:16px!important;padding:16px!important;}
+  body.torre-home .shortcut strong{font-size:20px!important;}
+  body.torre-home .shortcut small{font-size:12px!important;}
+  body.torre-home .shortcut:after{width:32px!important;height:32px!important;}
+  body.torre-home .cards{grid-template-columns:1fr!important;gap:32px!important;}
+  body.torre-home .place-art,body.torre-home .place[data-category] .place-art{aspect-ratio:1.75/1!important;}
+  body.torre-home .place-body{padding:14px 0 0!important;}
+  body.torre-home .place h3{font-size:25px!important;}
+  body.torre-home .plan-workspace{display:flex!important;flex-direction:column!important;border-radius:20px!important;}
+  body.torre-home .plan-journey{margin:0 14px 14px!important;border-radius:16px!important;padding:25px 19px!important;}
+  body.torre-home .plan-choice{padding:28px 21px!important;}
+  body.torre-home .plan-head{gap:14px!important;}
+  body.torre-home .plan-promise{max-width:none!important;min-width:0!important;width:100%;}
+  body.torre-home .infocard{padding:26px!important;}
+  body.torre-home .footer{padding-bottom:calc(95px + env(safe-area-inset-bottom))!important;}
+  body.torre-home .footerinner{grid-template-columns:1fr!important;gap:28px!important;}
+  body.torre-home .footer .v06-footer-links{margin-top:21px!important;gap:14px 24px;}
+  body.torre-home .mobilebar{
+    background:var(--craft-paper)!important;
+    backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+    box-shadow:none!important;border-top:1px solid var(--craft-line)!important;
+  }
+  body.torre-home .mobilebar button.active{
+    background:var(--craft-light-leaf)!important;color:var(--craft-leaf)!important;
+  }
+}
+@media(max-width:370px){
+  body.torre-home .shortcut{min-height:188px!important;}
+  body.torre-home .hero{min-height:660px!important;}
+  body.torre-home .hero-grid,body.torre-home .hero-photo{min-height:660px!important;}
+}
+@media(prefers-contrast:more){
+  body.torre-home :is(.searchbar,.plan-journey,.place-add,.route-control,.langwrap){
+    outline:1px solid var(--craft-ink)!important;
+  }
+  body.torre-home :is(.eyebrow,.zone,.plan-section-kicker){font-weight:800!important;}
+}
+@media(prefers-reduced-motion:reduce){
+  body.torre-home *,body[data-coast] *{
+    animation:none!important;transition:none!important;scroll-behavior:auto!important;
+  }
+}
+
+/* Final fallback and integrity corrections */
+body.torre-home .hero{background:var(--craft-leaf)!important;}
+body.torre-home .hero-grid,body.torre-home .hero-photo{background-color:var(--craft-leaf)!important;}
+body.torre-home .shortcut:nth-child(4){
+  background-color:var(--craft-leaf)!important;
+  background-image:url("assets/photos/album/estacion.webp")!important;
+  border-color:transparent!important;
+}
+body.torre-home :is(.feature,.agenda-home,.gallery-feature,.nogalera-feature,.music-shell){
+  background-color:var(--craft-paper)!important;
+}
+body.torre-home .footer .v06-footer-links a{
+  font-size:13px!important;line-height:1.5!important;
+}
