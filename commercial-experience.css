@@ -1,0 +1,428 @@
+/*
+ TORREMOLINOS — COMMERCIAL STORY EXPERIENCE
+ Product language: Mediterranean warmth, destination photography, bold but disciplined fields.
+ Mandatory: all UI controls pill shaped, all content boxes deeply rounded,
+ no black background, main headings without terminal punctuation,
+ premium typographic hierarchy and four-color palette.
+ Identity by section: WHITE / PALM GREEN / SUN ORANGE, never gradients as section ground.
+*/
+:root{
+ --story-white:#FFFFFF;
+ --story-ink:#111111;
+ --story-green:#16865A;
+ --story-orange:#F58A17;
+ --story-wash-green:rgba(22,134,90,.072);
+ --story-wash-orange:rgba(245,138,23,.11);
+ --story-soft-green:rgba(22,134,90,.12);
+ --story-surface-border:rgba(22,134,90,.16);
+ --story-box:clamp(26px,3.8vw,46px);
+ --story-box-sm:clamp(20px,2.4vw,32px);
+ --story-pill:999px;
+ --story-flow:clamp(62px,8vw,118px);
+ --story-curve:cubic-bezier(.22,1,.36,1);
+}
+html{color-scheme:light}
+body[data-coast],body[data-coast] main,body[data-coast] footer{background-color:var(--story-white)!important;color:var(--story-ink)!important;}
+body[data-coast] :is(h1,h2,h3,h4,h5,h6){
+ font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","DM Sans",system-ui,sans-serif!important;
+ font-optical-sizing:auto;letter-spacing:-.043em!important;font-weight:680!important;line-height:1.10!important;
+}
+body[data-coast] :is(p,li,small,figcaption){font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","DM Sans",system-ui,sans-serif!important;}
+body[data-coast] :is(a,button,select,input):focus-visible{outline:3px solid var(--story-orange)!important;outline-offset:3px!important;}
+body[data-coast] a,body[data-coast] button{touch-action:manipulation;}
+/* Every action is oval, including filters, footer badges, map controls and secondary links */
+body[data-coast] :is(
+  button,[role="button"],.btn,.darkbtn,.cta,
+  a.hero-cta-main,a.hero-cta-secondary,a.agenda-home-btn,
+  .directory-teaser>b,.mapbox a,.mapbox button,
+  .community>a,.nogalera-feature-copy>a,
+  .gallery-feature-body>a,.magazine-link,.magazine-extra strong,
+  .music-links>a,.infocard>a,.gallery-promo-link>a,
+  .story-banner a,.plan-actions a,.placefoot a,
+  .filterline button,.mood-btn,.route-control,.chip,.ai-badge,.badge,.tag
+){
+ border-radius:var(--story-pill)!important;
+}
+body[data-coast] :is(button,.btn,.darkbtn,[role="button"]){
+ min-height:44px;
+ transition:transform .20s var(--story-curve),background-color .20s ease,color .2s ease!important;
+}
+body[data-coast] :is(button,.btn,.darkbtn):active{transform:scale(.975)!important;}
+body[data-coast] :is(a.hero-cta-main,a.agenda-home-btn,.plan-map-link){
+ background:var(--story-orange)!important;color:var(--story-ink)!important;
+ border-color:transparent!important;
+}
+body[data-coast] :is(a.hero-cta-secondary,.plan-share,.place-add,.darkbtn,.agenda-home-copy .agenda-home-btn.secondary){
+ border:0!important;
+}
+body[data-coast] .langwrap{border-radius:var(--story-pill)!important;}
+body[data-coast] :is(input[type=search],input[type=text],select){border-radius:var(--story-pill)!important;}
+/* Cards are rounded, with one radius language and no gratuitous card shadows */
+body[data-coast] :is(
+ .shortcut,.place,.infocard,.plan-workspace,.plan-choice,.plan-journey,.plan-promise,
+ .magazine-card,.magazine-extra,.feature,.gallery-feature,.nogalera-feature,
+ .music-shell,.agenda-home,.community,.directory-teaser,.mapbox,.map-placeholder,
+ .photo-diary-grid figure,.story-banner,.gallery-card,.tile,.event,.card,.info-card,
+ .gallery-feature-img,.agenda-home-photo,.music-art,.music-body,.gallery-feature-body
+){
+ border-radius:var(--story-box)!important;
+ box-shadow:none!important;
+}
+body[data-coast] :is(.photo-diary-grid figure img,.magazine-card .cover,.magazine-extra img,.gallery-feature img,.agenda-home img,.nogalera-feature img){
+ border-radius:var(--story-box-sm)!important;
+}
+body[data-coast] :is(.chip,.badge,.ai-badge,.cover-label,.story-banner .initial){border-radius:var(--story-pill)!important;}
+/* Frame symmetry and fluent section spacing */
+body.torre-home .shell{max-width:1360px!important;width:calc(100% - clamp(36px,5.4vw,100px))!important;}
+body.torre-home .section.shell{padding-top:var(--story-flow)!important;}
+body.torre-home .sectop{margin-bottom:clamp(28px,4vw,52px)!important;gap:clamp(26px,5vw,74px)!important;}
+body.torre-home .sectop h2{font-size:clamp(38px,4.5vw,66px)!important;max-width:750px;}
+body.torre-home .sectop>p{max-width:435px!important;font-size:clamp(16px,1.35vw,18px)!important;line-height:1.59!important;}
+body.torre-home .eyebrow{font-size:13px!important;font-weight:730!important;letter-spacing:.015em!important;text-transform:none!important;}
+body.torre-home .hero{border-radius:var(--story-box)!important;}
+body.torre-home .hero .hero-main-title{font-weight:720!important;letter-spacing:-.062em!important;}
+body.torre-home .hero .hero-tagline{font-weight:600!important;}
+body.torre-home .hero-cta-row a{min-height:54px!important;padding:15px 25px!important;font-weight:720!important;}
+body.torre-home .topbar{background:var(--story-white)!important;box-shadow:none!important;}
+/* DISCOVER / editorial photography on white; character from images, no tinted blank tiles */
+body.torre-home #discover{padding-bottom:clamp(28px,4vw,55px)!important;}
+body.torre-home #discover .shortcuts{gap:clamp(12px,1.5vw,22px)!important;}
+body.torre-home #discover .shortcut{border:0!important;overflow:hidden;min-height:clamp(224px,22vw,318px)!important;border-radius:var(--story-box)!important;}
+body.torre-home #discover .shortcut::after{border-radius:50%!important;}
+/* EXPLORE / dedicated palm-light destination gallery */
+body.torre-home #explore{
+ width:calc(100% - clamp(36px,5.4vw,100px))!important;
+ max-width:1360px!important;
+ background:var(--story-wash-green)!important;
+ border-radius:clamp(32px,5vw,62px)!important;
+ margin:clamp(25px,3vw,47px) auto 0!important;
+ padding:clamp(42px,5vw,78px)!important;
+}
+body.torre-home #explore .sectop h2,body.torre-home #explore .sectop p{color:var(--story-ink)!important;}
+body.torre-home #explore .filterline{
+ display:flex!important;flex-wrap:wrap;gap:9px!important;
+ margin-bottom:clamp(22px,3vw,36px)!important;
+}
+body.torre-home #explore .filterline button{
+ background:var(--story-white)!important;color:var(--story-ink)!important;
+ border:0!important;min-height:44px!important;padding:10px 18px!important;
+}
+body.torre-home #explore .filterline button[aria-pressed=true]{
+ background:var(--story-green)!important;color:var(--story-white)!important;
+}
+body.torre-home #explore .cards{gap:clamp(26px,3vw,42px)!important;}
+body.torre-home #explore .place{
+ border:0!important;background:var(--story-white)!important;
+ border-radius:var(--story-box-sm)!important;overflow:hidden!important;
+ display:flex;flex-direction:column;min-width:0;
+}
+body.torre-home #explore .place-art,body.torre-home #explore .place[data-category] .place-art{
+ aspect-ratio:1.75/1!important;border-radius:var(--story-box-sm)!important;
+ border-bottom-left-radius:0!important;border-bottom-right-radius:0!important;
+ overflow:hidden!important;
+}
+body.torre-home #explore .place-body{padding:clamp(18px,2vw,26px)!important;flex:1;}
+body.torre-home #explore .place h3{font-weight:720!important;font-size:clamp(23px,2vw,29px)!important;}
+body.torre-home #explore .place .placefoot{gap:10px!important;}
+body.torre-home #explore .place .placefoot a{
+ background:var(--story-wash-green)!important;text-decoration:none!important;
+ padding:10px 15px!important;color:var(--story-green)!important;
+ min-height:44px!important;display:inline-flex;align-items:center;
+}
+body.torre-home #explore .place .placefoot .place-add{
+ min-height:46px!important;background:var(--story-green)!important;
+ color:var(--story-white)!important;margin-top:9px!important;
+ font-weight:700!important;
+}
+body.torre-home #explore .place .heart{border-radius:50%!important;}
+
+/* NOGALERA / immersive palm-green identity, white typography and orange call to action */
+body.torre-home .nogalera-feature{
+ margin-top:clamp(76px,9vw,132px)!important;
+ display:grid!important;grid-template-columns:1.06fr .94fr!important;
+ background:var(--story-green)!important;overflow:hidden!important;
+ border-radius:var(--story-box)!important;
+}
+body.torre-home .nogalera-feature-photo{
+ border-radius:0!important;overflow:hidden;
+}
+body.torre-home .nogalera-feature-photo img{
+ width:100%;height:100%!important;object-fit:cover!important;border-radius:0!important;
+}
+body.torre-home .nogalera-feature-copy{
+ background:var(--story-green)!important;color:var(--story-white)!important;
+ padding:clamp(30px,4.7vw,68px)!important;
+}
+body.torre-home .nogalera-feature-copy :is(h2,p,small,.eyebrow){
+ color:var(--story-white)!important;opacity:1!important;
+}
+body.torre-home .nogalera-feature-copy a{
+ background:var(--story-orange)!important;color:var(--story-ink)!important;
+ border:0!important;border-radius:var(--story-pill)!important;
+ font-weight:750!important;padding:14px 22px!important;min-height:49px!important;
+ display:inline-flex;align-items:center;justify-content:center;text-decoration:none!important;
+}
+body.torre-home .nogalera-feature-copy h2{font-size:clamp(43px,4.6vw,68px)!important;}
+/* LGBTQ+ HISTORICAL / sunshine orange, text clear and atmospheric */
+body.torre-home #pride .feature{
+ display:grid!important;grid-template-columns:1.05fr .95fr!important;
+ background:var(--story-wash-orange)!important;
+ border:0!important;overflow:hidden!important;gap:0!important;
+}
+body.torre-home #pride .feature-copy{
+ padding:clamp(30px,5vw,72px)!important;background:var(--story-wash-orange)!important;
+}
+body.torre-home #pride .feature-copy :is(h2,p,.eyebrow){color:var(--story-ink)!important;opacity:1!important;}
+body.torre-home #pride .feature button{
+ background:var(--story-green)!important;color:var(--story-white)!important;
+ border:0!important;border-radius:var(--story-pill)!important;
+ min-height:49px!important;padding:12px 25px!important;
+}
+body.torre-home #pride .feature-art{
+ border-radius:var(--story-box)!important;
+ background:var(--story-orange)!important;color:var(--story-ink)!important;
+ overflow:hidden;align-self:stretch;
+}
+body.torre-home #pride .pride-visual-word,
+body.torre-home #pride .pride-visual-detail{
+ color:var(--story-ink)!important;text-shadow:none!important;
+}
+/* LOCAL LENS / white editorial gallery with distinctive panorama */
+body.torre-home .photo-diary{margin-top:var(--story-flow)!important;}
+body.torre-home .photo-diary-grid{gap:clamp(14px,2vw,28px)!important;}
+body.torre-home .photo-diary-grid figure{
+ background:var(--story-white)!important;border:0!important;overflow:hidden;
+}
+body.torre-home .photo-diary-grid figure img{
+ border-radius:var(--story-box)!important;width:100%;object-fit:cover;
+}
+body.torre-home .photo-diary-grid figcaption{padding:18px 4px!important;}
+body.torre-home .gallery-promo-link a{
+ background:var(--story-wash-green)!important;color:var(--story-green)!important;
+ border:0!important;border-radius:var(--story-pill)!important;
+ text-decoration:none!important;min-height:48px!important;padding:13px 20px!important;
+}
+body.torre-home .directory-teaser{
+ display:flex!important;align-items:center;justify-content:space-between!important;
+ gap:25px!important;background:var(--story-orange)!important;
+ padding:clamp(25px,4vw,50px)!important;border-radius:var(--story-box)!important;
+}
+body.torre-home .directory-teaser :is(strong,small){color:var(--story-ink)!important;opacity:1!important;}
+body.torre-home .directory-teaser>b{
+ background:var(--story-white)!important;color:var(--story-green)!important;
+ border-radius:var(--story-pill)!important;white-space:normal;text-align:center;
+ min-height:46px;padding:12px 20px!important;
+}
+/* GALLERY / white photography showcase with leaf-colored action */
+body.torre-home .gallery-feature{margin-top:var(--story-flow)!important;overflow:hidden!important;}
+body.torre-home .gallery-feature-body{
+ background:var(--story-wash-green)!important;
+ padding:clamp(28px,4vw,58px)!important;
+}
+body.torre-home .gallery-feature-body :is(h2,p,.eyebrow){color:var(--story-ink)!important;}
+body.torre-home .gallery-feature-body a{
+ background:var(--story-green)!important;color:var(--story-white)!important;
+ text-decoration:none!important;display:inline-flex;align-items:center;
+ padding:13px 21px!important;min-height:46px!important;border-radius:var(--story-pill)!important;
+}
+/* MUSIC / palm-green surface with ample white typography, rounded player */
+body.torre-home .music-intro{margin-top:var(--story-flow)!important;}
+body.torre-home .music-shell{
+ background:var(--story-green)!important;color:var(--story-white)!important;
+ border-radius:var(--story-box)!important;overflow:hidden!important;
+ display:grid!important;grid-template-columns:1.12fr .88fr!important;align-items:stretch;
+}
+body.torre-home .music-body{background:var(--story-green)!important;color:var(--story-white)!important;padding:clamp(30px,4.7vw,65px)!important;}
+body.torre-home .music-body :is(h2,p,small,.eyebrow,.player-label,.music-status){
+ color:var(--story-white)!important;opacity:1!important;text-shadow:none!important;
+}
+body.torre-home .music-shell .music-art{
+ background:var(--story-green)!important;border-radius:0!important;
+}
+body.torre-home .music-shell .music-art img{
+ border-radius:clamp(24px,3vw,38px)!important;object-fit:cover;
+}
+body.torre-home .music-shell .music-art small{color:var(--story-white)!important;}
+body.torre-home .music-links{
+ display:flex!important;flex-wrap:wrap!important;gap:10px!important;
+}
+body.torre-home .music-links a{
+ color:var(--story-ink)!important;background:var(--story-orange)!important;border:0!important;
+ border-radius:var(--story-pill)!important;padding:12px 17px!important;
+ font-size:13px!important;min-height:44px!important;display:inline-flex;align-items:center;
+}
+body.torre-home #torremolinos-audio{width:100%;max-width:490px;border-radius:var(--story-pill)!important;}
+/* STORIES / editorial typographic white, story card crop consistency */
+body.torre-home .magazine{margin-top:var(--story-flow)!important;}
+body.torre-home .magazine-top{gap:30px!important;}
+body.torre-home .magazine-link{
+ background:var(--story-wash-green)!important;color:var(--story-green)!important;
+ text-decoration:none!important;border-radius:var(--story-pill)!important;
+ padding:12px 20px!important;min-height:48px!important;display:inline-flex;align-items:center;
+}
+body.torre-home .magazine-card{border-radius:var(--story-box-sm)!important;overflow:hidden!important;}
+body.torre-home .magazine-card .cover{border-radius:var(--story-box-sm)!important;overflow:hidden!important;}
+body.torre-home .magazine-card .cover img{width:100%;height:100%;object-fit:cover;}
+body.torre-home .magazine-text{padding:clamp(14px,2vw,22px) 5px!important;}
+body.torre-home .magazine-text h3{font-size:clamp(24px,2.35vw,36px)!important;}
+body.torre-home .magazine-extra{
+ background:var(--story-wash-orange)!important;border-radius:var(--story-box)!important;
+ overflow:hidden!important;
+}
+body.torre-home .magazine-extra>div{padding:clamp(24px,4vw,55px)!important;}
+body.torre-home .story-banner{
+ background:var(--story-wash-green)!important;border-radius:var(--story-box)!important;
+}
+/* AGENDA / unmistakable solar orange identity */
+body.torre-home .agenda-home{
+ margin-top:var(--story-flow)!important;
+ background:var(--story-wash-orange)!important;
+ display:grid!important;grid-template-columns:1fr .95fr!important;
+ border-radius:var(--story-box)!important;overflow:hidden!important;
+}
+body.torre-home .agenda-home-copy{
+ padding:clamp(29px,4.8vw,67px)!important;background:var(--story-wash-orange)!important;
+}
+body.torre-home .agenda-home-copy :is(h2,p,small,.eyebrow){color:var(--story-ink)!important;opacity:1!important;}
+body.torre-home .agenda-home-copy h2{font-size:clamp(40px,4.7vw,70px)!important;}
+body.torre-home .agenda-home-btn{
+ background:var(--story-orange)!important;color:var(--story-ink)!important;
+ border:0!important;border-radius:var(--story-pill)!important;
+ padding:15px 23px!important;min-height:48px!important;
+}
+body.torre-home .agenda-home-photo{border-radius:0!important;overflow:hidden!important;}
+body.torre-home .agenda-home-photo img{height:100%!important;object-fit:cover!important;border-radius:0!important;}
+/* PLANNER / interactive heart of product: luminous green, white control surface */
+body.torre-home #plan{margin-top:var(--story-flow)!important;}
+body.torre-home .plan-head{
+ border-radius:var(--story-box)!important;
+ background:var(--story-wash-green)!important;
+ padding:clamp(27px,4.2vw,58px)!important;gap:25px!important;
+ grid-template-columns:minmax(0,1.2fr) minmax(210px,.5fr)!important;
+}
+body.torre-home .plan-lead h2{font-size:clamp(46px,6vw,84px)!important;}
+body.torre-home .plan-head .plan-promise{
+ border-radius:var(--story-box-sm)!important;background:var(--story-white)!important;
+ padding:clamp(18px,2vw,28px)!important;align-self:center;max-width:none!important;
+}
+body.torre-home .plan-workspace{
+ margin-top:16px!important;
+ display:grid!important;grid-template-columns:1fr 1fr!important;
+ border-radius:var(--story-box)!important;background:var(--story-wash-green)!important;
+ overflow:hidden!important;
+}
+body.torre-home .plan-choice{border-radius:0!important;background:var(--story-wash-green)!important;}
+body.torre-home .plan-journey{
+ border-radius:var(--story-box-sm)!important;background:var(--story-white)!important;
+ margin:clamp(15px,2.2vw,30px)!important;
+}
+body.torre-home .plan-choice .mood-btn{
+ border-radius:var(--story-pill)!important;min-height:48px!important;
+}
+body.torre-home .plan-choice .mood-btn[aria-pressed=true]{background:var(--story-green)!important;color:var(--story-white)!important;}
+body.torre-home .plan-actions :is(a,button){border-radius:var(--story-pill)!important;min-height:46px!important;}
+body.torre-home .route-number{border-radius:50%!important;}
+/* ESSENTIALS / orange and green panels visually differentiated, no generic boxes */
+body.torre-home #useful{margin-top:clamp(25px,3vw,50px)!important;}
+body.torre-home #useful .info-grid{gap:clamp(15px,2vw,28px)!important;}
+body.torre-home #useful .infocard{
+ padding:clamp(28px,3vw,43px)!important;
+ border:0!important;border-radius:var(--story-box)!important;box-shadow:none!important;
+}
+body.torre-home #useful .infocard:nth-child(1){background:var(--story-wash-green)!important;}
+body.torre-home #useful .infocard:nth-child(2){background:var(--story-wash-orange)!important;}
+body.torre-home #useful .infocard:nth-child(3){background:var(--story-wash-green)!important;}
+body.torre-home #useful .infocard :is(h3,p){color:var(--story-ink)!important;opacity:1!important;}
+body.torre-home #useful .infocard a{
+ background:var(--story-white)!important;color:var(--story-green)!important;
+ border:0!important;border-radius:var(--story-pill)!important;padding:12px 20px!important;
+ text-decoration:none!important;display:inline-flex;align-items:center;min-height:46px!important;
+}
+body.torre-home .mapbox{background:var(--story-wash-green)!important;border-radius:var(--story-box)!important;}
+body.torre-home .community{
+ background:var(--story-orange)!important;border-radius:var(--story-box)!important;
+}
+body.torre-home .community :is(h2,p,.eyebrow){color:var(--story-ink)!important;opacity:1!important;}
+body.torre-home .community .darkbtn{
+ background:var(--story-white)!important;color:var(--story-green)!important;border:0!important;
+ border-radius:var(--story-pill)!important;
+}
+/* Footer remains explicitly white and approachable, NOT a dark concluding block */
+body[data-coast] :is(footer,.footer,.foot,.bottom){background:var(--story-white)!important;color:var(--story-ink)!important;}
+body[data-coast] :is(footer,.footer,.foot,.bottom) :is(h2,h3,h4,p,small,span,strong,a){color:var(--story-ink)!important;}
+body.torre-home .footer{border-top:3px solid var(--story-green)!important;border-radius:0!important;}
+body.torre-home .footer :is(.links a,.v06-footer-links a){color:var(--story-green)!important;}
+body[data-coast] footer a:hover{color:var(--story-green)!important;}
+/* Inner pages keep same recognizable visual controls, rather than seven different systems */
+body[data-coast]:not(.torre-home) :is(.hero,.feature,.hero-body,.intro,.highlight,.identity,.section,.card,.event,.tile,.gallery-card,.experience,.notice,.gallery-feature){
+ border-radius:var(--story-box)!important;
+}
+body[data-coast]:not(.torre-home) :is(.btn,.cta,.tag,.badge,.pill,.filter,.tab,.filter-button,.filterbar button,.filters button,.hero-actions a,.cardlinks a,.gallery-links a){
+ border-radius:var(--story-pill)!important;
+}
+body[data-coast]:not(.torre-home) :is(.card,.event,.tile,.gallery-card){
+ box-shadow:none!important;border:0!important;
+}
+body[data-coast]:not(.torre-home) :is(.card:nth-child(3n+1),.event:nth-child(3n+1),.tile:nth-child(3n+1)){
+ background:var(--story-wash-green)!important;
+}
+body[data-coast]:not(.torre-home) :is(.card:nth-child(3n+2),.event:nth-child(3n+2),.tile:nth-child(3n+2)){
+ background:var(--story-wash-orange)!important;
+}
+/* Mobile composition: family resemblance, not simply stacked desktop slabs */
+@media(max-width:1080px){
+ body.torre-home .nogalera-feature,body.torre-home .music-shell,body.torre-home .agenda-home,
+ body.torre-home #pride .feature{grid-template-columns:1fr 1fr!important;}
+ body.torre-home .plan-head{grid-template-columns:1fr!important;}
+ body.torre-home .plan-workspace{grid-template-columns:1fr!important;}
+ body.torre-home .plan-journey{margin:0 24px 24px!important;}
+ body.torre-home #explore{padding:clamp(24px,4vw,48px)!important;}
+}
+@media(max-width:760px){
+ :root{--story-flow:65px;--story-box:26px;--story-box-sm:22px}
+ body.torre-home .shell{width:calc(100% - 32px)!important;}
+ body.torre-home .hero.shell{width:calc(100% - 20px)!important;}
+ body.torre-home #explore{
+  width:calc(100% - 20px)!important;padding:28px 16px!important;
+  border-radius:28px!important;
+ }
+ body.torre-home #explore .cards{grid-template-columns:1fr!important;}
+ body.torre-home #explore .place-body{padding:20px!important;}
+ body.torre-home #discover .shortcuts{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
+ body.torre-home #discover .shortcut{min-height:196px!important;padding:16px!important;}
+ body.torre-home .nogalera-feature,body.torre-home .music-shell,body.torre-home .agenda-home,
+ body.torre-home #pride .feature{
+  grid-template-columns:1fr!important;display:flex!important;flex-direction:column!important;
+ }
+ body.torre-home .nogalera-feature-photo{min-height:220px!important;max-height:305px!important;}
+ body.torre-home .nogalera-feature-photo img{height:260px!important;min-height:260px!important;object-fit:cover!important;}
+ body.torre-home #pride .feature-art{min-height:230px!important;}
+ body.torre-home .music-body{padding:30px 24px!important;}
+ body.torre-home .music-shell .music-art{padding:12px 26px 28px!important;}
+ body.torre-home .agenda-home-photo{max-height:285px!important;}
+ body.torre-home .agenda-home-photo img{height:265px!important;}
+ body.torre-home .plan-head{padding:28px 23px!important;}
+ body.torre-home .plan-workspace{display:flex!important;flex-direction:column!important;}
+ body.torre-home .plan-journey{margin:0 14px 14px!important;}
+ body.torre-home .plan-choice{padding:29px 23px!important;}
+ body.torre-home .directory-teaser{flex-direction:column!important;align-items:flex-start!important;padding:27px!important;}
+ body.torre-home .directory-teaser>b{width:auto!important;}
+ body.torre-home .community{padding:28px!important;}
+ body.torre-home .magazine-top{display:flex!important;flex-direction:column!important;align-items:flex-start!important;}
+ body.torre-home .photo-diary-grid{gap:14px!important;}
+ body.torre-home .filterline button{font-size:13px!important;}
+}
+@media(max-width:390px){
+ body.torre-home #discover .shortcut{min-height:185px!important;}
+ body.torre-home #explore{padding:22px 13px!important;}
+ body.torre-home .plan-actions{gap:9px!important;}
+}
+@media(prefers-reduced-motion:reduce){
+ body[data-coast] *,body[data-coast] *:before,body[data-coast] *:after{
+  scroll-behavior:auto!important;animation:none!important;transition:none!important;
+ }
+}
+@media(prefers-contrast:more){
+ body.torre-home #explore .place{outline:2px solid var(--story-green)!important;}
+ body[data-coast] :is(.badge,.chip,.tag){outline:1px solid var(--story-ink)!important;}
+}
