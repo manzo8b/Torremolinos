@@ -61,6 +61,8 @@ jobs:
           assert 'agenda/' in src
           assert Path('editorial.css').exists()
           photos=[
+              'hero-apple-2026.webp',
+              'hero-apple-2026-mobile.webp',
               'hero-torremolinos-desktop.webp',
               'hero-torremolinos-mobile.webp',
               'playa-palmeras-panorama.webp',
@@ -73,8 +75,8 @@ jobs:
           for file in photos:
               path=Path('assets/photos')/file
               assert path.is_file() and path.stat().st_size>1000, path
-          assert 'assets/gallery/beach-palms-ai.webp' in src
-          hero=Path('assets/gallery/beach-palms-ai.webp')
+          assert 'assets/photos/hero-apple-2026.webp' in src
+          hero=Path('assets/photos/hero-apple-2026.webp')
           assert hero.is_file() and hero.stat().st_size>1000, hero
           assert 'class="hero-main-title">TORREMOLINOS</h1>' in src
           assert 'La tua guida libera sulla Costa del Sol' in src
