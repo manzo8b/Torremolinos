@@ -237,6 +237,33 @@ try{
     }));
     assert.ok(layout.full<=layout.viewport+3,'horizontal overflow on '+path+': '+layout.full+' > '+layout.viewport);
     assert.ok(layout.hasFinalStyles,'narrative v7 styling absent on '+path);
+
+    if(path==='comer/'||path==='agenda/'){
+      const hero=await page.evaluate(()=>{
+        const outer=document.querySelector('body.torre-comer .hero-body,body.torre-agenda .hero.wrap');
+        const copy=outer?.querySelector('.hero-copy'),photo=outer?.querySelector('.hero-photo');
+        if(!copy||!photo||!outer)return null;
+        const a=copy.getBoundingClientRect(),b=photo.getBoundingClientRect(),h=outer.getBoundingClientRect();
+        const mobile=window.innerWidth<=760;
+        const gap=mobile?Math.min(Math.abs(a.top-b.bottom),Math.abs(b.top-a.bottom)):
+          Math.min(Math.abs(a.left-b.right),Math.abs(b.left-a.right));
+        return {gap,height:b.height,width:b.width,frame:h.width,mobile};
+      });
+      assert.ok(hero,'page hero not found '+path);
+      assert.ok(hero.gap<9,'photo and editorial copy detached on '+path+' ('+hero.gap+'px)');
+      assert.ok(hero.height>=245,'photo hero collapses on '+path);
+    }
+    if(path==='gallery/'){
+      const photo=page.locator('#galleryGrid .gallery-card:not([hidden]) .image-button').first();
+      await photo.waitFor({timeout:15000});
+      const shape=await photo.evaluate(el=>{
+        const b=el.getBoundingClientRect(),style=getComputedStyle(el);
+        return {radius:parseFloat(style.borderTopLeftRadius),ratio:b.width/Math.max(1,b.height)};
+      });
+      assert.ok(shape.radius>=16 && shape.radius<=65,'gallery images became oval controls: '+JSON.stringify(shape));
+      assert.ok(shape.ratio>=1.3,'gallery photograph not a landscape frame: '+JSON.stringify(shape));
+    }
+
     if(['comer/','agenda/','gallery/'].includes(path)){
       await page.screenshot({
         path:'artifacts/screenshots/inner-'+path.replaceAll('/','-')+'390.png',
