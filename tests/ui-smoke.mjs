@@ -76,7 +76,7 @@ try{
         v6:[...document.styleSheets].some(x=>x.href?.includes('product-v6.css')),
         bridgeBg:bridge?.backgroundColor,bridgeText:bridgeText?.color,
         agendaBg:agenda?.backgroundColor,musicBg:music?.backgroundColor,
-        galleryImg:touch('.gallery-feature-img'),musicCover:touch('.music-album-art'),
+        galleryImg:touch('.gallery-feature-img'),musicCover:touch('.music-album-art:not([hidden])')||touch('.music-album-fallback:not([hidden])'),
         agendaPhoto:touch('.agenda-home-photo'),restaurantStyle:css('.directory-teaser')?.borderTopLeftRadius,
         gallerySeam:seam('.gallery-feature','.gallery-feature-img','.gallery-feature-body'),
         agendaSeam:seam('.agenda-home','.agenda-home-copy','.agenda-home-photo'),
@@ -127,6 +127,13 @@ try{
           check();
         }));
       }
+      await page.locator('.music-art').scrollIntoViewIfNeeded();
+      await page.waitForTimeout(450);
+      const mediaOk=await page.evaluate(()=>{
+        const img=document.querySelector('.music-album-art'),fallback=document.querySelector('.music-album-fallback');
+        return (img?.naturalWidth>0&&!img.hidden) || (fallback&&!fallback.hidden);
+      });
+      assert.ok(mediaOk,'music cover and offline poster both missing at '+width);
       await page.evaluate(()=>window.scrollTo(0,0));
       assert.equal(await page.locator('#cards .place-photo').count(),10,'broken place photo');
     }
