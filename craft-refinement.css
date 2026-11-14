@@ -429,3 +429,18 @@ body[data-coast]:not(.torre-home) :is(.filterbar,.filters,.chips,.pill-row,.filt
     animation:none!important;transition:none!important;scroll-behavior:auto!important;
   }
 }
+
+/* Final fallback and integrity corrections */
+body.torre-home .hero{background:var(--craft-leaf)!important;}
+body.torre-home .hero-grid,body.torre-home .hero-photo{background-color:var(--craft-leaf)!important;}
+body.torre-home .shortcut:nth-child(4){
+  background-color:var(--craft-leaf)!important;
+  background-image:url("assets/photos/album/estacion.webp")!important;
+  border-color:transparent!important;
+}
+body.torre-home :is(.feature,.agenda-home,.gallery-feature,.nogalera-feature,.music-shell){
+  background-color:var(--craft-paper)!important;
+}
+body.torre-home .footer .v06-footer-links a{
+  font-size:13px!important;line-height:1.5!important;
+}
