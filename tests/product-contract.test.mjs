@@ -125,7 +125,7 @@ test('narrative copy and punctuation-free titles in all six languages', () => {
 
 test('offline cache contains the modern UI and two actual hero photographs', () => {
   const sw=file('service-worker.js');
-  assert.match(sw,/torremolinos-v22/);
+  assert.match(sw,/torremolinos-v23/);
   ['apple-premium.css','apple-runtime.js','hero-apple-2026.webp','hero-apple-2026-mobile.webp'].forEach(x=>assert.ok(sw.includes(x),x+' missing from offline cache'));
   assert.doesNotThrow(()=>new Script(sw));
 });
@@ -139,7 +139,7 @@ test('craft refinements are last, consistent, and offline-available',()=>{
     assert.match(page,/craft-refinement\.css/,path+' refinement not loaded');
     assert.ok(page.indexOf('craft-refinement.css')>page.indexOf('craft-finish.css'),path+' craft css must override prior craft layer');
   }
-  assert.match(file('service-worker.js'),/torremolinos-v22/);
+  assert.match(file('service-worker.js'),/torremolinos-v23/);
   assert.match(file('service-worker.js'),/craft-refinement\.css/);
   assert.equal((craft.match(/\{/g)||[]).length,(craft.match(/\}/g)||[]).length);
   assert.match(craft,/prefers-reduced-motion/);
@@ -233,7 +233,7 @@ test('commercial storytelling is authored in all six locales and the action is f
 
 test('commercial stylesheet is present in offline shell',()=>{
  const sw=file('service-worker.js');
- assert.match(sw,/torremolinos-v22/);
+ assert.match(sw,/torremolinos-v23/);
  assert.match(sw,/commercial-experience\.css/);
  assert.match(file('index.html'),/apple-runtime\.js/);
 });
@@ -271,7 +271,7 @@ test('v6 hierarchy and critical screenshot contrast repairs exist',()=>{
 });
 test('v6 offline shell includes its stylesheet and original supplied hero',()=>{
  const sw=file('service-worker.js');
- assert.match(sw,/torremolinos-v22/);
+ assert.match(sw,/torremolinos-v23/);
  assert.match(sw,/product-v6\.css/);
  assert.match(sw,/product-v6\.js/);
  assert.match(file('index.html'),/product-v6\.js/);
@@ -298,7 +298,7 @@ test('v7 narrative system is loaded last on all core and editorial pages',()=>{
  }
  assert.match(file('index.html'),/narrative-v7\.js/);
  const sw=file('service-worker.js');
- assert.match(sw,/torremolinos-v22/);
+ assert.match(sw,/torremolinos-v23/);
  assert.match(sw,/narrative-v7\.css/);
  assert.match(sw,/narrative-v7\.js/);
 });
@@ -331,4 +331,67 @@ test('native thumb discovery and consistent accessible arrows are operational',(
  assert.match(js,/requestAnimationFrame/);
  assert.match(js,/prefers-reduced-motion/);
  new Script(js,{filename:'narrative-v7.js'});
+});
+
+
+test('v8 daylight section families, tactile hover and accessible motion fallback',()=>{
+ const css=file('luminosity-v8.css');
+ assert.equal((css.match(/\{/g)||[]).length,(css.match(/\}/g)||[]).length);
+ for(const token of ['--l8-paper:#FFFFFF','--l8-ink:#111111','--l8-palm:#16865A','--l8-sun:#F58A17'])
+   assert.ok(css.includes(token),token);
+ for(const key of ['#discover.section.shell','#photodiary.photo-diary.shell',
+                   '#stories.magazine.shell','#useful.section.shell','#explore.section.shell',
+                   '.l8-season-promo','.season-event','.season-layout'])
+   assert.ok(css.includes(key),'missing v8 section '+key);
+ assert.match(css,/prefers-reduced-motion:reduce/);
+ assert.match(css,/prefers-contrast:more/);
+ const js=file('luminosity-v8.js');
+ assert.match(js,/requestAnimationFrame/);
+ assert.match(js,/pointermove/);
+ assert.match(js,/pointerout/);
+ assert.match(js,/pointer:fine/);
+ assert.match(js,/prefers-reduced-motion/);
+ new Script(js,{filename:'luminosity-v8.js'});
+});
+test('v8 loads after v7 on all public pages, and narrative asset cached offline',()=>{
+ const pages=['index.html','agenda/index.html','comer/index.html','gallery/index.html',
+   'listen/index.html','stories/index.html','explore/la-nogalera/index.html',
+   'legal/index.html','legal/privacy-policy.html','legal/cookie-policy.html',
+   'legal/terms-of-use.html','legal/contact.html','legal/accessibility.html',
+   'legal/editorial-policy.html','legal/event-source-policy.html','legal/ai-transparency.html',
+   'legal/copyright-credits.html','stories/torremolinos-mucho-mas-que-sol-y-playa.html',
+   'stories/la-nogalera-donde-la-noche-tiene-historia.html',
+   'stories/pasaje-begona-memoria-de-libertad.html',
+   'stories/san-miguel-la-fiesta-que-saca-torremolinos-a-la-calle.html'];
+ for(const path of pages){
+   const h=file(path).split(/<\/head>/i)[0];
+   assert.ok(h.lastIndexOf('luminosity-v8.css')>h.lastIndexOf('narrative-v7.css'),'v8 cascade missing '+path);
+ }
+ const sw=file('service-worker.js');
+ assert.match(sw,/torremolinos-v23/);
+ assert.match(sw,/luminosity-v8.css/);
+ assert.match(sw,/luminosity-v8.js/);
+ assert.match(sw,/navidad-ano-nuevo-torremolinos-malaga-2026-2027.html/);
+});
+test('sourced seasonal article separates verified 2026 facts from unconfirmed 2025 programme',()=>{
+ const path='stories/navidad-ano-nuevo-torremolinos-malaga-2026-2027.html';
+ const html=file(path);
+ const h1=[...html.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/g)];
+ assert.equal(h1.length,1);
+ assert.match(h1[0][1],/Navidad a dos ritmos/);
+ const titles=[...html.matchAll(/<h[1-6][^>]*>([\s\S]*?)<\/h[1-6]>/g)]
+ .map(m=>m[1].replace(/<[^>]+>/g,'').trim());
+ for(const title of titles)assert.doesNotMatch(title,/[.．]\s*$/);
+ assert.match(html,/27 noviembre · desde 18:30/);
+ assert.match(html,/28 nov – 4 ene/);
+ assert.match(html,/(?:Nochevieja|Tardevieja|31 diciembre)/);
+ assert.match(html,/Campamentos deportivos/);
+ assert.match(html,/programa municipal integral 2026–2027/);
+ assert.match(html,/PROGRAMA 2026 PENDIENTE/);
+ assert.match(html,/malaga\.eu\/el-ayuntamiento\/notas-de-prensa/);
+ assert.match(html,/torremolinoscultura\.es\/eventos/);
+ assert.match(html,/deportes\.torremolinos\.es\/campamentos/);
+ assert.match(file('sitemap.xml'),/navidad-ano-nuevo-torremolinos-malaga-2026-2027/);
+ assert.match(file('stories/index.html'),/l8-season-story/);
+ assert.match(file('index.html'),/l8-season-promo/);
 });

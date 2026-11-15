@@ -1,7 +1,7 @@
 // TORREMOLINOS v0.4 — offline shell and key editorial pages
-const CACHE='torremolinos-v22';
+const CACHE='torremolinos-v23';
 const FILES=[
-  './','./index.html','./apple-premium.css','./craft-refinement.css','./commercial-experience.css','./product-v6.css','./product-v6.js','./narrative-v7.css','./narrative-v7.js','./craft-finish.css','./apple-runtime.js','./craft-runtime.js','./design-system-2026.css','./editorial.css','./favicon.svg','./manifest.webmanifest',
+  './','./index.html','./apple-premium.css','./craft-refinement.css','./commercial-experience.css','./product-v6.css','./product-v6.js','./narrative-v7.css','./narrative-v7.js','./luminosity-v8.css','./luminosity-v8.js','./craft-finish.css','./apple-runtime.js','./craft-runtime.js','./design-system-2026.css','./editorial.css','./favicon.svg','./manifest.webmanifest',
   './brand/torremolinos-logo.svg','./brand/torremolinos-logo-light.svg','./brand/torremolinos-symbol.svg','./assets/illustrations/pride-flag-ai.svg','./legal/ai-transparency.html',
   './gallery/','./gallery/styles.css','./gallery/data.js','./gallery/app.js',
   './explore/la-nogalera/','./explore/la-nogalera/styles.css','./explore/la-nogalera/data.js','./explore/la-nogalera/app.js',
@@ -18,7 +18,8 @@ const FILES=[
   './stories/torremolinos-mucho-mas-que-sol-y-playa.html',
   './stories/la-nogalera-donde-la-noche-tiene-historia.html',
   './stories/pasaje-begona-memoria-de-libertad.html',
-  './stories/san-miguel-la-fiesta-que-saca-torremolinos-a-la-calle.html'
+  './stories/san-miguel-la-fiesta-que-saca-torremolinos-a-la-calle.html',
+  './stories/navidad-ano-nuevo-torremolinos-malaga-2026-2027.html'
 ];
 self.addEventListener('install',event=>{
   event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES)));
