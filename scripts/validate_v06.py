@@ -67,7 +67,8 @@ def validate():
  x=ET.parse(ROOT/"sitemap.xml").getroot()
  namespace="{http://www.sitemaps.org/schemas/sitemap/0.9}"
  urls=[e.text for e in x.findall(".//"+namespace+"loc")]
- assert len(urls)==len(set(urls))==16,("sitemap",len(urls))
+ assert len(urls)==len(set(urls))>=16,("sitemap",len(urls))
+ assert any(u.endswith("/stories/navidad-ano-nuevo-torremolinos-malaga-2026-2027.html") for u in urls), "Christmas article missing in sitemap"
  assert all(u.startswith(BASE) for u in urls)
  for url in urls:
   route=unquote(urlsplit(url).path.split("/Torremolinos/",1)[-1])
