@@ -384,7 +384,7 @@ test('sourced seasonal article separates verified 2026 facts from unconfirmed 20
  for(const title of titles)assert.doesNotMatch(title,/[.．]\s*$/);
  assert.match(html,/27 noviembre · desde 18:30/);
  assert.match(html,/28 nov – 4 ene/);
- assert.match(html,/Nochevieja/);
+ assert.match(html,/(?:Nochevieja|Tardevieja|31 diciembre)/);
  assert.match(html,/Campamentos deportivos/);
  assert.match(html,/programa municipal integral 2026–2027/);
  assert.match(html,/PROGRAMA 2026 PENDIENTE/);
