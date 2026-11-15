@@ -8,6 +8,7 @@ on:
       - design/commercial-story-experience-2026-11
       - design/product-v6-iphone-craft
       - design/final-craft-v7-narrative-ux
+      - design/apple-light-chapters-navidad-2026
       - main
   pull_request:
     paths:
