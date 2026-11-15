@@ -133,6 +133,24 @@ try{
       };
     });
     assert.ok(v7.stylesheet,'v7 final stylesheet absent at '+width);
+
+    const daylight=await page.evaluate(()=>{
+      const color=sel=>getComputedStyle(document.querySelector(sel)).backgroundColor;
+      const sheet=[...document.styleSheets].some(x=>x.href?.includes('luminosity-v8.css'));
+      return {
+        sheet,discover:color('#discover'),explore:color('#explore'),
+        stories:color('#stories'),photos:color('#photodiary'),useful:color('#useful'),
+        christmas:!!document.querySelector('#stories .l8-season-promo')
+      };
+    });
+    assert.ok(daylight.sheet,'v8 daylight style missing at '+width);
+    assert.equal(daylight.discover,'rgb(255, 250, 244)','discovery lacks warm chapter');
+    assert.equal(daylight.explore,'rgb(239, 248, 243)','explore lacks palm green wash');
+    assert.equal(daylight.stories,'rgb(255, 243, 230)','stories lacks solar light chapter');
+    assert.equal(daylight.photos,'rgb(247, 251, 249)','local lens lacks gentle green tint');
+    assert.equal(daylight.useful,'rgb(245, 248, 246)','utilities lack light background');
+    assert.ok(daylight.christmas,'Christmas editorial feature missing at '+width);
+
     for(const [key,value] of Object.entries({
       discover:v7.spaceDiscover,explore:v7.spaceExplore,sound:v7.spaceSound,
       stories:v7.spaceStories,agenda:v7.spaceAgenda
@@ -280,6 +298,18 @@ try{
 
     console.log('PASS route '+path);
   }
+
+  const seasonal='stories/navidad-ano-nuevo-torremolinos-malaga-2026-2027.html';
+  const holidayResponse=await page.goto(base+'/'+seasonal,{waitUntil:'domcontentloaded',timeout:30000});
+  assert.equal(holidayResponse.status(),200,'seasonal article is unavailable');
+  assert.deepEqual(await titleAudit(page),[],'seasonal headings with terminal periods');
+  assert.equal(await page.locator('html').getAttribute('lang'),'es');
+  assert.ok(await page.locator('.season-event').count()>=14,'insufficient researched seasonal entries');
+  assert.ok(await page.getByText('Navidad a dos ritmos',{exact:true}).count()>0,'Christmas hero missing');
+  const holidayBox=await page.evaluate(()=>({viewport:innerWidth,content:document.documentElement.scrollWidth}));
+  assert.ok(holidayBox.content<=holidayBox.viewport+3,'seasonal article mobile overflow');
+  await page.screenshot({path:'artifacts/screenshots/navidad-390.png',fullPage:true,animations:'disabled'});
+
   await context.close();
 
   const desktop=await browser.newContext({
@@ -298,6 +328,13 @@ try{
       fullPage:true,animations:'disabled'
     });
   }
+
+  const holidayDesktop=await desktopPage.goto(base+'/'+seasonal,{waitUntil:'domcontentloaded',timeout:30000});
+  assert.equal(holidayDesktop.status(),200,'seasonal desktop article unavailable');
+  const box=await desktopPage.evaluate(()=>({viewport:innerWidth,content:document.documentElement.scrollWidth}));
+  assert.ok(box.content<=box.viewport+3,'seasonal desktop horizontal overflow');
+  await desktopPage.screenshot({path:'artifacts/screenshots/navidad-1440.png',fullPage:true,animations:'disabled'});
+
   await desktop.close();
   console.log('PASS all UI smoke tests');
 }finally{
