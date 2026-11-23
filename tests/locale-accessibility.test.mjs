@@ -27,7 +27,7 @@ test('six UI languages have accessible labels without external dependencies',()=
   assert.match(locale,/addEventListener\('change',update\)/);
 });
 test('offline PWA uses a transparent and navigable fallback, not a misleading home page',()=>{
-  assert.match(sw,/torremolinos-v28/);
+  assert.match(sw,/torremolinos-v29/);
   assert.match(sw,/\.\/offline\.html/);
   assert.match(sw,/\.\/locale-accessibility\.js/);
   assert.match(sw,/req\.mode==='navigate'\?caches\.match\('\.\/offline\.html'\)/);
