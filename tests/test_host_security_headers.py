@@ -11,6 +11,7 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+(ROOT / "artifacts").mkdir(exist_ok=True)
 SCRIPT = ROOT / "scripts/generate_security_headers.py"
 spec = importlib.util.spec_from_file_location("torre_headers", SCRIPT)
 mod = importlib.util.module_from_spec(spec)
