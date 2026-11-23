@@ -15,7 +15,7 @@ test('Home footer is one clearly structured landmark, not the legacy unordered l
  assert.equal((home.match(/id="year"/g)||[]).length,1);
  assert.equal((markup.match(/class="footer-pro-column"/g)||[]).length,3);
  assert.ok(markup.includes('class="footer-pro-brand"'));
- assert.ok(markup.includes('class="footer-pro-bottom"'));
+ assert.ok(markup.includes('class="shell footer-pro-bottom"'));
  assert.ok(markup.includes('class="footer-pro-legal-status"'));
  assert.doesNotMatch(markup,/(?:v0\.6|footerinner|v06-footer-links|style="padding)/);
  assert.match(markup,/aria-label="Esplora e informazioni"/);
