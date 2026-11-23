@@ -350,3 +350,7 @@ body.torre-home main #sound.music-intro .music-shell .music-body .eyebrow{
 body.torre-home .nogalera-feature.shell .nogalera-feature-copy :is(h2,p,small,span,.eyebrow){
  color:var(--ac-ink)!important;opacity:1!important;
 }
+
+body.torre-home main #sound.music-intro .music-shell .music-body small.approved-sound-credit{
+ color:#617185!important;background:transparent!important;opacity:1!important;
+}
