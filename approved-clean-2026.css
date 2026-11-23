@@ -258,3 +258,12 @@ body.torre-home #photodiary .photo-diary-grid figcaption{position:static!importa
 @media(prefers-reduced-motion:reduce){
  body.torre-home .approved-feature-card{transition:none!important;transform:none!important}
 }
+
+/* Dynamic category labels remain discoverable but never print over a photograph */
+body.torre-home #explore .place-art .chip{display:none!important}
+body.torre-home #explore .place-body .approved-place-chip{
+ display:inline-flex!important;position:static!important;top:auto!important;left:auto!important;
+ align-self:flex-start!important;max-width:100%!important;margin:0 0 9px!important;
+ border-radius:999px!important;background:#EDF4FC!important;color:var(--ac-blue)!important;
+ padding:5px 11px!important;font-size:11px!important;font-weight:740!important;
+}
