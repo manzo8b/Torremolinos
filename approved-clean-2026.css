@@ -354,3 +354,72 @@ body.torre-home .nogalera-feature.shell .nogalera-feature-copy :is(h2,p,small,sp
 body.torre-home main #sound.music-intro .music-shell .music-body small.approved-sound-credit{
  color:#617185!important;background:transparent!important;opacity:1!important;
 }
+
+/* HERO RESET / do not inherit the old 640px green single-layer photograph hero */
+body.torre-home main > section.hero.shell{
+ display:flex!important;flex-direction:column!important;grid-template-columns:none!important;
+ min-height:0!important;height:auto!important;
+ background:#FFFFFF!important;background-color:#FFFFFF!important;background-image:none!important;
+ box-shadow:none!important;border-radius:0!important;overflow:visible!important;
+ margin-top:0!important;padding:0!important;
+}
+body.torre-home main > section.hero.shell > .hero-grid{
+ display:block!important;order:0!important;
+ min-height:0!important;height:auto!important;aspect-ratio:auto!important;
+ width:100%!important;margin:0!important;
+ background:#FFFFFF!important;background-color:#FFFFFF!important;
+ border:0!important;border-radius:0!important;overflow:hidden!important;
+}
+body.torre-home main > section.hero.shell > .hero-grid > .hero-photo{
+ display:block!important;position:relative!important;
+ height:clamp(270px,24vw,420px)!important;min-height:0!important;
+ aspect-ratio:auto!important;max-height:420px!important;
+ background:#D9EAF7!important;border-radius:0 0 18px 18px!important;
+}
+body.torre-home main > section.hero.shell > .hero-grid > .hero-photo::after{
+ display:none!important;content:none!important;background:none!important;
+}
+body.torre-home main > section.hero.shell > .hero-heading{
+ order:1!important;position:static!important;grid-area:auto!important;z-index:auto!important;
+ min-height:0!important;height:auto!important;
+ padding:26px 20px 0!important;margin:0 auto!important;
+ width:100%!important;max-width:1100px!important;
+ background:#FFFFFF!important;background-color:#FFFFFF!important;background-image:none!important;
+ align-self:center!important;justify-self:center!important;pointer-events:auto!important;
+ text-align:center!important;
+}
+body.torre-home main > section.hero.shell > .hero-after{
+ order:2!important;position:static!important;grid-area:auto!important;align-self:center!important;
+ height:auto!important;min-height:0!important;
+ display:block!important;background:#FFFFFF!important;background-color:#FFFFFF!important;
+ background-image:none!important;margin:0 auto!important;padding:13px 16px 0!important;
+ border:0!important;box-shadow:none!important;pointer-events:auto!important;
+}
+body.torre-home main > section.hero.shell > .hero-heading .hero-main-title{
+ color:var(--ac-ink)!important;text-shadow:none!important;white-space:normal!important;
+ text-transform:none!important;font-size:clamp(43px,5.2vw,76px)!important;
+ line-height:1.08!important;letter-spacing:-.054em!important;
+ margin:0 0 9px!important;
+}
+body.torre-home main > section.hero.shell > .hero-heading .hero-tagline{
+ color:var(--ac-muted)!important;text-shadow:none!important;font-size:clamp(16px,1.7vw,23px)!important;
+ line-height:1.42!important;margin:0!important;max-width:100%!important;
+}
+body.torre-home main > section.hero.shell > .hero-after .hero-cta-row{
+ justify-content:center!important;align-items:center!important;
+}
+body.torre-home .topbar .navlinks a{
+ display:inline-flex!important;align-items:center!important;visibility:visible!important;
+}
+@media(max-width:760px){
+ body.torre-home main > section.hero.shell > .hero-grid > .hero-photo{
+  height:clamp(230px,59vw,340px)!important;max-height:340px!important;
+ }
+ body.torre-home main > section.hero.shell > .hero-heading{
+  padding:23px 17px 0!important;
+ }
+ body.torre-home main > section.hero.shell > .hero-after{
+  padding:13px 16px 0!important;
+ }
+ body.torre-home .topbar .navlinks a{display:none!important}
+}
