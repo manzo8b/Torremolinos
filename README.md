@@ -1,5 +1,26 @@
 # TORREMOLINOS 🌞
 
+## Stato corrente del prodotto — 23 novembre 2026
+
+**Stato reale:** micro-app statica multi-pagina, pubblicata tramite GitHub Pages da `main`. Ultimo deployment verificato su commit `088a622a2055194cca3c577750fe5b0e81f82a3e` (workflow Pages `success`). Questo paragrafo prevale sulle descrizioni **storiche** delle release v0.1–v0.7 riportate sotto; non cancellare i changelog precedenti.
+
+- **Home**: design approvato Apple Clean White (bianco `#FFFFFF`, navy `#10244B`, blu `#096BCB`, superfici `#F4F8FC`); fotografie prive di testo sovrapposto; Sound compatto con fotografia delle cuffie; contenuti interattivi.
+- **Sezioni effettive**: `comer/`, `agenda/`, `gallery/`, `stories/` e relativi dossier, `explore/la-nogalera/`, `listen/`, `legal/`; `anteprima/` è un ambiente dimostrativo noindex.
+- **Lingue**: interfaccia con ES, EN, IT, DE, FR, RU dove disponibile; non esistono ancora sei URL distinte né traduzioni dei dossier in ogni lingua. Il russo richiede revisione madrelingua. Non pubblicizzare la copertura dei singoli articoli oltre la realtà.
+- **Funzioni**: ricerca, filtri, preferiti e itinerario in locale, mappa caricata su richiesta, player audio attivabile, PWA offline e collegamenti editoriali.
+- **CI**: controlli statici e test Node/Chromium passati su commit `088a622`. Lo scanner eventi risulta eseguito il 22 novembre 2026; l'ultimo **aggiornamento umano** del dataset `agenda/events.json` è invece `2026-11-02`.
+- **Attenzioni**: le pagine privacy/cookie/termini/contatto/accessibilità hanno ancora bozza `noindex`; indirizzo proprietario, contatto pubblico, relazioni commerciali e diritti musica vanno confermati prima del rilascio legale. Il provider e il dominio definitivo non sono stati decisi.
+- **Congelamento design**: non cambiare palette, tipografia, spaziature, icone, ombre, animazioni, immagini o componenti per i fix tecnici. Riferimento: `DESIGN-CONTRACT.md` e `baseline/README.md`, branch `baseline/pre-fix-2026-11-23`.
+- **Preparazione migrazione**: nessun cambio a canonical, URL, scope PWA o hosting in produzione fino a test di staging, scelta dominio/provider e verifica visuale < 0,1%.
+
+**Avvio locale senza build:** `python3 -m http.server 8000` dalla root e aprire `http://localhost:8000/`.  
+**Test esistenti:** `node --test tests/*.test.mjs` (Node 22); `node tests/ui-smoke.mjs` dopo `npm install --no-save playwright@1.57.0` e installazione Chromium.  
+**Baseline:** `node scripts/capture_visual_baseline.mjs`, output e rapporto nella run GitHub Actions dedicata.  
+**Rilascio**: push/merge su `main` attiva `.github/workflows/pages.yml`; verificare Pages e CI sullo stesso SHA. Nessun merge implicito per le PR di audit.
+
+---
+
+
 **[Esplora la guida](https://manzo8b.github.io/Torremolinos/)** · [Sorgenti](https://github.com/manzo8b/Torremolinos) · [Segnala informazioni da aggiornare](https://github.com/manzo8b/Torremolinos/issues)
 
 Guida editoriale indipendente, multilingue e mobile-first. Le schede di eventi, attività e località sono da verificare con fonti aggiornate: il progetto non garantisce disponibilità, orari o prezzi in tempo reale.
