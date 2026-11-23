@@ -23,6 +23,10 @@
 - **C-14:** testo Home aggiornato per descrivere correttamente che la selezione è **prevalentemente LGBTQ+**, con alcune proposte culturali. Le restrizioni `ageRestricted` e il badge `18+` erano già implementati nell'Agenda.
 - **C-01, parziale:** sistemato lo stato dell'Agenda con contatori tradotti e linguaggio esplicito sulla revisione. La migrazione a **un dizionario i18n unico** e il check linguistico automatico completo sono attività ulteriori, non coperte da questa tranche.
 
+## Ricerca ufficiale preliminare per C-06
+
+Ho raccolto e registrato fonti pubbliche pertinenti a Renfe C1, autobus M-110/M-112, accessibilità spiagge, emergenze 112 e assistenza sanitaria nella guida `docs/C06_ESSENTIALS_OFFICIAL_SOURCES_2026-11-23.md`. La ricerca distingue ciò che la pagina ufficiale documenta dall'operatività del servizio nel giorno del viaggio. Nessun numero taxi, farmacia di turno, supermercato o ospedale d'urgenza viene inventato; le nuove card Essentials non sono state pubblicate per rispettare il design freeze.
+
 ## Matrice di avanzamento C-01 … C-20
 
 | ID | Stato dopo prima tranche | Condizione ancora da rispettare |
@@ -32,7 +36,7 @@
 | C-03 | PARZIALE | Verifica completa degli alt/crediti Gallery e Stories |
 | C-04 | DA VALUTARE | Duplicazioni Gallery/Stories/Sound; qualunque rimozione che muti la composizione visiva richiede approvazione |
 | C-05 | PARZIALE | Mappa/URL sharing e comandi duplicati da audit browser; link di destinazione corretti |
-| C-06 | DA RICERCARE | Bus, taxi, accessi spiagge, farmacia/ospedale/numeri: aggiungere solo dopo fonti ufficiali e date |
+| C-06 | FONTI UFFICIALI RACCOLTE, UI IN ATTESA | Registro documentale in `docs/C06_ESSENTIALS_OFFICIAL_SOURCES_2026-11-23.md`; taxi, farmacie di turno, supermercati e servizio attivo dell'ascensore da verificare; nessun nuovo recapito pubblicato |
 | C-07 | IMPLEMENTATO | README aggiornato; mantenere changelog storico |
 | C-08 | IN VERIFICA | Gerarchia nel footer già TORREMOLINOS / MANZO AI; LUNE_X solo per musica, testo definitivo da approvare |
 | C-09 | VERIFICATO, ISSUE APERTA | Ultima run scanner documentata, INFINITY/ACOGAT HTTP 202 e revisione umana necessaria |
