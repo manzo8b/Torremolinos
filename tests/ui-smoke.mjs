@@ -51,6 +51,20 @@ try{
     }));
     assert.ok(doc.page<=doc.viewport+3,'horizontal overflow '+width+': doc='+doc.page);
     assert.ok(doc.hero.includes('hero-apple-2026'),'hero image missing at '+width);
+    const heroSurface=await page.evaluate(()=>{
+      const el=document.querySelector('main > .hero'),heading=el?.querySelector('.hero-heading');
+      const nav=[...document.querySelectorAll('.topbar .navlinks a')];
+      return {
+        background:el?getComputedStyle(el).backgroundColor:null,
+        headingBg:heading?getComputedStyle(heading).backgroundColor:null,
+        height:el?.getBoundingClientRect().height||0,
+        navVisible:nav.filter(x=>getComputedStyle(x).display!=='none').length
+      };
+    });
+    assert.equal(heroSurface.background,'rgb(255, 255, 255)','legacy green hero remains at '+width);
+    assert.equal(heroSurface.headingBg,'rgb(255, 255, 255)','hero heading still has a tinted panel at '+width);
+    assert.ok(heroSurface.height<800,'hero retained legacy giant min-height at '+width);
+    if(width===1440)assert.equal(heroSurface.navVisible,5,'desktop primary navigation lost two destinations');
     assert.equal(doc.lang,'it');
     const whiteCraft=await page.evaluate(()=>{
       const footer=document.querySelector('footer.footer');
