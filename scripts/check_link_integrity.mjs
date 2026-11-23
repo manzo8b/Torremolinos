@@ -8,7 +8,7 @@
 import {readdirSync,readFileSync,statSync,existsSync,mkdirSync,writeFileSync} from 'node:fs';
 import {resolve,relative,join,sep} from 'node:path';
 const ROOT=resolve('.');
-const EXCLUDED=new Set(['.git','node_modules','baseline','artifacts','dist','coverage']);
+const EXCLUDED=new Set(['.git','node_modules','baseline','artifacts','dist','coverage','fixtures']);
 function pages(dir=ROOT){
  const result=[];
  for(const f of readdirSync(dir,{withFileTypes:true})){
