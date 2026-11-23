@@ -579,3 +579,22 @@ body.torre-home main #sound.music-intro .music-shell .music-art img.music-album-
  aspect-ratio:auto!important;object-fit:cover!important;object-position:center!important;
  margin:0!important;padding:0!important;transform:none!important;
 }
+
+/* Tablet: stack Sound instead of squeezing readable copy into two narrow columns */
+@media(max-width:950px){
+ body.torre-home main #sound.music-intro .music-shell{
+  display:flex!important;flex-direction:column-reverse!important;
+  min-height:0!important;
+ }
+ body.torre-home main #sound.music-intro .music-shell .music-art{
+  height:200px!important;min-height:200px!important;
+ }
+ body.torre-home main #sound.music-intro .music-shell .music-body{
+  padding:23px 29px!important;min-height:0!important;
+ }
+}
+@media(max-width:760px){
+ body.torre-home main #sound.music-intro .music-shell .music-art{
+  height:178px!important;min-height:178px!important;
+ }
+}
