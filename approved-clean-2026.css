@@ -528,3 +528,54 @@ body.torre-home main #sound.music-intro .music-shell .music-body .approved-music
   padding:19px 23px 23px!important;
  }
 }
+
+/* Secondary discovery selectors: not another dark photographic ad row */
+body.torre-home main #discover.section.shell .shortcuts .shortcut{
+ background:#F6F9FC!important;background-image:none!important;
+ color:var(--ac-ink)!important;border:1px solid var(--ac-line)!important;
+ border-radius:20px!important;min-height:145px!important;max-height:none!important;
+ padding:24px!important;box-shadow:none!important;justify-content:flex-end!important;
+}
+body.torre-home main #discover.section.shell .shortcuts .shortcut::before{
+ display:none!important;content:none!important;background:none!important;opacity:0!important;
+}
+body.torre-home main #discover.section.shell .shortcuts .shortcut::after{
+ background:#FFFFFF!important;color:var(--ac-blue)!important;border:1px solid var(--ac-line)!important;
+ width:39px!important;height:39px!important;
+}
+body.torre-home main #discover.section.shell .shortcuts .shortcut :is(strong,small){
+ color:var(--ac-ink)!important;text-shadow:none!important;opacity:1!important;
+}
+body.torre-home main #discover.section.shell .shortcuts .shortcut strong{
+ font-size:clamp(22px,2vw,28px)!important;
+}
+body.torre-home main #discover.section.shell .shortcuts .shortcut small{
+ color:var(--ac-muted)!important;font-size:13px!important;
+}
+body.torre-home main #discover.section.shell .shortcuts .shortcut .emoji{
+ display:none!important;
+}
+/* Primary interactions in the Home catalogue consistently use the blue brand accent */
+body.torre-home main #explore.section.shell .placefoot a,
+body.torre-home main #explore.section.shell .place-add,
+body.torre-home main #explore.section.shell .filterline button[aria-pressed="true"]{
+ background:var(--ac-blue)!important;color:#FFFFFF!important;
+ border-color:var(--ac-blue)!important;border-radius:999px!important;
+}
+body.torre-home main #explore.section.shell .place-add:is(:hover,:focus-visible),
+body.torre-home main #explore.section.shell .placefoot a:is(:hover,:focus-visible){
+ background:var(--ac-blue-dark)!important;color:#FFFFFF!important;
+}
+body.torre-home #stories .readmore,
+body.torre-home .photo-diary .gallery-promo-link a,
+body.torre-home #useful .infocard a{
+ color:var(--ac-blue)!important;
+}
+/* Image fills the entire Sound crop, no blank poster strip */
+body.torre-home main #sound.music-intro .music-shell .music-art img.music-album-art{
+ display:block!important;position:absolute!important;inset:0!important;
+ width:100%!important;min-width:100%!important;max-width:none!important;
+ height:100%!important;min-height:100%!important;max-height:none!important;
+ aspect-ratio:auto!important;object-fit:cover!important;object-position:center!important;
+ margin:0!important;padding:0!important;transform:none!important;
+}
