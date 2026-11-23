@@ -12,6 +12,9 @@ on:
       - 'service-worker.js'
       - 'tests/content-consistency-fase2.test.mjs'
       - 'tests/content-consistency-fase2b.test.mjs'
+      - 'tests/content-consistency-fase2c.test.mjs'
+      - 'tests/fase2c-browser.mjs'
+      - 'scripts/audit_fase2c_i18n.mjs'
       - 'tests/fase2-content-browser.mjs'
       - 'tests/fase2b-browser.mjs'
       - '.github/workflows/content-coherence.yml'
@@ -28,15 +31,19 @@ jobs:
         with:
           node-version: '22'
       - name: Check editorial provenance and translations without accessing external websites
-        run: node --test tests/content-consistency-fase2.test.mjs tests/content-consistency-fase2b.test.mjs
+        run: node --test tests/content-consistency-fase2.test.mjs tests/content-consistency-fase2b.test.mjs tests/content-consistency-fase2c.test.mjs
+      - name: Audit Home and Gallery translation coverage without mother-tongue certification
+        run: node scripts/audit_fase2c_i18n.mjs
       - name: Install Chromium test environment
         run: |
-          npm install --no-save --ignore-scripts playwright@1.57.0
+          npm install --no-save --ignore-scripts playwright@1.57.0 axe-core@4.10.3
           npx playwright install --with-deps chromium
       - name: Check localized Agenda and Comer, provenance and responsive status
         run: node tests/fase2-content-browser.mjs
       - name: Check Gallery, Stories licensing and no-JS Comer in Chromium
         run: node tests/fase2b-browser.mjs
+      - name: Verify Essentials sources and produce axe-core accessibility baseline
+        run: node tests/fase2c-browser.mjs
       - name: Preserve editorial QA screenshots and evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -45,5 +52,6 @@ jobs:
           path: |
             artifacts/editorial-fase2/
             artifacts/editorial-fase2b/
+            artifacts/editorial-fase2c/
           if-no-files-found: warn
           retention-days: 30
