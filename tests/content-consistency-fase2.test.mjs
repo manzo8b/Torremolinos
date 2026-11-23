@@ -81,7 +81,7 @@ test('Already implemented C-15/C-20 functions are preserved, not falsely reporte
  assert.match(agendaJS,/function icsUrl\(e\)/);
  assert.match(agendaJS,/DTSTART;VALUE=DATE/);
  assert.match(read('listen/index.html'),/controls preload="none"/);
- assert.match(readme,/Revisione editoriale|revisione umana/i);
+ assert.ok(readme.includes('ultima revisione **umana**'),'README must distinguish human review');
  assert.match(read('footer-professional-2026.js'),/Un progetto editoriale MANZO AI/);
 });
 test('PWA caches new same-origin editorial evidence and never overwrites other projects',()=>{
