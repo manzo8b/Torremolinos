@@ -57,7 +57,7 @@ try{
       };
     });
     assert.equal(whiteCraft.footer,'rgb(255, 255, 255)','footer is not white at '+width);
-    assert.equal(whiteCraft.music,'rgb(255, 255, 255)','music title lacks contrast on green at '+width);
+    assert.equal(whiteCraft.music,'rgb(16, 36, 75)','music title lacks dark-on-light contrast at '+width);
     assert.equal(whiteCraft.nogalera,'rgb(255, 255, 255)','Nogalera title lacks contrast on green at '+width);
     assert.equal(whiteCraft.photos,10,'place gallery should have 10 documentary photos at '+width);
 
@@ -85,10 +85,10 @@ try{
       };
     });
     assert.ok(premium.v6,'product v6 stylesheet missing at '+width);
-    assert.equal(premium.bridgeBg,'rgb(22, 134, 90)','narrative bridge washed out at '+width);
-    assert.equal(premium.bridgeText,'rgb(255, 255, 255)','narrative bridge title illegible at '+width);
-    assert.equal(premium.agendaBg,'rgb(245, 138, 23)','agenda scene has no color at '+width);
-    assert.equal(premium.musicBg,'rgb(22, 134, 90)','music scene missing green at '+width);
+    assert.equal(premium.bridgeBg,'rgb(244, 248, 252)','editorial bridge must use approved light surface at '+width);
+    assert.equal(premium.bridgeText,'rgb(16, 36, 75)','editorial bridge text must be legible at '+width);
+    assert.equal(premium.agendaBg,'rgb(244, 248, 252)','agenda still has orange chapter at '+width);
+    assert.equal(premium.musicBg,'rgb(236, 243, 250)','Sound is not the approved compact blue-light surface at '+width);
     assert.ok(premium.galleryImg?.h>=240,'gallery image collapsed at '+width);
     assert.ok(premium.agendaPhoto?.h>=240,'agenda photograph collapsed at '+width);
     assert.ok(premium.musicCover?.h>=100,'music artwork collapsed at '+width);
@@ -117,8 +117,8 @@ try{
         stylesheet,
         spaceDiscover:gap('#discover','#explore'),
         spaceExplore:gap('#explore','.nogalera-feature'),
-        spaceSound:gap('.gallery-feature','#sound'),
-        spaceStories:gap('#sound','#stories'),
+        spaceSound:gap('#clean-access','#sound'),
+        spaceStories:gap('.gallery-feature','#stories'),
         spaceAgenda:gap('#stories','#agenda-home'),
         photoLead:figs[0]?.getBoundingClientRect().height||0,
         photoDetail:figs[1]?.getBoundingClientRect().height||0,
@@ -144,18 +144,18 @@ try{
       };
     });
     assert.ok(daylight.sheet,'v8 daylight style missing at '+width);
-    assert.equal(daylight.discover,'rgb(255, 250, 244)','discovery lacks warm chapter');
-    assert.equal(daylight.explore,'rgb(239, 248, 243)','explore lacks palm green wash');
-    assert.equal(daylight.stories,'rgb(255, 243, 230)','stories lacks solar light chapter');
-    assert.equal(daylight.photos,'rgb(247, 251, 249)','local lens lacks gentle green tint');
-    assert.equal(daylight.useful,'rgb(245, 248, 246)','utilities lack light background');
+    assert.equal(daylight.discover,'rgb(255, 255, 255)','discovery must be white');
+    assert.equal(daylight.explore,'rgb(255, 255, 255)','explore must be white');
+    assert.equal(daylight.stories,'rgb(255, 255, 255)','stories must be white');
+    assert.equal(daylight.photos,'rgb(255, 255, 255)','local lens must be white');
+    assert.equal(daylight.useful,'rgb(255, 255, 255)','utilities must be white');
     assert.ok(daylight.christmas,'Christmas editorial feature missing at '+width);
 
     for(const [key,value] of Object.entries({
       discover:v7.spaceDiscover,explore:v7.spaceExplore,sound:v7.spaceSound,
       stories:v7.spaceStories,agenda:v7.spaceAgenda
     })){
-      assert.ok(value>=50,'chapters visually stuck together at '+width+' '+key+' '+value+'px');
+      assert.ok(value>=(key==='sound'?18:50),'chapters visually stuck together at '+width+' '+key+' '+value+'px');
     }
     assert.ok(v7.photoLead>v7.photoDetail,'photo hierarchy collapsed at '+width);
     assert.ok(v7.actions>=5,'coordinated arrows missing at '+width);
@@ -175,11 +175,11 @@ try{
         const el=document.querySelector(selector),css=el&&getComputedStyle(el);
         return css?{text:css.color,bg:css.backgroundColor}:null;
       }
-      return {gallery:props('.gallery-feature-body a'),feedback:props('.community .darkbtn'),credit:props('.music-art small')};
+      return {gallery:props('.gallery-feature-body a'),feedback:props('.community .darkbtn'),credit:props('.music-body .approved-sound-credit')};
     });
-    assert.deepEqual(ctas.gallery,{text:'rgb(255, 255, 255)',bg:'rgb(22, 134, 90)'},'gallery contrast '+width);
-    assert.deepEqual(ctas.feedback,{text:'rgb(22, 134, 90)',bg:'rgb(255, 255, 255)'},'feedback CTA contrast '+width);
-    assert.equal(ctas.credit.text,'rgb(255, 255, 255)','album credit unreadable at '+width);
+    assert.deepEqual(ctas.gallery,{text:'rgb(255, 255, 255)',bg:'rgb(9, 107, 203)'},'gallery contrast '+width);
+    assert.deepEqual(ctas.feedback,{text:'rgb(255, 255, 255)',bg:'rgb(9, 107, 203)'},'feedback CTA contrast '+width);
+    assert.equal(ctas.credit?.text,'rgb(97, 113, 133)','Sound credit must be outside photo, legible at '+width);
     if(width===390||width===1440){
       // Full-page screenshots do not automatically reveal lazy images. Simulate
       // a real visitor scrolling through the whole catalog, then validate.
