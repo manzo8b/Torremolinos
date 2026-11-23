@@ -72,7 +72,7 @@ test('PWA still has a relative manifest and explicit offline fallback',()=>{
  const manifest=JSON.parse(read('manifest.webmanifest'));
  assert.equal(manifest.start_url,'./');
  assert.equal(manifest.scope,'./');
- assert.match(sw,/\Qreq.mode\E/);
+ assert.match(sw,/req\.mode/);
  assert.match(sw,/offline\.html/);
  assert.match(sw,/torremolinos-v28/);
 });
