@@ -1,5 +1,7 @@
 # TORREMOLINOS · Gallery · Piano di pubblicazione v1
 
+> **Rettifica di inventario — 23 novembre 2026 (Fase 2B).** Il file `gallery/data.js` contiene **9 schede**: **7 fotografie `user_photo` pubblicabili** e **2 illustrazioni IA ancora `publicationStatus: pending_review`**. Le 16 immagini descritte nei due lotti sono in un percorso di approvazione separato: non risultano 16 schede approvate nel dataset attuale. Le cifre storiche sottostanti descrivono lo stato del piano originale e non vanno interpretate come un conteggio del catalogo pubblicato oggi. Le localizzazioni dei titoli e testi alternativi sono predisposte in sei lingue; la revisione madrelingua resta aperta.
+
 Data: 2 novembre 2026. Questo file è una checklist operativa, non una dichiarazione di pubblicazione.
 
 ## Stato confermato
