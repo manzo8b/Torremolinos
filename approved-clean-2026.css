@@ -660,3 +660,20 @@ body.torre-home .mapbox .coral.eyebrow,
 body.torre-home .mobilebar [data-t="mobHome"]{
   color:#0C7046!important;
 }
+
+/* Fase 2C specificity safeguard.
+   Legacy #cards/#stories/#pride/#plan rules carry ID-level !important
+   declarations: these do not yield to low-specificity accessibility rules. */
+body.torre-home main #cards article.place .placefoot>a.source.v7-action{
+  background:#0966BA!important;
+  background-image:none!important;
+  border-color:#0966BA!important;
+  color:#FFFFFF!important;
+}
+body.torre-home main #pride .pride-visual-detail{color:#075DA9!important}
+body.torre-home main #stories .magazine-card .magazine-text .readmore.v7-action,
+body.torre-home main #stories .l8-season-promo-copy>small{
+  color:#0C7046!important;
+}
+body.torre-home main #plan .plan-section-kicker{color:#0C7046!important}
+body.torre-home main .mapbox>div>.eyebrow.coral{color:#0C7046!important}
