@@ -32,6 +32,8 @@ Le tre card esistenti (Renfe C1, emergenze 112, accessibilità spiagge) conserva
 - Correzione CSS mirata su etichette di fiducia, pulsanti delle fonti nei luoghi, testi verdi in Stories/piano e voce attiva mobile. Nuovi colori verificati aritmeticamente sullo sfondo osservato con contrasto > 4,5:1, senza introdurre nuove tinte principali, layout o modifiche alle fotografie.
 - Una prima esecuzione dopo il cambio colori ha ridotto i nodi con problemi di contrasto in Home da 24/25 a 15. La causa dei nodi rimanenti era la maggiore specificità di vecchie regole CSS con ID e `!important`; applicato un override mirato, sottoposto all'ultimo test axe-core (non dichiarare zero violazioni prima del suo esito).
 - La verifica di regressione axe e gli screenshot dopo il cambio CSS sono parte del gate della PR #19, non una certificazione ufficiale.
+- **Esito v32:** audit Home a 390/1280 ancora con **11 nodi color-contrast per viewport**, concentrati in 10 link `.placefoot > a.source.v7-action` e `.pride-visual-detail`; Gallery **0 violazioni** nelle stesse viewport. Il problema residuo ha [Issue #20](https://github.com/manzo8b/Torremolinos/issues/20) con rapporti di contrasto, selettori e gate. **Non dichiarare la Home conforme WCAG.**
+- Tutti i 6 dizionari della Home risolvono **109/109 chiavi visibili** nel report finale (linguaggio non revisionato da madrelingua).
 
 ## C-17 — Dossier Stories
 
