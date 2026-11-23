@@ -125,7 +125,7 @@ test('narrative copy and punctuation-free titles in all six languages', () => {
 
 test('offline cache contains the modern UI and two actual hero photographs', () => {
   const sw=file('service-worker.js');
-  assert.match(sw,/torremolinos-v27/);
+  assert.match(sw,/torremolinos-v28/);
   ['apple-premium.css','apple-runtime.js','hero-apple-2026.webp','hero-apple-2026-mobile.webp'].forEach(x=>assert.ok(sw.includes(x),x+' missing from offline cache'));
   assert.doesNotThrow(()=>new Script(sw));
 });
@@ -139,7 +139,7 @@ test('craft refinements are last, consistent, and offline-available',()=>{
     assert.match(page,/craft-refinement\.css/,path+' refinement not loaded');
     assert.ok(page.indexOf('craft-refinement.css')>page.indexOf('craft-finish.css'),path+' craft css must override prior craft layer');
   }
-  assert.match(file('service-worker.js'),/torremolinos-v27/);
+  assert.match(file('service-worker.js'),/torremolinos-v28/);
   assert.match(file('service-worker.js'),/craft-refinement\.css/);
   assert.equal((craft.match(/\{/g)||[]).length,(craft.match(/\}/g)||[]).length);
   assert.match(craft,/prefers-reduced-motion/);
@@ -233,7 +233,7 @@ test('commercial storytelling is authored in all six locales and the action is f
 
 test('commercial stylesheet is present in offline shell',()=>{
  const sw=file('service-worker.js');
- assert.match(sw,/torremolinos-v27/);
+ assert.match(sw,/torremolinos-v28/);
  assert.match(sw,/commercial-experience\.css/);
  assert.match(file('index.html'),/apple-runtime\.js/);
 });
@@ -271,7 +271,7 @@ test('v6 hierarchy and critical screenshot contrast repairs exist',()=>{
 });
 test('v6 offline shell includes its stylesheet and original supplied hero',()=>{
  const sw=file('service-worker.js');
- assert.match(sw,/torremolinos-v27/);
+ assert.match(sw,/torremolinos-v28/);
  assert.match(sw,/product-v6\.css/);
  assert.match(sw,/product-v6\.js/);
  assert.match(file('index.html'),/product-v6\.js/);
@@ -298,7 +298,7 @@ test('v7 narrative system is loaded last on all core and editorial pages',()=>{
  }
  assert.match(file('index.html'),/narrative-v7\.js/);
  const sw=file('service-worker.js');
- assert.match(sw,/torremolinos-v27/);
+ assert.match(sw,/torremolinos-v28/);
  assert.match(sw,/narrative-v7\.css/);
  assert.match(sw,/narrative-v7\.js/);
 });
@@ -368,7 +368,7 @@ test('v8 loads after v7 on all public pages, and narrative asset cached offline'
    assert.ok(h.lastIndexOf('luminosity-v8.css')>h.lastIndexOf('narrative-v7.css'),'v8 cascade missing '+path);
  }
  const sw=file('service-worker.js');
- assert.match(sw,/torremolinos-v27/);
+ assert.match(sw,/torremolinos-v28/);
  assert.match(sw,/luminosity-v8.css/);
  assert.match(sw,/luminosity-v8.js/);
  assert.match(sw,/navidad-ano-nuevo-torremolinos-malaga-2026-2027.html/);
