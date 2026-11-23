@@ -236,7 +236,8 @@ window.TORREMOLINOS_GALLERY={
       "languageLabel": "Idioma de la galería",
       "previous": "Imagen anterior",
       "next": "Imagen siguiente",
-      "viewer": "Visor de imágenes"
+      "viewer": "Visor de imágenes",
+      "filterGroup": "Filtros de la galería"
     },
     "en": {
       "title": "Album",
@@ -272,7 +273,8 @@ window.TORREMOLINOS_GALLERY={
       "languageLabel": "Gallery language",
       "previous": "Previous image",
       "next": "Next image",
-      "viewer": "Image viewer"
+      "viewer": "Image viewer",
+      "filterGroup": "Gallery filters"
     },
     "it": {
       "title": "Album",
@@ -308,7 +310,8 @@ window.TORREMOLINOS_GALLERY={
       "languageLabel": "Lingua della galleria",
       "previous": "Immagine precedente",
       "next": "Immagine successiva",
-      "viewer": "Visualizzatore immagini"
+      "viewer": "Visualizzatore immagini",
+      "filterGroup": "Filtri della galleria"
     },
     "de": {
       "title": "Album",
@@ -344,7 +347,8 @@ window.TORREMOLINOS_GALLERY={
       "languageLabel": "Sprache der Galerie",
       "previous": "Vorheriges Bild",
       "next": "Nächstes Bild",
-      "viewer": "Bildbetrachter"
+      "viewer": "Bildbetrachter",
+      "filterGroup": "Galeriefilter"
     },
     "fr": {
       "title": "Album",
@@ -380,7 +384,8 @@ window.TORREMOLINOS_GALLERY={
       "languageLabel": "Langue de la galerie",
       "previous": "Image précédente",
       "next": "Image suivante",
-      "viewer": "Visionneuse d'images"
+      "viewer": "Visionneuse d'images",
+      "filterGroup": "Filtres de la galerie"
     },
     "ru": {
       "title": "Album",
@@ -416,7 +421,8 @@ window.TORREMOLINOS_GALLERY={
       "languageLabel": "Язык галереи",
       "previous": "Предыдущее изображение",
       "next": "Следующее изображение",
-      "viewer": "Просмотр изображений"
+      "viewer": "Просмотр изображений",
+      "filterGroup": "Фильтры галереи"
     }
   }
 };
