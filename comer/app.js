@@ -20,6 +20,17 @@ function link(parent,label,url,cls){const a=safeText(parent,'a',label,cls);a.hre
 function mapUrl(r){return'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(r.name+', '+r.address)}
 function favButton(parent,r){const btn=safeText(parent,'button',favs.includes(r.id)?'♥':'♡','save');btn.type='button';btn.setAttribute('aria-label',t('save')+' '+r.name);btn.setAttribute('aria-pressed',String(favs.includes(r.id)));btn.addEventListener('click',()=>{favs=favs.includes(r.id)?favs.filter(v=>v!==r.id):[...favs,r.id];try{localStorage.setItem('torremolinos.food.favorites',JSON.stringify(favs))}catch(e){}render()});return btn}
 function categoryLabel(c){return t(c)}
+const verificationLabels={
+ es:'Revisión editorial',en:'Editorial review',it:'Revisione editoriale',
+ de:'Redaktionell geprüft',fr:'Révision éditoriale',ru:'Редакционная проверка'
+};
+function verifiedLabel(r){
+ const d=new Date(r.verified+'T12:00:00Z');
+ const locale={es:'es-ES',en:'en-GB',it:'it-IT',de:'de-DE',fr:'fr-FR',ru:'ru-RU'}[lang]||'es-ES';
+ const date=Number.isNaN(d.getTime())?r.verified:
+  new Intl.DateTimeFormat(locale,{timeZone:'Europe/Madrid',day:'numeric',month:'long',year:'numeric'}).format(d);
+ return verificationLabels[lang]+': '+date;
+}
 function showFeatured(r){const card=document.createElement('article');card.className='card';card.dataset.id=r.id;
 const top=safeText(card,'div','','card-top');safeText(top,'span',t('labelFeatured'),'flag');safeText(top,'span',r.emoji,'icon');safeText(top,'div',r.short,'monogram');favButton(top,r);
 const body=safeText(card,'div','','card-body');safeText(body,'span',categoryLabel(r.category)+' · '+r.branch,'card-topline');const title=safeText(body,'h3',r.name);safeText(title,'small',r.branch);
@@ -28,9 +39,9 @@ const tags=safeText(body,'div','','tags');r.tags.forEach(v=>safeText(tags,'span'
 if(r.conceptPending)safeText(body,'div',t('pending'),'pending');if(r.brandNote)safeText(body,'div',t('brand'),'pending');
 safeText(body,'div','📍 '+r.address,'address');
 const actions=safeText(body,'div','','cardlinks');link(actions,t('directions')+' ↗',mapUrl(r),'primary');link(actions,t('site')+' ↗',r.website);if(r.phone)link(actions,t('contact')+' ↗','tel:'+r.phone);
-const src=safeText(body,'div','','fineprint');const a=link(src,t('source')+': '+r.sourceName+' ↗',r.source);a.className='source';safeText(src,'span',' · '+t('updated'));
+const src=safeText(body,'div','','fineprint');const a=link(src,t('source')+' ↗',r.source);a.className='source';safeText(src,'span',' · '+verifiedLabel(r));
 return card}
-function showOther(r){const card=safeText(document.createElement('article'),'div','','other');safeText(card,'span',r.branch,'otherzone');safeText(card,'small',categoryLabel(r.category));safeText(card,'h3',r.name);safeText(card,'p',r.desc[lang]||r.desc.en);safeText(card,'div','📍 '+r.address,'address');const actions=safeText(card,'div','','other-links');link(actions,t('directions')+' ↗',mapUrl(r));link(actions,t('source')+' ↗',r.source);return card}
+function showOther(r){const card=safeText(document.createElement('article'),'div','','other');safeText(card,'span',r.branch,'otherzone');safeText(card,'small',categoryLabel(r.category));safeText(card,'h3',r.name);safeText(card,'p',r.desc[lang]||r.desc.en);safeText(card,'div','📍 '+r.address,'address');const actions=safeText(card,'div','','other-links');link(actions,t('directions')+' ↗',mapUrl(r));link(actions,t('source')+' ↗',r.source);safeText(card,'small',verifiedLabel(r),'fineprint');return card}
 function passes(r){const allWords=[r.name,r.short,r.branch,r.address,...r.tags,r.desc[lang]||r.desc.en].join(' ').toLocaleLowerCase();return (category==='all'||r.category===category)&&(zone==='all'||r.zone===zone)&&(!savedOnly||favs.includes(r.id))&&(!term||allWords.includes(term))}
 function render(){const items=list.filter(passes),featured=items.filter(x=>x.featured),other=items.filter(x=>!x.featured);get('featuredCards').replaceChildren();featured.forEach(r=>get('featuredCards').appendChild(showFeatured(r)));get('moreCards').replaceChildren();other.forEach(r=>get('moreCards').appendChild(showOther(r)));get('featuredSection').hidden=!featured.length;get('moreSection').hidden=!other.length;get('count').textContent=items.length+' '+t('results');get('empty').hidden=!!items.length;document.querySelectorAll('[data-cat]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.cat===category)));get('savedOnly').setAttribute('aria-pressed',String(savedOnly))}
 function setLanguage(){document.documentElement.lang=lang;get('lang').value=lang;document.querySelectorAll('[data-i18n]').forEach(el=>el.textContent=t(el.dataset.i18n));get('search').placeholder=t('search');document.querySelectorAll('[data-category-label]').forEach(el=>el.textContent=t(el.dataset.categoryLabel));document.title=(lang==='es'?'Dónde comer en Torremolinos':lang==='it'?'Dove mangiare a Torremolinos':'Where to eat in Torremolinos')+' | TORREMOLINOS';render()}
