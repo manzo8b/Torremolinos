@@ -1,0 +1,56 @@
+name: TORREMOLINOS — P0 Portable Build Verification
+on:
+  pull_request:
+    branches:
+      - main
+      - audit/fase0-design-freeze-2026-11-23
+    paths:
+      - 'scripts/build_portable_site.py'
+      - 'tests/test_portable_build.py'
+      - 'tests/portable-browser-smoke.mjs'
+      - '.github/workflows/portable-build.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  portable-build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify output identity, internal exclusions and configurable URLs
+        run: python3 -m unittest discover -s tests -p 'test_portable_build.py' -v
+      - name: Build unchanged GitHub Pages origin
+        run: |
+          python3 scripts/build_portable_site.py --out dist --report artifacts/portability/current-report.json
+      - name: Build alternative host and path
+        run: |
+          python3 scripts/build_portable_site.py --origin https://preview.example --base-path /guide/ --out dist-preview --report artifacts/portability/preview-report.json
+      - name: Prepare local path-prefix test servers
+        run: |
+          mkdir -p artifacts/portability/hosts/current/Torremolinos
+          mkdir -p artifacts/portability/hosts/preview/guide
+          cp -a dist/. artifacts/portability/hosts/current/Torremolinos/
+          cp -a dist-preview/. artifacts/portability/hosts/preview/guide/
+      - name: Install browser test environment
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.57.0
+          npx playwright install --with-deps chromium
+      - name: Check both path prefixes at 390 and 1280px in Chromium
+        run: node tests/portable-browser-smoke.mjs
+      - name: Preserve both builds and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: torremolinos-portability-staging
+          path: |
+            dist/
+            dist-preview/
+            artifacts/portability/current-report.json
+            artifacts/portability/preview-report.json
+            artifacts/portability/screenshots/
+          if-no-files-found: warn
+          retention-days: 14
