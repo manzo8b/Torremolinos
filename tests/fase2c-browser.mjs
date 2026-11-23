@@ -14,7 +14,9 @@ async function axeAudit(page,section,width){
   runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa']}
  }));
  return {section,width,violations:results.violations.map(x=>({id:x.id,impact:x.impact,
-  help:x.help,nodes:x.nodes.length})),
+  help:x.help,nodes:x.nodes.length,affected:x.nodes.slice(0,50).map(n=>({
+   target:n.target,html:n.html.slice(0,260),summary:n.failureSummary?.slice(0,340)
+  }))})),
   incompleteChecks:results.incomplete.length,
   resultType:'baseline observation, not a claim of WCAG conformance'};
 }
