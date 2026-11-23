@@ -58,7 +58,7 @@ try{
     });
     assert.equal(whiteCraft.footer,'rgb(255, 255, 255)','footer is not white at '+width);
     assert.equal(whiteCraft.music,'rgb(16, 36, 75)','music title lacks dark-on-light contrast at '+width);
-    assert.equal(whiteCraft.nogalera,'rgb(255, 255, 255)','Nogalera title lacks contrast on green at '+width);
+    assert.equal(whiteCraft.nogalera,'rgb(16, 36, 75)','Nogalera title must be readable on the approved light panel at '+width);
     assert.equal(whiteCraft.photos,10,'place gallery should have 10 documentary photos at '+width);
 
     const premium=await page.evaluate(()=>{
