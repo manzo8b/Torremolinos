@@ -619,3 +619,10 @@ body.torre-home main #sound.music-intro .music-shell .music-art img.music-album-
   min-height:100%!important;object-fit:cover!important;
  }
 }
+
+/* C-03: no AI tag on the original documentary photo while fallback is active. */
+body.torre-home #galleryTeaserProvenance[hidden]{display:none!important}
+/* C-13: metadata remains in the existing editorial panel, never over photography. */
+body.torre-home #agendaHomeScanStatus{display:block;margin-top:8px;line-height:1.55}
+body.torre-home .agenda-transparency-status .agenda-stale-note{font-weight:700}
+body.torre-home .agenda-transparency-status a{color:#096BCB;text-underline-offset:3px}
