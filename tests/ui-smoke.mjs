@@ -244,6 +244,12 @@ try{
         return (img?.naturalWidth>0&&!img.hidden) || (fallback&&!fallback.hidden);
       });
       assert.ok(mediaOk,'music cover and offline poster both missing at '+width);
+      const approvedSound=await page.locator('#sound .music-album-art').evaluate(img=>({
+        src:img.currentSrc,width:img.naturalWidth,height:img.naturalHeight,complete:img.complete
+      }));
+      assert.ok(approvedSound.src.includes('sound-headphones-torremolinos.webp'),'old Sound image at '+width);
+      assert.ok(approvedSound.complete&&approvedSound.width>=480&&approvedSound.height>=320,
+        'approved Sound image did not load at '+width+': '+JSON.stringify(approvedSound));
       await page.locator('#cards').evaluate(el=>el.scrollLeft=0);
       await page.evaluate(()=>window.scrollTo(0,0));
       assert.equal(await page.locator('#cards .place-photo').count(),10,'broken place photo');
