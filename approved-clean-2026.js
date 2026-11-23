@@ -15,7 +15,7 @@
   story2:'La Nogalera, dove la notte incontra la storia',
   story3:'Pasaje Begoña, memoria di libertà',
   sanmiguel:'San Miguel: la festa che porta la città in strada',
-  photoCredit:'Fotografia d’archivio TORREMOLINOS',musicCredit:'Immagine illustrativa generata con IA · Musica LUNE_X'
+  photoCredit:'Fotografia d’archivio TORREMOLINOS',musicCredit:'Fotografia d’archivio TORREMOLINOS · Musica LUNE_X'
  },
  es:{
   home:'Inicio',food:'Comer',agenda:'Agenda',gallery:'Gallery',stories:'Stories',
@@ -27,7 +27,7 @@
   story1:'Torremolinos, mucho más que sol y playa',
   story2:'La Nogalera, donde la noche tiene historia',story3:'Pasaje Begoña, memoria de libertad',
   sanmiguel:'San Miguel: la fiesta que saca Torremolinos a la calle',
-  photoCredit:'Fotografía del archivo TORREMOLINOS',musicCredit:'Imagen ilustrativa generada con IA · Música LUNE_X'
+  photoCredit:'Fotografía del archivo TORREMOLINOS',musicCredit:'Fotografía de archivo TORREMOLINOS · Música LUNE_X'
  },
  en:{
   home:'Home',food:'Food',agenda:'Events',gallery:'Gallery',stories:'Stories',
@@ -39,7 +39,7 @@
   story1:'Torremolinos, more than sun and beaches',
   story2:'La Nogalera, where nightlife has a history',story3:'Pasaje Begoña, a place of freedom and remembrance',
   sanmiguel:'San Miguel: the festival that fills the streets',
-  photoCredit:'TORREMOLINOS archive photograph',musicCredit:'AI-generated illustration · Music by LUNE_X'
+  photoCredit:'TORREMOLINOS archive photograph',musicCredit:'TORREMOLINOS archive photograph · Music by LUNE_X'
  },
  de:{
   home:'Startseite',food:'Essen',agenda:'Termine',gallery:'Galerie',stories:'Stories',
@@ -50,7 +50,7 @@
   listen:'▶ Jetzt hören',pause:'Ⅱ Pause',listenError:'Wiedergabe nicht möglich. Internetverbindung prüfen.',
   story1:'Torremolinos: mehr als Sonne und Strand',story2:'La Nogalera: ein Viertel voller Geschichte',
   story3:'Pasaje Begoña: Erinnerung an die Freiheit',sanmiguel:'San Miguel: das Fest auf den Straßen',
-  photoCredit:'Foto aus dem TORREMOLINOS-Archiv',musicCredit:'KI-generierte Illustration · Musik LUNE_X'
+  photoCredit:'Foto aus dem TORREMOLINOS-Archiv',musicCredit:'Archivfoto TORREMOLINOS · Musik LUNE_X'
  },
  fr:{
   home:'Accueil',food:'Restaurants',agenda:'Agenda',gallery:'Galerie',stories:'Stories',
@@ -61,7 +61,7 @@
   listen:'▶ Écouter',pause:'Ⅱ Pause',listenError:'Lecture indisponible. Vérifiez votre connexion.',
   story1:'Torremolinos, bien plus que le soleil et la plage',story2:'La Nogalera, un quartier chargé d’histoire',
   story3:'Pasaje Begoña, mémoire de liberté',sanmiguel:'San Miguel : la fête dans les rues',
-  photoCredit:'Photo des archives TORREMOLINOS',musicCredit:'Illustration créée par IA · Musique LUNE_X'
+  photoCredit:'Photo des archives TORREMOLINOS',musicCredit:'Photo des archives TORREMOLINOS · Musique LUNE_X'
  },
  ru:{
   home:'Главная',food:'Рестораны',agenda:'События',gallery:'Галерея',stories:'Истории',
@@ -72,7 +72,7 @@
   listen:'▶ Слушать',pause:'Ⅱ Пауза',listenError:'Не удаётся воспроизвести. Проверьте соединение.',
   story1:'Торремолинос: больше, чем солнце и пляж',story2:'Ла-Ногалера: история ночной жизни',
   story3:'Пассаж Бегонья: память о свободе',sanmiguel:'Сан-Мигель: праздник на улицах',
-  photoCredit:'Фото из архива TORREMOLINOS',musicCredit:'Иллюстрация создана ИИ · Музыка LUNE_X'
+  photoCredit:'Фото из архива TORREMOLINOS',musicCredit:'Фото из архива TORREMOLINOS · Музыка LUNE_X'
  }
  };
  const audio=document.getElementById('torremolinos-audio');
