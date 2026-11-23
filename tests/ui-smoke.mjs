@@ -187,7 +187,7 @@ try{
     });
     assert.deepEqual(ctas.gallery,{text:'rgb(255, 255, 255)',bg:'rgb(9, 107, 203)'},'gallery contrast '+width);
     assert.deepEqual(ctas.feedback,{text:'rgb(255, 255, 255)',bg:'rgb(9, 107, 203)'},'feedback CTA contrast '+width);
-    assert.equal(ctas.credit?.text,'rgb(97, 113, 133)','Sound credit must be outside photo, legible at '+width);
+    assert.equal(ctas.credit?.text,'rgb(16, 36, 75)','Sound credit must be outside photo and strongly legible at '+width);
     if(width===390||width===1440){
       // Full-page screenshots do not automatically reveal lazy images. Simulate
       // a real visitor scrolling through the whole catalog, then validate.
