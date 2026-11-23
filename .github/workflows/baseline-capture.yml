@@ -1,0 +1,38 @@
+name: TORREMOLINOS — P0 Design Freeze Baseline
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/baseline-capture.yml'
+      - 'scripts/capture_visual_baseline.mjs'
+      - 'scripts/compare_visual_baseline.py'
+      - 'baseline/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: torremolinos-baseline-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  capture:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install identical browser runtime
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.57.0
+          npx playwright install --with-deps chromium
+      - name: Capture every HTML route in available languages, four widths and computed design tokens
+        run: node scripts/capture_visual_baseline.mjs
+      - name: Preserve screenshots, tokens and coverage manifest
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: torremolinos-design-freeze-baseline
+          path: baseline/runs/
+          if-no-files-found: warn
+          retention-days: 90
