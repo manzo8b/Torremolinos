@@ -85,7 +85,7 @@ test('Already implemented C-15/C-20 functions are preserved, not falsely reporte
  assert.match(read('footer-professional-2026.js'),/Un progetto editoriale MANZO AI/);
 });
 test('PWA caches new same-origin editorial evidence and never overwrites other projects',()=>{
- assert.match(sw,/torremolinos-v31/);
+ assert.match(sw,/torremolinos-v32/);
  assert.match(sw,/\.\/agenda\/scan-status\.json/);
  assert.match(sw,/\.\/agenda\/scan-status-ui\.js/);
  assert.match(sw,/key\.startsWith\(CACHE_PREFIX\)/);
