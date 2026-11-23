@@ -71,6 +71,19 @@ try{
     }));
     assert.equal(cleanScenes.nogalera,'rgb(244, 248, 252)','green La Nogalera billboard remains at '+width);
     assert.equal(cleanScenes.pride,'rgb(234, 243, 251)','orange Pride billboard remains at '+width);
+    const editorialPolish=await page.evaluate(()=>{
+      const badge=document.querySelector('#galleryTeaserProvenance');
+      const sound=document.querySelector('#sound .music-shell');
+      return {
+        badgeInCopy:!!badge?.closest('.gallery-feature-body'),
+        badgePosition:badge?getComputedStyle(badge).position:null,
+        soundHeight:sound?.getBoundingClientRect().height||0
+      };
+    });
+    assert.ok(editorialPolish.badgeInCopy,'AI provenance is not attached to Gallery editorial copy at '+width);
+    assert.equal(editorialPolish.badgePosition,'static','stray AI badge still floats over the Home at '+width);
+    assert.ok(editorialPolish.soundHeight<(width<=760?650:355),'Sound did not become compact at '+width);
+
     assert.equal(doc.lang,'it');
     const whiteCraft=await page.evaluate(()=>{
       const footer=document.querySelector('footer.footer');
