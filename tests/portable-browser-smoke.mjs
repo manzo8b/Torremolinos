@@ -28,6 +28,10 @@ try{
    const response=await page.goto(base+'?lang=it',{waitUntil:'domcontentloaded',timeout:30000});
    assert.equal(response?.status(),200,plan.label+' home '+width);
    await page.locator('#cards .place').first().waitFor({timeout:15000});
+   const artwork=page.locator('#sound .music-art img');
+   await artwork.scrollIntoViewIfNeeded();
+   await artwork.evaluate(async img => {if(img.complete&&img.naturalWidth)return;await img.decode()});
+   await page.evaluate(()=>window.scrollTo(0,0));
    const state=await page.evaluate(()=>({
     lang:document.documentElement.lang,
     title:document.title,
