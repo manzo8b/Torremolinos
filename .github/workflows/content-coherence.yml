@@ -4,12 +4,16 @@ on:
     branches: [main]
     paths:
       - 'agenda/**'
-      - 'comer/app.js'
+      - 'comer/**'
+      - 'gallery/**'
+      - 'stories/**'
       - 'index.html'
       - 'approved-clean-2026.css'
       - 'service-worker.js'
       - 'tests/content-consistency-fase2.test.mjs'
+      - 'tests/content-consistency-fase2b.test.mjs'
       - 'tests/fase2-content-browser.mjs'
+      - 'tests/fase2b-browser.mjs'
       - '.github/workflows/content-coherence.yml'
   workflow_dispatch:
 permissions:
@@ -24,18 +28,22 @@ jobs:
         with:
           node-version: '22'
       - name: Check editorial provenance and translations without accessing external websites
-        run: node --test tests/content-consistency-fase2.test.mjs
+        run: node --test tests/content-consistency-fase2.test.mjs tests/content-consistency-fase2b.test.mjs
       - name: Install Chromium test environment
         run: |
           npm install --no-save --ignore-scripts playwright@1.57.0
           npx playwright install --with-deps chromium
       - name: Check localized Agenda and Comer, provenance and responsive status
         run: node tests/fase2-content-browser.mjs
+      - name: Check Gallery, Stories licensing and no-JS Comer in Chromium
+        run: node tests/fase2b-browser.mjs
       - name: Preserve editorial QA screenshots and evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: torremolinos-fase2-editorial-qa
-          path: artifacts/editorial-fase2/
+          path: |
+            artifacts/editorial-fase2/
+            artifacts/editorial-fase2b/
           if-no-files-found: warn
           retention-days: 30
