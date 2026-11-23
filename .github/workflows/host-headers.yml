@@ -1,0 +1,50 @@
+name: TORREMOLINOS — P0-09 Host Security Headers
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/generate_security_headers.py'
+      - 'scripts/preview_http_headers.py'
+      - 'tests/test_host_security_headers.py'
+      - 'tests/host-headers-browser-smoke.mjs'
+      - '.github/workflows/host-headers.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  security-headers-staging:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate paths and security-header policy with no site mutation
+        run: python3 -m unittest discover -s tests -p 'test_host_security_headers.py' -v
+      - name: Generate Cloudflare root candidate, no live deployment
+        run: |
+          python3 scripts/generate_security_headers.py \
+            --provider cloudflare-pages --base-path / \
+            --out artifacts/hosting-staging/cloudflare-root/_headers \
+            --report artifacts/hosting-staging/cloudflare-root-report.json
+      - name: Generate Netlify subpath candidate, no live deployment
+        run: |
+          python3 scripts/generate_security_headers.py \
+            --provider netlify --base-path /guide/ \
+            --out artifacts/hosting-staging/netlify-guide/_headers \
+            --report artifacts/hosting-staging/netlify-guide-report.json
+      - name: Prepare Chromium for realistic header behavior testing
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.57.0
+          npx playwright install --with-deps chromium
+      - name: Run actual Chromium browser under simulated HTTP headers
+        run: node tests/host-headers-browser-smoke.mjs
+      - name: Preserve candidate config and CSP/browser analysis
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: torremolinos-p0-09-host-headers-staging
+          path: artifacts/hosting-staging/
+          if-no-files-found: warn
+          retention-days: 30
