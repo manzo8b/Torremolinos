@@ -423,3 +423,44 @@ body.torre-home .topbar .navlinks a{
  }
  body.torre-home .topbar .navlinks a{display:none!important}
 }
+
+/* Inner green/orange advertising-style slides converted into neutral editorial modules */
+body.torre-home main .nogalera-feature.shell .nogalera-feature-copy{
+ background:#F4F8FC!important;background-image:none!important;color:var(--ac-ink)!important;
+ border:0!important;box-shadow:none!important;
+}
+body.torre-home main .nogalera-feature.shell .nogalera-feature-copy :is(h2,p,small,span,.eyebrow){
+ color:var(--ac-ink)!important;text-shadow:none!important;opacity:1!important;
+}
+body.torre-home main .nogalera-feature.shell .nogalera-feature-copy .eyebrow{
+ color:var(--ac-blue)!important;
+}
+body.torre-home main .nogalera-feature.shell .nogalera-feature-copy a{
+ background:var(--ac-blue)!important;color:#FFFFFF!important;
+ border:0!important;border-radius:999px!important;
+}
+body.torre-home main #pride.section.shell .feature{
+ background:#F4F8FC!important;background-image:none!important;color:var(--ac-ink)!important;
+ border:1px solid var(--ac-line)!important;
+}
+body.torre-home main #pride.section.shell .feature .feature-copy{
+ background:#F4F8FC!important;background-image:none!important;color:var(--ac-ink)!important;
+}
+body.torre-home main #pride.section.shell .feature .feature-copy :is(h2,p,span,.eyebrow){
+ color:var(--ac-ink)!important;text-shadow:none!important;
+}
+body.torre-home main #pride.section.shell .feature .feature-art.pride-visual{
+ background:#EAF3FB!important;background-color:#EAF3FB!important;background-image:none!important;
+ color:var(--ac-blue)!important;border:0!important;
+}
+body.torre-home main #pride.section.shell .feature .feature-art.pride-visual :is(strong,span,div,p){
+ color:var(--ac-blue)!important;background:transparent!important;
+}
+body.torre-home main #pride.section.shell .feature .feature-copy button{
+ background:var(--ac-blue)!important;color:#FFFFFF!important;border:0!important;
+ border-radius:999px!important;
+}
+body.torre-home #explore .filterline button[aria-pressed="true"],
+body.torre-home #plan .mood-btn[aria-pressed="true"]{
+ background:var(--ac-blue)!important;color:#FFFFFF!important;border-color:var(--ac-blue)!important;
+}
