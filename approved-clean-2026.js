@@ -5,7 +5,7 @@
  'use strict';
  const T = {
  it:{
-  home:'Home',food:'Comer',agenda:'Agenda',gallery:'Gallery',stories:'Stories',
+  home:'Home',food:'Mangiare',agenda:'Agenda',gallery:'Gallery',stories:'Stories',
   foodSub:'Ristoranti, tapas e sapori locali',agendaSub:'Eventi, concerti e appuntamenti',
   gallerySub:'La città attraverso le fotografie',storiesSub:'Curiosità, luoghi e ispirazioni',
   tagline:'Mare, sapori, eventi e storie sulla Costa del Sol',
