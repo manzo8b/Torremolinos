@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "verifiedDate": "2026-11-23",
+  "sourceOfTruth": "Public, official source webpages consulted; not a real-time service API.",
+  "publicationState": "internal_reference_only",
+  "records": [
+    {
+      "id": "renfe-c1",
+      "category": "rail",
+      "source": "Renfe",
+      "url": "https://www.renfe.com/es/es/cercanias/cercanias-malaga/mapas",
+      "fact_es": "El mapa de Cercanías Málaga incluye Torremolinos y Aeropuerto en la línea C1.",
+      "limitations_es": "No garantiza horarios, accesibilidad de estación ni incidencias en directo.",
+      "uiStatus": "approved_reference"
+    },
+    {
+      "id": "bus-m110",
+      "category": "bus",
+      "source": "Consorcio de Transporte Metropolitano del Área de Málaga",
+      "url": "https://siu.ctmam.ctan.es/es/horarios_lineas_tabla.php?linea=1",
+      "fact_es": "La M-110 conecta Málaga, Torremolinos y Benalmádena Costa.",
+      "limitations_es": "Consultar el horario actual; frecuencia y paradas pueden variar.",
+      "uiStatus": "staging_reference"
+    },
+    {
+      "id": "bus-m112",
+      "category": "bus",
+      "source": "Consorcio de Transporte Metropolitano del Área de Málaga",
+      "url": "https://siu.ctmam.ctan.es/es/horarios_lineas_tabla.php?linea=3",
+      "fact_es": "La línea M-112 Málaga–Mijas incluye una parada en Terminal Torremolinos.",
+      "limitations_es": "No hay datos de frecuencias ni tiempos en directo.",
+      "uiStatus": "staging_reference"
+    },
+    {
+      "id": "beach-access",
+      "category": "accessibility",
+      "source": "Turismo Torremolinos",
+      "url": "https://turismotorremolinos.es/es/descubre/playas/playas-accesibles/",
+      "fact_es": "La guía oficial describe infraestructuras de acceso a playas y un ascensor hacia el Bajondillo.",
+      "limitations_es": "No verifica en tiempo real estado del ascensor, asistencia disponible o temporada.",
+      "uiStatus": "approved_reference"
+    },
+    {
+      "id": "emergencies-112",
+      "category": "emergency",
+      "source": "Junta de Andalucía",
+      "url": "https://www.juntadeandalucia.es/organismos/ema/areas/emergencias-112/112-andalucia-digame.html",
+      "fact_es": "112 es un servicio público gratuito de emergencias que atiende permanentemente en Andalucía.",
+      "limitations_es": "No es un canal de consultas turísticas ni de citas médicas.",
+      "uiStatus": "approved_reference"
+    },
+    {
+      "id": "hospital-maritimo",
+      "category": "medical-safety",
+      "source": "Servicio Andaluz de Salud — Hospital Universitario Virgen de la Victoria",
+      "url": "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/hospital/virgen-victoria/preguntas-frecuentes/hay-urgencias-en-el-hospital-maritimo-de-torremolinos",
+      "fact_es": "La FAQ oficial afirma que el Hospital Marítimo de Torremolinos no dispone de Urgencias.",
+      "limitations_es": "La información puede cambiar; verificar el servicio de urgencias operativo y su ubicación antes de crear una indicación clínica o direccional.",
+      "uiStatus": "do_not_publish_without_reverification"
+    }
+  ]
+}
