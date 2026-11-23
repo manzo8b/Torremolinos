@@ -107,6 +107,47 @@ try{
       };
     });
     assert.equal(whiteCraft.footer,'rgb(255, 255, 255)','footer is not white at '+width);
+
+    const footerPro = await page.evaluate(() => {
+      const footer=document.querySelector('#site-footer');
+      const nav=footer?.querySelector('.footer-pro-columns');
+      const logo=footer?.querySelector('.footer-pro-brandlink img');
+      return {
+        exists:!!footer,
+        surface:footer?getComputedStyle(footer).backgroundColor:null,
+        border:footer?getComputedStyle(footer).borderTopColor:null,
+        cols:footer?.querySelectorAll('.footer-pro-column').length||0,
+        buttons:footer?.querySelectorAll('a[href]').length||0,
+        grid:nav?getComputedStyle(nav).gridTemplateColumns:null,
+        logoReady:logo?.complete&&logo.naturalWidth>0,
+        disclaimer:footer?.querySelector('.footer-pro-disclaimer')?.textContent.trim(),
+        legalStatus:footer?.querySelector('.footer-pro-legal-status')?.textContent.trim(),
+        scroll:document.documentElement.scrollWidth
+      };
+    });
+    assert.equal(footerPro.exists,true,'professional footer missing at '+width);
+    assert.equal(footerPro.surface,'rgb(255, 255, 255)','footer must be white at '+width);
+    assert.equal(footerPro.cols,3,'footer must have three grouped link columns at '+width);
+    assert.ok(footerPro.buttons>=17,'footer navigation links missing at '+width);
+    assert.ok(footerPro.logoReady,'footer brand mark not loaded at '+width);
+    assert.ok(footerPro.legalStatus.length>20,'draft legal status disclosure is absent at '+width);
+    assert.ok(footerPro.scroll<=width+3,'footer causes horizontal overflow at '+width);
+    if(width===390){
+      assert.equal((await page.locator('#site-footer [data-footer="food"]').innerText()).trim(),'Mangiare','Italian footer language incorrect');
+      await page.locator('#lang').selectOption('en');
+      assert.equal((await page.locator('#site-footer [data-footer="project"]').innerText()).trim(),'Project & sources','English footer language incorrect');
+      await page.locator('#lang').selectOption('es');
+      assert.equal((await page.locator('#site-footer [data-footer="feedback"]').innerText()).trim(),'Proponer una corrección','Spanish footer language incorrect');
+      await page.locator('#lang').selectOption('it');
+      assert.equal((await page.locator('#site-footer [data-footer="explore"]').innerText()).trim(),'Esplora','Italian footer not restored');
+    }
+    if([390,768,1440].includes(width)){
+      await page.locator('#site-footer').screenshot({
+        path:'artifacts/screenshots/footer-'+width+'.png',
+        animations:'disabled'
+      });
+    }
+
     assert.equal(whiteCraft.music,'rgb(16, 36, 75)','music title lacks dark-on-light contrast at '+width);
     assert.equal(whiteCraft.nogalera,'rgb(16, 36, 75)','Nogalera title must be readable on the approved light panel at '+width);
     assert.equal(whiteCraft.photos,10,'place gallery should have 10 documentary photos at '+width);
