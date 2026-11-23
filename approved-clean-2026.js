@@ -105,6 +105,14 @@
    if(item&&target) {item.classList.add('photo-credit-outside');target.appendChild(item)}
   });
  }
+ function keepPlaceLabelsOutsidePhotos(){
+  const cards=document.getElementById('cards');
+  if(!cards)return;
+  cards.querySelectorAll('.place-art .chip').forEach(chip=>{
+   const body=chip.closest('.place')?.querySelector('.place-body');
+   if(body){chip.classList.add('approved-place-chip');body.prepend(chip)}
+  });
+ }
  function translate(){
   const lang=(document.documentElement.lang||'es').slice(0,2);
   const t=T[lang]||T.es;
@@ -145,7 +153,9 @@
   ['play','pause','ended'].forEach(ev=>audio.addEventListener(ev,renderPlay));
  }
  const init=()=>{
-  movePhotoCredits();translate();renderPlay();
+  movePhotoCredits();keepPlaceLabelsOutsidePhotos();translate();renderPlay();
+  const placeHost=document.getElementById('cards');
+  if(placeHost)new MutationObserver(keepPlaceLabelsOutsidePhotos).observe(placeHost,{childList:true,subtree:true});
   new MutationObserver(()=>{translate();renderPlay()})
     .observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
   document.getElementById('lang')?.addEventListener('change',()=>{
