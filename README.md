@@ -6,6 +6,30 @@ Guida editoriale indipendente, multilingue e mobile-first. Le schede di eventi, 
 
 **Your city. Your way.** Micro-app indipendente mobile-first per turisti e residenti a Torremolinos, Spagna. **Non è il sito istituzionale del Comune.**
 
+## Stato corrente — 23 novembre 2026
+
+**Prodotto online:** [TORREMOLINOS](https://manzo8b.github.io/Torremolinos/), micro-app statica con Home e pagine `comer/`, `agenda/`, `gallery/`, `stories/`, `listen/`, `explore/la-nogalera/`, `legal/`. Il sito è una guida indipendente e non un portale istituzionale.
+
+**Design attuale:** Home Apple Clean White (bianco, navy e blu), footer professionale; PWA con service worker `torremolinos-v28` alla versione pubblicata. Il lavoro editoriale della **Fase 2** è ancora in una PR di sviluppo e non costituisce contenuto pubblicato.
+
+**Contenuti effettivamente presenti:**
+- **Mangiare:** 9 schede nel dataset, ciascuna con fonte e data editoriale `2026-11-02`; alcune sono evidenziate per scelta del progetto, senza prova di valutazione oggettiva. Il concept ANDALUZ richiede conferma pubblica e un chiarimento su eventuali rapporti commerciali.
+- **Agenda:** 27 schede con data nel dataset, di cui 24 LGBTQ+ e 3 culturali, oltre a 5 voci sotto osservazione. Lo scanner ha eseguito un controllo il **2026-11-23** (run [45235268131](https://github.com/manzo8b/Torremolinos/actions/runs/45235268131)); l'ultima revisione **umana** del feed risale al **2026-11-02**. Un run riuscito non certifica il contenuto delle fonti irraggiungibili: Issue #1 ancora aperta.
+- **Lingue:** l'interfaccia presenta ES/EN/IT/DE/FR/RU, ma i dossier Stories sono attualmente in spagnolo e la verifica madrelingua (RU prioritario, poi DE, FR, EN) è ancora aperta. Nessun `hreflang` distinto finché non esistono vere pagine tradotte.
+- **Pagine legali:** alcune informative sono ancora `noindex` e in bozza. Non inventare titolare, recapiti o relazioni commerciali; serve revisione professionale e un canale di contatto privato verificato.
+- **Musica:** estratto LUNE_X caricato da un altro percorso dello stesso `github.io`. Non ricopiare il file fino alla verifica dei diritti.
+- **Qualità:** test Node e browser nei workflow GitHub Actions; baseline visiva e release pulita preparate ma non ancora applicate come gate di produzione.
+
+**Deploy attuale:** `.github/workflows/pages.yml` pubblica ancora i file dalla root di `main`. Il rilascio pulito in `dist/` è predisposto nella [PR #18](https://github.com/manzo8b/Torremolinos/pull/18) ma non autorizzato al merge; anche le PR #13 (baseline) e #17 (header futuri) sono in bozza.
+
+**Sviluppo e QA:** `python3 -m http.server 8000` per anteprima; `node --test tests/*.test.mjs` e workflow GitHub Actions per i controlli. Gli script di portabilità in PR #18 non sono ancora nel ramo pubblico.
+
+### Principio editoriale
+
+Distinguere sempre ciò che una fonte pubblica annuncia, ciò che un revisore ha verificato e ciò che lo scanner ha soltanto monitorato. Le date di un evento, lo stato di un locale, gli orari e gli accordi commerciali **non** diventano validati per effetto di una scansione automatica.
+
+---
+
 ## MVP v0.1 · 2 novembre 2026
 
 - Nome ufficiale e brand: **TORREMOLINOS** (mai TORREMO o Brillante)
