@@ -464,3 +464,67 @@ body.torre-home #explore .filterline button[aria-pressed="true"],
 body.torre-home #plan .mood-btn[aria-pressed="true"]{
  background:var(--ac-blue)!important;color:#FFFFFF!important;border-color:var(--ac-blue)!important;
 }
+
+/* Gallery AI disclosure: move the ID-scoped badge into its editorial body.
+   Old legacy ID selectors otherwise position it at page x=18, outside the card. */
+body.torre-home main #galleryTeaserProvenance.ai-badge{
+ display:inline-flex!important;position:static!important;
+ left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;inset:auto!important;
+ width:auto!important;max-width:100%!important;margin:9px 0 0!important;
+ padding:6px 11px!important;background:#FFFFFF!important;color:var(--ac-blue)!important;
+ border:1px solid var(--ac-line)!important;border-radius:999px!important;
+ font-size:11px!important;z-index:auto!important;
+}
+body.torre-home .trust.shell{
+ margin:0 auto!important;padding:7px 0 0!important;min-height:0!important;
+}
+body.torre-home #clean-access.approved-feature-links{margin-top:24px!important;}
+/* One clear play action, native audio controls, and secondary links in a disclosure */
+body.torre-home main #sound.music-intro .music-shell{
+ min-height:0!important;max-height:none!important;
+}
+body.torre-home main #sound.music-intro .music-shell .music-body{
+ padding:19px clamp(22px,2.7vw,36px)!important;min-height:0!important;
+}
+body.torre-home main #sound.music-intro .music-shell .music-body h2#sound-heading{
+ font-size:clamp(28px,2.8vw,39px)!important;
+}
+body.torre-home main #sound.music-intro .music-shell .music-body .approved-sound-note{
+ margin:0 0 8px!important;
+}
+body.torre-home main #sound.music-intro .music-shell .music-art{
+ min-height:285px!important;height:285px!important;max-height:none!important;
+}
+body.torre-home main #sound.music-intro .music-shell .music-body .player-label{
+ position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;
+ clip-path:inset(50%)!important;white-space:nowrap!important;
+}
+body.torre-home main #sound.music-intro .music-shell .music-body .music-status{
+ position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;
+ clip-path:inset(50%)!important;white-space:nowrap!important;
+}
+body.torre-home main #sound.music-intro .music-shell .music-body audio{
+ margin:8px 0 0!important;height:40px!important;
+}
+body.torre-home main #sound.music-intro .music-shell .music-body .approved-music-more{
+ margin-top:5px!important;max-width:100%!important;background:transparent!important;
+}
+body.torre-home main #sound.music-intro .music-shell .music-body .approved-music-more summary{
+ min-height:35px!important;display:inline-flex!important;align-items:center!important;
+ cursor:pointer!important;color:var(--ac-blue)!important;font-size:12px!important;
+ font-weight:680!important;text-decoration:underline!important;text-underline-offset:3px!important;
+}
+body.torre-home main #sound.music-intro .music-shell .music-body .approved-music-more:not([open]) .music-links{
+ display:none!important;
+}
+body.torre-home main #sound.music-intro .music-shell .music-body .approved-music-more .music-links{
+ margin-top:8px!important;
+}
+@media(max-width:760px){
+ body.torre-home main #sound.music-intro .music-shell .music-art{
+  height:178px!important;min-height:178px!important;
+ }
+ body.torre-home main #sound.music-intro .music-shell .music-body{
+  padding:19px 23px 23px!important;
+ }
+}
