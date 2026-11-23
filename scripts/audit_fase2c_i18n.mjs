@@ -31,8 +31,11 @@ function extractObject(src,marker){
  }
  throw Error('Unterminated '+marker);
 }
-const base=vm.runInNewContext('('+extractObject(home,'var base=')+')',{});
-const editorial=vm.runInNewContext('('+extractObject(home,'var editorialCopy=')+')',{});
+const dataObjects={};
+for(const name of ['base','other','editorialStrings','photoDiaryStrings','nextStageStrings',
+ 'foodHomeTranslations','v06HomeStrings','editorialCopy']){
+ dataObjects[name]=vm.runInNewContext('('+extractObject(home,'var '+name+'=')+')',{});
+}
 const context={window:{}};
 vm.runInNewContext(read('gallery/data.js'),context);
 const gallery=context.window.TORREMOLINOS_GALLERY;
@@ -43,8 +46,12 @@ const essentials=['airportTitle','airportText','airportLink','airportChecked','e
  'accessText','accessLink','accessChecked','usefulTitle','usefulLead'];
 const coverage={};
 for(const lang of languages){
- const dict={...base[lang],...editorial[lang]};
- if(!base[lang]&&!editorial[lang])throw Error('Missing all locale dictionaries for '+lang);
+ const root=dataObjects.base[lang]||dataObjects.other[lang];
+ if(!root)throw Error('Missing main language dictionary '+lang);
+ const dict={...root};
+ for(const group of ['editorialStrings','photoDiaryStrings','nextStageStrings',
+  'foodHomeTranslations','v06HomeStrings','editorialCopy'])
+  Object.assign(dict,dataObjects[group][lang]||{});
  const missing=keys.filter(k=>typeof dict[k]!=='string'||!dict[k].trim());
  coverage[lang]={keysInHome:keys.length,resolved:keys.length-missing.length,
   missingKeys:missing,
