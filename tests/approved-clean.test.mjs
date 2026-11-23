@@ -43,5 +43,17 @@ test('translated cards and headings cover all six supported languages',()=>{
 test('PWA includes updated UI and brand asset without breaking offline fallback',()=>{
  for(const name of ['approved-clean-2026.css','approved-clean-2026.js','torremolinos-logo-clean.svg','offline.html'])
   assert.ok(sw.includes(name),name);
- assert.ok(sw.includes('torremolinos-v25'));
+ assert.ok(sw.includes('torremolinos-v26'));
+});
+
+test('chosen Sound image exists, is WebP, and is disclosed as an AI illustration',()=>{
+ const photo=readFileSync(new URL('../assets/photos/sound-headphones-torremolinos.webp',import.meta.url));
+ assert.ok(photo.length>10000,'missing or corrupt Sound image');
+ assert.equal(photo.toString('ascii',0,4),'RIFF');
+ assert.equal(photo.toString('ascii',8,12),'WEBP');
+ assert.match(page,/src="assets\/photos\/sound-headphones-torremolinos\.webp"/);
+ assert.match(page,/Immagine illustrativa generata con IA/);
+ assert.doesNotMatch(page,/src="assets\/photos\/mar-mediterraneo\.webp"/);
+ assert.match(sw,/\.\/assets\/photos\/sound-headphones-torremolinos\.webp/);
+ assert.equal((page.match(/id="torremolinos-audio"/g)||[]).length,1);
 });
