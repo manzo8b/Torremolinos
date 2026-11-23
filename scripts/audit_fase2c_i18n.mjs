@@ -67,7 +67,8 @@ for(const lang of languages)for(const key of ['filterGroup','languageLabel','pre
  if(!gallery.translations[lang]?.[key])missingGallery.push(lang+':'+key);
 const report={schemaVersion:1,date:'2026-11-23',languages,coverage,
  missingGallery,motherTongueReview:'NOT PERFORMED',
- gate:{essentialsComplete:languages.every(l=>coverage[l].missingEssentials.length===0),
+ gate:{homeComplete:languages.every(l=>coverage[l].missingKeys.length===0),
+  essentialsComplete:languages.every(l=>coverage[l].missingEssentials.length===0),
   galleryComplete:missingGallery.length===0},
  limitations:['Missing-key detection cannot establish grammatical quality',
   'Dynamic DOM keys require complementary browser checks',
@@ -78,5 +79,6 @@ writeFileSync(output,JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify({coverage:Object.fromEntries(languages.map(l=>[l,{
   resolved:coverage[l].resolved,total:coverage[l].keysInHome,missing:coverage[l].missingKeys.length
  }])),missingGallery:missingGallery.length,gate:report.gate}));
+assert.ok(report.gate.homeComplete,'Visible Home translations are missing keys');
 assert.ok(report.gate.essentialsComplete,'Essentials copy missing in one or more languages');
 assert.ok(report.gate.galleryComplete,'Gallery language labels are missing');
