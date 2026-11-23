@@ -30,7 +30,7 @@ const selectors={
   agenda:'#agenda-home',
   footer:'footer'
 };
-const ignored=new Set(['.git','node_modules','baseline','artifacts','dist','coverage']);
+const ignored=new Set(['.git','node_modules','baseline','artifacts','dist','coverage','fixtures']);
 function htmlFiles(dir=ROOT){
   const files=[];
   for(const entry of readdirSync(dir,{withFileTypes:true})){
