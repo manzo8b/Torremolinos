@@ -19,7 +19,7 @@ Conservare la micro-app esistente: hero originale, sei lingue (ES/EN/IT/DE/FR/RU
 | G2 Architettura e contenuti | PASS su struttura esistente | Index, route interne, Stories, Agenda, Gallery, Comer, Listen; fonti da riverificare nel tempo |
 | G3 Design e UX writing | PASS su identità documentata, QA visiva NOT TESTED | DESIGN-CONTRACT.md; hero e palette preservate |
 | G4 Implementazione | Preparata in branch | Correzioni metadata, etichette accessibili e offline fallback |
-| G5 QA tecnica | TEST STATICI in CI previsti; browser e dispositivi NOT TESTED in questa fase | `tests/locale-accessibility.test.mjs`, test preesistenti e screenshot via workflow |
+| G5 QA tecnica | PASS CI statico, PASS 41/41 test Node, PASS Chromium responsive; dispositivi fisici NOT TESTED | [Quality checks](https://github.com/manzo8b/Torremolinos/actions/runs/45131405044) · [Product + Chromium](https://github.com/manzo8b/Torremolinos/actions/runs/45131405149) |
 | G6 Lancio | NO-GO | Nessuna autorizzazione a fondere il PR e nessuna verifica conclusiva di tutti i gate |
 | G7 Handover e manutenzione | Da pianificare | Revisione fonti eventi, traduzioni, privacy, gestione contenuti |
 
@@ -38,6 +38,14 @@ Conservare la micro-app esistente: hero originale, sei lingue (ES/EN/IT/DE/FR/RU
 - **Prestazioni:** misurare Lighthouse/Core Web Vitals in condizioni ripetibili, incluse le fotografie e il carico dei CSS.
 - **Accessibilità:** controlli reali con tastiera, VoiceOver/Safari, Android TalkBack/Chrome e zoom 200%. Test statici da soli non certificano WCAG.
 - **Protezione dati e attribuzioni:** rivedere periodicamente privacy, copyright/crediti, provenienza fotografica ed eventuali servizi di terze parti.
+
+## Evidenze raccolte il 23 novembre 2026
+
+- **PASS — GitHub Actions static quality checks:** workflow 45131405044, risultato `success`.
+- **PASS — Node product contract:** 41 test su 41, 0 fallimenti, incluso test per il nuovo sistema di accessibilità multilingue e la pagina offline; job 137547517973.
+- **PASS — Chromium browser smoke:** job 137547518267, risultato `success`; larghezze 360, 390, 768, 1024 e 1440 px, navigazione e schermate interne previste dal test.
+- **Artefatti di screenshot:** archivio `torremolinos-visual-review` associato al workflow, comprensivo di Home e pagine interne in formato desktop e mobile. Controllata una selezione visiva; non equivale a un collaudo manuale completo su tutti i dispositivi.
+- **NOT TESTED:** Safari/iPhone fisico, VoiceOver, Android/TalkBack, Lighthouse/Core Web Vitals su rete reale, revisione madrelingua delle sei lingue e verifica giuridica finale.
 
 ## Verifica di accettazione prima del merge
 
