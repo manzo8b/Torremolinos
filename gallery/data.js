@@ -14,9 +14,9 @@ window.TORREMOLINOS_GALLERY={
         "ru": "Пальмы и море"
       },
       "alt": {
-        "es": "Palmeras y mar",
-        "it": "Palme e mare",
-        "en": "Palm trees and sea",
+        "es": "Palmeras junto al mar en Torremolinos",
+        "it": "Palme vicino al mare a Torremolinos",
+        "en": "Palm trees by the sea in Torremolinos",
         "de": "Palmen am Meer in Torremolinos",
         "fr": "Palmiers au bord de la mer à Torremolinos",
         "ru": "Пальмы у моря в Торремолиносе"
@@ -36,9 +36,9 @@ window.TORREMOLINOS_GALLERY={
         "ru": "За столом"
       },
       "alt": {
-        "es": "A la mesa",
-        "it": "A tavola",
-        "en": "At the table",
+        "es": "Paella servida en una mesa",
+        "it": "Paella servita su una tavola",
+        "en": "Paella served at a table",
         "de": "Paella auf einem Tisch",
         "fr": "Paella servie sur une table",
         "ru": "Паэлья на столе"
@@ -58,9 +58,9 @@ window.TORREMOLINOS_GALLERY={
         "ru": "Цветы у моря"
       },
       "alt": {
-        "es": "Flores junto al mar",
-        "it": "Fiori sul mare",
-        "en": "Flowers by the sea",
+        "es": "Flores junto al mar en Torremolinos",
+        "it": "Fiori vicino al mare a Torremolinos",
+        "en": "Flowers by the sea in Torremolinos",
         "de": "Blumen an der Küste von Torremolinos",
         "fr": "Fleurs près de la mer à Torremolinos",
         "ru": "Цветы у моря в Торремолиносе"
@@ -80,9 +80,9 @@ window.TORREMOLINOS_GALLERY={
         "ru": "Прибытие в Торремолинос"
       },
       "alt": {
-        "es": "Llegar a Torremolinos",
-        "it": "Arrivare a Torremolinos",
-        "en": "Arriving in Torremolinos",
+        "es": "Entorno de la estación de Torremolinos",
+        "it": "Zona della stazione di Torremolinos",
+        "en": "Station area in Torremolinos",
         "de": "Bahnhofsbereich von Torremolinos",
         "fr": "Environs de la gare de Torremolinos",
         "ru": "Район железнодорожной станции Торремолиноса"
@@ -102,9 +102,9 @@ window.TORREMOLINOS_GALLERY={
         "ru": "Площадь на солнце"
       },
       "alt": {
-        "es": "La plaza al sol",
-        "it": "La piazza al sole",
-        "en": "The sunlit square",
+        "es": "Plaza iluminada por el sol en Torremolinos",
+        "it": "Piazza illuminata dal sole a Torremolinos",
+        "en": "Sunlit square in Torremolinos",
         "de": "Ein sonniger Platz in Torremolinos",
         "fr": "Une place ensoleillée à Torremolinos",
         "ru": "Солнечная площадь в Торремолиносе"
@@ -124,9 +124,9 @@ window.TORREMOLINOS_GALLERY={
         "ru": "Вкус моря"
       },
       "alt": {
-        "es": "El sabor del mar",
-        "it": "Il sapore del mare",
-        "en": "A taste of the sea",
+        "es": "Espetos de la gastronomía costera",
+        "it": "Espetos della cucina costiera",
+        "en": "Espetos from the coastal cuisine",
         "de": "Traditionelle Espetos aus der Küstenküche",
         "fr": "Espetos de la cuisine côtière traditionnelle",
         "ru": "Традиционные эспетос местной кухни"
@@ -146,9 +146,9 @@ window.TORREMOLINOS_GALLERY={
         "ru": "За общим столом"
       },
       "alt": {
-        "es": "Una mesa compartida",
-        "it": "Una tavola condivisa",
-        "en": "A shared table",
+        "es": "Pizza sobre una mesa compartida",
+        "it": "Pizza su una tavola condivisa",
+        "en": "Pizza on a shared table",
         "de": "Pizza auf einem Tisch",
         "fr": "Pizza sur une table",
         "ru": "Пицца на столе"
@@ -168,9 +168,9 @@ window.TORREMOLINOS_GALLERY={
         "ru": "Закат"
       },
       "alt": {
-        "es": "Sunset · AI",
-        "it": "Sunset · AI",
-        "en": "Sunset · AI",
+        "es": "Ilustración de una puesta de sol creada con IA",
+        "it": "Illustrazione di un tramonto generata con IA",
+        "en": "AI-generated sunset illustration",
         "de": "KI-generierte Illustration eines Sonnenuntergangs",
         "fr": "Illustration générée par IA d'un coucher de soleil",
         "ru": "Изображение заката, созданное ИИ"
@@ -191,9 +191,9 @@ window.TORREMOLINOS_GALLERY={
         "ru": "Синий час"
       },
       "alt": {
-        "es": "Blue hour · AI",
-        "it": "Blue hour · AI",
-        "en": "Blue hour · AI",
+        "es": "Ilustración de la hora azul creada con IA",
+        "it": "Illustrazione dell'ora blu generata con IA",
+        "en": "AI-generated blue-hour illustration",
         "de": "KI-generierte Illustration der blauen Stunde",
         "fr": "Illustration générée par IA de l'heure bleue",
         "ru": "Изображение синего часа, созданное ИИ"
