@@ -57,7 +57,7 @@ function update(){
  empty.hidden=shown>0||pending;
 }
 function setLang(next){
- lang=languages[next]?next:"es";document.documentElement.lang=lang;$("#lang").value=lang;$("#lang").setAttribute("aria-label",tr("languageLabel"));$("#previousImage").setAttribute("aria-label",tr("previous"));$("#nextImage").setAttribute("aria-label",tr("next"));
+ lang=languages[next]?next:"es";document.documentElement.lang=lang;$("#lang").value=lang;$("#lang").setAttribute("aria-label",tr("languageLabel"));document.querySelector(".filterbar")?.setAttribute("aria-label",tr("filterGroup"));$("#previousImage").setAttribute("aria-label",tr("previous"));$("#nextImage").setAttribute("aria-label",tr("next"));
  try{localStorage.setItem("torremolinos.lang",lang)}catch(e){}
  document.querySelectorAll("[data-t]").forEach(e=>e.textContent=tr(e.dataset.t));
  for(const entry of source.images){
