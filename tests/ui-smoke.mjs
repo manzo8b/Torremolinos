@@ -34,6 +34,14 @@ try{
     const response=await page.goto(base+'/?lang=it',{waitUntil:'domcontentloaded',timeout:30000});
     assert.equal(response.status(),200);
     await page.locator('#cards .place').first().waitFor({timeout:15000});
+    if(width===390){
+      await page.waitForTimeout(120);
+      assert.equal((await page.locator('#clean-access .approved-feature-caption strong').first().innerText()).trim(),'Mangiare','IT Home still displays Spanish navigation');
+      assert.equal((await page.locator('.hero-tagline').innerText()).trim(),'Mare, sapori, eventi e storie sulla Costa del Sol','IT hero still displays fallback copy');
+      assert.equal((await page.locator('#stories .magazine-card.primary h3').innerText()).trim(),'Torremolinos, molto più che sole e spiaggia','IT editorial heading still Spanish');
+      assert.equal(await page.locator('#stories .cover :is(.cover-label,.photoattribution)').count(),0,'photographic overlays were not moved into editorial text');
+      assert.equal(await page.locator('#cards .place-art .chip').count(),0,'category label remains over a photograph');
+    }
     const doc=await page.evaluate(()=>({
       viewport:window.innerWidth,
       page:document.documentElement.scrollWidth,
