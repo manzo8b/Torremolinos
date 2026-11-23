@@ -30,6 +30,7 @@ Le tre card esistenti (Renfe C1, emergenze 112, accessibilità spiagge) conserva
 - Prima lettura: tutti gli **109 token visibili in ES/EN/IT**, mentre DE/FR/RU erano a **104/109**, con cinque etichette mancanti per lingua (`trust1`, `trust2`, `trust3`, `mapLead`, `mapPrivacy`). Il ramo ora integra le **15 traduzioni mancanti**; l'audit successivo deve confermare **109/109 per tutte e sei le lingue**.
 - Prima lettura axe-core (viewport 390 e 1280): **1 categoria di violazione WCAG sul contrasto cromatico nella Home** (25/24 nodi a seconda della viewport), **0 violazioni automatiche nella Gallery**. Non dichiarare conformità WCAG finché i nodi non risultano risolti e non viene effettuata una verifica manuale.
 - Correzione CSS mirata su etichette di fiducia, pulsanti delle fonti nei luoghi, testi verdi in Stories/piano e voce attiva mobile. Nuovi colori verificati aritmeticamente sullo sfondo osservato con contrasto > 4,5:1, senza introdurre nuove tinte principali, layout o modifiche alle fotografie.
+- Una prima esecuzione dopo il cambio colori ha ridotto i nodi con problemi di contrasto in Home da 24/25 a 15. La causa dei nodi rimanenti era la maggiore specificità di vecchie regole CSS con ID e `!important`; applicato un override mirato, sottoposto all'ultimo test axe-core (non dichiarare zero violazioni prima del suo esito).
 - La verifica di regressione axe e gli screenshot dopo il cambio CSS sono parte del gate della PR #19, non una certificazione ufficiale.
 
 ## C-17 — Dossier Stories
@@ -42,7 +43,7 @@ Sui cinque articoli attuali, metadati `BreadcrumbList` coerenti con canonical ef
 - `node scripts/audit_fase2c_i18n.mjs`
 - `node tests/fase2-content-browser.mjs && node tests/fase2b-browser.mjs && node tests/fase2c-browser.mjs`
 - Workflow `content-coherence.yml` con browser e rapporto accessibility + screenshots. Test di qualità e product contract separati, già attivi.
-- La build PWA passa a `torremolinos-v31` per non mantenere risorse HTML/CSS/JS precedenti in cache, incluse le correzioni di contrasto.
+- La build PWA passa a `torremolinos-v32` per non mantenere risorse HTML/CSS/JS precedenti in cache, incluse le correzioni di contrasto.
 - **Nessun merge o deploy automatico**: la PR #19 rimane in draft, il deploy Pages continua da `main`.
 
 ## Punti non risolti
