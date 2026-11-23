@@ -1,0 +1,621 @@
+/* TORREMOLINOS / approved visual direction — November 2026
+   Apple Clean White + compact Sound. User-approved visual direction, not Apple branding.
+   This additive layer is intentionally limited to the Home until its review is accepted.
+*/
+:root{
+ --ac-paper:#FFFFFF;--ac-ink:#10244B;--ac-muted:#596579;--ac-blue:#096BCB;
+ --ac-blue-dark:#0758AE;--ac-soft:#F3F7FB;--ac-line:#E3EAF3;
+ --ac-glow:0 12px 32px rgba(25,61,113,.075);--ac-radius:23px;
+}
+body.torre-home{background:var(--ac-paper)!important;color:var(--ac-ink)!important;
+ font-family:-apple-system,BlinkMacSystemFont,"DM Sans",system-ui,sans-serif!important}
+body.torre-home .shell{max-width:1432px!important;width:calc(100% - clamp(36px,5.2vw,96px))!important}
+body.torre-home :is(h1,h2,h3,p,strong,small){text-shadow:none!important}
+body.torre-home :is(h1,h2,h3){font-family:-apple-system,BlinkMacSystemFont,"DM Sans",system-ui,sans-serif!important}
+body.torre-home .topbar{background:#FFFFFFF2!important;border-bottom:1px solid #EDF1F7!important;
+ backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:none!important}
+body.torre-home .topinner{min-height:82px!important;max-width:1432px!important;gap:22px!important}
+body.torre-home .topbar .brand-logo-img{width:clamp(186px,18.5vw,264px)!important;height:auto!important}
+body.torre-home .topbar .navlinks{display:flex!important;gap:clamp(14px,2.4vw,36px)!important;
+ align-items:center!important;margin-inline:auto!important}
+body.torre-home .navlinks a{color:var(--ac-ink)!important;font-size:15px!important;font-weight:660!important;
+ text-decoration:none!important;padding:10px 2px!important;border-bottom:2px solid transparent}
+body.torre-home .navlinks a:is(:hover,:focus-visible),body.torre-home .navlinks a.is-active{
+ color:var(--ac-blue)!important;border-bottom-color:var(--ac-blue)!important}
+body.torre-home .langwrap{margin:0!important;background:#FFFFFF!important;
+ border:1px solid var(--ac-line)!important;border-radius:999px!important;padding:5px 12px!important;color:var(--ac-ink)!important}
+body.torre-home .langwrap select{color:var(--ac-ink)!important;min-height:35px!important}
+body.torre-home :is(a,button,select,input):focus-visible{outline:3px solid var(--ac-blue)!important;outline-offset:4px!important}
+/* Photographic hero: image is clean; all editorial text lives below it */
+body.torre-home .hero.shell{display:flex!important;flex-direction:column!important;gap:0!important;
+ padding:0!important;margin-top:0!important;max-width:none!important;width:100%!important}
+body.torre-home .hero .hero-grid{order:0!important;display:block!important;max-width:none!important;
+ width:100%!important;margin:0!important}
+body.torre-home .hero .hero-photo{width:100%!important;min-height:0!important;
+ height:clamp(270px,24vw,420px)!important;border-radius:0 0 18px 18px!important;
+ overflow:hidden!important;position:relative!important;isolation:isolate;background:#D9EAF7!important}
+body.torre-home .hero .hero-photo:before{content:""!important;display:block!important;position:absolute!important;
+ inset:0!important;z-index:0!important;opacity:1!important;
+ background-image:url("assets/photos/hero-apple-2026.webp")!important;
+ background-size:cover!important;background-position:center 57%!important;background-repeat:no-repeat!important}
+body.torre-home .hero :is(.photo-copy,.circle,.hero-photo .photo-copy,.hero-photo .circle){display:none!important}
+body.torre-home .hero .hero-heading{order:1!important;position:static!important;
+ margin:0 auto!important;padding:clamp(23px,2.8vw,44px) 20px 0!important;
+ max-width:1020px!important;text-align:center!important}
+body.torre-home .hero .hero-heading .eyebrow{display:none!important}
+body.torre-home .hero .hero-main-title{color:var(--ac-ink)!important;
+ font-size:clamp(43px,5.2vw,76px)!important;line-height:1.06!important;
+ font-weight:780!important;letter-spacing:-.054em!important;margin:0 0 9px!important}
+body.torre-home .hero .hero-tagline{color:var(--ac-muted)!important;
+ font-size:clamp(16px,1.7vw,23px)!important;line-height:1.42!important;margin:0!important}
+body.torre-home .hero .hero-after{order:2!important;display:block!important;margin:0 auto!important;
+ padding:12px 16px 0!important;min-height:0!important;background:transparent!important;
+ border:0!important;box-shadow:none!important}
+body.torre-home .hero .hero-after-copy{display:none!important}
+body.torre-home .hero .hero-cta-row{display:flex!important;gap:12px!important;justify-content:center!important;align-items:center!important}
+body.torre-home .hero .hero-cta-row a{border:1px solid var(--ac-blue)!important;background:var(--ac-blue)!important;
+ color:#FFFFFF!important;font-size:13px!important;font-weight:660!important;padding:9px 18px!important;
+ min-height:42px!important;box-shadow:none!important;border-radius:999px!important}
+body.torre-home .hero .hero-cta-row a:last-child{background:#FFFFFF!important;color:var(--ac-blue)!important}
+/* Search remains genuinely accessible, while the music is presented once in its own module */
+body.torre-home .hero-tools{padding:18px 0 8px!important;margin-top:0!important;
+ gap:15px!important;min-height:0!important;justify-content:center!important}
+body.torre-home .hero-tools .searchbar{background:#FFFFFF!important;border:1px solid var(--ac-line)!important;
+ box-shadow:none!important;border-radius:999px!important;max-width:540px!important;margin:0!important}
+body.torre-home .hero-tools .searchbar button{background:var(--ac-blue)!important;color:white!important;border-radius:999px!important}
+body.torre-home .hero-tools .hero-sound-shortcut{display:none!important}
+body.torre-home .trust{justify-content:center!important;gap:8px 22px!important;font-size:11px!important;
+ font-weight:550!important;color:#7B8797!important;padding:7px 0 12px!important}
+body.torre-home .trust span:before{color:var(--ac-blue)!important}
+/* Four destination cards from the approved desktop mockup */
+body.torre-home #clean-access{margin:26px auto 0!important;display:grid!important;
+ grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:18px!important;align-items:stretch!important}
+body.torre-home .approved-feature-card{display:block!important;overflow:hidden!important;
+ min-width:0!important;color:var(--ac-ink)!important;background:#FFFFFF!important;
+ text-decoration:none!important;border:1px solid var(--ac-line)!important;
+ border-radius:20px!important;box-shadow:var(--ac-glow)!important;
+ transition:transform .28s ease,box-shadow .28s ease!important}
+body.torre-home .approved-feature-card img{width:100%!important;height:clamp(125px,11.8vw,185px)!important;
+ display:block!important;object-fit:cover!important;object-position:center!important}
+body.torre-home .approved-feature-caption{padding:15px 16px 17px!important;display:flex!important;
+ align-items:center!important;gap:12px!important;min-height:79px!important;background:#FFFFFF!important}
+body.torre-home .approved-feature-icon{font-size:23px!important;color:var(--ac-blue)!important;
+ display:grid;place-items:center;flex:0 0 27px}
+body.torre-home .approved-feature-caption>span:nth-child(2){display:grid;gap:2px;min-width:0}
+body.torre-home .approved-feature-caption strong{font-size:19px!important;line-height:1.14!important;
+ font-weight:760!important;color:var(--ac-ink)!important;letter-spacing:-.035em!important}
+body.torre-home .approved-feature-caption small{font-size:12px!important;color:var(--ac-muted)!important;
+ font-weight:480!important;line-height:1.35!important}
+body.torre-home .approved-feature-arrow{font-size:27px;color:var(--ac-blue)!important;margin-left:auto!important}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){
+ body.torre-home .approved-feature-card:hover{transform:translateY(-4px)!important;box-shadow:0 20px 44px #10244B1C!important}
+}
+/* Compact Sound = single light panel, text and controls OUTSIDE the photo */
+body.torre-home #sound.music-intro{margin:24px auto 0!important;padding:0!important}
+body.torre-home main #sound .music-shell{display:grid!important;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)!important;
+ gap:0!important;background:#ECF3FA!important;color:var(--ac-ink)!important;border-radius:22px!important;
+ min-height:245px!important;max-height:none!important;overflow:hidden!important;box-shadow:none!important}
+body.torre-home main #sound .music-shell .music-body{min-width:0!important;padding:25px clamp(23px,3.3vw,46px)!important;
+ display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important}
+body.torre-home main #sound .music-shell .music-body>.eyebrow{color:var(--ac-blue)!important;font-size:11px!important;
+ letter-spacing:.09em!important;font-weight:760!important;margin-bottom:5px!important}
+body.torre-home main #sound .music-shell .music-body h2{color:var(--ac-ink)!important;font-size:clamp(28px,3.1vw,44px)!important;
+ margin:0 0 2px!important;letter-spacing:-.05em!important;line-height:1.05!important}
+body.torre-home main #sound .music-shell .music-body .approved-sound-lead{color:var(--ac-ink)!important;font-size:16px!important;
+ line-height:1.42!important;margin:4px 0 7px!important}
+body.torre-home main #sound .music-shell .approved-sound-note{font-size:12px!important;color:var(--ac-muted)!important;
+ line-height:1.4!important;margin:0 0 10px!important}
+body.torre-home main #sound .music-shell .approved-sound-play button{display:inline-flex;align-items:center!important;justify-content:center!important;
+ min-height:42px!important;background:var(--ac-blue)!important;color:#FFFFFF!important;
+ padding:9px 21px!important;border-radius:999px!important;border:0!important;
+ font-weight:720!important;font-size:14px!important}
+body.torre-home main #sound .music-shell .player-label{font-size:11px!important;color:var(--ac-muted)!important;
+ margin:9px 0 3px!important}
+body.torre-home main #sound .music-shell audio{width:min(100%,370px)!important;min-height:35px!important;
+ height:38px!important;margin:0!important;display:block!important}
+body.torre-home main #sound .music-shell .music-status{font-size:10px!important;color:var(--ac-muted)!important;
+ margin:4px 0 0!important}
+body.torre-home main #sound .music-shell .music-links{display:flex!important;flex-wrap:wrap!important;gap:8px 14px!important;
+ margin:7px 0 0!important}
+body.torre-home main #sound .music-shell .music-links a{font-size:11px!important;line-height:1.3!important;
+ background:transparent!important;color:var(--ac-blue)!important;min-height:0!important;
+ padding:0!important;border:0!important;text-decoration:underline!important;text-underline-offset:2px!important}
+body.torre-home main #sound .music-shell .music-art{position:relative!important;width:100%!important;height:100%!important;
+ min-height:245px!important;border:0!important;box-shadow:none!important;overflow:hidden!important;padding:0!important;
+ background:#DFEFF9!important}
+body.torre-home main #sound .music-shell .music-art img{width:100%!important;height:100%!important;position:absolute!important;
+ inset:0!important;object-fit:cover!important;object-position:center!important;
+ border-radius:0!important}
+body.torre-home main #sound .music-shell .music-art .music-album-fallback{background:#D7E8F4!important;color:var(--ac-ink)!important}
+body.torre-home main #sound .music-shell .music-art small{display:none!important}
+/* Pure-white chapters; orange and cream never occupy whole blocks */
+body.torre-home :is(#discover.section.shell,#explore.section.shell,#photodiary.photo-diary.shell,
+ #stories.magazine.shell,#useful.section.shell){
+ background:#FFFFFF!important;background-image:none!important;
+ border:0!important;border-radius:0!important;
+ padding:clamp(22px,3vw,42px) 0!important;
+ margin-top:clamp(58px,7.2vw,106px)!important;box-shadow:none!important}
+body.torre-home #discover .shortcut{background:#F5F8FC!important;border:1px solid var(--ac-line)!important;
+ min-height:164px!important;border-radius:22px!important;box-shadow:none!important}
+body.torre-home #discover .shortcut :is(strong,small){color:var(--ac-ink)!important}
+body.torre-home #explore .place{background:#FFFFFF!important;border:1px solid var(--ac-line)!important;
+ box-shadow:var(--ac-glow)!important}
+body.torre-home .nogalera-feature,
+body.torre-home #pride .feature,
+body.torre-home .gallery-feature.shell,
+body.torre-home #agenda-home,
+body.torre-home .editorial-bridge.shell,
+body.torre-home .photo-diary,
+body.torre-home .community,
+body.torre-home .directory-teaser,
+body.torre-home .mapbox{
+ background:#F4F8FC!important;background-image:none!important;color:var(--ac-ink)!important;
+ border:1px solid var(--ac-line)!important;border-radius:25px!important}
+body.torre-home .nogalera-feature :is(h2,p,small),
+body.torre-home #pride .feature :is(h2,p),
+body.torre-home .gallery-feature :is(h2,p),
+body.torre-home #agenda-home :is(h2,p,small),
+body.torre-home .editorial-bridge.shell :is(h2,p,span),
+body.torre-home .community :is(h2,p),
+body.torre-home .directory-teaser :is(strong,small,b){color:var(--ac-ink)!important}
+body.torre-home #pride .feature-art{background:#E9F3FC!important;color:var(--ac-blue)!important}
+body.torre-home #pride .feature-art :is(span,strong){color:var(--ac-blue)!important}
+body.torre-home #plan .plan-head,
+body.torre-home #plan .plan-workspace,
+body.torre-home #plan .plan-choice{background:#F4F8FC!important;color:var(--ac-ink)!important}
+body.torre-home #stories .l8-season-promo,
+body.torre-home #stories .l8-season-promo-copy,
+body.torre-home #stories .magazine-card:not(.primary),
+body.torre-home #useful .infocard,
+body.torre-home #photodiary .photo-diary-grid figure figcaption{
+ background:#F7F9FC!important;color:var(--ac-ink)!important}
+body.torre-home .magazine-card.primary,.torre-home .magazine-card.primary .magazine-text{
+ background:#FFFFFF!important}
+body.torre-home .agenda-home-copy{background:transparent!important}
+body.torre-home .gallery-feature .gallery-feature-body{background:#F4F8FC!important}
+/* Blue is used for actions; no orange-filled slides or accent text over media */
+body.torre-home :is(.hero-cta-main,.hero-cta-secondary,.agenda-home-btn,
+ .editorial-bridge-action,.gallery-feature-body a,.community .darkbtn,
+ #pride button,.music-links a,.magazine-link,.plan-map-link,.plan-share,
+ #loadMap,#mapStart,.plan-explore-link,.gallery-promo-link a,
+ .directory-teaser>b,.l8-season-promo-copy em){
+ border-radius:999px!important}
+body.torre-home :is(.agenda-home-btn,.editorial-bridge-action,.gallery-feature-body a,
+ .community .darkbtn,#pride button,.plan-map-link,#loadMap,#mapStart,.plan-share,
+ .gallery-promo-link a,.l8-season-promo-copy em){
+ background:var(--ac-blue)!important;color:#FFFFFF!important;border-color:var(--ac-blue)!important;
+ box-shadow:none!important}
+body.torre-home :is(.magazine-link,.plan-explore-link,.directory-teaser>b){
+ color:var(--ac-blue)!important}
+body.torre-home :is(.eyebrow,.zone,.source,.plan-section-kicker,.magazine-text small){color:var(--ac-blue)!important}
+body.torre-home .footer{background:#FFFFFF!important;color:var(--ac-ink)!important;
+ border-top:1px solid var(--ac-line)!important}
+body.torre-home .footer :is(p,a,small,strong){color:var(--ac-ink)!important}
+body.torre-home .footer a:hover{color:var(--ac-blue)!important}
+body.torre-home .mobilebar{background:#FFFFFFF5!important;border-top:1px solid var(--ac-line)!important}
+body.torre-home .mobilebar .active{background:#EAF3FE!important;color:var(--ac-blue)!important}
+/* All photographic captions and source credits sit on paper, never on photographs */
+body.torre-home :is(.hero-photo,.nogalera-feature-photo,.gallery-feature-img,
+ .music-art,.agenda-home-photo,.magazine-card .cover,.photo-diary figure,
+ .approved-feature-card img){isolation:isolate}
+body.torre-home .magazine-card .cover :is(.cover-label,.photoattribution),
+body.torre-home .nogalera-feature-photo small,
+body.torre-home .gallery-feature-img .ai-badge,
+body.torre-home .agenda-home-photo small{display:none!important}
+body.torre-home .photo-credit-outside{display:block!important;font-size:11px!important;
+ color:#617185!important;line-height:1.4!important;padding:7px 0!important;letter-spacing:0!important}
+body.torre-home .magazine-card .magazine-text .cover-label{display:block!important;
+ font-size:11px!important;color:var(--ac-blue)!important;margin-bottom:8px!important;
+ background:transparent!important;position:static!important}
+body.torre-home .magazine-card .magazine-text .photoattribution{display:block!important;
+ position:static!important;color:#617185!important;background:none!important;
+ font-size:11px!important;padding:5px 0 0!important}
+body.torre-home .gallery-feature-body .ai-badge{display:inline-block!important;position:static!important;
+ padding:4px 10px!important;border-radius:999px!important;font-size:11px!important;
+ background:#FFFFFF!important;color:var(--ac-blue)!important}
+body.torre-home #photodiary .photo-diary-grid figcaption{position:static!important}
+/* Coherent breakpoints: four cards to two, then single column */
+@media(max-width:950px){
+ body.torre-home .topbar .navlinks{gap:13px!important}
+ body.torre-home .topbar .navlinks a{font-size:13px!important}
+ body.torre-home #clean-access{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ body.torre-home .approved-feature-card img{height:clamp(150px,20vw,220px)!important}
+}
+@media(max-width:760px){
+ body.torre-home .topinner{min-height:67px!important}
+ body.torre-home .topbar .navlinks{display:none!important}
+ body.torre-home .hero .hero-photo{height:clamp(230px,59vw,340px)!important;
+ border-radius:0 0 17px 17px!important}
+ body.torre-home .hero .hero-photo:before{
+ background-image:url("assets/photos/hero-apple-2026-mobile.webp")!important;
+ background-position:center center!important}
+ body.torre-home .hero .hero-main-title{font-size:clamp(38px,9vw,56px)!important}
+ body.torre-home .hero .hero-tagline{font-size:16px!important}
+ body.torre-home .hero .hero-cta-row{flex-wrap:wrap!important}
+ body.torre-home .hero-tools{flex-direction:column!important}
+ body.torre-home .hero-tools .searchbar{width:min(100%,560px)!important}
+ body.torre-home #clean-access{gap:12px!important;margin-top:17px!important}
+ body.torre-home .approved-feature-caption{min-height:85px!important;padding:14px!important;gap:6px!important}
+ body.torre-home .approved-feature-icon{font-size:21px!important;flex-basis:21px}
+ body.torre-home .approved-feature-caption strong{font-size:17px!important}
+ body.torre-home .approved-feature-caption small{font-size:11px!important}
+ body.torre-home .approved-feature-arrow{font-size:21px!important}
+ body.torre-home main #sound .music-shell{display:flex!important;flex-direction:column-reverse!important}
+ body.torre-home main #sound .music-shell .music-art{height:180px!important;min-height:180px!important}
+ body.torre-home main #sound .music-shell .music-body{padding:25px!important}
+ body.torre-home main #sound .music-shell .music-body h2{font-size:33px!important}
+ body.torre-home .editorial-bridge.shell{padding:26px!important}
+ body.torre-home .plan-journey{margin:0 14px 14px!important}
+}
+@media(max-width:420px){
+ body.torre-home #clean-access{grid-template-columns:1fr 1fr!important}
+ body.torre-home .approved-feature-card img{height:110px!important}
+ body.torre-home .approved-feature-caption{align-items:start!important;gap:5px!important}
+ body.torre-home .approved-feature-caption strong{font-size:16px!important}
+ body.torre-home .approved-feature-icon{display:none!important}
+ body.torre-home .approved-feature-arrow{font-size:18px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ body.torre-home .approved-feature-card{transition:none!important;transform:none!important}
+}
+
+/* Dynamic category labels remain discoverable but never print over a photograph */
+body.torre-home #explore .place-art .chip{display:none!important}
+body.torre-home #explore .place-body .approved-place-chip{
+ display:inline-flex!important;position:static!important;top:auto!important;left:auto!important;
+ align-self:flex-start!important;max-width:100%!important;margin:0 0 9px!important;
+ border-radius:999px!important;background:#EDF4FC!important;color:var(--ac-blue)!important;
+ padding:5px 11px!important;font-size:11px!important;font-weight:740!important;
+}
+
+/* Intentional cascade: these selectors match the deeply scoped legacy v6 Sound declarations. */
+
+/* Legacy component-authority overrides. Match their full specificity instead
+   of leaving hidden orange/green rules active after the approved restyle. */
+body.torre-home main > section.editorial-bridge.shell{
+ background:#F4F8FC!important;background-image:none!important;color:var(--ac-ink)!important;
+ border:1px solid var(--ac-line)!important;
+}
+body.torre-home main > section.editorial-bridge.shell :is(h2,p,span){
+ color:var(--ac-ink)!important;opacity:1!important;
+}
+body.torre-home main > section.editorial-bridge.shell a.editorial-bridge-action{
+ background:var(--ac-blue)!important;color:#FFFFFF!important;border:0!important;
+}
+body.torre-home main #agenda-home.agenda-home.shell,
+body.torre-home main #agenda-home .agenda-home-copy{
+ background:#F4F8FC!important;background-image:none!important;
+}
+body.torre-home main #agenda-home .agenda-home-copy :is(h2,p,small,.eyebrow){
+ color:var(--ac-ink)!important;
+}
+body.torre-home main #agenda-home .agenda-home-copy a.agenda-home-btn{
+ background:var(--ac-blue)!important;color:#FFFFFF!important;border:0!important;
+}
+body.torre-home main > section.gallery-feature.shell,
+body.torre-home main > section.gallery-feature.shell .gallery-feature-body{
+ background:#F4F8FC!important;background-image:none!important;color:var(--ac-ink)!important;
+}
+body.torre-home main > section.gallery-feature.shell .gallery-feature-body :is(h2,p){
+ color:var(--ac-ink)!important;
+}
+body.torre-home main > section.gallery-feature.shell .gallery-feature-body a{
+ background:var(--ac-blue)!important;color:#FFFFFF!important;border:0!important;
+}
+body.torre-home main #sound .music-shell .music-body :is(h2,p,small,label,span,a:not(.music-links a)){
+ color:var(--ac-ink)!important;
+}
+body.torre-home main #sound .music-shell .music-body .approved-sound-credit{
+ color:#617185!important;background:none!important;font-size:11px!important;
+ margin-top:8px!important;padding:0!important;position:static!important;
+}
+body.torre-home main #sound .music-shell .music-body .approved-sound-play button{
+ background:var(--ac-blue)!important;color:#FFFFFF!important;
+}
+body.torre-home main #sound .music-shell .music-body .music-links a,
+body.torre-home main #sound .music-shell .music-body .music-links a:first-child{
+ display:inline-flex!important;background:transparent!important;color:var(--ac-blue)!important;
+ padding:0!important;min-height:0!important;border-radius:0!important;
+ font-size:11px!important;text-decoration:underline!important;
+}
+body.torre-home main #sound .music-shell .music-art {
+ background:#D9EBF9!important;min-height:245px!important;
+}
+body.torre-home main #sound .music-shell .music-body {
+ background:#ECF3FA!important;color:var(--ac-ink)!important;
+}
+body.torre-home main #sound .music-shell {
+ background:#ECF3FA!important;color:var(--ac-ink)!important;
+}
+body.torre-home main #sound .music-shell .music-body h2{
+ color:var(--ac-ink)!important;font-size:clamp(28px,3.1vw,44px)!important;
+}
+body.torre-home main #sound .music-shell .music-body .approved-sound-lead{
+ color:var(--ac-ink)!important;
+}
+@media(max-width:760px){
+ body.torre-home main #sound .music-shell .music-art{height:180px!important;min-height:180px!important}
+}
+
+/* Exact-match override of legacy :is() selectors whose a:not() branch adds specificity. */
+body.torre-home main #sound.music-intro .music-shell .music-body :is(h2,p,small,label,span,a:not(.music-links a)){
+ color:var(--ac-ink)!important;text-shadow:none!important;opacity:1!important;
+}
+body.torre-home main #sound.music-intro .music-shell .music-body h2#sound-heading{
+ color:var(--ac-ink)!important;
+}
+body.torre-home main #sound.music-intro .music-shell .music-body .eyebrow{
+ color:var(--ac-blue)!important;
+}
+body.torre-home .nogalera-feature.shell .nogalera-feature-copy :is(h2,p,small,span,.eyebrow){
+ color:var(--ac-ink)!important;opacity:1!important;
+}
+
+body.torre-home main #sound.music-intro .music-shell .music-body small.approved-sound-credit{
+ color:#617185!important;background:transparent!important;opacity:1!important;
+}
+
+/* HERO RESET / do not inherit the old 640px green single-layer photograph hero */
+body.torre-home main > section.hero.shell{
+ display:flex!important;flex-direction:column!important;grid-template-columns:none!important;
+ min-height:0!important;height:auto!important;
+ background:#FFFFFF!important;background-color:#FFFFFF!important;background-image:none!important;
+ box-shadow:none!important;border-radius:0!important;overflow:visible!important;
+ margin-top:0!important;padding:0!important;
+}
+body.torre-home main > section.hero.shell > .hero-grid{
+ display:block!important;order:0!important;
+ min-height:0!important;height:auto!important;aspect-ratio:auto!important;
+ width:100%!important;margin:0!important;
+ background:#FFFFFF!important;background-color:#FFFFFF!important;
+ border:0!important;border-radius:0!important;overflow:hidden!important;
+}
+body.torre-home main > section.hero.shell > .hero-grid > .hero-photo{
+ display:block!important;position:relative!important;
+ height:clamp(270px,24vw,420px)!important;min-height:0!important;
+ aspect-ratio:auto!important;max-height:420px!important;
+ background:#D9EAF7!important;border-radius:0 0 18px 18px!important;
+}
+body.torre-home main > section.hero.shell > .hero-grid > .hero-photo::after{
+ display:none!important;content:none!important;background:none!important;
+}
+body.torre-home main > section.hero.shell > .hero-heading{
+ order:1!important;position:static!important;grid-area:auto!important;z-index:auto!important;
+ min-height:0!important;height:auto!important;
+ padding:26px 20px 0!important;margin:0 auto!important;
+ width:100%!important;max-width:1100px!important;
+ background:#FFFFFF!important;background-color:#FFFFFF!important;background-image:none!important;
+ align-self:center!important;justify-self:center!important;pointer-events:auto!important;
+ text-align:center!important;
+}
+body.torre-home main > section.hero.shell > .hero-after{
+ order:2!important;position:static!important;grid-area:auto!important;align-self:center!important;
+ height:auto!important;min-height:0!important;
+ display:block!important;background:#FFFFFF!important;background-color:#FFFFFF!important;
+ background-image:none!important;margin:0 auto!important;padding:13px 16px 0!important;
+ border:0!important;box-shadow:none!important;pointer-events:auto!important;
+}
+body.torre-home main > section.hero.shell > .hero-heading .hero-main-title{
+ color:var(--ac-ink)!important;text-shadow:none!important;white-space:normal!important;
+ text-transform:none!important;font-size:clamp(43px,5.2vw,76px)!important;
+ line-height:1.08!important;letter-spacing:-.054em!important;
+ margin:0 0 9px!important;
+}
+body.torre-home main > section.hero.shell > .hero-heading .hero-tagline{
+ color:var(--ac-muted)!important;text-shadow:none!important;font-size:clamp(16px,1.7vw,23px)!important;
+ line-height:1.42!important;margin:0!important;max-width:100%!important;
+}
+body.torre-home main > section.hero.shell > .hero-after .hero-cta-row{
+ justify-content:center!important;align-items:center!important;
+}
+body.torre-home .topbar .navlinks a{
+ display:inline-flex!important;align-items:center!important;visibility:visible!important;
+}
+@media(max-width:760px){
+ body.torre-home main > section.hero.shell > .hero-grid > .hero-photo{
+  height:clamp(230px,59vw,340px)!important;max-height:340px!important;
+ }
+ body.torre-home main > section.hero.shell > .hero-heading{
+  padding:23px 17px 0!important;
+ }
+ body.torre-home main > section.hero.shell > .hero-after{
+  padding:13px 16px 0!important;
+ }
+ body.torre-home .topbar .navlinks a{display:none!important}
+}
+
+/* Inner green/orange advertising-style slides converted into neutral editorial modules */
+body.torre-home main .nogalera-feature.shell .nogalera-feature-copy{
+ background:#F4F8FC!important;background-image:none!important;color:var(--ac-ink)!important;
+ border:0!important;box-shadow:none!important;
+}
+body.torre-home main .nogalera-feature.shell .nogalera-feature-copy :is(h2,p,small,span,.eyebrow){
+ color:var(--ac-ink)!important;text-shadow:none!important;opacity:1!important;
+}
+body.torre-home main .nogalera-feature.shell .nogalera-feature-copy .eyebrow{
+ color:var(--ac-blue)!important;
+}
+body.torre-home main .nogalera-feature.shell .nogalera-feature-copy a{
+ background:var(--ac-blue)!important;color:#FFFFFF!important;
+ border:0!important;border-radius:999px!important;
+}
+body.torre-home main #pride.section.shell .feature{
+ background:#F4F8FC!important;background-image:none!important;color:var(--ac-ink)!important;
+ border:1px solid var(--ac-line)!important;
+}
+body.torre-home main #pride.section.shell .feature .feature-copy{
+ background:#F4F8FC!important;background-image:none!important;color:var(--ac-ink)!important;
+}
+body.torre-home main #pride.section.shell .feature .feature-copy :is(h2,p,span,.eyebrow){
+ color:var(--ac-ink)!important;text-shadow:none!important;
+}
+body.torre-home main #pride.section.shell .feature .feature-art.pride-visual{
+ background:#EAF3FB!important;background-color:#EAF3FB!important;background-image:none!important;
+ color:var(--ac-blue)!important;border:0!important;
+}
+body.torre-home main #pride.section.shell .feature .feature-art.pride-visual :is(strong,span,div,p){
+ color:var(--ac-blue)!important;background:transparent!important;
+}
+body.torre-home main #pride.section.shell .feature .feature-copy button{
+ background:var(--ac-blue)!important;color:#FFFFFF!important;border:0!important;
+ border-radius:999px!important;
+}
+body.torre-home #explore .filterline button[aria-pressed="true"],
+body.torre-home #plan .mood-btn[aria-pressed="true"]{
+ background:var(--ac-blue)!important;color:#FFFFFF!important;border-color:var(--ac-blue)!important;
+}
+
+/* Gallery AI disclosure: move the ID-scoped badge into its editorial body.
+   Old legacy ID selectors otherwise position it at page x=18, outside the card. */
+body.torre-home main #galleryTeaserProvenance.ai-badge{
+ display:inline-flex!important;position:static!important;
+ left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;inset:auto!important;
+ width:auto!important;max-width:100%!important;margin:9px 0 0!important;
+ padding:6px 11px!important;background:#FFFFFF!important;color:var(--ac-blue)!important;
+ border:1px solid var(--ac-line)!important;border-radius:999px!important;
+ font-size:11px!important;z-index:auto!important;
+}
+body.torre-home .trust.shell{
+ margin:0 auto!important;padding:7px 0 0!important;min-height:0!important;
+}
+body.torre-home #clean-access.approved-feature-links{margin-top:24px!important;}
+/* One clear play action, native audio controls, and secondary links in a disclosure */
+body.torre-home main #sound.music-intro .music-shell{
+ min-height:0!important;max-height:none!important;
+}
+body.torre-home main #sound.music-intro .music-shell .music-body{
+ padding:19px clamp(22px,2.7vw,36px)!important;min-height:0!important;
+}
+body.torre-home main #sound.music-intro .music-shell .music-body h2#sound-heading{
+ font-size:clamp(28px,2.8vw,39px)!important;
+}
+body.torre-home main #sound.music-intro .music-shell .music-body .approved-sound-note{
+ margin:0 0 8px!important;
+}
+body.torre-home main #sound.music-intro .music-shell .music-art{
+ min-height:285px!important;height:285px!important;max-height:none!important;
+}
+body.torre-home main #sound.music-intro .music-shell .music-body .player-label{
+ position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;
+ clip-path:inset(50%)!important;white-space:nowrap!important;
+}
+body.torre-home main #sound.music-intro .music-shell .music-body .music-status{
+ position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;
+ clip-path:inset(50%)!important;white-space:nowrap!important;
+}
+body.torre-home main #sound.music-intro .music-shell .music-body audio{
+ margin:8px 0 0!important;height:40px!important;
+}
+body.torre-home main #sound.music-intro .music-shell .music-body .approved-music-more{
+ margin-top:5px!important;max-width:100%!important;background:transparent!important;
+}
+body.torre-home main #sound.music-intro .music-shell .music-body .approved-music-more summary{
+ min-height:35px!important;display:inline-flex!important;align-items:center!important;
+ cursor:pointer!important;color:var(--ac-blue)!important;font-size:12px!important;
+ font-weight:680!important;text-decoration:underline!important;text-underline-offset:3px!important;
+}
+body.torre-home main #sound.music-intro .music-shell .music-body .approved-music-more:not([open]) .music-links{
+ display:none!important;
+}
+body.torre-home main #sound.music-intro .music-shell .music-body .approved-music-more .music-links{
+ margin-top:8px!important;
+}
+@media(max-width:760px){
+ body.torre-home main #sound.music-intro .music-shell .music-art{
+  height:178px!important;min-height:178px!important;
+ }
+ body.torre-home main #sound.music-intro .music-shell .music-body{
+  padding:19px 23px 23px!important;
+ }
+}
+
+/* Secondary discovery selectors: not another dark photographic ad row */
+body.torre-home main #discover.section.shell .shortcuts .shortcut{
+ background:#F6F9FC!important;background-image:none!important;
+ color:var(--ac-ink)!important;border:1px solid var(--ac-line)!important;
+ border-radius:20px!important;min-height:145px!important;max-height:none!important;
+ padding:24px!important;box-shadow:none!important;justify-content:flex-end!important;
+}
+body.torre-home main #discover.section.shell .shortcuts .shortcut::before{
+ display:none!important;content:none!important;background:none!important;opacity:0!important;
+}
+body.torre-home main #discover.section.shell .shortcuts .shortcut::after{
+ background:#FFFFFF!important;color:var(--ac-blue)!important;border:1px solid var(--ac-line)!important;
+ width:39px!important;height:39px!important;
+}
+body.torre-home main #discover.section.shell .shortcuts .shortcut :is(strong,small){
+ color:var(--ac-ink)!important;text-shadow:none!important;opacity:1!important;
+}
+body.torre-home main #discover.section.shell .shortcuts .shortcut strong{
+ font-size:clamp(22px,2vw,28px)!important;
+}
+body.torre-home main #discover.section.shell .shortcuts .shortcut small{
+ color:var(--ac-muted)!important;font-size:13px!important;
+}
+body.torre-home main #discover.section.shell .shortcuts .shortcut .emoji{
+ display:none!important;
+}
+/* Primary interactions in the Home catalogue consistently use the blue brand accent */
+body.torre-home main #explore.section.shell .placefoot a,
+body.torre-home main #explore.section.shell .place-add,
+body.torre-home main #explore.section.shell .filterline button[aria-pressed="true"]{
+ background:var(--ac-blue)!important;color:#FFFFFF!important;
+ border-color:var(--ac-blue)!important;border-radius:999px!important;
+}
+body.torre-home main #explore.section.shell .place-add:is(:hover,:focus-visible),
+body.torre-home main #explore.section.shell .placefoot a:is(:hover,:focus-visible){
+ background:var(--ac-blue-dark)!important;color:#FFFFFF!important;
+}
+body.torre-home #stories .readmore,
+body.torre-home .photo-diary .gallery-promo-link a,
+body.torre-home #useful .infocard a{
+ color:var(--ac-blue)!important;
+}
+/* Image fills the entire Sound crop, no blank poster strip */
+body.torre-home main #sound.music-intro .music-shell .music-art img.music-album-art{
+ display:block!important;position:absolute!important;inset:0!important;
+ width:100%!important;min-width:100%!important;max-width:none!important;
+ height:100%!important;min-height:100%!important;max-height:none!important;
+ aspect-ratio:auto!important;object-fit:cover!important;object-position:center!important;
+ margin:0!important;padding:0!important;transform:none!important;
+}
+
+/* Tablet: stack Sound instead of squeezing readable copy into two narrow columns */
+@media(max-width:950px){
+ body.torre-home main #sound.music-intro .music-shell{
+  display:flex!important;flex-direction:column-reverse!important;
+  min-height:0!important;
+ }
+ body.torre-home main #sound.music-intro .music-shell .music-art{
+  height:200px!important;min-height:200px!important;
+ }
+ body.torre-home main #sound.music-intro .music-shell .music-body{
+  padding:23px 29px!important;min-height:0!important;
+ }
+}
+@media(max-width:760px){
+ body.torre-home main #sound.music-intro .music-shell .music-art{
+  height:178px!important;min-height:178px!important;
+ }
+}
+
+/* Final photo composition — the image must fill the entire Sound column.
+   The old craft layer adds a 14px flex gap to every text child, creating
+   unnecessary height and a blank strip below the image on desktop. */
+@media (min-width:951px){
+ body.torre-home main #sound.music-intro .music-shell{
+  align-items:stretch!important;min-height:0!important;
+ }
+ body.torre-home main #sound.music-intro .music-shell .music-body{
+  gap:0!important;min-height:0!important;padding:18px 28px!important;
+ }
+ body.torre-home main #sound.music-intro .music-shell .music-art{
+  height:auto!important;min-height:0!important;
+  align-self:stretch!important;padding:0!important;
+ }
+ body.torre-home main #sound.music-intro .music-shell .music-art img.music-album-art{
+  position:absolute!important;inset:0!important;
+  width:100%!important;height:100%!important;
+  min-height:100%!important;object-fit:cover!important;
+ }
+}

@@ -1,5 +1,16 @@
 # TORREMOLINOS — Product Vision & Design Principles
 
+> **Aggiornamento approvato il 23 novembre 2026 — precedenza per la HOME.**
+> Il proprietario ha approvato il mockup **Apple Clean White** con il modulo **Sound compatto**.
+> Per la Home prevalgono da questa data questi token: bianco `#FFFFFF`, navy `#10244B`, blu `#096BCB`, azzurro-grigio `#F4F8FC`.
+> Non utilizzare grandi fondi arancioni, crema, verdi o scuri nei pannelli della Home. L'uso del colore nelle fotografie non è limitato.
+> Non sovrapporre testo alle fotografie; titolo, data, crediti, etichette e provenienza AI devono stare nel contenuto esterno all'immagine.
+> La Hero deve conservare la fotografia originale, con titolo e CTA all'esterno; mantenere tutte le funzioni esistenti e la localizzazione ES/EN/IT/DE/FR/RU.
+> La sezione Sound è una card compatta, controlli audio reali e link secondari accessibili.
+> I vecchi vincoli di verde/arancione descritti sotto restano materiale storico per le pagine interne non ancora migrate: **non ripristinarli sulla Home**.
+> Questo documento registra una direzione visiva approvata, non l'autorizzazione al merge o al go-live.
+
+
 **Status:** design direction — November 2026  
 **Owner:** Marcelo Javier Fernandez Caballero  
 **Product:** independent, multilingual, mobile-first city-guide micro-app  

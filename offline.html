@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#16865A">
+<meta name="robots" content="noindex,nofollow">
+<title>Sin conexión | TORREMOLINOS</title>
+<link rel="icon" type="image/svg+xml" href="/Torremolinos/favicon.svg">
+<style>
+:root{color-scheme:light;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#111111;background:#FFFFFF}
+*{box-sizing:border-box}body{margin:0;min-height:100dvh;display:grid;place-items:center;padding:24px}
+main{width:min(100%,540px);border:1px solid #dce9e0;border-radius:30px;padding:clamp(25px,6vw,50px);box-shadow:0 18px 55px #16865a12}
+.kicker{font-size:12px;font-weight:750;letter-spacing:.08em;color:#16865A;text-transform:uppercase}
+h1{font-size:clamp(36px,8vw,58px);line-height:1.06;letter-spacing:-.05em;margin:16px 0}
+p{font-size:17px;line-height:1.65;margin:0 0 28px}
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+a,button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;border-radius:999px;padding:12px 20px;font:700 15px system-ui,sans-serif;text-decoration:none}
+a{background:#16865A;color:#FFFFFF;border:2px solid #16865A}button{background:#F58A17;color:#111111;border:2px solid #F58A17;cursor:pointer}
+:is(a,button):focus-visible{outline:3px solid #111111;outline-offset:3px}
+small{display:block;margin-top:30px;color:#35644e}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<span class="kicker">TORREMOLINOS · OFFLINE</span>
+<h1 id="title">Sin conexión</h1>
+<p id="message">Esta página no está disponible sin conexión. Puedes volver a la guía guardada o intentar cargarla de nuevo cuando tengas Internet.</p>
+<div class="actions"><a href="/Torremolinos/" id="home">Volver a la guía</a><button type="button" id="retry">Reintentar</button></div>
+<small id="note">Guía independiente · No se muestran datos en tiempo real</small>
+</main>
+<script>
+(() => {
+  'use strict';
+  const texts={
+    es:['Sin conexión','Esta página no está disponible sin conexión. Puedes volver a la guía guardada o intentar cargarla de nuevo cuando tengas Internet.','Volver a la guía','Reintentar','Guía independiente · No se muestran datos en tiempo real'],
+    en:['Offline','This page is not available offline. Return to the saved guide or try again when you have an Internet connection.','Back to the guide','Try again','Independent guide · No real-time information is shown'],
+    it:['Senza connessione','Questa pagina non è disponibile offline. Puoi tornare alla guida salvata o riprovare quando avrai una connessione Internet.','Torna alla guida','Riprova','Guida indipendente · Nessun dato in tempo reale'],
+    de:['Offline','Diese Seite ist offline nicht verfügbar. Gehe zum gespeicherten Reiseführer zurück oder versuche es erneut, sobald du eine Internetverbindung hast.','Zurück zum Reiseführer','Erneut versuchen','Unabhängiger Reiseführer · Keine Echtzeitinformationen'],
+    fr:['Hors connexion','Cette page est indisponible hors connexion. Revenez au guide enregistré ou réessayez lorsque vous aurez accès à Internet.','Retour au guide','Réessayer','Guide indépendant · Aucune information en temps réel'],
+    ru:['Нет подключения','Эта страница недоступна без подключения. Вернитесь к сохранённому путеводителю или повторите попытку, когда появится Интернет.','Вернуться к путеводителю','Повторить','Независимый гид · Без информации в реальном времени']
+  };
+  let language=(navigator.language||'es').slice(0,2);
+  try{language=(localStorage.getItem('torremolinos.lang')||language).slice(0,2)}catch{}
+  if(!texts[language])language='es';
+  document.documentElement.lang=language;
+  const t=texts[language];
+  ['title','message','home','retry','note'].forEach((id,i)=>{document.getElementById(id).textContent=t[i]});
+  document.title=t[0]+' | TORREMOLINOS';
+  document.getElementById('retry').addEventListener('click',()=>location.reload());
+})();
+</script>
+</body>
+</html>

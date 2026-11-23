@@ -34,6 +34,14 @@ try{
     const response=await page.goto(base+'/?lang=it',{waitUntil:'domcontentloaded',timeout:30000});
     assert.equal(response.status(),200);
     await page.locator('#cards .place').first().waitFor({timeout:15000});
+    if(width===390){
+      await page.waitForTimeout(120);
+      assert.equal((await page.locator('#clean-access .approved-feature-caption strong').first().innerText()).trim(),'Mangiare','IT Home still displays Spanish navigation');
+      assert.equal((await page.locator('.hero-tagline').innerText()).trim(),'Mare, sapori, eventi e storie sulla Costa del Sol','IT hero still displays fallback copy');
+      assert.equal((await page.locator('#stories .magazine-card.primary h3').innerText()).trim(),'Torremolinos, molto più che sole e spiaggia','IT editorial heading still Spanish');
+      assert.equal(await page.locator('#stories .cover :is(.cover-label,.photoattribution)').count(),0,'photographic overlays were not moved into editorial text');
+      assert.equal(await page.locator('#cards .place-art .chip').count(),0,'category label remains over a photograph');
+    }
     const doc=await page.evaluate(()=>({
       viewport:window.innerWidth,
       page:document.documentElement.scrollWidth,
@@ -43,6 +51,48 @@ try{
     }));
     assert.ok(doc.page<=doc.viewport+3,'horizontal overflow '+width+': doc='+doc.page);
     assert.ok(doc.hero.includes('hero-apple-2026'),'hero image missing at '+width);
+    const heroSurface=await page.evaluate(()=>{
+      const el=document.querySelector('main > .hero'),heading=el?.querySelector('.hero-heading');
+      const nav=[...document.querySelectorAll('.topbar .navlinks a')];
+      return {
+        background:el?getComputedStyle(el).backgroundColor:null,
+        headingBg:heading?getComputedStyle(heading).backgroundColor:null,
+        height:el?.getBoundingClientRect().height||0,
+        navVisible:nav.filter(x=>getComputedStyle(x).display!=='none').length
+      };
+    });
+    assert.equal(heroSurface.background,'rgb(255, 255, 255)','legacy green hero remains at '+width);
+    assert.equal(heroSurface.headingBg,'rgb(255, 255, 255)','hero heading still has a tinted panel at '+width);
+    assert.ok(heroSurface.height<800,'hero retained legacy giant min-height at '+width);
+    if(width===1440)assert.equal(heroSurface.navVisible,5,'desktop primary navigation lost two destinations');
+    const cleanScenes=await page.evaluate(()=>({
+      nogalera:getComputedStyle(document.querySelector('.nogalera-feature-copy')).backgroundColor,
+      pride:getComputedStyle(document.querySelector('#pride .feature-art')).backgroundColor
+    }));
+    assert.equal(cleanScenes.nogalera,'rgb(244, 248, 252)','green La Nogalera billboard remains at '+width);
+    assert.equal(cleanScenes.pride,'rgb(234, 243, 251)','orange Pride billboard remains at '+width);
+    const editorialPolish=await page.evaluate(()=>{
+      const badge=document.querySelector('#galleryTeaserProvenance');
+      const sound=document.querySelector('#sound .music-shell');
+      return {
+        badgeInCopy:!!badge?.closest('.gallery-feature-body'),
+        badgePosition:badge?getComputedStyle(badge).position:null,
+        soundHeight:sound?.getBoundingClientRect().height||0
+      };
+    });
+    assert.ok(editorialPolish.badgeInCopy,'AI provenance is not attached to Gallery editorial copy at '+width);
+    assert.equal(editorialPolish.badgePosition,'static','stray AI badge still floats over the Home at '+width);
+    assert.ok(editorialPolish.soundHeight<(width<=950?650:width<=1100?430:365),'Sound did not become compact at '+width+' ('+Math.round(editorialPolish.soundHeight)+'px)');
+    if(width>=1024){
+      const photoFill=await page.evaluate(()=>{
+        const root=document.querySelector('#sound .music-shell')?.getBoundingClientRect();
+        const photo=document.querySelector('#sound .music-art')?.getBoundingClientRect();
+        return {panel:root?.height||0,photo:photo?.height||0};
+      });
+      assert.ok(Math.abs(photoFill.panel-photoFill.photo)<=3,
+        'Sound photo leaves an empty stripe below the media at '+width+': '+JSON.stringify(photoFill));
+    }
+
     assert.equal(doc.lang,'it');
     const whiteCraft=await page.evaluate(()=>{
       const footer=document.querySelector('footer.footer');
@@ -57,8 +107,8 @@ try{
       };
     });
     assert.equal(whiteCraft.footer,'rgb(255, 255, 255)','footer is not white at '+width);
-    assert.equal(whiteCraft.music,'rgb(255, 255, 255)','music title lacks contrast on green at '+width);
-    assert.equal(whiteCraft.nogalera,'rgb(255, 255, 255)','Nogalera title lacks contrast on green at '+width);
+    assert.equal(whiteCraft.music,'rgb(16, 36, 75)','music title lacks dark-on-light contrast at '+width);
+    assert.equal(whiteCraft.nogalera,'rgb(16, 36, 75)','Nogalera title must be readable on the approved light panel at '+width);
     assert.equal(whiteCraft.photos,10,'place gallery should have 10 documentary photos at '+width);
 
     const premium=await page.evaluate(()=>{
@@ -85,10 +135,10 @@ try{
       };
     });
     assert.ok(premium.v6,'product v6 stylesheet missing at '+width);
-    assert.equal(premium.bridgeBg,'rgb(22, 134, 90)','narrative bridge washed out at '+width);
-    assert.equal(premium.bridgeText,'rgb(255, 255, 255)','narrative bridge title illegible at '+width);
-    assert.equal(premium.agendaBg,'rgb(245, 138, 23)','agenda scene has no color at '+width);
-    assert.equal(premium.musicBg,'rgb(22, 134, 90)','music scene missing green at '+width);
+    assert.equal(premium.bridgeBg,'rgb(244, 248, 252)','editorial bridge must use approved light surface at '+width);
+    assert.equal(premium.bridgeText,'rgb(16, 36, 75)','editorial bridge text must be legible at '+width);
+    assert.equal(premium.agendaBg,'rgb(244, 248, 252)','agenda still has orange chapter at '+width);
+    assert.equal(premium.musicBg,'rgb(236, 243, 250)','Sound is not the approved compact blue-light surface at '+width);
     assert.ok(premium.galleryImg?.h>=240,'gallery image collapsed at '+width);
     assert.ok(premium.agendaPhoto?.h>=240,'agenda photograph collapsed at '+width);
     assert.ok(premium.musicCover?.h>=100,'music artwork collapsed at '+width);
@@ -117,8 +167,8 @@ try{
         stylesheet,
         spaceDiscover:gap('#discover','#explore'),
         spaceExplore:gap('#explore','.nogalera-feature'),
-        spaceSound:gap('.gallery-feature','#sound'),
-        spaceStories:gap('#sound','#stories'),
+        spaceSound:gap('#clean-access','#sound'),
+        spaceStories:gap('.gallery-feature','#stories'),
         spaceAgenda:gap('#stories','#agenda-home'),
         photoLead:figs[0]?.getBoundingClientRect().height||0,
         photoDetail:figs[1]?.getBoundingClientRect().height||0,
@@ -144,18 +194,18 @@ try{
       };
     });
     assert.ok(daylight.sheet,'v8 daylight style missing at '+width);
-    assert.equal(daylight.discover,'rgb(255, 250, 244)','discovery lacks warm chapter');
-    assert.equal(daylight.explore,'rgb(239, 248, 243)','explore lacks palm green wash');
-    assert.equal(daylight.stories,'rgb(255, 243, 230)','stories lacks solar light chapter');
-    assert.equal(daylight.photos,'rgb(247, 251, 249)','local lens lacks gentle green tint');
-    assert.equal(daylight.useful,'rgb(245, 248, 246)','utilities lack light background');
+    assert.equal(daylight.discover,'rgb(255, 255, 255)','discovery must be white');
+    assert.equal(daylight.explore,'rgb(255, 255, 255)','explore must be white');
+    assert.equal(daylight.stories,'rgb(255, 255, 255)','stories must be white');
+    assert.equal(daylight.photos,'rgb(255, 255, 255)','local lens must be white');
+    assert.equal(daylight.useful,'rgb(255, 255, 255)','utilities must be white');
     assert.ok(daylight.christmas,'Christmas editorial feature missing at '+width);
 
     for(const [key,value] of Object.entries({
       discover:v7.spaceDiscover,explore:v7.spaceExplore,sound:v7.spaceSound,
       stories:v7.spaceStories,agenda:v7.spaceAgenda
     })){
-      assert.ok(value>=50,'chapters visually stuck together at '+width+' '+key+' '+value+'px');
+      assert.ok(value>=(key==='sound'?18:50),'chapters visually stuck together at '+width+' '+key+' '+value+'px');
     }
     assert.ok(v7.photoLead>v7.photoDetail,'photo hierarchy collapsed at '+width);
     assert.ok(v7.actions>=5,'coordinated arrows missing at '+width);
@@ -175,11 +225,11 @@ try{
         const el=document.querySelector(selector),css=el&&getComputedStyle(el);
         return css?{text:css.color,bg:css.backgroundColor}:null;
       }
-      return {gallery:props('.gallery-feature-body a'),feedback:props('.community .darkbtn'),credit:props('.music-art small')};
+      return {gallery:props('.gallery-feature-body a'),feedback:props('.community .darkbtn'),credit:props('.music-body .approved-sound-credit')};
     });
-    assert.deepEqual(ctas.gallery,{text:'rgb(255, 255, 255)',bg:'rgb(22, 134, 90)'},'gallery contrast '+width);
-    assert.deepEqual(ctas.feedback,{text:'rgb(22, 134, 90)',bg:'rgb(255, 255, 255)'},'feedback CTA contrast '+width);
-    assert.equal(ctas.credit.text,'rgb(255, 255, 255)','album credit unreadable at '+width);
+    assert.deepEqual(ctas.gallery,{text:'rgb(255, 255, 255)',bg:'rgb(9, 107, 203)'},'gallery contrast '+width);
+    assert.deepEqual(ctas.feedback,{text:'rgb(255, 255, 255)',bg:'rgb(9, 107, 203)'},'feedback CTA contrast '+width);
+    assert.equal(ctas.credit?.text,'rgb(16, 36, 75)','Sound credit must be outside photo and strongly legible at '+width);
     if(width===390||width===1440){
       // Full-page screenshots do not automatically reveal lazy images. Simulate
       // a real visitor scrolling through the whole catalog, then validate.
@@ -203,6 +253,12 @@ try{
         return (img?.naturalWidth>0&&!img.hidden) || (fallback&&!fallback.hidden);
       });
       assert.ok(mediaOk,'music cover and offline poster both missing at '+width);
+      const approvedSound=await page.locator('#sound .music-album-art').evaluate(img=>({
+        src:img.currentSrc,width:img.naturalWidth,height:img.naturalHeight,complete:img.complete
+      }));
+      assert.ok(approvedSound.src.includes('sound-headphones-torremolinos.webp'),'old Sound image at '+width);
+      assert.ok(approvedSound.complete&&approvedSound.width>=480&&approvedSound.height>=320,
+        'approved Sound image did not load at '+width+': '+JSON.stringify(approvedSound));
       await page.locator('#cards').evaluate(el=>el.scrollLeft=0);
       await page.evaluate(()=>window.scrollTo(0,0));
       assert.equal(await page.locator('#cards .place-photo').count(),10,'broken place photo');

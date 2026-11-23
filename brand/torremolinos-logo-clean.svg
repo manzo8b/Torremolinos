@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 145" role="img" aria-labelledby="title description">
+<title id="title">Torremolinos · Costa del Sol</title>
+<desc id="description">Due linee blu ispirate al movimento del mare accanto al nome Torremolinos</desc>
+<g fill="none" stroke="#096BCB" stroke-linecap="round" stroke-width="8">
+<path d="M8 46C33 27 54 29 75 42S118 57 143 39"/>
+<path d="M8 75C31 56 53 60 76 72S118 86 143 68"/>
+</g>
+<text x="168" y="74" fill="#10244B" font-family="DM Sans,-apple-system,BlinkMacSystemFont,Arial,sans-serif" font-weight="760" font-size="60" letter-spacing="-2.4">Torremolinos</text>
+<text x="170" y="114" fill="#096BCB" font-family="DM Sans,-apple-system,BlinkMacSystemFont,Arial,sans-serif" font-weight="720" font-size="19" letter-spacing="5.3">COSTA DEL SOL</text>
+</svg>
