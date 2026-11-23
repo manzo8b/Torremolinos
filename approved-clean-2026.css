@@ -626,3 +626,8 @@ body.torre-home main #galleryTeaserProvenance.ai-badge[hidden]{display:none!impo
 body.torre-home #agendaHomeScanStatus{display:block;margin-top:8px;line-height:1.55}
 body.torre-home .agenda-transparency-status .agenda-stale-note{font-weight:700}
 body.torre-home .agenda-transparency-status a{color:#096BCB;text-underline-offset:3px}
+
+/* Fase 2C: source dates within the three existing Essentials cards, no new panels. */
+body.torre-home #useful .infocard .essentials-verified{display:block!important;margin-top:10px!important;font-size:12px!important;line-height:1.55!important;font-weight:450!important;color:#51667E!important;max-width:32ch!important}
+body.torre-home #useful .infocard>a+a{margin-inline-start:12px!important}
+body.torre-home #useful .infocard>a:focus-visible{outline:3px solid #096BCB;outline-offset:3px}
