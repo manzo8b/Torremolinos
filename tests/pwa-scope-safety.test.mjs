@@ -19,6 +19,8 @@ function makeEvents(){
    caches:{
      keys:async()=>cacheNames,
      delete:async name=>{deleted.push(name);cacheNames=cacheNames.filter(x=>x!==name);return true},
+     open:async()=>({put:async()=>true,match:async()=>null}),
+     match:async()=>null,
    },
    self:{
      registration:{scope:'https://manzo8b.github.io/Torremolinos/'},
@@ -43,7 +45,7 @@ test('Only TORREMOLINOS caches are ever evicted, never other projects',async()=>
  assert.match(sw,/CACHE_PREFIX='torremolinos-'/);
  assert.match(sw,/keys\.filter\(key=>key\.startsWith\(CACHE_PREFIX\)&&key!==CACHE\)/);
 });
-test('Fetch interception is strictly limited to this application scope',()=>{
+test('Fetch interception is strictly limited to this application scope',async()=>{
  const {events}=makeEvents();
  for(const url of [
    'https://manzo8b.github.io/Lune_X/assets/audio/music.mp3',
@@ -55,12 +57,13 @@ test('Fetch interception is strictly limited to this application scope',()=>{
    events.fetch({request:{method:'GET',url},respondWith:()=>{called++}});
    assert.equal(called,0,url+' must not be intercepted');
  }
- let handled=0;
+ let handled=0;let completed;
  events.fetch({
   request:{method:'GET',url:'https://manzo8b.github.io/Torremolinos/comer/'},
-  respondWith:()=>{handled++}
+  respondWith:p=>{handled++;completed=p}
  });
  assert.equal(handled,1);
+ await completed;
  let posted=0;
  events.fetch({
   request:{method:'POST',url:'https://manzo8b.github.io/Torremolinos/api'},
