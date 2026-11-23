@@ -1,0 +1,41 @@
+name: TORREMOLINOS — Fase 2 Content Coherence
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'agenda/**'
+      - 'comer/app.js'
+      - 'index.html'
+      - 'approved-clean-2026.css'
+      - 'service-worker.js'
+      - 'tests/content-consistency-fase2.test.mjs'
+      - 'tests/fase2-content-browser.mjs'
+      - '.github/workflows/content-coherence.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  editorial-consistency:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check editorial provenance and translations without accessing external websites
+        run: node --test tests/content-consistency-fase2.test.mjs
+      - name: Install Chromium test environment
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.57.0
+          npx playwright install --with-deps chromium
+      - name: Check localized Agenda and Comer, provenance and responsive status
+        run: node tests/fase2-content-browser.mjs
+      - name: Preserve editorial QA screenshots and evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: torremolinos-fase2-editorial-qa
+          path: artifacts/editorial-fase2/
+          if-no-files-found: warn
+          retention-days: 30
