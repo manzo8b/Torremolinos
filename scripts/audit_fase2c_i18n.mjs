@@ -56,7 +56,7 @@ for(const lang of languages){
  coverage[lang]={keysInHome:keys.length,resolved:keys.length-missing.length,
   missingKeys:missing,
   missingEssentials:essentials.filter(k=>typeof dict[k]!=='string'||!dict[k].trim()),
-  placeholderKeys:Object.entries(dict).filter(([k,v])=>typeof v==='string'&&/\b(TODO|FIXME|TBD)\b/i.test(v)).map(([k])=>k)};
+  placeholderKeys:Object.entries(dict).filter(([k,v])=>typeof v==='string'&&/\b(TODO|FIXME|TBD)\b/.test(v)).map(([k])=>k)};
 }
 const missingGallery=[];
 for(const img of gallery.images){
