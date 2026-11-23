@@ -36,15 +36,15 @@ test('C-13 localized scanner and editorial status appears in both Home and Agend
  assert.match(home,/id="agendaHomeScanStatus"/);
  assert.match(agendaHtml,/id="agendaPageScanStatus"/);
  for(const page of [home,agendaHtml])assert.match(page,/scan-status-ui\.js/);
- for(const key of ['es','en','it','de','fr','ru'])assert.match(scanJS,new RegExp('\\\\b'+key+':\\\\{'));
- assert.match(scanJS,/14\\*86400\\*1000/);
+ for(const key of ['es','en','it','de','fr','ru'])assert.match(scanJS,new RegExp('\\b'+key+':\\{'));
+ assert.match(scanJS,/14\*86400\*1000/);
  assert.match(scanJS,/status\.editorial\.verifiedThrough/);
  assert.match(scanJS,/status\.scanner\.checkedAtUTC/);
  assert.match(scanJS,/document\.documentElement\.lang/);
  assert.match(scanJS,/No se puede consultar|temporarily unavailable/);
  assert.match(agendaJS,/renderCatalogueStatus/);
  assert.match(agendaJS,/catalogCount/);
- assert.doesNotMatch(agendaJS,/fichas con fecha · '\\+watch\\.length\\+' bajo seguimiento/);
+ assert.doesNotMatch(agendaJS,/fichas con fecha · '\+watch\.length\+' bajo seguimiento/);
 });
 test('C-14 homepage lead represents actual LGBTQ-majority dataset rather than a predominantly cultural calendar',()=>{
  assert.equal(events.events.length,27);
@@ -58,27 +58,27 @@ test('C-14 homepage lead represents actual LGBTQ-majority dataset rather than a 
 });
 test('C-03 gallery AI label is hidden with original photo, visible only on AI image load',()=>{
  assert.match(home,/galleryTeaserProvenance" class="ai-badge" hidden/);
- assert.match(home,/teaserLabel\\.hidden=false/);
- assert.match(home,/teaserLabel\\.hidden=true/);
- assert.match(home,/teaser\\.dataset\\.isAI='true'/);
- assert.match(home,/teaser\\.dataset\\.isAI='false'/);
- assert.match(read('approved-clean-2026.css'),/#galleryTeaserProvenance\\[hidden\\]\\{display:none!important\\}/);
+ assert.match(home,/teaserLabel\.hidden=false/);
+ assert.match(home,/teaserLabel\.hidden=true/);
+ assert.match(home,/teaser\.dataset\.isAI='true'/);
+ assert.match(home,/teaser\.dataset\.isAI='false'/);
+ assert.match(read('approved-clean-2026.css'),/#galleryTeaserProvenance\[hidden\]\{display:none!important\}/);
 });
 test('C-11 all current Comer entries carry a dated source with localized display in both list types',()=>{
- const ids=[...comerData.matchAll(/\\bid:"([^"]+)"/g)].map(m=>m[1]);
- const dates=[...comerData.matchAll(/\\bverified:"(\\d{4}-\\d{2}-\\d{2})"/g)].map(m=>m[1]);
- const sources=[...comerData.matchAll(/\\bsource:"(https:[^"]+)"/g)].map(m=>m[1]);
+ const ids=[...comerData.matchAll(/\bid:"([^"]+)"/g)].map(m=>m[1]);
+ const dates=[...comerData.matchAll(/\bverified:"(\d{4}-\d{2}-\d{2})"/g)].map(m=>m[1]);
+ const sources=[...comerData.matchAll(/\bsource:"(https:[^"]+)"/g)].map(m=>m[1]);
  assert.equal(ids.length,9);assert.equal(new Set(ids).size,ids.length);
  assert.equal(dates.length,ids.length);
  assert.equal(sources.length,ids.length);
  for(const date of dates)assert.match(date,/^2026-11-02$/);
  for(const url of sources)assert.ok(url.startsWith('https://'));
- assert.match(comerJS,/function verifiedLabel\\(r\\)/);
- assert.match(comerJS,/new Intl\\.DateTimeFormat\\(locale/);
- assert.equal((comerJS.match(/verifiedLabel\\(r\\)/g)||[]).length,3); // helper + two card renderers
+ assert.match(comerJS,/function verifiedLabel\(r\)/);
+ assert.match(comerJS,/new Intl\.DateTimeFormat\(locale/);
+ assert.equal((comerJS.match(/verifiedLabel\(r\)/g)||[]).length,3); // helper + two card renderers
 });
 test('Already implemented C-15/C-20 functions are preserved, not falsely reported as new',()=>{
- assert.match(agendaJS,/function icsUrl\\(e\\)/);
+ assert.match(agendaJS,/function icsUrl\(e\)/);
  assert.match(agendaJS,/DTSTART;VALUE=DATE/);
  assert.match(read('listen/index.html'),/controls preload="none"/);
  assert.match(readme,/Revisione editoriale|revisione umana/i);
@@ -86,7 +86,7 @@ test('Already implemented C-15/C-20 functions are preserved, not falsely reporte
 });
 test('PWA caches new same-origin editorial evidence and never overwrites other projects',()=>{
  assert.match(sw,/torremolinos-v29/);
- assert.match(sw,/\\.\\/agenda\\/scan-status\\.json/);
- assert.match(sw,/\\.\\/agenda\\/scan-status-ui\\.js/);
- assert.match(sw,/key\\.startsWith\\(CACHE_PREFIX\\)/);
+ assert.match(sw,/\.\/agenda\/scan-status\.json/);
+ assert.match(sw,/\.\/agenda\/scan-status-ui\.js/);
+ assert.match(sw,/key\.startsWith\(CACHE_PREFIX\)/);
 });
