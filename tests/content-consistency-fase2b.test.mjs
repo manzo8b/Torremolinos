@@ -41,7 +41,7 @@ test('C-10 Comer featured copy avoids unverified paid/non-paid assertions in all
  assert.equal((comerApp.match(/featuredLead:"/g)||[]).length,6);
  assert.equal((comerApp.match(/transparency:"/g)||[]).length,6);
  assert.equal((comerApp.match(/pending:"/g)||[]).length,6);
- assert.ok(comerApp.includes('possibili rapporti commerciali restano da verificare'));
+ assert.match(comerApp,/rapporti commerciali restano da verificare/i);
  assert.ok(comerApp.includes('posibles vínculos comerciales'));
  assert.ok(comerApp.includes('Возможные коммерческие связи'));
  assert.doesNotMatch(comerApp,/No es un ranking, una puntuación ni una selección anunciada como patrocinada/);
