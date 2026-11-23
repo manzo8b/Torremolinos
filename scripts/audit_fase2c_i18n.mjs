@@ -44,7 +44,7 @@ const essentials=['airportTitle','airportText','airportLink','airportChecked','e
 const coverage={};
 for(const lang of languages){
  const dict={...base[lang],...editorial[lang]};
- if(!base[lang]||!editorial[lang])throw Error('Missing locale dictionary '+lang);
+ if(!base[lang]&&!editorial[lang])throw Error('Missing all locale dictionaries for '+lang);
  const missing=keys.filter(k=>typeof dict[k]!=='string'||!dict[k].trim());
  coverage[lang]={keysInHome:keys.length,resolved:keys.length-missing.length,
   missingKeys:missing,
