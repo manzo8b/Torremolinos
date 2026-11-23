@@ -1,0 +1,28 @@
+name: TORREMOLINOS — Internal link inventory
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/check_link_integrity.mjs'
+      - '.github/workflows/link-inventory.yml'
+      - '**/*.html'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Report existing local link integrity without altering the site
+        run: node scripts/check_link_integrity.mjs
+      - name: Preserve inventory and unresolved links for triage
+        uses: actions/upload-artifact@v4
+        with:
+          name: torremolinos-link-inventory
+          path: artifacts/audit/links.json
+          retention-days: 30
