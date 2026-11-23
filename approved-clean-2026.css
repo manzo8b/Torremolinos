@@ -621,7 +621,7 @@ body.torre-home main #sound.music-intro .music-shell .music-art img.music-album-
 }
 
 /* C-03: no AI tag on the original documentary photo while fallback is active. */
-body.torre-home #galleryTeaserProvenance[hidden]{display:none!important}
+body.torre-home main #galleryTeaserProvenance.ai-badge[hidden]{display:none!important}
 /* C-13: metadata remains in the existing editorial panel, never over photography. */
 body.torre-home #agendaHomeScanStatus{display:block;margin-top:8px;line-height:1.55}
 body.torre-home .agenda-transparency-status .agenda-stale-note{font-weight:700}
