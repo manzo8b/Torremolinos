@@ -62,7 +62,7 @@ test('C-03 gallery AI label is hidden with original photo, visible only on AI im
  assert.match(home,/teaserLabel\.hidden=true/);
  assert.match(home,/teaser\.dataset\.isAI='true'/);
  assert.match(home,/teaser\.dataset\.isAI='false'/);
- assert.match(read('approved-clean-2026.css'),/#galleryTeaserProvenance\[hidden\]\{display:none!important\}/);
+ assert.match(read('approved-clean-2026.css'),/#galleryTeaserProvenance\.ai-badge\[hidden\]\{display:none!important\}/);
 });
 test('C-11 all current Comer entries carry a dated source with localized display in both list types',()=>{
  const ids=[...comerData.matchAll(/\bid:"([^"]+)"/g)].map(m=>m[1]);
