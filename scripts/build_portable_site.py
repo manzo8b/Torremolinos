@@ -20,6 +20,9 @@ PUBLIC_DIRS={"assets","brand","agenda","comer","explore","gallery","legal","list
 FORMATS={".html",".css",".js",".json",".webmanifest",".webp",".svg",".jpg",
          ".jpeg",".png",".ico",".gif",".woff",".woff2",".mp3",".ogg",".wav",".pdf"}
 TEXT={".html",".css",".js",".json",".webmanifest",".svg",".xml",".txt"}
+# Scanner reference data is for editorial maintenance, not for website visitors.
+INTERNAL_FILE_PATHS={"agenda/scanner-baseline.json"}
+
 def hash_bytes(b): return hashlib.sha256(b).hexdigest()
 def clean_origin(raw):
     value=raw.strip().rstrip("/")
@@ -43,7 +46,7 @@ def source_files():
             for child in p.rglob("*"):
                 if child.is_symlink():raise ValueError("Symlink forbidden: "+str(child))
                 if child.is_file() and child.suffix.lower() in FORMATS: paths.append(child)
-    return sorted(paths)
+    return sorted(p for p in paths if p.relative_to(ROOT).as_posix() not in INTERNAL_FILE_PATHS)
 def build(origin,base,out,report):
     site=clean_origin(origin)+clean_path(base)
     target=Path(out).resolve()
@@ -69,7 +72,7 @@ def build(origin,base,out,report):
     manifest=json.loads((target/"manifest.webmanifest").read_text("utf8"))
     if manifest.get("start_url")!="./" or manifest.get("scope")!="./":
         raise RuntimeError("PWA manifest scope must remain relative")
-    forbidden=["README.md","anteprima/index.html",".github/workflows/pages.yml",
+    forbidden=["agenda/scanner-baseline.json","README.md","anteprima/index.html",".github/workflows/pages.yml",
                "scripts/scan_events.py","tests/ui-smoke.mjs","docs/"]
     if any((target/p).exists() for p in forbidden):
         raise RuntimeError("Internal source materials included in site build")
