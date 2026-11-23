@@ -1,5 +1,8 @@
-// TORREMOLINOS v0.4 — offline shell and key editorial pages
-const CACHE='torremolinos-v27';
+// TORREMOLINOS — Scoped offline cache. May be content-hashed in deployment builds.
+// Never delete caches belonging to other applications hosted on github.io.
+const CACHE_PREFIX='torremolinos-';
+const CACHE='torremolinos-v28';
+const SCOPE_URL=new URL(self.registration.scope);
 const FILES=[
   './','./index.html','./offline.html','./locale-accessibility.js','./approved-clean-2026.css','./approved-clean-2026.js','./footer-professional-2026.css','./footer-professional-2026.js','./brand/torremolinos-logo-clean.svg','./apple-premium.css','./craft-refinement.css','./commercial-experience.css','./product-v6.css','./product-v6.js','./narrative-v7.css','./narrative-v7.js','./luminosity-v8.css','./luminosity-v8.js','./craft-finish.css','./apple-runtime.js','./craft-runtime.js','./design-system-2026.css','./editorial.css','./favicon.svg','./manifest.webmanifest',
   './brand/torremolinos-logo.svg','./brand/torremolinos-logo-light.svg','./brand/torremolinos-symbol.svg','./assets/illustrations/pride-flag-ai.svg','./legal/ai-transparency.html',
@@ -26,12 +29,23 @@ self.addEventListener('install',event=>{
   self.skipWaiting();
 });
 self.addEventListener('activate',event=>{
-  event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))));
-  self.clients.claim();
+  event.waitUntil(
+    caches.keys()
+      .then(keys=>Promise.all(
+        keys.filter(key=>key.startsWith(CACHE_PREFIX)&&key!==CACHE)
+          .map(key=>caches.delete(key))
+      ))
+      .then(()=>self.clients.claim())
+  );
 });
 self.addEventListener('fetch',event=>{
   const req=event.request;
-  if(req.method!=='GET'||new URL(req.url).origin!==self.location.origin)return;
+  const url=new URL(req.url);
+  // Only requests inside our registered scope are eligible for caching.
+  // This explicitly excludes other projects (LUNE_X, MANZO AI, etc.)
+  // even when they share the same github.io origin.
+  if(req.method!=='GET'||url.origin!==SCOPE_URL.origin||
+     !url.pathname.startsWith(SCOPE_URL.pathname))return;
   event.respondWith(
     fetch(req).then(resp=>{
       if(resp.ok){const copy=resp.clone();caches.open(CACHE).then(cache=>cache.put(req,copy))}
