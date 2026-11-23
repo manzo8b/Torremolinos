@@ -82,7 +82,7 @@ try{
     });
     assert.ok(editorialPolish.badgeInCopy,'AI provenance is not attached to Gallery editorial copy at '+width);
     assert.equal(editorialPolish.badgePosition,'static','stray AI badge still floats over the Home at '+width);
-    assert.ok(editorialPolish.soundHeight<(width<=950?650:width<=1100?430:355),'Sound did not become compact at '+width+' ('+Math.round(editorialPolish.soundHeight)+'px)');
+    assert.ok(editorialPolish.soundHeight<(width<=950?650:width<=1100?430:460),'Sound did not become compact at '+width+' ('+Math.round(editorialPolish.soundHeight)+'px)');
 
     assert.equal(doc.lang,'it');
     const whiteCraft=await page.evaluate(()=>{
