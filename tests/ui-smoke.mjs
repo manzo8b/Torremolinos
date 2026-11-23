@@ -65,6 +65,12 @@ try{
     assert.equal(heroSurface.headingBg,'rgb(255, 255, 255)','hero heading still has a tinted panel at '+width);
     assert.ok(heroSurface.height<800,'hero retained legacy giant min-height at '+width);
     if(width===1440)assert.equal(heroSurface.navVisible,5,'desktop primary navigation lost two destinations');
+    const cleanScenes=await page.evaluate(()=>({
+      nogalera:getComputedStyle(document.querySelector('.nogalera-feature-copy')).backgroundColor,
+      pride:getComputedStyle(document.querySelector('#pride .feature-art')).backgroundColor
+    }));
+    assert.equal(cleanScenes.nogalera,'rgb(244, 248, 252)','green La Nogalera billboard remains at '+width);
+    assert.equal(cleanScenes.pride,'rgb(234, 243, 251)','orange Pride billboard remains at '+width);
     assert.equal(doc.lang,'it');
     const whiteCraft=await page.evaluate(()=>{
       const footer=document.querySelector('footer.footer');
