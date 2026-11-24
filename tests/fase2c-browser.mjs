@@ -54,7 +54,39 @@ try{
   }
   await page.locator('#lang').selectOption('it');
   await page.locator('#useful').screenshot({path:'artifacts/editorial-fase2c/essentials-'+width+'.png',animations:'disabled'});
-  records.push(await axeAudit(page,'home',width));
+  const sources=page.locator('#explore #cards article.place .placefoot > a.source');
+  assert.ok(await sources.count()>0,'Catalogue links must render');
+  const states=await sources.evaluateAll(nodes=>nodes.map(n=>{
+   const s=getComputedStyle(n);
+   return {opacity:s.opacity,color:s.color,background:s.backgroundColor,href:n.getAttribute('href')};
+  }));
+  for(const s of states){
+   assert.equal(s.opacity,'1','Legacy source opacity must not leak');
+   assert.equal(s.color,'rgb(255, 255, 255)');
+   assert.equal(s.background,'rgb(7, 88, 174)');
+   assert.match(s.href,/^https:\/\//);
+  }
+  const pride=page.locator('#pride .feature-art.pride-visual > .pride-visual-detail');
+  const prideState=await pride.evaluate(n=>({color:getComputedStyle(n).color,opacity:getComputedStyle(n).opacity}));
+  assert.deepEqual(prideState,{color:'rgb(7, 88, 174)',opacity:'1'});
+  const keyboardSamples=[];
+  for(const source of await sources.all()){
+   await source.focus();
+   await page.keyboard.press('Tab');
+   assert.equal(await source.evaluate(n=>document.activeElement===n),false,'Tab must leave source');
+   await page.keyboard.press('Shift+Tab');
+   const focused=await source.evaluate(n=>{
+    const s=getComputedStyle(n);
+    return {active:document.activeElement===n,visible:n.matches(':focus-visible'),outline:s.outlineStyle,width:s.outlineWidth};
+   });
+   assert.ok(focused.active&&focused.visible&&focused.outline!=='none'&&parseFloat(focused.width)>0,'Source must regain visible keyboard focus');
+   keyboardSamples.push(focused);
+  }
+  await page.locator('#explore').screenshot({path:'artifacts/editorial-fase2c/sources-'+width+'.png',animations:'disabled'});
+  await page.locator('#pride').screenshot({path:'artifacts/editorial-fase2c/pride-'+width+'.png',animations:'disabled'});
+  await page.evaluate(()=>document.activeElement?.blur());
+  const homeAudit=await axeAudit(page,'home',width);
+  records.push({...homeAudit,computedSources:states,computedPride:prideState,keyboardSamples});
   resp=await page.goto(base+'gallery/?lang=it',{waitUntil:'domcontentloaded'});
   assert.equal(resp?.status(),200);
   for(const lang of ['it','de','fr','ru','en','es']){
@@ -67,10 +99,12 @@ try{
   await ctx.close();
  }
  writeFileSync('artifacts/editorial-fase2c/accessibility-report.json',JSON.stringify({
-  schemaVersion:1,records,
-  note:'Automated axe-core 2.1 A/AA evaluation of two pages at two viewports; this is NOT a manual or mother-tongue accessibility certification.'
+  schemaVersion:2,records,
+  note:'Automated axe-core 2.1 A/AA evaluation and sampled keyboard round-trip checks; this is NOT a manual, real-device screen-reader or mother-tongue accessibility certification.'
  },null,2)+'\n');
- console.log(JSON.stringify({status:'PASS functional 2C',samples:records.map(r=>({
+ const residual=records.flatMap(r=>r.violations.filter(v=>v.id==='color-contrast').map(v=>({section:r.section,width:r.width,nodes:v.nodes,affected:v.affected})));
+ assert.deepEqual(residual,[],'Fase 2D contrast regression: '+JSON.stringify(residual));
+ console.log(JSON.stringify({status:'PASS functional 2C/2D',samples:records.map(r=>({
   section:r.section,width:r.width,violations:r.violations.length,incomplete:r.incompleteChecks
  }))}));
 }finally{

@@ -677,3 +677,24 @@ body.torre-home main #stories .l8-season-promo-copy>small{
 }
 body.torre-home main #plan .plan-section-kicker{color:#0C7046!important}
 body.torre-home main .mapbox>div>.eyebrow.coral{color:#0C7046!important}
+
+/* Fase 2D / Issue #20: legacy opacity composites brand blue against paper.
+   Scope to the actual rendered catalogue links and the Pride detail.
+   Explicitly retain the darker hover/focus treatment; no geometry changes. */
+body.torre-home main #explore #cards article.place .placefoot > a.source {
+  background:var(--ac-blue-dark)!important;
+  background-image:none!important;
+  border-color:var(--ac-blue-dark)!important;
+  color:#FFFFFF!important;
+  opacity:1!important;
+}
+body.torre-home main #explore #cards article.place .placefoot > a.source:is(:hover,:focus-visible) {
+  background:#064788!important;
+  border-color:#064788!important;
+  color:#FFFFFF!important;
+  opacity:1!important;
+}
+body.torre-home main #pride .feature-art.pride-visual > .pride-visual-detail {
+  color:var(--ac-blue-dark)!important;
+  opacity:1!important;
+}

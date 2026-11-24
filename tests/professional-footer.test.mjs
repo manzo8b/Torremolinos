@@ -62,5 +62,5 @@ test('White-and-blue footer works on mobile and is cached offline',()=>{
   assert.ok(home.includes(name),name+' missing from Home');
   assert.ok(sw.includes('./'+name),name+' missing from service worker cache');
  }
- assert.match(sw,/torremolinos-v32/);
+ assert.match(sw,/torremolinos-v33/);
 });
