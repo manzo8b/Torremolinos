@@ -125,13 +125,13 @@ try{
       const badge=document.querySelector('#galleryTeaserProvenance');
       const sound=document.querySelector('#sound .music-shell');
       return {
-        badgeInCopy:!!badge?.closest('.gallery-feature-body'),
-        badgePosition:badge?getComputedStyle(badge).position:null,
+        galleryBannerRemoved:!document.querySelector('.gallery-feature')&&!badge,
+        galleryCount:document.querySelectorAll('#photodiary figure').length,
         soundHeight:sound?.getBoundingClientRect().height||0
       };
     });
-    assert.ok(editorialPolish.badgeInCopy,'AI provenance is not attached to Gallery editorial copy at '+width);
-    assert.equal(editorialPolish.badgePosition,'static','stray AI badge still floats over the Home at '+width);
+    assert.ok(editorialPolish.galleryBannerRemoved,'redundant AI Gallery banner remains at '+width);
+    assert.equal(editorialPolish.galleryCount,3,'documentary Gallery must contain three photos at '+width);
     assert.ok(editorialPolish.soundHeight<(width<=950?650:width<=1100?430:365),'Sound did not become compact at '+width+' ('+Math.round(editorialPolish.soundHeight)+'px)');
     if(width>=1024){
       const photoFill=await page.evaluate(()=>{
@@ -217,9 +217,8 @@ try{
         v6:[...document.styleSheets].some(x=>x.href?.includes('product-v6.css')),
         bridgeBg:bridge?.backgroundColor,bridgeText:bridgeText?.color,
         agendaBg:agenda?.backgroundColor,musicBg:music?.backgroundColor,
-        galleryImg:touch('.gallery-feature-img'),musicCover:touch('.music-album-art:not([hidden])')||touch('.music-album-fallback:not([hidden])'),
+        galleryImg:touch('#photodiary figure img'),musicCover:touch('.music-album-art:not([hidden])')||touch('.music-album-fallback:not([hidden])'),
         agendaPhoto:touch('.agenda-home-photo'),restaurantStyle:css('.directory-teaser')?.borderTopLeftRadius,
-        gallerySeam:seam('.gallery-feature','.gallery-feature-img','.gallery-feature-body'),
         agendaSeam:seam('.agenda-home','.agenda-home-copy','.agenda-home-photo'),
         ctaRadius:css('.editorial-bridge-action')?.borderTopLeftRadius,
         galleryBg:gallery?.backgroundColor
@@ -230,12 +229,11 @@ try{
     assert.equal(premium.bridgeText,'rgb(16, 36, 75)','editorial bridge text must be legible at '+width);
     assert.equal(premium.agendaBg,'rgb(251, 248, 242)','review warm agenda card at '+width);
     assert.equal(premium.musicBg,'rgb(16, 36, 75)','review navy Sound at '+width);
-    assert.ok(premium.galleryImg?.h>=240,'gallery image collapsed at '+width);
+    assert.ok(premium.galleryImg?.h>=100,'gallery image collapsed at '+width);
     assert.ok(premium.agendaPhoto?.h>=240,'agenda photograph collapsed at '+width);
     assert.ok(premium.musicCover?.h>=100,'music artwork collapsed at '+width);
     assert.ok(parseFloat(premium.ctaRadius)>=20,'action lost pill shape at '+width);
     if(width>=768){
-      assert.ok(premium.gallerySeam?.gap<8,'gallery disconnected halves at '+width+': '+JSON.stringify(premium.gallerySeam));
       assert.ok(premium.agendaSeam?.gap<8,'agenda disconnected halves at '+width+': '+JSON.stringify(premium.agendaSeam));
     }
 
@@ -259,7 +257,7 @@ try{
         spaceDiscover:gap('#discover','#explore'),
         spaceExplore:gap('#explore','.nogalera-feature'),
         spaceSound:gap('#clean-access','#sound'),
-        spaceStories:gap('.gallery-feature','#stories'),
+        spaceStories:gap('#photodiary','#stories'),
         spaceAgenda:gap('#stories','#agenda-home'),
         photoLead:figs[0]?.getBoundingClientRect().height||0,
         photoDetail:figs[1]?.getBoundingClientRect().height||0,
@@ -298,7 +296,7 @@ try{
     })){
       assert.ok(value>=(key==='sound'?18:50),'chapters visually stuck together at '+width+' '+key+' '+value+'px');
     }
-    assert.ok(v7.photoLead>v7.photoDetail,'photo hierarchy collapsed at '+width);
+    assert.ok(Math.abs(v7.photoLead-v7.photoDetail)<=2,'gallery strip images must have equal height at '+width);
     assert.ok(v7.actions>=5,'coordinated arrows missing at '+width);
     assert.ok(v7.reading,'scroll progress indicator absent at '+width);
     assert.ok(parseFloat(v7.ctaRadius)>20,'oval CTA lost at '+width);
@@ -316,7 +314,7 @@ try{
         const el=document.querySelector(selector),css=el&&getComputedStyle(el);
         return css?{text:css.color,bg:css.backgroundColor}:null;
       }
-      return {gallery:props('.gallery-feature-body a'),feedback:props('.community .darkbtn'),credit:props('.music-body .approved-sound-credit')};
+      return {gallery:props('#photodiary .gallery-promo-link a'),feedback:props('.community .darkbtn'),credit:props('.music-body .approved-sound-credit')};
     });
     assert.deepEqual(ctas.gallery,{text:'rgb(255, 255, 255)',bg:'rgb(9, 107, 203)'},'gallery contrast '+width);
     assert.deepEqual(ctas.feedback,{text:'rgb(255, 255, 255)',bg:'rgb(9, 107, 203)'},'feedback CTA contrast '+width);

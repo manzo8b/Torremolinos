@@ -68,3 +68,12 @@ test('review Home cards use four supplied documentary photos and valid responsiv
  assert.match(section,/data-review-credit/);
  for(const name of assets.filter(x=>!x.includes('-1600.')))assert.ok(sw.includes(name),'missing offline card '+name);
 });
+
+test('Home review Gallery is one three-photo documentary strip with one action',()=>{
+ const section=page.match(/<section[^>]*id="photodiary"[\s\S]*?<\/section>/)[0];
+ assert.equal((section.match(/<figure>/g)||[]).length,3);
+ assert.equal((section.match(/© Archivo fotográfico TORREMOLINOS/g)||[]).length,3);
+ assert.equal((section.match(/href="gallery\/"/g)||[]).length,1);
+ assert.doesNotMatch(page,/<section class="gallery-feature shell"/);
+ assert.doesNotMatch(page,/tryImage\('assets\/photos\/album\/blue-hour-ai\.webp'/);
+});

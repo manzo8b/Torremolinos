@@ -36,7 +36,7 @@ try{
     const photos={};for(const img of document.querySelectorAll('main img')){const src=img.getAttribute('src');if(!src)continue;(photos[src]??=[]).push(img.closest('section')?.id||img.closest('section')?.className||'main')}
     const sections=[...document.querySelectorAll('main > section')].map(e=>({id:e.id||e.className,top:e.offsetTop,height:e.getBoundingClientRect().height,bg:getComputedStyle(e).backgroundColor}));
     const vis=s=>[...document.querySelectorAll(s)].filter(e=>e.getClientRects().length>0&&getComputedStyle(e).visibility!=='hidden').length;
-    const frames=['.nogalera-feature-photo','.gallery-feature-img','#agenda-home .agenda-home-photo'].map(s=>({selector:s,frame:rect(s),image:rect(s+' img')}));
+    const frames=['.nogalera-feature-photo','.gallery-feature-img','#agenda-home .agenda-home-photo'].filter(s=>document.querySelector(s)).map(s=>({selector:s,frame:rect(s),image:rect(s+' img')}));
     const source=document.querySelector('#cards .source'),map=document.querySelector('#cards .placefoot a:not(.source)');
     return {width:innerWidth,scrollWidth:document.documentElement.scrollWidth,height:document.documentElement.scrollHeight,protectedBottom,sections,frames,duplicatePhotos:Object.entries(photos).filter(([k,v])=>v.length>1),soundControls:vis('#sound audio[controls],#sound #approvedSoundPlay'),mapControls:vis('#mapStart,#loadMap'),source:source&&{color:getComputedStyle(source).color,background:getComputedStyle(source).backgroundColor,opacity:getComputedStyle(source).opacity,href:source.href},map:map&&{color:getComputedStyle(map).color,href:map.href}};
    });
@@ -46,6 +46,8 @@ try{
    await p.locator('#clean-access').screenshot({path:out+'/'+label+'-cards-'+width+'.png',animations:'disabled'});
    await p.locator('#discover').screenshot({path:out+'/'+label+'-explore-'+width+'.png',animations:'disabled'});
    await p.locator('.nogalera-feature').screenshot({path:out+'/'+label+'-nogalera-'+width+'.png',animations:'disabled'});
+   await p.locator('#photodiary').screenshot({path:out+'/'+label+'-gallery-'+width+'.png',animations:'disabled'});
+   if(label==='before')await p.locator('.gallery-feature').screenshot({path:out+'/before-gallery-banner-'+width+'.png',animations:'disabled'});
    if(label==='after'){
     const cardPhotos=await p.locator('#clean-access img[data-review-photo]').evaluateAll(imgs=>imgs.map(i=>({key:i.dataset.reviewPhoto,src:i.currentSrc,loaded:i.complete&&i.naturalWidth>0,ratio:i.getBoundingClientRect().width/i.getBoundingClientRect().height,alt:i.alt})));
     if(cardPhotos.length!==4||cardPhotos.some(x=>!x.loaded||Math.abs(x.ratio-1.5)>.025||!x.alt))report.errors.push('Card photo contract '+width+': '+JSON.stringify(cardPhotos));
@@ -53,6 +55,8 @@ try{
     if(tiles.length!==4||tiles.some(x=>!x.loaded||Math.abs(x.ratio-1.5)>.03))report.errors.push('Explore photo contract '+width+': '+JSON.stringify(tiles));
     if(await p.locator('#cards .place').count()!==6)report.errors.push('Featured places count '+width);
     if(await p.locator('#pride').count())report.errors.push('Open to all still present '+width);
+    const strip=await p.locator('#photodiary').evaluate(el=>({photos:[...el.querySelectorAll('figure img')].map(img=>({src:img.getAttribute('src'),loaded:img.complete&&img.naturalWidth>0,ratio:img.getBoundingClientRect().width/img.getBoundingClientRect().height,alt:img.alt})),credits:[...el.querySelectorAll('figcaption small')].map(x=>x.textContent),links:el.querySelectorAll('a[href="gallery/"]').length,banner:!!document.querySelector('.gallery-feature')}));
+    if(strip.photos.length!==3||strip.photos.some(x=>!x.loaded||Math.abs(x.ratio-1.5)>.03||!x.alt)||strip.credits.length!==3||strip.credits.some(x=>!x.includes('© Archivo fotográfico TORREMOLINOS'))||strip.links!==1||strip.banner)report.errors.push('Gallery strip contract '+width+': '+JSON.stringify(strip));
     const n=await p.locator('.nogalera-feature').evaluate(el=>({primary:el.querySelectorAll('.review-nogalera-main').length,links:[...el.querySelectorAll('.review-nogalera-stories a')].map(a=>({href:a.getAttribute('href'),background:getComputedStyle(a).backgroundColor})),photo:el.querySelector('img').getAttribute('src')}));
     if(n.primary!==1||n.links.length!==2||n.links.some(a=>a.background!=='rgba(0, 0, 0, 0)')||n.photo!=='assets/photos/album/plaza.webp')report.errors.push('Nogalera contract '+width+': '+JSON.stringify(n));
     await p.evaluate(()=>window.scrollTo(0,0));

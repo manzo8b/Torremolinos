@@ -115,16 +115,16 @@ Tu navegador no admite la reproducción de audio
 <div class="nogalera-feature-copy"><span class="eyebrow coral">LOCAL EDITION / EXPLORE</span><h2 id="nogalera-feature-title">La Nogalera</h2><p data-t="nogaleraHomeIntro">Terrazas, tapas, bares, cultura y noches para todos. Una guía de La Nogalera y sus calles cercanas, con lugares identificados y fuentes consultables.</p><a class="review-nogalera-main" href="explore/la-nogalera/" data-t="nogaleraHomeCTA">Entra en La Nogalera ↗</a><div class="review-nogalera-heritage"><p data-review-nogalera="heritage">La historia LGBTQ+ de Torremolinos se cuenta también entre La Nogalera y el histórico Pasaje Begoña.</p><div class="review-nogalera-stories"><a href="stories/la-nogalera-donde-la-noche-tiene-historia.html" data-review-nogalera="nogalera">La Nogalera: historia ↗</a><a href="stories/pasaje-begona-memoria-de-libertad.html" data-review-nogalera="pasaje">Pasaje Begoña: memoria ↗</a></div></div><small data-t="nogaleraHomeNote">Selección editorial · No es un ranking ni una guía de horarios en tiempo real</small></div></section>
 
 
-<section class="photo-diary shell" id="photodiary" aria-labelledby="photodiary-heading">
+<section class="photo-diary shell review-gallery-strip" id="photodiary" aria-labelledby="photodiary-heading">
 <div class="photo-diary-head"><div><span class="eyebrow coral">LOCAL LENS</span><h2 id="photodiary-heading" data-t="photoDiaryTitle">La ciudad desde dentro</h2></div><p data-t="photoDiaryLead">Fotografías originales de la costa, las palmeras y los rincones cotidianos de Torremolinos.</p></div>
 <div class="photo-diary-grid">
-<figure><img id="photoDiary1" src="assets/photos/album/palmeras-sol.webp" alt="Palmeras junto a la playa, con el Mediterráneo al fondo" loading="lazy"><figcaption><span data-t="photoDiary1">El Mediterráneo</span><small>© Archivo fotográfico TORREMOLINOS</small></figcaption></figure>
-<figure><img id="photoDiary2" src="assets/photos/el-bajondillo-letrero.webp" alt="Cartel de cerámica El Bajondillo junto a una pared blanca" loading="lazy"><figcaption><span data-t="photoDiary2">El Bajondillo</span><small>© Archivo fotográfico TORREMOLINOS</small></figcaption></figure>
-<figure><img id="photoDiary3" src="assets/photos/paseo-palmeras.webp" alt="Paisaje del paseo marítimo con palmeras y cielo azul" loading="lazy"><figcaption><span data-t="photoDiary3">Pasear sin prisa</span><small>© Archivo fotográfico TORREMOLINOS</small></figcaption></figure>
+<figure><img id="photoDiary1" src="assets/photos/album/palmeras-sol.webp" alt="Palmeras junto a la playa, con el Mediterráneo al fondo" loading="lazy" decoding="async"><figcaption><span data-t="photoDiary1">El Mediterráneo</span><small>© Archivo fotográfico TORREMOLINOS</small></figcaption></figure>
+<figure><img id="photoDiary2" src="assets/photos/el-bajondillo-letrero.webp" alt="Cartel de cerámica El Bajondillo junto a una pared blanca" loading="lazy" decoding="async"><figcaption><span data-t="photoDiary2">El Bajondillo</span><small>© Archivo fotográfico TORREMOLINOS</small></figcaption></figure>
+<figure><img id="photoDiary3" src="assets/photos/paseo-palmeras.webp" alt="Paisaje del paseo marítimo con palmeras y cielo azul" loading="lazy" decoding="async"><figcaption><span data-t="photoDiary3">Pasear sin prisa</span><small>© Archivo fotográfico TORREMOLINOS</small></figcaption></figure>
 </div><div class="gallery-promo-link"><a href="gallery/" data-t="galleryDiaryCTA">Abrir la Gallery ↗</a></div><p class="photo-diary-note" data-t="photoDiaryNote">Fotografías del autor, cedidas para esta publicación. Todos los derechos reservados.</p>
 </section>
 <section class="shell" style="padding-top:28px" aria-label="Guía gastronómica"><a href="comer/" class="directory-teaser"><span aria-hidden="true">🍽️</span><div><strong data-t="foodTeaserTitle">Dónde comer en Torremolinos</strong><small data-t="foodTeaserDesc">Guadalupe Bajondillo y La Nogalera · Cozzy Inn Gastro Bar · ANDALUZ · y más</small></div><b data-t="foodTeaserLink">Descubrir locales ↗</b></a></section>
-<section class="gallery-feature shell" aria-labelledby="galleryFeatureTitle"><div class="gallery-feature-img"><img id="galleryTeaserImg" src="assets/photos/album/palmeras-sol.webp" width="1200" height="680" alt="Fotografía original de Torremolinos" loading="lazy"><span id="galleryTeaserProvenance" class="ai-badge">AI</span></div><div class="gallery-feature-body"><span class="eyebrow coral">LOCAL LENS / GALLERY</span><h2 id="galleryFeatureTitle" data-t="galleryHomeTitle">La ciudad desde otra mirada</h2><p data-t="galleryHomeDesc">Un diario visual de playas, paseos, barrios y detalles. Fotografías del archivo y piezas ilustrativas señaladas con transparencia.</p><a href="gallery/" data-t="galleryHomeLink">Explorar la Gallery ↗</a></div></section>
+
 <section class="magazine shell" id="stories" aria-labelledby="stories-heading">
 <div class="magazine-top"><div><span class="eyebrow coral">TORREMOLINOS / PEOPLE & PLACES</span><h2 id="stories-heading" data-t="storiesTitle">Historias de una ciudad viva</h2><p data-t="storiesLead">Personas, barrios, memoria y cultura más allá de la postal.</p></div><a class="magazine-link" href="stories/" data-t="allStories">Ver todas las historias ↗</a></div>
 <div class="magazine-grid">
@@ -388,17 +388,7 @@ if(heroMusicButton&&heroMusicAudio){
  heroMusicAudio.addEventListener('ended',updateHeroMusic);
 }
 $('#year').textContent=new Date().getFullYear();setLang();updateHeroMusic();
-// Progressive media upgrade. Original documentary photography remains available
-// until the supplied editorial AI images have actually been uploaded to the repo.
-(function(){
- var teaser=document.getElementById('galleryTeaserImg'),teaserLabel=document.getElementById('galleryTeaserProvenance');
- function tryImage(url,onSuccess,onError){var img=new Image();img.onload=function(){onSuccess(url)};if(onError)img.onerror=onError;img.src=url}
- if(teaser){tryImage('assets/photos/album/blue-hour-ai.webp',function(src){
-  teaser.src=src;teaser.alt=msg('heroAiAlt');
-  if(teaserLabel)teaserLabel.textContent='AI';
-  teaser.dataset.isAI='true';
- });}
-})();
+// Home gallery uses only the three documentary archive photographs.
 
 
 

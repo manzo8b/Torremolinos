@@ -97,7 +97,7 @@
   const pairs=[
    ['.nogalera-feature-photo small','.nogalera-feature-copy'],
    ['.agenda-home-photo small','.agenda-home-copy'],
-   ['.gallery-feature-img .ai-badge','.gallery-feature-body'],
+
    ['#sound .music-art .approved-sound-credit','#sound .music-body']
   ];
   pairs.forEach(([from,to])=>{
@@ -115,6 +115,8 @@
  }
  function translate(){
   const lang=(document.documentElement.lang||'es').slice(0,2);
+  const galleryAlt={"es":["Palmeras junto a la playa, con el Mediterráneo al fondo","Cartel de cerámica El Bajondillo junto a una pared blanca","Paseo marítimo con palmeras y cielo azul"],"it":["Palme accanto alla spiaggia, con il Mediterraneo sullo sfondo","Cartello in ceramica El Bajondillo accanto a un muro bianco","Lungomare con palme e cielo azzurro"],"en":["Palm trees beside the beach with the Mediterranean in the background","El Bajondillo ceramic sign beside a white wall","Seafront promenade with palm trees and blue sky"],"de":["Palmen am Strand mit dem Mittelmeer im Hintergrund","Keramikschild El Bajondillo an einer weißen Wand","Strandpromenade mit Palmen und blauem Himmel"],"fr":["Palmiers près de la plage, avec la Méditerranée en arrière-plan","Panneau en céramique El Bajondillo près d’un mur blanc","Promenade maritime bordée de palmiers sous un ciel bleu"],"ru":["Пальмы у пляжа на фоне Средиземного моря","Керамическая табличка Эль-Бахондильо у белой стены","Набережная с пальмами и голубым небом"]};
+  ['photoDiary1','photoDiary2','photoDiary3'].forEach((id,i)=>{const img=document.getElementById(id);if(img)img.alt=(galleryAlt[lang]||galleryAlt.es)[i];});
   const t=T[lang]||T.es;
   document.querySelectorAll('[data-clean]').forEach(el=>{
    const k=el.getAttribute('data-clean');
