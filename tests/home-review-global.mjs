@@ -44,9 +44,13 @@ try{
    await p.screenshot({path:hero,clip:{x:0,y:0,width,height:data.protectedBottom},animations:'disabled'});
    await p.screenshot({path:out+'/'+label+'-home-'+width+'.png',fullPage:true,animations:'disabled'});
    await p.locator('#clean-access').screenshot({path:out+'/'+label+'-cards-'+width+'.png',animations:'disabled'});
+   await p.locator('#discover').screenshot({path:out+'/'+label+'-explore-'+width+'.png',animations:'disabled'});
    if(label==='after'){
     const cardPhotos=await p.locator('#clean-access img[data-review-photo]').evaluateAll(imgs=>imgs.map(i=>({key:i.dataset.reviewPhoto,src:i.currentSrc,loaded:i.complete&&i.naturalWidth>0,ratio:i.getBoundingClientRect().width/i.getBoundingClientRect().height,alt:i.alt})));
     if(cardPhotos.length!==4||cardPhotos.some(x=>!x.loaded||Math.abs(x.ratio-1.5)>.025||!x.alt))report.errors.push('Card photo contract '+width+': '+JSON.stringify(cardPhotos));
+    const tiles=await p.locator('#discover .review-photo-filter img').evaluateAll(imgs=>imgs.map(i=>({src:i.currentSrc,loaded:i.complete&&i.naturalWidth>0,ratio:i.getBoundingClientRect().width/i.getBoundingClientRect().height})));
+    if(tiles.length!==4||tiles.some(x=>!x.loaded||Math.abs(x.ratio-1.5)>.03))report.errors.push('Explore photo contract '+width+': '+JSON.stringify(tiles));
+    if(await p.locator('#cards .place').count()!==6)report.errors.push('Featured places count '+width);
     await p.evaluate(()=>window.scrollTo(0,0));
    }
 

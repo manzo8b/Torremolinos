@@ -834,3 +834,38 @@ body.torre-home main#main #clean-access .review-card-photo-credit{
  color:var(--ac-muted)!important;font-size:11px!important;line-height:1.45!important;
  text-align:right;letter-spacing:0!important;
 }
+
+/* HOME REVIEW §3 · in attesa di validazione MF. One continuous discovery section. */
+body.torre-home main#main #discover.section.shell{background:var(--review-sand)!important;padding:0!important}
+body.torre-home main#main #discover .shortcuts{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:clamp(10px,1.4vw,20px)!important}
+body.torre-home main#main #discover .shortcuts .shortcut.review-photo-filter{
+ display:flex!important;flex-direction:column!important;justify-content:flex-start!important;align-items:stretch!important;
+ background:var(--review-card)!important;padding:0!important;gap:0!important;min-height:0!important;
+ border:2px solid var(--ac-line)!important;overflow:hidden!important;text-align:left!important;min-width:0!important;
+}
+body.torre-home main#main #discover .shortcuts .shortcut.review-photo-filter::before,
+body.torre-home main#main #discover .shortcuts .shortcut.review-photo-filter::after{display:none!important;content:none!important}
+body.torre-home main#main #discover .review-photo-filter img{display:block!important;width:100%!important;height:auto!important;aspect-ratio:3/2;object-fit:cover!important;flex:none!important;border-radius:0!important}
+body.torre-home main#main #discover .review-photo-filter .review-filter-copy{display:flex!important;flex-direction:column!important;gap:4px!important;padding:14px!important;min-height:76px!important}
+body.torre-home main#main #discover .review-photo-filter strong{font-size:clamp(17px,1.6vw,24px)!important;letter-spacing:-.012em!important;line-height:1.2!important;color:var(--ac-ink)!important}
+body.torre-home main#main #discover .review-photo-filter small{font-size:12px!important;color:var(--ac-muted)!important;line-height:1.35!important}
+body.torre-home main#main #discover .review-photo-filter[aria-pressed="true"]{border-color:var(--ac-blue-dark)!important;box-shadow:0 0 0 2px var(--ac-blue-dark)!important}
+body.torre-home main#main #discover .review-photo-filter[aria-pressed="true"] strong{color:var(--ac-blue-dark)!important}
+body.torre-home main#main #discover .review-explore-credit{color:var(--ac-muted)!important;font-size:11px!important;text-align:right;margin:8px 0 0!important}
+body.torre-home main#main #discover #explore.review-explore-results{
+ width:100%!important;max-width:none!important;margin:clamp(32px,4vw,52px) 0 0!important;padding:0!important;
+ background:var(--review-sand)!important;border:0!important;box-shadow:none!important;border-radius:0!important;
+}
+body.torre-home main#main #discover #explore .sectop{margin:0 0 14px!important}
+body.torre-home main#main #discover #explore .sectop h2{font-size:clamp(26px,2.8vw,40px)!important;letter-spacing:-.012em!important}
+body.torre-home main#main #discover .sectop .eyebrow{color:var(--ac-ink)!important}
+body.torre-home main#main #discover #explore .review-filter-tools{display:flex!important;flex-wrap:wrap!important;gap:12px!important;margin:10px 0!important;padding:0!important;overflow:visible!important}
+body.torre-home main#main #discover #explore .review-filter-tools button{
+ background:transparent!important;color:var(--ac-blue-dark)!important;border:0!important;box-shadow:none!important;
+ text-decoration:underline!important;text-underline-offset:3px!important;padding:8px 4px!important;min-height:44px!important;
+}
+body.torre-home main#main #discover #explore .review-filter-tools button[aria-pressed="true"]{font-weight:800!important;color:var(--ac-ink)!important}
+body.torre-home main#main #discover #explore .review-all-places{display:block!important;width:fit-content!important;margin:18px auto 0!important;padding:12px 18px!important;min-height:44px!important;color:var(--ac-blue-dark)!important;border:1px solid var(--ac-blue-dark)!important;border-radius:999px!important;text-decoration:none!important;background:transparent!important;font-weight:700!important}
+body.torre-home main#main #discover #explore .place-no-photo{background:var(--review-card)!important;min-height:0!important;height:75px!important}
+body.torre-home main#main #discover #explore .v7-rail-copy{color:var(--ac-ink)!important}
+@media(max-width:760px){body.torre-home main#main #discover .shortcuts{grid-template-columns:repeat(2,minmax(0,1fr))!important}}

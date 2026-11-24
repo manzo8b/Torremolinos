@@ -199,7 +199,7 @@ try{
 
     assert.equal(whiteCraft.music,'rgb(244, 239, 230)','Sound title must use sand on navy at '+width);
     assert.equal(whiteCraft.nogalera,'rgb(244, 239, 230)','Nogalera title must use sand on navy at '+width);
-    assert.equal(whiteCraft.photos,10,'place gallery should have 10 documentary photos at '+width);
+    assert.equal(whiteCraft.photos,6,'Home must show six featured places at '+width);
 
     const premium=await page.evaluate(()=>{
       function css(sel){const e=document.querySelector(sel);return e?getComputedStyle(e):null;}
@@ -292,7 +292,7 @@ try{
     assert.ok(daylight.christmas,'Christmas editorial feature missing at '+width);
 
     for(const [key,value] of Object.entries({
-      discover:v7.spaceDiscover,explore:v7.spaceExplore,sound:v7.spaceSound,
+      explore:v7.spaceExplore,sound:v7.spaceSound,
       stories:v7.spaceStories,agenda:v7.spaceAgenda
     })){
       assert.ok(value>=(key==='sound'?18:50),'chapters visually stuck together at '+width+' '+key+' '+value+'px');
@@ -323,7 +323,7 @@ try{
     if(width===390||width===1440){
       // Full-page screenshots do not automatically reveal lazy images. Simulate
       // a real visitor scrolling through the whole catalog, then validate.
-      for(let i=0;i<10;i++){
+      for(let i=0;i<6;i++){
         const img=page.locator('#cards .place-photo').nth(i);
         await img.scrollIntoViewIfNeeded();
         await img.evaluate(node=>new Promise((resolve,reject)=>{
@@ -351,7 +351,7 @@ try{
         'approved Sound image did not load at '+width+': '+JSON.stringify(approvedSound));
       await page.locator('#cards').evaluate(el=>el.scrollLeft=0);
       await page.evaluate(()=>window.scrollTo(0,0));
-      assert.equal(await page.locator('#cards .place-photo').count(),10,'broken place photo');
+      assert.equal(await page.locator('#cards .place-photo').count(),6,'broken featured place photo');
     }
     await page.screenshot({path:'artifacts/screenshots/home-'+width+'.png',fullPage:true,animations:'disabled'});
     if(width===390){
@@ -367,8 +367,13 @@ try{
       assert.ok(steps>=2,'planner rendered no stops');
       await page.locator('#route li .route-control').last().click();
       assert.equal(await page.locator('#route li').count(),steps-1,'cannot remove a stop');
-      await page.locator('[data-filter="lgbt"]').click();
-      assert.ok(await page.locator('#cards .place').count()>=1,'catalog filter failed');
+      await page.locator('[data-shortcut="lgbt"]').click();
+      assert.equal(await page.locator('#cards .place').count(),2,'LGBTQ+ photo filter failed');
+      await page.locator('[data-shortcut="practical"]').click();
+      assert.equal(await page.locator('#cards .place[data-place-id="c1"]').count(),1);
+      assert.equal(await page.locator('#cards .place[data-place-id="c1"] img').count(),0,'C1 must not display people');
+      await page.locator('[data-filter="all"]').click();
+      assert.equal(await page.locator('#cards .place').count(),6);
       await page.locator('#search').fill('Pasaje');
       assert.ok(await page.locator('#cards .place').count()>=1,'search failed');
       await page.locator('#search').fill('');
