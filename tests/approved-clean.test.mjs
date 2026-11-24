@@ -14,7 +14,7 @@ test('approved clean Home has four real navigation cards and the compact audio s
  assert.equal((page.match(/id="sound"/g)||[]).length,1);
 });
 test('approved design never replaces the visitor planner or original documentary hero assets',()=>{
- for(const id of ['id="cards"','id="filters"','id="lang"','id="plan"','id="route"','id="loadMap"'])
+ for(const id of ['id="cards"','id="filters"','id="lang"','href="tu-torremolinos/"','id="loadMap"'])
   assert.ok(page.includes(id),id);
  for(const item of ['hero-apple-2026.webp','hero-apple-2026-mobile.webp'])
   assert.ok(page.includes(item)||css.includes(item));
@@ -145,3 +145,5 @@ test('Essentials preserves three service cards and one consent-driven map, with 
  assert.doesNotMatch(page,/<section class="editorial-bridge shell"|<div class="community">/);
  assert.match(page,/data-footer="feedback">Invia un suggerimento/);
 });
+
+test('Standalone planner preserves the existing route storage, catalog, legacy URLs and offline shell',()=>{const planner=read('tu-torremolinos/index.html'),js=read('tu-torremolinos/planner.js');new vm.Script(js);assert.doesNotMatch(page,/<section[^>]*id="plan"/);for(const id of ['plan','route','moods','sharePlan','resetPlan','directions'])assert.ok(planner.includes('id="'+id+'"'));assert.match(js,/torremolinos\.plan/);assert.match(page,/torremolinos\.favs/);assert.match(js,/TORREMOLINOS_PLACES/);assert.match(page,/location\.replace\(target\.href\)/);assert.ok(sw.includes("'./tu-torremolinos/'"));assert.ok(read('sitemap.xml').includes('/tu-torremolinos/'));});

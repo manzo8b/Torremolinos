@@ -7,7 +7,7 @@ const FILES=[
   './','./index.html','./offline.html','./locale-accessibility.js','./approved-clean-2026.css','./approved-clean-2026.js','./footer-professional-2026.css','./footer-professional-2026.js','./brand/torremolinos-logo-clean.svg','./apple-premium.css','./craft-refinement.css','./commercial-experience.css','./product-v6.css','./product-v6.js','./narrative-v7.css','./narrative-v7.js','./luminosity-v8.css','./luminosity-v8.js','./craft-finish.css','./apple-runtime.js','./craft-runtime.js','./design-system-2026.css','./editorial.css','./favicon.svg','./manifest.webmanifest','./icons/apple-touch-icon.png','./icons/icon-192.png','./icons/icon-512.png',
   './brand/torremolinos-logo.svg','./brand/torremolinos-logo-light.svg','./brand/torremolinos-symbol.svg','./assets/illustrations/pride-flag-ai.svg','./legal/ai-transparency.html',
   './gallery/','./gallery/styles.css','./gallery/data.js','./gallery/app.js',
-  './explore/','./explore/catalog.js','./explore/catalog-app.js','./explore/catalog.css',
+  './tu-torremolinos/','./tu-torremolinos/index.html','./tu-torremolinos/planner.js','./tu-torremolinos/planner.css','./explore/','./explore/catalog.js','./explore/catalog-app.js','./explore/catalog.css',
   './assets/photos/home-review/explore-mare-800.webp','./assets/photos/home-review/explore-nogalera-800.webp','./assets/photos/home-review/explore-sapori-800.webp','./assets/photos/home-review/explore-primi-passi-800.webp',
   './explore/la-nogalera/','./explore/la-nogalera/styles.css','./explore/la-nogalera/data.js','./explore/la-nogalera/app.js',
   './album-motion.js','./coastal-light.css','./refinement.css','./v06.css','./listen/','./listen/content.js','./legal/','./legal/styles.css','./legal/app.js','./legal/data.js',

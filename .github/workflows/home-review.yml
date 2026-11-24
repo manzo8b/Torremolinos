@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - 'index.html'
+      - 'tu-torremolinos/**'
       - 'assets/photos/home-review/**'
       - 'approved-clean-2026.css'
       - 'approved-clean-2026.js'

@@ -47,5 +47,10 @@ Baseline main d8c92b1c6a9e8d1d6893020834c7c3f1d6d4836b. PR #21 separata, non inc
 
 - MF: «procediamo al prossimo traguardo». Sound approvato per passaggio alla sezione 9; test precedente 45376306805 fallito per dimensione naturale corretta per densità srcset, non per mancato caricamento. Test ora decodifica bitmap reale e verifica pixel effettivi.
 
-## §9 — Essenziale + mappa + footer · in attesa di validazione MF
+## §9 — Essenziale + mappa + footer · approvazione estetica MF, 24 novembre 2026
 - Tre card conservate con fonti Renfe/112/turismo ufficiale, tonalità esistenti l8-paper, l8-warm-soft e l8-green-soft; griglia 3 desktop/tablet e stack mobile. Un solo pulsante mappa sotto card, nessun iframe prima dell'azione, aria-expanded e chiusura riapribile. Rimosse entrambe le fasce ridondanti La città è anche tua / Local connection. Footer navy esistente, testo sabbia, logo originale su piccola superficie chiara, struttura/colonne/link/policy invariati; azione feedback rinominata Invia un suggerimento in sei lingue con destinazione esistente. La pagina percorso resta in Home fino al punto 10. Screenshot dedicati a quattro risoluzioni, test contrattuali, nessun merge/deploy.
+
+- MF: «approvo. procediamo». Static e product contract del commit 5e4aca7 superati; gate visivo globale ancora fallito.
+
+## §10 — La tua Torremolinos · in attesa di validazione MF
+- Percorso proposto dal brief /tu-torremolinos/ (nome da validare). Trasferito markup e codice del planner, catalogo condiviso, sei lingue, stessi ID e chiave torremolinos.plan, preferiti invariati. Home mantiene aggiunta tappe e link compatto dentro Explore; Hero e menu cambiano solo destinazione, barra mobile naviga alla pagina. Vecchi link Home con ?plan= e #plan reindirizzati preservando query. Cache e sitemap aggiornate, test di migrazione e screenshot 4 larghezze. Tema memorizzato separatamente senza sovrascrivere dati esistenti. Mappa fotografica MF del pannello Turismo comunale ricevuta come riferimento interno; non pubblicata senza verifica diritti, nessuna modifica a OpenStreetMap. Nessun merge/deploy.

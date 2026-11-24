@@ -20,8 +20,10 @@ test('each home control has a unique id', () => {
 });
 
 test('signature journey keeps the complete interactive flow', () => {
-  const ids = ['plan', 'plan-title', 'moods', 'route', 'directions', 'planCount', 'planStatus', 'planEmpty', 'sharePlan', 'resetPlan', 'filters', 'cards', 'lang', 'searchForm'];
-  ids.forEach(id => assert.match(html, new RegExp('id="' + id + '"')));
+  const planner=file('tu-torremolinos/index.html');
+  const ids = ['plan', 'plan-title', 'moods', 'route', 'directions', 'planCount', 'planStatus', 'planEmpty', 'sharePlan', 'resetPlan'];
+  ids.forEach(id => assert.match(planner, new RegExp('id="' + id + '"')));
+  ['filters','cards','lang','searchForm'].forEach(id=>assert.match(html,new RegExp('id="'+id+'"')));
   assert.match(html, /function addToPlan\(/);
   assert.match(html, /function editPlan\(/);
   assert.match(html, /function persistPlan\(/);
@@ -120,7 +122,7 @@ test('narrative copy and punctuation-free titles in all six languages', () => {
   assert.match(runtime,/cleanHeading/);
   assert.match(runtime,/MutationObserver/);
   assert.match(runtime,/NodeFilter\.SHOW_TEXT/);
-  assert.match(html,/data-plan-t="promiseTitle"/);
+  assert.match(file("tu-torremolinos/index.html"),/data-plan-t="promiseTitle"/);
 });
 
 test('offline cache contains the modern UI and two actual hero photographs', () => {

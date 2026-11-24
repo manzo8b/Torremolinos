@@ -1197,3 +1197,8 @@ body.torre-home main#main #useful #mapHolder[hidden]{display:none!important}
 body.torre-home main#main #useful #mapHolder:not([hidden]){display:block!important;width:100%!important;height:clamp(260px,40vw,460px)!important;min-height:0!important;border:1px solid var(--ac-line)!important;overflow:hidden!important;border-radius:18px!important}
 body.torre-home main#main #useful #mapHolder iframe{display:block!important;width:100%!important;height:100%!important;border:0!important}
 @media(max-width:760px){body.torre-home main#main #useful.section.shell .info-grid{grid-template-columns:minmax(0,1fr)!important}}
+
+/* §10: compact planner access within Explore, no extra Home chapter. */
+body.torre-home #explore .review-plan-link{margin-top:16px;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+body.torre-home #explore .review-plan-link a{color:var(--ac-blue-dark)!important;background:transparent!important;text-decoration:underline!important;min-height:44px;display:inline-flex;align-items:center}
+body.torre-home #explore #homePlanStatus{font-size:13px;color:var(--ac-ink);margin:0}

@@ -52,6 +52,8 @@ try{
    await p.locator('#agenda-home').screenshot({path:out+'/'+label+'-agenda-'+width+'.png',animations:'disabled'});
    await p.locator('#useful').screenshot({path:out+'/'+label+'-essentials-'+width+'.png',animations:'disabled'});
    await p.locator('#site-footer').screenshot({path:out+'/'+label+'-footer-'+width+'.png',animations:'disabled'});
+   if(label==='before')await p.locator('#plan').screenshot({path:out+'/before-planner-'+width+'.png',animations:'disabled'});
+   else {const planner=await ctx.newPage();await planner.goto(urls[i]+'tu-torremolinos/?lang=it');await planner.locator('#route li').first().waitFor();await planner.screenshot({path:out+'/after-planner-'+width+'.png',fullPage:true,animations:'disabled'});const metrics=await planner.evaluate(()=>({width:innerWidth,scroll:document.documentElement.scrollWidth,title:document.querySelector('h1').textContent,stops:document.querySelectorAll('#route li').length}));if(metrics.scroll>width||metrics.title!=='La tua Torremolinos'||!metrics.stops)report.errors.push('Standalone planner '+width+': '+JSON.stringify(metrics));await planner.close();}
    await p.locator('#sound').screenshot({path:out+'/'+label+'-sound-'+width+'.png',animations:'disabled'});
    if(label==='before')await p.locator('.gallery-feature').screenshot({path:out+'/before-gallery-banner-'+width+'.png',animations:'disabled'});
    if(label==='after'){

@@ -48,7 +48,7 @@ try{
     assert.ok(await panel.getByText('Mangiare',{exact:true}).isVisible());
     await p.screenshot({path:'artifacts/screenshots/iphone-menu-'+width+'.png',animations:'disabled'});
     await p.keyboard.press('Escape');assert.equal(await menu.getAttribute('open'),null);
-    await trigger.tap();await panel.locator('a[href="#plan"]').tap();
+    await trigger.tap();await panel.locator('a[href^="tu-torremolinos/"]').tap();await p.waitForURL('**/tu-torremolinos/**');await p.goBack();await trigger.waitFor({state:'visible'});
     assert.equal(await menu.getAttribute('open'),null);
     assert.equal(await p.locator('.editorial-bridge,.community').count(),0,'redundant banners remain');
     const layout=await p.locator('#useful').evaluate(e=>({width:e.clientWidth,scroll:e.scrollWidth,cards:e.querySelectorAll('.infocard').length}));
@@ -349,12 +349,17 @@ try{
       assert.ok(offset>0,'Next place arrow does not move the rail');
       await prev.click();
       await page.locator('#cards').evaluate(el=>el.scrollLeft=0);
+      await page.locator('.hero-cta-secondary').click();
+      await page.waitForURL('**/tu-torremolinos/**');
       await page.locator('[data-mood="taste"]').click();
       assert.ok((await page.locator('#route').innerText()).includes('La Carihuela'),'mood route did not change');
       const steps=await page.locator('#route li').count();
       assert.ok(steps>=2,'planner rendered no stops');
       await page.locator('#route li .route-control').last().click();
       assert.equal(await page.locator('#route li').count(),steps-1,'cannot remove a stop');
+      const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem('torremolinos.plan')));
+      await page.reload();assert.equal(await page.locator('#route li').count(),saved.length);
+      await page.locator('#plannerHome').click();await page.waitForURL('**/?lang=*');
       await page.locator('[data-shortcut="lgbt"]').click();
       assert.equal(await page.locator('#cards .place').count(),2,'LGBTQ+ photo filter failed');
       await page.locator('[data-shortcut="practical"]').click();

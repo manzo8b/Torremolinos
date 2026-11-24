@@ -1,0 +1,16 @@
+/* Standalone planner. Approved Home palette, compact accessible controls. */
+.review-planner main{max-width:1200px;padding:clamp(25px,5vw,64px) 20px}
+.plan-head{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:24px;align-items:end;margin-bottom:30px}
+.plan-lead h1{margin:8px 0 14px;font-size:clamp(32px,5vw,54px);line-height:1.12;letter-spacing:-.012em}.plan-section-kicker,.plan-journey-label{font-size:13px;font-weight:750;color:var(--dark)}
+.plan-lead p,.plan-choice p{margin:0 0 16px}.plan-promise{display:grid;gap:8px;padding:22px;background:var(--navy);color:var(--sand);border-radius:20px}
+.plan-workspace{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:20px;align-items:start}
+.plan-choice,.plan-journey{min-width:0;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:clamp(16px,3vw,30px)}
+.plan-choice h3,.plan-journey h3{font-size:clamp(22px,3vw,29px);line-height:1.2;margin:0 0 12px}
+.moods{display:grid;grid-template-columns:1fr;gap:10px;margin:20px 0}.mood-btn{text-align:left}
+.plan-journey-header{display:flex;align-items:start;justify-content:space-between;gap:12px}.plan-journey-header output{white-space:nowrap;font-size:13px;font-weight:700;color:var(--dark)}
+.route-list{list-style:none;padding:0;margin:16px 0;display:grid;gap:10px}.route-stop{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px;padding:12px;background:white;border:1px solid var(--line);border-radius:14px}
+.route-number{color:var(--dark);font-weight:750;font-variant-numeric:tabular-nums}.route-stop-info{display:grid;overflow-wrap:anywhere}.route-stop-info small{color:var(--navy)}.route-stop-controls{display:flex;gap:4px}.route-control{min-width:44px;min-height:44px;padding:6px}.route-control:disabled,.plan-share:disabled{opacity:.55;cursor:default}
+.plan-actions{display:flex;flex-wrap:wrap;gap:10px}.plan-map-link{display:inline-flex;min-height:44px;align-items:center;background:var(--blue);color:white;border-radius:999px;padding:10px 18px;text-decoration:none}.plan-map-link[aria-disabled=true]{opacity:.55;pointer-events:none}.plan-share,.plan-reset{border-radius:999px}.plan-status,.plan-disclaimer{font-size:13px;line-height:1.5}.plan-status{min-height:1.5em}.plan-explore-link{display:inline-flex;align-items:center;min-height:44px}
+.review-planner footer{background:var(--navy);color:var(--sand)}.review-planner footer a{color:var(--sand)}
+@media(max-width:760px){.plan-head,.plan-workspace{grid-template-columns:minmax(0,1fr)}.route-stop{grid-template-columns:auto minmax(0,1fr)}.route-stop-controls{grid-column:2}.plan-journey-header{flex-wrap:wrap}.review-planner header nav{margin-left:0}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
