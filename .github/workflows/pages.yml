@@ -22,5 +22,9 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
+      # Give the Actions artifact API time to index the uploaded github-pages artifact.
+      # Prevents the observed 2026-11-24 metadata lookup race on the first deployment.
+      - name: Wait for Pages artifact indexing
+        run: sleep 20
       - id: deployment
         uses: actions/deploy-pages@v4
