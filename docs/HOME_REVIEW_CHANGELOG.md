@@ -82,3 +82,6 @@ Run 45398867869: 14/15 combinazioni pagina/viewport superate, Agenda 768 px scro
 
 ### Sezioni autonome — revisione artistica MF
 MF chiede più respiro e superfici autonome, superando il sabbia obbligatorio e le card bianche annidate, con riferimento al ritmo Apple. Agenda approvata come esempio di spaziatura: invariata rispetto al commit 68d8fa2 (audit 45400404461 PASS). Stories: apertura azzurro Home #ECF3FA, griglia editoriale senza box su bianco, nota sabbia #F4EFE6. Album: apertura sabbia con padding, filtri su bianco, album unico azzurro con cornici foto e didascalie senza card annidate. Padding 26–64 px, separazione 32–76 px; griglia 28 px minimo. Solo CSS, test e changelog; foto, HTML, link, Home e Agenda invariati. Gate aggiornato per verificare nuovi colori, spazi, assenza di box e zero violazioni axe color-contrast; pubblicazione sospesa fino a validazione visiva e autorizzazione MF.
+
+### Rilascio v34 — sezioni autonome
+MF: «Wowww ottimo lavoro. Procedi pure» dopo le anteprime effettive. Run 45407003653 PASS 15/15, axe color-contrast 0, controlli statici 45407003656 PASS, product contract 45407003529 PASS. Autorizzato rilascio delle sole rifiniture approvate; cache PWA v34. Home, contenuti, dataset e foto invariati. Disponibilità delle foto esterne, verifica Safari reale e audit finale ancora da completare. Rollback mediante revert del merge.
