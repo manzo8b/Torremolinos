@@ -15,7 +15,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
@@ -35,7 +35,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: international-release-report
-          path: artifacts/international-report.json
+          path: |
+            artifacts/international-report.json
+            artifacts/christmas-standard-*.png
           if-no-files-found: ignore
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -117,3 +117,6 @@ Single-source build projects the existing localized DOM copy into static HTML fo
 
 ### v42 — Christmas article format correction (user request)
 All six editions now use the standard Stories masthead, full-width editorial photo, prose column, side index and shared footer, with 15 events as flat editorial entries rather than nested cards. Three key-date summaries, all 11 references, photo and captions, original copy, canonical/hreflang retained. No changes to other articles or Home layout. Validated by dedicated structure checks and browser smoke. Included in v42 to avoid release divergence.
+
+### Christmas standard — publication hotfix
+The v42 source correction was merged but Pages deployment 45444496653 failed at Playwright dependency installation: ubuntu-latest resolved to Ubuntu 26.04, unsupported by pinned Playwright 1.57.0. Pin the deployment runner to the tested Ubuntu 24.04, retain every build gate. Match Christmas header to the exact approved city identity article in all six languages; same standard metadata row and full-width photo under masthead, plain key-date list in prose, preserve 15 events and all sources. Add release-artifact visual parity checks across six languages and 390/768/1440 widths, capture Italian screenshots. Advance cache version to v43. Sprint 43 Agenda branch remains separate; no Agenda changes here.
