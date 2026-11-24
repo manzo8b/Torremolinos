@@ -82,11 +82,11 @@
     if(skip) skip.textContent = t.skip;
     // Keep Sound navigation aligned with the active guide language.
     if(document.body.classList.contains('torre-home')){
-      document.querySelectorAll('a[href^="listen/"]').forEach(a=>{
-        const dest=new URL('listen/',location.href);
-        dest.searchParams.set('lang',lang);
-        a.setAttribute('href','listen/?'+dest.searchParams.toString());
-      });
+      for(const route of ['listen','stories']){
+        document.querySelectorAll('a[href="'+route+'/"],a[href^="'+route+'/?lang="]').forEach(a=>{
+          a.setAttribute('href',route+'/?lang='+encodeURIComponent(lang));
+        });
+      }
     }
     const description = document.querySelector('meta[name="description"]');
     if(description) description.setAttribute('content',t.description);
