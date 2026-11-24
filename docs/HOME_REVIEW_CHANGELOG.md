@@ -102,3 +102,6 @@ Correct stylesheet ordering after failed contract in run 45417165293. First orig
 
 ### v38 — Cultural dossiers
 La Nogalera: full six language editions, same five sections, source URLs, photographs, date references, credits and editorial caveats. Index and city dossier link to localized editions. Cache v38, sitemap 39 URLs. No native certification or new fact-check. Draft pending QA.
+
+### v39 — Pasaje Begoña
+Full translations, preserving five sections, original photo and licence, citations, historical dates, documented differing figures and explicit methodological caveats. Sitemap 44 URLs. Tests extended, no publication until QA. No new research or native linguistic certification.
