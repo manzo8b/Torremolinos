@@ -99,3 +99,6 @@ Six localized static index pages: six cards, introduction, metadata, editorial n
 
 ### v37 — Full editorial localization, first dossier
 Correct stylesheet ordering after failed contract in run 45417165293. First original article Torremolinos, mucho más que sol y playa translated in full to EN/IT/DE/FR/RU; preserved five sections, paragraphs, historical dates, original photo, credits and source URLs, reciprocal canonical/hreflang and six real article links. Original Spanish article receives only SEO and language navigation. Localized indices link to their matching edition. Remaining four dossiers still Spanish and labelled. Sitemap 34 URLs; browser and static tests added. Translation assisted, no native certification or source re-verification; publication only after QA.
+
+### v38 — Cultural dossiers
+La Nogalera: full six language editions, same five sections, source URLs, photographs, date references, credits and editorial caveats. Index and city dossier link to localized editions. Cache v38, sitemap 39 URLs. No native certification or new fact-check. Draft pending QA.
