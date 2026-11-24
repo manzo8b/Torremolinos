@@ -86,7 +86,8 @@ def validate():
  gallery=(ROOT/"gallery/data.js").read_text("utf-8")
  assert "TORREMOLINOS_GALLERY" in gallery
  assert "provenance" in gallery and '"ai"' in gallery
- assert "blue-hour-ai.webp" in home
+ assert "blue-hour-ai.webp" not in home  # Home review §5 removes AI banner only.
+ assert "blue-hour-ai.webp" in gallery and '"ai"' in gallery  # Preserve Gallery provenance.
  assert "palmeras-sol.webp" in home
  nogalera=(ROOT/"explore/la-nogalera/data.js").read_text("utf-8")
  assert "TORREMOLINOS_NOGALERA" in nogalera and "Bodega Guerola" in nogalera

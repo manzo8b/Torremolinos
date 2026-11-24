@@ -77,3 +77,12 @@ test('Home review Gallery is one three-photo documentary strip with one action',
  assert.doesNotMatch(page,/<section class="gallery-feature shell"/);
  assert.doesNotMatch(page,/tryImage\('assets\/photos\/album\/blue-hour-ai\.webp'/);
 });
+
+test('Gallery strip uses all six supplied WebP variants and caches the small versions',()=>{
+ const section=page.match(/<section[^>]*id="photodiary"[\s\S]*?<\/section>/)[0];
+ const assets=["assets/photos/home-review/gallery-forme-800.webp","assets/photos/home-review/gallery-forme-1600.webp","assets/photos/home-review/gallery-luce-800.webp","assets/photos/home-review/gallery-luce-1600.webp","assets/photos/home-review/gallery-dettagli-800.webp","assets/photos/home-review/gallery-dettagli-1152.webp"];
+ for(const path of assets){const b=readFileSync(new URL('../'+path,import.meta.url));assert.equal(b.toString('ascii',0,4),'RIFF');assert.equal(b.toString('ascii',8,12),'WEBP');assert.ok(b.length>10000&&b.length<=250000,path);assert.ok(section.includes(path),path);if(path.endsWith('-800.webp'))assert.ok(sw.includes(path));}
+ assert.equal((section.match(/srcset=/g)||[]).length,3);
+ assert.equal((section.match(/width="800" height="533"/g)||[]).length,3);
+ assert.doesNotMatch(section,/palmeras-sol\.webp|el-bajondillo-letrero\.webp|paseo-palmeras\.webp/);
+});
