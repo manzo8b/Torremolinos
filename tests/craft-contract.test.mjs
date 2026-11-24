@@ -53,8 +53,9 @@ test("safely compiled interactive scripts and progressive image fallback",()=>{
 });
 test("real catalog images are lazy, locally hosted and transparently decorative",()=>{
  const data=home.slice(home.indexOf("var placePhoto={"),home.indexOf("function render(){"));
- for(const id of ["nogalera","bajondillo","carihuela","pasaje","playamar","alamos","bateria","pimentel","sanmiguel","c1"])
+ for(const id of ["nogalera","bajondillo","carihuela","pasaje","playamar","alamos","bateria","sanmiguel"])
   assert.match(data,new RegExp("\\b"+id+":\\["));
+ for(const id of ["pimentel","c1"])assert.match(data,new RegExp("\\b"+id+":null"));
  assert.match(home,/photo\.loading='lazy'/);
  assert.match(home,/photo\.alt=''/);
  assert.match(home,/photo\.addEventListener\('error'/);

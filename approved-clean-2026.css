@@ -869,3 +869,64 @@ body.torre-home main#main #discover #explore .review-all-places{display:block!im
 body.torre-home main#main #discover #explore .place-no-photo{background:var(--review-card)!important;min-height:0!important;height:75px!important}
 body.torre-home main#main #discover #explore .v7-rail-copy{color:var(--ac-ink)!important}
 @media(max-width:760px){body.torre-home main#main #discover .shortcuts{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+
+/* §3 regression correction: legacy horizontal rail must not auto-place the
+   four photographic filters in implicit columns. No change to card content. */
+body.torre-home main#main #discover.section.shell > .shortcuts{
+ grid-auto-flow:row!important;grid-auto-columns:auto!important;grid-auto-rows:auto!important;
+ overflow:visible!important;scroll-snap-type:none!important;padding-bottom:0!important;
+}
+body.torre-home main#main #discover.section.shell > .shortcuts > .shortcut.review-photo-filter{
+ grid-column:auto!important;grid-row:auto!important;width:100%!important;max-width:none!important;height:auto!important;
+ min-height:0!important;justify-self:stretch!important;align-self:stretch!important;
+}
+body.torre-home main#main #discover.section.shell > .shortcuts > .shortcut.review-photo-filter > img{
+ position:static!important;display:block!important;inset:auto!important;width:100%!important;
+ height:auto!important;min-height:0!important;max-height:none!important;max-width:none!important;
+ aspect-ratio:3 / 2!important;object-fit:cover!important;flex:0 0 auto!important;
+}
+/* HOME REVIEW §4 · in attesa di validazione MF. Existing photograph retained. */
+body.torre-home main#main > section.nogalera-feature.shell{
+ display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+ align-items:stretch!important;grid-template-rows:auto!important;gap:0!important;
+ padding:0!important;overflow:hidden!important;background:var(--ac-ink)!important;
+}
+body.torre-home main#main > section.nogalera-feature.shell > .nogalera-feature-photo{
+ position:relative!important;align-self:stretch!important;width:100%!important;min-width:0!important;
+ height:auto!important;min-height:365px!important;padding:0!important;margin:0!important;
+}
+body.torre-home main#main > section.nogalera-feature.shell > .nogalera-feature-photo > img{
+ position:absolute!important;inset:0!important;display:block!important;width:100%!important;
+ height:100%!important;min-height:100%!important;max-height:none!important;max-width:none!important;
+ object-fit:cover!important;margin:0!important;padding:0!important;border-radius:0!important;
+}
+body.torre-home main#main > section.nogalera-feature.shell > .nogalera-feature-copy{
+ background:var(--ac-ink)!important;min-height:0!important;min-width:0!important;
+ padding:clamp(24px,3.2vw,48px)!important;gap:12px!important;justify-content:center!important;
+}
+body.torre-home main#main > section.nogalera-feature.shell .nogalera-feature-copy .review-nogalera-main{
+ background:var(--ac-blue)!important;color:var(--ac-paper)!important;border:1px solid var(--review-sand)!important;
+ width:fit-content!important;min-height:44px!important;
+}
+body.torre-home main#main > section.nogalera-feature.shell .review-nogalera-heritage{
+ width:100%!important;border-top:1px solid rgba(244,239,230,.35)!important;padding-top:13px!important;
+ margin-top:4px!important;
+}
+body.torre-home main#main > section.nogalera-feature.shell .review-nogalera-heritage p{
+ color:var(--review-sand)!important;font-size:14px!important;line-height:1.5!important;
+ max-width:none!important;margin:0 0 5px!important;
+}
+body.torre-home main#main > section.nogalera-feature.shell .review-nogalera-stories{
+ display:flex!important;flex-wrap:wrap!important;column-gap:16px!important;
+}
+body.torre-home main#main > section.nogalera-feature.shell .review-nogalera-stories a,
+body.torre-home main#main > section.nogalera-feature.shell .review-nogalera-stories a:is(:hover,:focus-visible){
+ display:inline-flex!important;align-items:center!important;background:transparent!important;
+ color:var(--review-sand)!important;border:0!important;border-radius:0!important;box-shadow:none!important;
+ min-height:44px!important;padding:5px 0!important;margin:0!important;
+ font-size:13px!important;font-weight:650!important;text-decoration:underline!important;text-underline-offset:3px!important;
+}
+@media(max-width:760px){
+ body.torre-home main#main > section.nogalera-feature.shell{grid-template-columns:minmax(0,1fr)!important}
+ body.torre-home main#main > section.nogalera-feature.shell > .nogalera-feature-photo{height:clamp(245px,65vw,310px)!important;min-height:245px!important}
+}

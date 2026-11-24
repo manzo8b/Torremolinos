@@ -116,10 +116,11 @@ try{
     if(width===1440)assert.equal(heroSurface.navVisible,5,'desktop primary navigation lost two destinations');
     const cleanScenes=await page.evaluate(()=>({
       nogalera:getComputedStyle(document.querySelector('.nogalera-feature-copy')).backgroundColor,
-      pride:getComputedStyle(document.querySelector('#pride .feature-art')).backgroundColor
+      prideRemoved:!document.querySelector('#pride'),heritageLinks:document.querySelectorAll('.review-nogalera-stories a').length
     }));
     assert.equal(cleanScenes.nogalera,'rgb(16, 36, 75)','review navy Nogalera surface at '+width);
-    assert.equal(cleanScenes.pride,'rgb(234, 243, 251)','orange Pride billboard remains at '+width);
+    assert.ok(cleanScenes.prideRemoved,'redundant Open to all remains at '+width);
+    assert.equal(cleanScenes.heritageLinks,2,'missing LGBTQ+ history links at '+width);
     const editorialPolish=await page.evaluate(()=>{
       const badge=document.querySelector('#galleryTeaserProvenance');
       const sound=document.querySelector('#sound .music-shell');
