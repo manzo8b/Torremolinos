@@ -57,7 +57,7 @@ function update(){
  empty.hidden=shown>0||pending;
 }
 function setLang(next){
- lang=languages[next]?next:"es";document.documentElement.lang=lang;$("#lang").value=lang;
+ lang=languages[next]?next:"es";document.documentElement.lang=lang;$("#lang").value=lang;$("#lang").setAttribute("aria-label",tr("languageLabel"));document.querySelector(".filterbar")?.setAttribute("aria-label",tr("filterGroup"));$("#previousImage").setAttribute("aria-label",tr("previous"));$("#nextImage").setAttribute("aria-label",tr("next"));
  try{localStorage.setItem("torremolinos.lang",lang)}catch(e){}
  document.querySelectorAll("[data-t]").forEach(e=>e.textContent=tr(e.dataset.t));
  for(const entry of source.images){
@@ -91,7 +91,7 @@ function open(entry){
  if(!dialog.open)opener=document.activeElement;
  image.src=entry.src;image.alt=label(entry,"alt");
  $("#viewerTitle").textContent=label(entry,"title");
- $("#viewerCredit").textContent=entry.provenance==="ai"?"AI":"© Archivo TORREMOLINOS";
+ $("#viewerCredit").textContent=tr(creditKey(entry));
  const entries=visibleEntries();$("#viewerPosition").textContent=(entries.indexOf(entry)+1)+" / "+entries.length;
  if(!dialog.open&&typeof dialog.showModal==="function")dialog.showModal();
  if(!matchMedia('(prefers-reduced-motion: reduce)').matches)image.animate([{opacity:.45,transform:'translateX(12px)'},{opacity:1,transform:'none'}],{duration:280,easing:'ease-out'});

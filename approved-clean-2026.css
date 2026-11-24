@@ -619,3 +619,82 @@ body.torre-home main #sound.music-intro .music-shell .music-art img.music-album-
   min-height:100%!important;object-fit:cover!important;
  }
 }
+
+/* C-03: no AI tag on the original documentary photo while fallback is active. */
+body.torre-home main #galleryTeaserProvenance.ai-badge[hidden]{display:none!important}
+/* C-13: metadata remains in the existing editorial panel, never over photography. */
+body.torre-home #agendaHomeScanStatus{display:block;margin-top:8px;line-height:1.55}
+body.torre-home .agenda-transparency-status .agenda-stale-note{font-weight:700}
+body.torre-home .agenda-transparency-status a{color:#096BCB;text-underline-offset:3px}
+
+/* Fase 2C: source dates within the three existing Essentials cards, no new panels. */
+body.torre-home #useful .infocard .essentials-verified{display:block!important;margin-top:10px!important;font-size:12px!important;line-height:1.55!important;font-weight:450!important;color:#51667E!important;max-width:32ch!important}
+body.torre-home #useful .infocard>a+a{margin-inline-start:12px!important}
+body.torre-home #useful .infocard>a:focus-visible{outline:3px solid #096BCB;outline-offset:3px}
+
+/* Fase 2C accessibility: targeted WCAG 2.1 AA contrast improvements.
+   Darken text and source pills only. No changes to spacing, backgrounds,
+   layout, brand images, animations or the approved hero.
+   Colors checked against observed source backgrounds:
+   #536378/white=6.13:1; #0966BA/white=5.80:1;
+   #075DA9/#eaf3fb=5.94:1; #0C7046/#f7f9fc=5.82:1.
+*/
+body.torre-home [data-t="trust1"],
+body.torre-home [data-t="trust2"],
+body.torre-home [data-t="trust3"],
+body.torre-home small[data-t="extraSanNote"]{
+  color:#536378!important;
+}
+body.torre-home article .placefoot a.source{
+  background:#0966BA!important;
+  border-color:#0966BA!important;
+  color:#FFFFFF!important;
+}
+body.torre-home .pride-visual-detail{color:#075DA9!important}
+body.torre-home .magazine-card .magazine-text .readmore.v7-action,
+body.torre-home .l8-season-promo-copy>small,
+body.torre-home .plan-section-kicker,
+body.torre-home #planCount,
+body.torre-home .route-number,
+body.torre-home .mapbox .coral.eyebrow,
+body.torre-home .mobilebar [data-t="mobHome"]{
+  color:#0C7046!important;
+}
+
+/* Fase 2C specificity safeguard.
+   Legacy #cards/#stories/#pride/#plan rules carry ID-level !important
+   declarations: these do not yield to low-specificity accessibility rules. */
+body.torre-home main #cards article.place .placefoot>a.source.v7-action{
+  background:#0966BA!important;
+  background-image:none!important;
+  border-color:#0966BA!important;
+  color:#FFFFFF!important;
+}
+body.torre-home main #pride .pride-visual-detail{color:#075DA9!important}
+body.torre-home main #stories .magazine-card .magazine-text .readmore.v7-action,
+body.torre-home main #stories .l8-season-promo-copy>small{
+  color:#0C7046!important;
+}
+body.torre-home main #plan .plan-section-kicker{color:#0C7046!important}
+body.torre-home main .mapbox>div>.eyebrow.coral{color:#0C7046!important}
+
+/* Fase 2D / Issue #20: legacy opacity composites brand blue against paper.
+   Scope to the actual rendered catalogue links and the Pride detail.
+   Explicitly retain the darker hover/focus treatment; no geometry changes. */
+body.torre-home main #explore #cards article.place .placefoot > a.source {
+  background:var(--ac-blue-dark)!important;
+  background-image:none!important;
+  border-color:var(--ac-blue-dark)!important;
+  color:#FFFFFF!important;
+  opacity:1!important;
+}
+body.torre-home main #explore #cards article.place .placefoot > a.source:is(:hover,:focus-visible) {
+  background:#064788!important;
+  border-color:#064788!important;
+  color:#FFFFFF!important;
+  opacity:1!important;
+}
+body.torre-home main #pride .feature-art.pride-visual > .pride-visual-detail {
+  color:var(--ac-blue-dark)!important;
+  opacity:1!important;
+}
