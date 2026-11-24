@@ -5,6 +5,7 @@ Only project canonical/schema/OG/sitemap links are moved; LUNE_X stays external.
 """
 import argparse
 import hashlib
+import gzip
 import json
 import os
 import re
@@ -47,7 +48,72 @@ def source_files():
                 if child.is_symlink():raise ValueError("Symlink forbidden: "+str(child))
                 if child.is_file() and child.suffix.lower() in FORMATS: paths.append(child)
     return sorted(p for p in paths if p.relative_to(ROOT).as_posix() not in INTERNAL_FILE_PATHS)
-def build(origin,base,out,report):
+# Bundle only the ordered root-level Home styles. Relative URLs stay relative
+# to the same root, and original styles remain available to every other route.
+HOME_CSS=("editorial.css","v06.css","refinement.css","coastal-light.css",
+          "design-system-2026.css","apple-premium.css","craft-finish.css",
+          "craft-refinement.css","commercial-experience.css","product-v6.css",
+          "narrative-v7.css","luminosity-v8.css","approved-clean-2026.css",
+          "footer-professional-2026.css")
+BUNDLE="home-render.css"
+CSS_LINK=re.compile(r'<link rel="stylesheet" href="([^"]+\.css)">')
+UNSAFE_AT=re.compile(r"@(?:import|charset|namespace)\b",re.I)
+
+def distribution_files(site, optimize=True):
+    sources={p.relative_to(ROOT).as_posix():p for p in source_files()}
+    if BUNDLE in sources:raise ValueError("Generated bundle must not be committed in source")
+    files={}
+    for name,p in sources.items():
+        value=p.read_bytes()
+        if p.suffix.lower() in TEXT:value=value.decode("utf8").replace(CURRENT,site).encode("utf8")
+        files[name]=value
+    details={"optimized":optimize,"homeLocalStylesBefore":len(HOME_CSS),"homeLocalStylesAfter":len(HOME_CSS)}
+    if not optimize:return files,details
+    home=files["index.html"].decode("utf8")
+    head,tail=home.split("</head>",1)
+    found=tuple(CSS_LINK.findall(head))
+    if found!=HOME_CSS:raise ValueError("Unexpected Home stylesheet cascade: "+repr(found))
+    # No non-CSS markup or script execution order changes; replace the first
+    # link, remove the other 13 links. All styles follow the inline Home CSS.
+    if head.rfind("</style>")>head.index(CSS_LINK.search(head).group(0)):
+        raise ValueError("Inline style interleaved with bundle inputs")
+    chunks=[]
+    for name in HOME_CSS:
+        css=files[name].decode("utf8")
+        if UNSAFE_AT.search(css):raise ValueError("CSS at-rule requires manual handling: "+name)
+        chunks.append("/* TORREMOLINOS: "+name+" */\n"+css+"\n")
+    combined="\n".join(chunks).encode("utf8")
+    count=0
+    def link(match):
+        nonlocal count
+        count+=1
+        return '<link rel="stylesheet" href="'+BUNDLE+'">' if count==1 else ''
+    head=CSS_LINK.sub(link,head)
+    files["index.html"]=(head+"</head>"+tail).encode("utf8")
+    files[BUNDLE]=combined
+    # Dist uses its own deterministic revision, including all assets and SW
+    # logic. Source remains the separately testable v35. Avoid stale bundles
+    # on upgrade or rollback without touching caches of other projects.
+    sw=files["service-worker.js"].decode("utf8")
+    if "const FILES=[" not in sw:raise ValueError("Missing precache array")
+    sw=sw.replace("const FILES=[","const FILES=[\n  './"+BUNDLE+"',",1)
+    files["service-worker.js"]=sw.encode("utf8")
+    digest=hashlib.sha256()
+    for name,value in sorted(files.items()):
+        digest.update(name.encode("utf8")+b"\0"+hashlib.sha256(value).digest())
+    cache="torremolinos-h"+digest.hexdigest()[:16]
+    sw,n=re.subn(r"const CACHE='torremolinos-[A-Za-z0-9-]+';", "const CACHE='"+cache+"';",sw,count=1)
+    if n!=1:raise ValueError("Missing versioned cache")
+    files["service-worker.js"]=sw.encode("utf8")
+    details.update({"homeLocalStylesAfter":1,"bundle":BUNDLE,"bundleInputs":list(HOME_CSS),
+      "bundleSHA256":hash_bytes(combined),"bundleBytes":len(combined),
+      "bundleGzipBytes":len(gzip.compress(combined,mtime=0)),
+      "originalCssBytes":sum(len(files[n]) for n in HOME_CSS),
+      "originalCssGzipBytes":sum(len(gzip.compress(files[n],mtime=0)) for n in HOME_CSS),
+      "cache":cache,"generated":[BUNDLE],"transformed":["index.html","service-worker.js"]})
+    return files,details
+
+def build(origin,base,out,report,optimize=True):
     site=clean_origin(origin)+clean_path(base)
     target=Path(out).resolve()
     if target==ROOT or target in ROOT.parents:raise ValueError("Output would overwrite source")
@@ -57,17 +123,16 @@ def build(origin,base,out,report):
     if target.exists():shutil.rmtree(target)
     target.mkdir(parents=True)
     data=[]
-    for source in source_files():
-        rel=source.relative_to(ROOT)
-        new=target/rel
+    files,optimization=distribution_files(site,optimize)
+    for name,value in sorted(files.items()):
+        new=target/name
         new.parent.mkdir(parents=True,exist_ok=True)
-        original=source.read_bytes()
-        value=original
-        if source.suffix.lower() in TEXT:
-            value=original.decode("utf8").replace(CURRENT,site).encode("utf8")
+        source=ROOT/name
+        original=source.read_bytes() if source.is_file() else None
         new.write_bytes(value)
-        data.append({"path":rel.as_posix(),"sha256":hash_bytes(value),
-                     "source_sha256":hash_bytes(original),"changed":value!=original})
+        data.append({"path":name,"sha256":hash_bytes(value),
+                     "source_sha256":hash_bytes(original) if original is not None else None,
+                     "changed":value!=original})
     if not data:raise RuntimeError("No site files were selected")
     manifest=json.loads((target/"manifest.webmanifest").read_text("utf8"))
     if manifest.get("start_url")!="./" or manifest.get("scope")!="./":
@@ -84,13 +149,13 @@ def build(origin,base,out,report):
     result={"schemaVersion":1,"siteBase":site,"siteOrigin":clean_origin(origin),
             "basePath":clean_path(base),"fileCount":len(data),
             "rewritten":[d["path"] for d in data if d["changed"]],
-            "sourceUnchanged":True,"files":data,
+            "sourceUnchanged":True,"files":data,"optimization":optimization,
             "externalMediaDependency":"https://manzo8b.github.io/Lune_X/"}
     report_path=Path(report)
     report_path.parent.mkdir(parents=True,exist_ok=True)
     report_path.write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n",encoding="utf8")
     print(json.dumps({"base":site,"files":len(data),"rewritten":len(result["rewritten"]),
-                      "internalFilesExcluded":True},ensure_ascii=False))
+                      "internalFilesExcluded":True,"optimization":optimization},ensure_ascii=False))
     return result
 if __name__=="__main__":
     parser=argparse.ArgumentParser()
@@ -98,5 +163,6 @@ if __name__=="__main__":
     parser.add_argument("--base-path",default=os.getenv("BASE_PATH","/Torremolinos/"))
     parser.add_argument("--out",default="dist")
     parser.add_argument("--report",default="artifacts/portability/build-manifest.json")
+    parser.add_argument("--unoptimized",action="store_true",help="Build control package without bundling")
     args=parser.parse_args()
-    build(args.origin,args.base_path,args.out,args.report)
+    build(args.origin,args.base_path,args.out,args.report,not args.unoptimized)

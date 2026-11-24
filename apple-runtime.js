@@ -26,7 +26,7 @@
    node.querySelectorAll(selector).forEach(queue);
  }
  function init(){
-   document.querySelectorAll(selector).forEach(cleanHeading);
+   document.querySelectorAll('h1,h2,h3,h4,h5,h6').forEach(cleanHeading);
    if(!document.body||!('MutationObserver' in window))return;
    var observer=new MutationObserver(function(changes){
      changes.forEach(function(change){

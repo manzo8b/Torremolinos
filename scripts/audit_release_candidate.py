@@ -6,7 +6,7 @@ from html.parser import HTMLParser
 from xml.etree import ElementTree as ET
 from urllib.parse import urljoin
 from audit_clean_release import local_target
-from build_portable_site import source_files,ROOT,CURRENT,TEXT
+from build_portable_site import distribution_files,BUNDLE
 
 class Meta(HTMLParser):
  def __init__(self):
@@ -54,16 +54,16 @@ def audit(dist,base):
  for path in precache:
   target=local_target(path,base,base)
   require(bool(target) and (dist/target).is_file(),'precache missing '+path)
- expected={p.relative_to(ROOT).as_posix():p for p in source_files()}
+ expected,optimization=distribution_files(base)
  actual={p.relative_to(dist).as_posix():p for p in dist.rglob('*') if p.is_file()}
- require(set(expected)==set(actual),'distribution file inventory differs from selected sources')
+ require(set(expected)==set(actual),'distribution file inventory differs from expected optimized sources')
  for name in set(expected)&set(actual):
-  original=expected[name].read_bytes()
-  if expected[name].suffix.lower() in TEXT:original=original.decode('utf8').replace(CURRENT,base).encode('utf8')
-  require(actual[name].read_bytes()==original,'unexpected bytes '+name)
+  require(actual[name].read_bytes()==expected[name],'unexpected bytes '+name)
+ require('./'+BUNDLE in precache,'bundle missing from precache')
+ require(optimization['homeLocalStylesAfter']==1,'Home bundle count mismatch')
  require('href="/Torremolinos/' not in (dist/'offline.html').read_text('utf8'),'hardcoded offline route')
  sizes=sorted([{'path':name,'bytes':p.stat().st_size} for name,p in actual.items()],key=lambda x:x['bytes'],reverse=True)
- return {'siteBase':base,'sitemapEntries':len(sitemap),'pages':pages,'precacheEntries':len(precache),'fileCount':len(actual),'totalBytes':sum(x['bytes'] for x in sizes),'largestFiles':sizes[:15],'issues':issues,'limits':'Static metadata and package bytes only; indexing, external links and performance metrics not measured.'}
+ return {'siteBase':base,'sitemapEntries':len(sitemap),'pages':pages,'precacheEntries':len(precache),'fileCount':len(actual),'totalBytes':sum(x['bytes'] for x in sizes),'largestFiles':sizes[:15],'optimization':optimization,'issues':issues,'limits':'Static metadata and package bytes only; indexing, external links and performance metrics not measured.'}
 
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('--dist',required=True);p.add_argument('--site-base',required=True);p.add_argument('--report',required=True);a=p.parse_args()

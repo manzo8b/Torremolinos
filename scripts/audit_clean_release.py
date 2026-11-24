@@ -13,6 +13,7 @@ import re
 from pathlib import Path
 from urllib.parse import urljoin,urlsplit,unquote
 from xml.etree import ElementTree
+from build_portable_site import distribution_files
 
 ROOT=Path(__file__).resolve().parents[1]
 BASE="https://manzo8b.github.io/Torremolinos/"
@@ -23,7 +24,7 @@ REQUIRED={
  "offline.html","manifest.webmanifest","service-worker.js",
  "sitemap.xml","robots.txt",".nojekyll",
  "footer-professional-2026.css","footer-professional-2026.js",
- "approved-clean-2026.css","approved-clean-2026.js",
+ "approved-clean-2026.css","approved-clean-2026.js","home-render.css",
  "assets/photos/sound-headphones-torremolinos.webp"
 }
 FORBIDDEN={
@@ -97,6 +98,9 @@ def check(dist:Path,report:Path,expected_base:str):
    "identicalToSource":origin.is_file() and path.read_bytes()==origin.read_bytes()
   })
  base=expected_base
+ expected,optimization=distribution_files(base)
+ unexpected=sorted(set(relative)^set(expected))
+ unexpected+=sorted(name for name in set(relative)&set(expected) if (dist/name).read_bytes()!=expected[name])
  url_parts=urlsplit(base)
  if url_parts.scheme not in ("https","http") or not base.endswith("/"):
   raise ValueError("Expected origin must end in / and be HTTP(S)")
@@ -138,7 +142,7 @@ def check(dist:Path,report:Path,expected_base:str):
   "unapprovedDirectories":extras,"unresolvedStaticResources":broken,
   "sitemapProblems":sitemap_errors,
   "sourceByteChanges":[x["path"] for x in hashes if not x["identicalToSource"]],
-  "fileHashes":hashes,
+  "fileHashes":hashes,"expectedTransformation":optimization,"unexpectedDistributionChanges":unexpected,
   "coverageLimitations":[
    "References built at runtime in JavaScript require browser smoke tests.",
    "Outbound external URLs are not probed.",
@@ -147,11 +151,11 @@ def check(dist:Path,report:Path,expected_base:str):
  }
  report.parent.mkdir(parents=True,exist_ok=True)
  report.write_text(json.dumps(results,ensure_ascii=False,indent=2)+"\n","utf8")
- errors=missing or forbidden or extras or broken or sitemap_errors or (base==BASE and results["sourceByteChanges"])
+ errors=missing or forbidden or extras or broken or sitemap_errors or unexpected
  print(json.dumps({"files":len(files),"resources":resource_count,
                    "missing":len(missing),"forbidden":len(forbidden)+len(extras),
                    "broken":len(broken),"sitemapProblems":len(sitemap_errors),
-                   "changedFiles":len(results["sourceByteChanges"]),
+                   "changedFiles":len(results["sourceByteChanges"]),"unexpectedChanges":len(unexpected),
                    "firstErrors":(broken+sitemap_errors)[:8]},ensure_ascii=False))
  if errors:raise SystemExit("NO-GO: distribution validation failed")
  return results
