@@ -1,7 +1,7 @@
 // TORREMOLINOS — Scoped offline cache. May be content-hashed in deployment builds.
 // Never delete caches belonging to other applications hosted on github.io.
 const CACHE_PREFIX='torremolinos-';
-const CACHE='torremolinos-v35';
+const CACHE='torremolinos-v36';
 const SCOPE_URL=new URL(self.registration.scope);
 const FILES=[
   './','./index.html','./offline.html','./locale-accessibility.js','./approved-clean-2026.css','./inner-palette-2026.css','./inner-refinement-2026.css','./approved-clean-2026.js','./footer-professional-2026.css','./footer-professional-2026.js','./brand/torremolinos-logo-clean.svg','./apple-premium.css','./craft-refinement.css','./commercial-experience.css','./product-v6.css','./product-v6.js','./narrative-v7.css','./narrative-v7.js','./luminosity-v8.css','./luminosity-v8.js','./craft-finish.css','./apple-runtime.js','./craft-runtime.js','./design-system-2026.css','./editorial.css','./favicon.svg','./manifest.webmanifest','./icons/apple-touch-icon.png','./icons/icon-192.png','./icons/icon-512.png',
@@ -10,7 +10,7 @@ const FILES=[
   './tu-torremolinos/','./tu-torremolinos/index.html','./tu-torremolinos/planner.js','./tu-torremolinos/planner.css','./explore/','./explore/catalog.js','./explore/catalog-app.js','./explore/catalog.css',
   './assets/photos/home-review/explore-mare-800.webp','./assets/photos/home-review/explore-nogalera-800.webp','./assets/photos/home-review/explore-sapori-800.webp','./assets/photos/home-review/explore-primi-passi-800.webp',
   './explore/la-nogalera/','./explore/la-nogalera/styles.css','./explore/la-nogalera/data.js','./explore/la-nogalera/app.js',
-  './album-motion.js','./coastal-light.css','./refinement.css','./v06.css','./listen/','./listen/content.js','./legal/','./legal/styles.css','./legal/app.js','./legal/data.js',
+  './album-motion.js','./coastal-light.css','./refinement.css','./v06.css','./listen/','./listen/content.js','./listen/language.js','./listen/en.html','./listen/it.html','./listen/de.html','./listen/fr.html','./listen/ru.html','./legal/','./legal/styles.css','./legal/app.js','./legal/data.js',
   './assets/photos/home-review/home-mangiare-800.webp','./assets/photos/home-review/home-agenda-672.webp','./assets/photos/home-review/home-gallery-800.webp','./assets/photos/home-review/home-stories-800.webp',
   './assets/photos/home-review/gallery-forme-800.webp','./assets/photos/home-review/gallery-luce-800.webp','./assets/photos/home-review/gallery-dettagli-800.webp',
   './assets/photos/hero-apple-2026.webp','./assets/photos/hero-apple-2026-mobile.webp','./assets/photos/sound-headphones-torremolinos.webp','./assets/photos/home-review/sound-headphones-800.webp',

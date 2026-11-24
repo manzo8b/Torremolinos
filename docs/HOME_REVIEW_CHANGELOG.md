@@ -88,3 +88,8 @@ MF: «Wowww ottimo lavoro. Procedi pure» dopo le anteprime effettive. Run 45407
 
 ### Hotfix v35 — Home mobile
 MF segnala screenshot iPhone (24 novembre) con fascia sabbia tra trust e card. Causa: il confine bianco/sabbia era a fine trust solo fino a 950 px. Esteso a fine #clean-access a tutte le larghezze; nessuna modifica a geometria, immagini, navigazione o testi. Cache v35; test browser ora richiede confine dopo le card anche su mobile. Adeguate asserzioni cache legacy ferme a v33 per non bloccare rilasci futuri. Esito workflow post-rilascio da confermare; controllo Safari reale da MF.
+
+### Sound e SEO multilingue — v36 proposta
+Corretto script annidato. Sound: sei versioni HTML con articolo statico, metadati tradotti, canonical autonomi, hreflang reciproci e x-default ES. Conservati audio, immagini, destinazioni e CSS; selettore naviga verso URL lingua e supporta vecchi link ?lang=. Sitemap aggiornata a 24 URL; cache v36; controlli statici e browser dedicati. Home: solo allineamento dei link Sound alla lingua attiva. Revisione linguistica editoriale assistita, non madrelingua certificata; le altre pagine restano da localizzare in profondità prima di aggiungere hreflang. Nessun nuovo design, nessun merge prima del collaudo.
+
+- Album: completate didascalie e alt in DE/FR/RU (7 foto pubbliche + 2 illustrazioni ancora in pending_review), localizzati controlli del visore e navigazione; nessuna variazione agli asset o allo stato di pubblicazione. Stories index e articoli restano prevalentemente ES, con revisione separata necessaria; non creare hreflang verso pagine non realmente tradotte.

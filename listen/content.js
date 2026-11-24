@@ -24,7 +24,14 @@ window.TORREMOLINOS_LISTEN_I18N={
     "relatedLink": "Volver a las Stories ↗",
     "photo": "Fotografía original de Torremolinos · todos los derechos reservados",
     "disclosure": "Nota editorial · Esta selección musical es contenido propio vinculado al proyecto LUNE_X. No constituye una recomendación independiente ni una colaboración pagada con un organizador turístico. Enlaces a plataformas externas.",
-    "langLabel": "Idioma"
+    "langLabel": "Idioma",
+    "youtubeFullAlbum": "YouTube · Álbum completo ↗",
+    "navLegal": "Legal y transparencia",
+    "photoAlt": "Fotografía original de palmeras y playa en Torremolinos",
+    "albumAlt": "Imagen promocional del álbum Welcome to the Paradise de LUNE_X",
+    "aiTransparency": "Transparencia IA",
+    "seoTitle": "Sound de Torremolinos | Música y LUNE_X",
+    "seoDescription": "Escucha un fragmento de Next Stop: Torremolinos y descubre Welcome to the Paradise, el álbum independiente de LUNE_X."
   },
   "en": {
     "navHome": "Home",
@@ -41,7 +48,7 @@ window.TORREMOLINOS_LISTEN_I18N={
     "albumTitle": "Welcome to the Paradise",
     "article": [
       "The Mediterranean takes on a different mood as the day unfolds. Mornings mean promenades and cafés; nights reveal a town where people meet, dance and spend time together in different ways. TORREMOLINOS aims to tell that story without turning it into a cliché.",
-      "«Welcome to the Paradise» is an album by digital music project LUNE_X. It is neither a live recording nor the official soundtrack of Torremolinos. It is an independent creative project that speaks to the ideas of movement, travel and Mediterranean nights.",
+      "“Welcome to the Paradise” is an album by digital music project LUNE_X. It is neither a live recording nor the official soundtrack of Torremolinos. It is an independent creative project that speaks to the ideas of movement, travel and Mediterranean nights.",
       "LUNE_X has human creative direction and uses artificial intelligence tools in music production. This disclosure describes how the project works; it is not a claim about a human performer or a live show.",
       "Listening is another way to approach the city, not a replacement for its local musicians, people and stories. The reporting elsewhere in this guide remains focused on identifiable sources and original photography."
     ],
@@ -51,7 +58,14 @@ window.TORREMOLINOS_LISTEN_I18N={
     "relatedLink": "Back to Stories ↗",
     "photo": "Original photo of Torremolinos · all rights reserved",
     "disclosure": "Editorial note · This is in-house cultural content connected to LUNE_X. It is not an independent endorsement or a paid partnership with a tourism organiser. Streaming links lead to external platforms.",
-    "langLabel": "Language"
+    "langLabel": "Language",
+    "youtubeFullAlbum": "YouTube · Full album ↗",
+    "navLegal": "Legal and transparency",
+    "photoAlt": "Original photograph of palm trees and the beach in Torremolinos",
+    "albumAlt": "Promotional artwork for Welcome to the Paradise by LUNE_X",
+    "aiTransparency": "AI transparency",
+    "seoTitle": "Sound of Torremolinos | Music and LUNE_X",
+    "seoDescription": "Listen to a preview of Next Stop: Torremolinos and discover Welcome to the Paradise, the independent album by LUNE_X."
   },
   "it": {
     "navHome": "Home",
@@ -59,8 +73,8 @@ window.TORREMOLINOS_LISTEN_I18N={
     "navFood": "Dove mangiare",
     "navStories": "Storie",
     "kicker": "SOUND OF TORREMOLINOS / LUNE_X",
-    "headline": "Una città che si può anche ascoltare",
-    "intro": "Ci sono città che rimangono impresse in una fotografia. Altre anche in una canzone. Qui le immagini autentiche di Torremolinos incontrano un racconto musicale indipendente.",
+    "headline": "Una città che si ascolta",
+    "intro": "Ci sono città che restano impresse in una fotografia, altre in una canzone. Qui le immagini autentiche di Torremolinos incontrano un racconto musicale indipendente.",
     "prelisten": "Ascolta un estratto di Next Stop: Torremolinos",
     "previewLabel": "Next Stop: Torremolinos · anteprima ufficiale",
     "previewNote": "L'audio parte premendo Play. È un estratto, non l'album completo.",
@@ -75,15 +89,22 @@ window.TORREMOLINOS_LISTEN_I18N={
     "albumLink": "Apri l'album sulle piattaforme disponibili ↗",
     "artistLink": "Scopri LUNE_X ↗",
     "related": "Continua a esplorare la città",
-    "relatedLink": "Torna alle Stories ↗",
+    "relatedLink": "Torna alle Storie ↗",
     "photo": "Fotografia originale di Torremolinos · diritti riservati",
     "disclosure": "Nota editoriale · Questo contenuto musicale è collegato al progetto LUNE_X e non costituisce una raccomandazione indipendente né una partnership turistica a pagamento. I link portano a piattaforme esterne.",
-    "langLabel": "Lingua"
+    "langLabel": "Lingua",
+    "youtubeFullAlbum": "YouTube · Album completo ↗",
+    "navLegal": "Note legali e trasparenza",
+    "photoAlt": "Fotografia originale di palme e spiaggia a Torremolinos",
+    "albumAlt": "Immagine promozionale dell'album Welcome to the Paradise di LUNE_X",
+    "aiTransparency": "Trasparenza IA",
+    "seoTitle": "Sound di Torremolinos | Musica e LUNE_X",
+    "seoDescription": "Ascolta un estratto di Next Stop: Torremolinos e scopri Welcome to the Paradise, l'album indipendente di LUNE_X."
   },
   "de": {
-    "navHome": "Start",
+    "navHome": "Startseite",
     "navEvents": "Events",
-    "navFood": "Essen",
+    "navFood": "Gastronomie",
     "navStories": "Stories",
     "kicker": "SOUND OF TORREMOLINOS / LUNE_X",
     "headline": "Eine Stadt zum Anhören",
@@ -105,7 +126,14 @@ window.TORREMOLINOS_LISTEN_I18N={
     "relatedLink": "Zurück zu den Stories ↗",
     "photo": "Originalfoto aus Torremolinos · alle Rechte vorbehalten",
     "disclosure": "Redaktionshinweis · Diese Musik gehört zu unserem verbundenen Projekt LUNE_X. Sie ist keine unabhängige Empfehlung oder bezahlte Partnerschaft mit einem Reiseveranstalter. Links führen zu externen Diensten.",
-    "langLabel": "Sprache"
+    "langLabel": "Sprache",
+    "youtubeFullAlbum": "YouTube · Ganzes Album ↗",
+    "navLegal": "Rechtliches und Transparenz",
+    "photoAlt": "Originalfoto von Palmen und Strand in Torremolinos",
+    "albumAlt": "Promotionalbild zum Album Welcome to the Paradise von LUNE_X",
+    "aiTransparency": "KI-Transparenz",
+    "seoTitle": "Sound von Torremolinos | Musik und LUNE_X",
+    "seoDescription": "Höre einen Ausschnitt aus Next Stop: Torremolinos und entdecke Welcome to the Paradise, das unabhängige Album von LUNE_X."
   },
   "fr": {
     "navHome": "Accueil",
@@ -132,7 +160,14 @@ window.TORREMOLINOS_LISTEN_I18N={
     "relatedLink": "Retour aux récits ↗",
     "photo": "Photo originale de Torremolinos · tous droits réservés",
     "disclosure": "Note éditoriale · Ce contenu musical est lié au projet LUNE_X. Ce n'est ni une recommandation indépendante ni un partenariat touristique rémunéré. Les liens ouvrent des plateformes externes.",
-    "langLabel": "Langue"
+    "langLabel": "Langue",
+    "youtubeFullAlbum": "YouTube · Album complet ↗",
+    "navLegal": "Mentions légales et transparence",
+    "photoAlt": "Photographie originale de palmiers et de la plage de Torremolinos",
+    "albumAlt": "Visuel promotionnel de l'album Welcome to the Paradise de LUNE_X",
+    "aiTransparency": "Transparence IA",
+    "seoTitle": "Sound de Torremolinos | Musique et LUNE_X",
+    "seoDescription": "Écoutez un extrait de Next Stop: Torremolinos et découvrez Welcome to the Paradise, l'album indépendant de LUNE_X."
   },
   "ru": {
     "navHome": "Главная",
@@ -159,6 +194,13 @@ window.TORREMOLINOS_LISTEN_I18N={
     "relatedLink": "Назад к историям ↗",
     "photo": "Оригинальное фото Торремолиноса · все права защищены",
     "disclosure": "Примечание редакции · Этот материал связан с музыкальным проектом LUNE_X и не является независимой рекомендацией или платным туристическим партнёрством. Ссылки ведут на внешние сервисы.",
-    "langLabel": "Язык"
+    "langLabel": "Язык",
+    "youtubeFullAlbum": "YouTube · Полный альбом ↗",
+    "navLegal": "Правовая информация и прозрачность",
+    "photoAlt": "Оригинальная фотография пальм и пляжа Торремолиноса",
+    "albumAlt": "Промоизображение альбома Welcome to the Paradise проекта LUNE_X",
+    "aiTransparency": "Прозрачность ИИ",
+    "seoTitle": "Музыка Торремолиноса | Sound и LUNE_X",
+    "seoDescription": "Послушайте фрагмент Next Stop: Torremolinos и откройте Welcome to the Paradise, независимый альбом LUNE_X."
   }
 };

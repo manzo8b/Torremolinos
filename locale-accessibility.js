@@ -80,6 +80,14 @@
     if(foodSection) foodSection.setAttribute('aria-label',t.food);
     const skip = document.querySelector('.skip-link');
     if(skip) skip.textContent = t.skip;
+    // Keep Sound navigation aligned with the active guide language.
+    if(document.body.classList.contains('torre-home')){
+      document.querySelectorAll('a[href^="listen/"]').forEach(a=>{
+        const dest=new URL('listen/',location.href);
+        dest.searchParams.set('lang',lang);
+        a.setAttribute('href','listen/?'+dest.searchParams.toString());
+      });
+    }
     const description = document.querySelector('meta[name="description"]');
     if(description) description.setAttribute('content',t.description);
   }
