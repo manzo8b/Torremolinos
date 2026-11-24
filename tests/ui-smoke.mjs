@@ -525,6 +525,11 @@ try{
     assert.equal((await page.goto(base+'/'+path,{waitUntil:'domcontentloaded'})).status(),200);
     assert.equal(await page.locator('html').getAttribute('lang'),lang);
     assert.equal(await page.locator('.season-event').count(),15);
+    assert.equal(await page.locator('main.page > .masthead').count(),1);
+    assert.equal(await page.locator('main.page > figure > .hero-photo').count(),1);
+    assert.equal(await page.locator('.body-grid > .prose').count(),1);
+    assert.equal(await page.locator('.body-grid > .side').count(),1);
+    assert.equal(await page.locator('.season-event').first().evaluate(e=>getComputedStyle(e).backgroundColor),'rgba(0, 0, 0, 0)');
     assert.equal(await page.locator('.article-languages a').count(),6);
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+3),'Seasonal dossier overflow '+lang);
   }
