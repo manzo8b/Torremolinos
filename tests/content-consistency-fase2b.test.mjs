@@ -84,7 +84,7 @@ test('Gallery initial HTML matches published data, avoids hydration layout inser
  const initial=html.match(/<div id="galleryGrid" class="gallery-grid">([\s\S]*?)<div id="empty"/)?.[1];
  assert.ok(initial);
  const visible=gallery.images.filter(e=>e.publicationStatus!=='pending_review');
- assert.deepEqual([...initial.matchAll(/data-gallery-id="([^"]+)"/g)].map(x=>x[1]),visible.map(e=>e.id));
+ assert.deepEqual([...initial.matchAll(/data-gallery-id="([^"]+)"/g)].map(x=>x[1]),Array.from(visible,e=>e.id));
  for(const e of visible)assert.ok(initial.includes('src="'+e.src+'"'),e.id);
  for(const e of gallery.images.filter(e=>e.publicationStatus==='pending_review'))assert.ok(!initial.includes(e.src));
  assert.doesNotMatch(galleryApp,/main\.append\(article\)/);
