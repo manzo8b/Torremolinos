@@ -1202,3 +1202,9 @@ body.torre-home main#main #useful #mapHolder iframe{display:block!important;widt
 body.torre-home #explore .review-plan-link{margin-top:16px;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
 body.torre-home #explore .review-plan-link a{color:var(--ac-blue-dark)!important;background:transparent!important;text-decoration:underline!important;min-height:44px;display:inline-flex;align-items:center}
 body.torre-home #explore #homePlanStatus{font-size:13px;color:var(--ac-ink);margin:0}
+
+/* §11 AA correction: approved dark blue, scoped to four failing labels, no change to protected Hero. */
+body.torre-home main#main #photodiary.review-gallery-strip .photo-diary-head .coral.eyebrow,
+body.torre-home main#main #stories.magazine.review-stories .magazine-top .coral.eyebrow,
+body.torre-home main#main #stories.magazine.review-stories [data-review-story="season"],
+body.torre-home main#main #useful.section.shell .sectop .coral.eyebrow{color:var(--ac-blue-dark)!important;opacity:1!important}

@@ -82,6 +82,7 @@ $('#sharePlan').addEventListener('click',function(){var url=new URL(location.hre
 
 function localize(){document.documentElement.lang=lang;$('#lang').value=lang;document.title=planText('title')+' · TORREMOLINOS';$('#plannerHome').textContent=({"es":"Inicio","it":"Home","en":"Home","de":"Startseite","fr":"Accueil","ru":"Главная"})[lang];$('#plannerHome').href='../?lang='+lang;$('#plannerHomeLogo').href='../?lang='+lang;$('#plannerExplore').href='../explore/?lang='+lang;$('.plan-explore-link').href='../explore/?lang='+lang;route()}
 $('#lang').addEventListener('change',function(e){lang=e.target.value;try{localStorage.setItem('torremolinos.lang',lang)}catch(e){}var url=new URL(location.href);url.searchParams.set('lang',lang);history.replaceState(null,'',url);localize()});
+if(new URLSearchParams(location.search).has('plan')&&selectedStops!==null)persistPlan();
 localize();
 if('serviceWorker'in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('../service-worker.js').catch(function(){});
 })();

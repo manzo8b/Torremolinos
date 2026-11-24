@@ -52,5 +52,10 @@ Baseline main d8c92b1c6a9e8d1d6893020834c7c3f1d6d4836b. PR #21 separata, non inc
 
 - MF: «approvo. procediamo». Static e product contract del commit 5e4aca7 superati; gate visivo globale ancora fallito.
 
-## §10 — La tua Torremolinos · in attesa di validazione MF
+## §10 — La tua Torremolinos · approvazione MF, 24 novembre 2026
 - Percorso proposto dal brief /tu-torremolinos/ (nome da validare). Trasferito markup e codice del planner, catalogo condiviso, sei lingue, stessi ID e chiave torremolinos.plan, preferiti invariati. Home mantiene aggiunta tappe e link compatto dentro Explore; Hero e menu cambiano solo destinazione, barra mobile naviga alla pagina. Vecchi link Home con ?plan= e #plan reindirizzati preservando query. Cache e sitemap aggiornate, test di migrazione e screenshot 4 larghezze. Tema memorizzato separatamente senza sovrascrivere dati esistenti. Mappa fotografica MF del pannello Turismo comunale ricevuta come riferimento interno; non pubblicata senza verifica diritti, nessuna modifica a OpenStreetMap. Nessun merge/deploy.
+
+- MF: «approvo ottimo lavoro. procediamo spediti». Sezione 10 approvata; rilascio non autorizzato implicitamente.
+
+## §11 — Audit conclusivo, correzioni tecniche 1
+Run 45378296332 su 5901f71: static e product contract PASS; pixel area protetta 0 a 375/768/1280/1920; altezza 17952→11334,15734→9062,15522→8342,16791→9109. Gate FAIL: 4 etichette verdi AA insufficienti (3.99/4.31); test Sound confrontava naturalWidth corretto per densità con risoluzione file, falso negativo già risolto nell'altro test. Lighthouse mediana 66→65 performance, 97→96 accessibilità, SEO100. Correzioni: 4 etichette in blu scuro già approvato, test bitmap reale 800×533 minimo, gate contrasto zero violazioni; prima installazione PWA dopo load/idle e priorità bassa immagini lazy per ridurre concorrenza con Hero; salvataggio URL condiviso nel planner per conservare tappe durante navigazione. Nessun redesign, nessun merge/deploy. Misure da confermare; precedente target mobile 90/LCP2.5s non raggiunto. Foto Torre Pimentel/C1 e piazza La Nogalera non ancora fornite; cartografia comunale riferimento interno. Safari/iPhone reale, lettore schermo e documenti legali rimangono verifiche manuali.
