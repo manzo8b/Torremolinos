@@ -6,7 +6,7 @@ Guida editoriale indipendente, multilingue e mobile-first. Le schede di eventi, 
 
 **Your city. Your way.** Micro-app indipendente mobile-first per turisti e residenti a Torremolinos, Spagna. **Non è il sito istituzionale del Comune.**
 
-## Stato corrente — 23 novembre 2026
+## Stato corrente — 24 novembre 2026
 
 **Prodotto online:** [TORREMOLINOS](https://manzo8b.github.io/Torremolinos/), micro-app statica con Home e pagine `comer/`, `agenda/`, `gallery/`, `stories/`, `listen/`, `explore/la-nogalera/`, `legal/`. Il sito è una guida indipendente e non un portale istituzionale.
 
@@ -15,6 +15,7 @@ Guida editoriale indipendente, multilingue e mobile-first. Le schede di eventi, 
 **Contenuti effettivamente presenti:**
 - **Mangiare:** 9 schede nel dataset, ciascuna con fonte e data editoriale `2026-11-02`; alcune sono evidenziate per scelta del progetto, senza prova di valutazione oggettiva. Il concept ANDALUZ richiede conferma pubblica e un chiarimento su eventuali rapporti commerciali.
 - **Agenda:** 27 schede con data nel dataset, di cui 24 LGBTQ+ e 3 culturali, oltre a 5 voci sotto osservazione. Lo scanner ha eseguito un controllo il **2026-11-23** (run [45235268131](https://github.com/manzo8b/Torremolinos/actions/runs/45235268131)); l'ultima revisione **umana** del feed risale al **2026-11-02**. Un run riuscito non certifica il contenuto delle fonti irraggiungibili: Issue #1 ancora aperta.
+- **La Nogalera (ramo Fase 2E):** 12 schede visibili con data del registro 02/11/2026: 6 siti dei locali, 2 schede di terzi e 4 ricerche cartografiche non verificate direttamente; 4 record senza fonte rimangono esclusi. Nessuna nuova verifica sul campo.
 - **Lingue:** l'interfaccia presenta ES/EN/IT/DE/FR/RU, ma i dossier Stories sono attualmente in spagnolo e la verifica madrelingua (RU prioritario, poi DE, FR, EN) è ancora aperta. Nessun `hreflang` distinto finché non esistono vere pagine tradotte.
 - **Pagine legali:** alcune informative sono ancora `noindex` e in bozza. Non inventare titolare, recapiti o relazioni commerciali; serve revisione professionale e un canale di contatto privato verificato.
 - **Musica:** estratto LUNE_X caricato da un altro percorso dello stesso `github.io`. Non ricopiare il file fino alla verifica dei diritti.
@@ -23,6 +24,8 @@ Guida editoriale indipendente, multilingue e mobile-first. Le schede di eventi, 
 **Deploy attuale:** `.github/workflows/pages.yml` pubblica ancora i file dalla root di `main`. Il rilascio pulito in `dist/` è predisposto nella [PR #18](https://github.com/manzo8b/Torremolinos/pull/18) ma non autorizzato al merge; anche le PR #13 (baseline) e #17 (header futuri) sono in bozza.
 
 **Sviluppo e QA:** `python3 -m http.server 8000` per anteprima; `node --test tests/*.test.mjs` e workflow GitHub Actions per i controlli. Gli script di portabilità in PR #18 non sono ancora nel ramo pubblico.
+
+**Gate di rilascio Fase 2E:** [matrice C-01–C-20 e decisioni aperte](docs/FASE2E_RELEASE_REVIEW_2026-11-24.md). PR #19 draft, candidata PWA v33 non pubblicata. Nessuna dichiarazione di conformità WCAG o approvazione legale automatica.
 
 ### Principio editoriale
 

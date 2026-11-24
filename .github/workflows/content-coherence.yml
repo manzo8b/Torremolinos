@@ -7,6 +7,9 @@ on:
       - 'comer/**'
       - 'gallery/**'
       - 'stories/**'
+      - 'explore/la-nogalera/**'
+      - 'tests/content-consistency-fase2e.test.mjs'
+      - 'tests/fase2e-browser.mjs'
       - 'index.html'
       - 'approved-clean-2026.css'
       - 'service-worker.js'
@@ -31,7 +34,7 @@ jobs:
         with:
           node-version: '22'
       - name: Check editorial provenance and translations without accessing external websites
-        run: node --test tests/content-consistency-fase2.test.mjs tests/content-consistency-fase2b.test.mjs tests/content-consistency-fase2c.test.mjs
+        run: node --test tests/content-consistency-fase2.test.mjs tests/content-consistency-fase2b.test.mjs tests/content-consistency-fase2c.test.mjs tests/content-consistency-fase2e.test.mjs
       - name: Audit Home and Gallery translation coverage without mother-tongue certification
         run: node scripts/audit_fase2c_i18n.mjs
       - name: Install Chromium test environment
@@ -42,7 +45,9 @@ jobs:
         run: node tests/fase2-content-browser.mjs
       - name: Check Gallery, Stories licensing and no-JS Comer in Chromium
         run: node tests/fase2b-browser.mjs
-      - name: Verify Essentials sources and produce axe-core accessibility baseline
+      - name: Verify La Nogalera source labels and dates in six languages
+        run: node tests/fase2e-browser.mjs
+      - name: Verify Essentials sources and enforce axe-core contrast gate
         run: node tests/fase2c-browser.mjs
       - name: Preserve editorial QA screenshots and evidence
         if: always()
@@ -53,5 +58,6 @@ jobs:
             artifacts/editorial-fase2/
             artifacts/editorial-fase2b/
             artifacts/editorial-fase2c/
+            artifacts/editorial-fase2e/
           if-no-files-found: warn
           retention-days: 30
