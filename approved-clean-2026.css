@@ -694,7 +694,7 @@ body.torre-home main #explore #cards article.place .placefoot > a.source:is(:hov
   color:#FFFFFF!important;
   opacity:1!important;
 }
-body.torre-home main #pride .feature-art.pride-visual > .pride-visual-detail {
+body.torre-home main #pride.section.shell .feature .feature-art.pride-visual > .pride-visual-detail {
   color:var(--ac-blue-dark)!important;
   opacity:1!important;
 }

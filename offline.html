@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#16865A">
 <meta name="robots" content="noindex,nofollow">
 <title>Sin conexión | TORREMOLINOS</title>
-<link rel="icon" type="image/svg+xml" href="/Torremolinos/favicon.svg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
 <style>
 :root{color-scheme:light;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#111111;background:#FFFFFF}
 *{box-sizing:border-box}body{margin:0;min-height:100dvh;display:grid;place-items:center;padding:24px}
@@ -27,7 +27,7 @@ small{display:block;margin-top:30px;color:#35644e}
 <span class="kicker">TORREMOLINOS · OFFLINE</span>
 <h1 id="title">Sin conexión</h1>
 <p id="message">Esta página no está disponible sin conexión. Puedes volver a la guía guardada o intentar cargarla de nuevo cuando tengas Internet.</p>
-<div class="actions"><a href="/Torremolinos/" id="home">Volver a la guía</a><button type="button" id="retry">Reintentar</button></div>
+<div class="actions"><a href="./" id="home">Volver a la guía</a><button type="button" id="retry">Reintentar</button></div>
 <small id="note">Guía independiente · No se muestran datos en tiempo real</small>
 </main>
 <script>
@@ -48,6 +48,15 @@ small{display:block;margin-top:30px;color:#35644e}
   const t=texts[language];
   ['title','message','home','retry','note'].forEach((id,i)=>{document.getElementById(id).textContent=t[i]});
   document.title=t[0]+' | TORREMOLINOS';
+  // A fallback can be rendered at an uncached nested route. Use the active worker's scope root.
+  const worker=navigator.serviceWorker?.controller;
+  if(worker){
+    const root=new URL('./',worker.scriptURL);
+    if(root.origin===location.origin){
+      document.getElementById('home').href=root.href;
+      document.querySelector('link[rel="icon"]').href=new URL('favicon.svg',root).href;
+    }
+  }
   document.getElementById('retry').addEventListener('click',()=>location.reload());
 })();
 </script>

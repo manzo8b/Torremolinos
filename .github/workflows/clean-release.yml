@@ -1,0 +1,61 @@
+name: TORREMOLINOS — P0-10 Clean Release Gate
+on:
+  pull_request:
+    branches: [main]
+    # Run for every PR to main: public content changes must also pass the release gate.
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build-and-compare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify output integrity and paths before preparing release
+        run: python3 -m unittest discover -s tests -p test_portable_build.py -v
+      - name: Generate GitHub Pages-compatible public-only package
+        run: |
+          python3 scripts/build_portable_site.py --out dist --report artifacts/release/current-build.json
+      - name: Audit public files, static resources, and sitemap
+        run: |
+          python3 scripts/audit_clean_release.py --dist dist --site-base https://manzo8b.github.io/Torremolinos/ --report artifacts/release/manifest-audit.json
+      - name: Generate alternative-prefix package without publishing it
+        run: |
+          python3 scripts/build_portable_site.py --origin https://preview.example --base-path /guide/ --out dist-preview --report artifacts/release/preview-build.json
+      - name: Audit SEO, cache inventory and offline routes for both packages
+        run: |
+          python3 scripts/audit_clean_release.py --dist dist-preview --site-base https://preview.example/guide/ --report artifacts/release/preview-manifest-audit.json
+          python3 scripts/audit_release_candidate.py --dist dist --site-base https://manzo8b.github.io/Torremolinos/ --report artifacts/release/candidate-current.json
+          python3 scripts/audit_release_candidate.py --dist dist-preview --site-base https://preview.example/guide/ --report artifacts/release/candidate-preview.json
+      - name: Stage both path prefixes for browser smoke
+        run: |
+          mkdir -p artifacts/portability/hosts/current/Torremolinos
+          mkdir -p artifacts/portability/hosts/preview/guide
+          cp -a dist/. artifacts/portability/hosts/current/Torremolinos/
+          cp -a dist-preview/. artifacts/portability/hosts/preview/guide/
+      - name: Install consistent Chromium and PNG comparison runtime
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.57.0 pngjs@7.0.0
+          npx playwright install --with-deps chromium
+      - name: Smoke-test two origin/path configurations
+        run: node tests/portable-browser-smoke.mjs
+      - name: Verify service worker update, offline fallback and scope
+        run: node tests/release-pwa-browser.mjs
+      - name: Compare source and clean dist pixels on key routes
+        run: node tests/clean-release-visual.mjs
+      - name: Upload clean public package and detailed QA proof (no deployment)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: torremolinos-release-candidate
+          path: |
+            dist/
+            artifacts/release/
+            artifacts/portability/screenshots/
+          if-no-files-found: warn
+          retention-days: 30
+          include-hidden-files: true

@@ -73,7 +73,7 @@ test('C-17 five published articles retain original dates and declare canonical b
 
 test('Fase 2D: scoped contrast overrides defeat legacy opacity and preserve focus state',()=>{
  const source=css.match(/#explore #cards article\.place \.placefoot > a\.source \{([^}]+)\}/)?.[1];
- const pride=css.match(/#pride \.feature-art\.pride-visual > \.pride-visual-detail \{([^}]+)\}/)?.[1];
+ const pride=css.match(/#pride\.section\.shell \.feature \.feature-art\.pride-visual > \.pride-visual-detail \{([^}]+)\}/)?.[1];
  assert.ok(source&&pride);
  assert.match(source,/background:var\(--ac-blue-dark\)!important/);
  assert.match(source,/opacity:1!important/);
