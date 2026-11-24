@@ -43,6 +43,13 @@ try{
    const hero=out+'/'+label+'-protected-'+width+'.png';
    await p.screenshot({path:hero,clip:{x:0,y:0,width,height:data.protectedBottom},animations:'disabled'});
    await p.screenshot({path:out+'/'+label+'-home-'+width+'.png',fullPage:true,animations:'disabled'});
+   await p.locator('#clean-access').screenshot({path:out+'/'+label+'-cards-'+width+'.png',animations:'disabled'});
+   if(label==='after'){
+    const cardPhotos=await p.locator('#clean-access img[data-review-photo]').evaluateAll(imgs=>imgs.map(i=>({key:i.dataset.reviewPhoto,src:i.currentSrc,loaded:i.complete&&i.naturalWidth>0,ratio:i.getBoundingClientRect().width/i.getBoundingClientRect().height,alt:i.alt})));
+    if(cardPhotos.length!==4||cardPhotos.some(x=>!x.loaded||Math.abs(x.ratio-1.5)>.025||!x.alt))report.errors.push('Card photo contract '+width+': '+JSON.stringify(cardPhotos));
+    await p.evaluate(()=>window.scrollTo(0,0));
+   }
+
    await p.addScriptTag({path:require.resolve('axe-core/axe.min.js')});
    const contrast=await p.evaluate(async()=>{const result=await axe.run(document,{runOnly:{type:'rule',values:['color-contrast']}});return {violations:result.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>({target:n.target,summary:n.failureSummary}))})),incomplete:result.incomplete.map(v=>({id:v.id,count:v.nodes.length}))}});
    const record={label,...data,contrast,errors};

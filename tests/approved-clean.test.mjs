@@ -57,3 +57,14 @@ test('chosen Sound image exists, is WebP, and is disclosed as an AI illustration
  assert.match(sw,/\.\/assets\/photos\/sound-headphones-torremolinos\.webp/);
  assert.equal((page.match(/id="torremolinos-audio"/g)||[]).length,1);
 });
+
+// Review §2: independent photographic sources, real WebP files, responsive markup.
+test('review Home cards use four supplied documentary photos and valid responsive sources',()=>{
+ const section=page.match(/<section id="clean-access"[\s\S]*?<\/section>/)[0];
+ const assets=["assets/photos/home-review/home-mangiare-800.webp","assets/photos/home-review/home-mangiare-1600.webp","assets/photos/home-review/home-agenda-672.webp","assets/photos/home-review/home-gallery-800.webp","assets/photos/home-review/home-gallery-1600.webp","assets/photos/home-review/home-stories-800.webp","assets/photos/home-review/home-stories-1600.webp"];
+ for(const name of assets){const bytes=readFileSync(new URL('../'+name,import.meta.url));assert.equal(bytes.toString('ascii',0,4),'RIFF');assert.equal(bytes.toString('ascii',8,12),'WEBP');assert.ok(bytes.length>10000&&bytes.length<=250000,name);assert.ok(section.includes(name),name);}
+ assert.equal((section.match(/data-review-photo=/g)||[]).length,4);
+ assert.doesNotMatch(section,/sunset-ai\.webp/);
+ assert.match(section,/data-review-credit/);
+ for(const name of assets.filter(x=>!x.includes('-1600.')))assert.ok(sw.includes(name),'missing offline card '+name);
+});

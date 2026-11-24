@@ -822,3 +822,15 @@ body.torre-home main#main #explore.section.shell .placefoot a:is(:hover,:focus-v
 }
 body.torre-home main#main #explore.section.shell .placefoot .source{font-weight:650!important}
 body.torre-home main#main #explore.section.shell .placefoot .place-add{background:var(--ac-blue)!important;color:var(--ac-paper)!important}
+
+/* HOME REVIEW §2 · in attesa di validazione MF. Four genuine 3:2 photos. */
+body.torre-home main#main #clean-access .approved-feature-card img{
+ width:100%!important;height:auto!important;aspect-ratio:3 / 2!important;
+ object-fit:cover!important;display:block!important;object-position:center!important;
+}
+body.torre-home main#main #clean-access .approved-feature-caption{height:auto!important;min-height:79px!important;}
+body.torre-home main#main #clean-access .review-card-photo-credit{
+ grid-column:1/-1;margin:0!important;padding:0 2px!important;
+ color:var(--ac-muted)!important;font-size:11px!important;line-height:1.45!important;
+ text-align:right;letter-spacing:0!important;
+}

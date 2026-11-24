@@ -9,6 +9,7 @@ const FILES=[
   './gallery/','./gallery/styles.css','./gallery/data.js','./gallery/app.js',
   './explore/la-nogalera/','./explore/la-nogalera/styles.css','./explore/la-nogalera/data.js','./explore/la-nogalera/app.js',
   './album-motion.js','./coastal-light.css','./refinement.css','./v06.css','./listen/','./listen/content.js','./legal/','./legal/styles.css','./legal/app.js','./legal/data.js',
+  './assets/photos/home-review/home-mangiare-800.webp','./assets/photos/home-review/home-agenda-672.webp','./assets/photos/home-review/home-gallery-800.webp','./assets/photos/home-review/home-stories-800.webp',
   './assets/photos/hero-apple-2026.webp','./assets/photos/hero-apple-2026-mobile.webp','./assets/photos/sound-headphones-torremolinos.webp',
   './assets/photos/hero-torremolinos-desktop.webp',
   './assets/photos/hero-torremolinos-mobile.webp',
