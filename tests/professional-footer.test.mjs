@@ -63,5 +63,5 @@ test('Navy Home footer works on mobile and is cached offline',()=>{
   assert.ok(home.includes(name),name+' missing from Home');
   assert.ok(sw.includes('./'+name),name+' missing from service worker cache');
  }
- assert.match(sw,/torremolinos-v33/);
+ assert.match(sw,/const CACHE='torremolinos-v(?:3[3-9]|[4-9]\d|\d{3,})';/);
 });

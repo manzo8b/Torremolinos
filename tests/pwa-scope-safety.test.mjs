@@ -77,7 +77,7 @@ test('PWA still has a relative manifest and explicit offline fallback',()=>{
  assert.equal(manifest.scope,'./');
  assert.match(sw,/req\.mode/);
  assert.match(sw,/offline\.html/);
- assert.match(sw,/torremolinos-v33/);
+ assert.match(sw,/const CACHE='torremolinos-v(?:3[3-9]|[4-9]\d|\d{3,})';/);
 });
 test('Build-time cache revision depends on precache bytes and stays deterministic',()=>{
  const folder=join(root,'artifacts','sw-cache-fixture');

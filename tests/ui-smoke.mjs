@@ -106,7 +106,7 @@ try{
     assert.equal(heroSurface.headingBg,'rgb(255, 255, 255)','hero heading still has a tinted panel at '+width);
     await page.waitForFunction(()=>{
       const main=document.querySelector('body.torre-home main#main');
-      const boundary=document.querySelector(matchMedia('(min-width: 951px)').matches?'#clean-access':'.trust.shell');
+      const boundary=document.querySelector('#clean-access');
       const expected=Math.ceil(boundary.getBoundingClientRect().bottom-main.getBoundingClientRect().top+1);
       return Math.abs(parseFloat(getComputedStyle(main).getPropertyValue('--review-start'))-expected)<=1;
     });

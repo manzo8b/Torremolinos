@@ -186,13 +186,12 @@
  else init();
 })();
 
-/* Desktop hotfix: extend the white introduction through the four access cards.
-   Preserve the original mobile boundary and the sand canvas farther down. */
+/* Extend the white introduction through the four access cards at every width.
+   Keep the sand canvas below the cards, including on iPhone. */
 (()=>{const main=document.querySelector('body.torre-home main#main');
  if(!main)return;const trust=main.querySelector('.trust.shell');if(!trust)return;
  const access=main.querySelector('#clean-access');
- const desktop=window.matchMedia('(min-width: 951px)');
- const update=()=>{const boundary=desktop.matches&&access?access:trust;
+ const update=()=>{const boundary=access||trust;
   const bottom=boundary.getBoundingClientRect().bottom-main.getBoundingClientRect().top;
   main.style.setProperty('--review-start',Math.ceil(bottom+1)+'px')};
  update();if('ResizeObserver'in window){const ro=new ResizeObserver(update);

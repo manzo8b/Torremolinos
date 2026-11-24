@@ -727,7 +727,7 @@ body.torre-home .tm-mobile-menu{display:none!important}
 
 /* HOME REVIEW G1–G5 · proposal · in attesa di validazione MF
    No rules target header, hero, hero-tools, trust, bottom nav or footer.
-   The canvas starts after the protected trust row; measured by review JS. */
+   The sand canvas starts after the four access cards at every width; measured by review JS. */
 body.torre-home main#main{
  --review-sand:#F4EFE6;--review-card:#FBF8F2;
  background:linear-gradient(to bottom,var(--ac-paper) 0 var(--review-start,100%),var(--review-sand) var(--review-start,100%) 100%)!important;

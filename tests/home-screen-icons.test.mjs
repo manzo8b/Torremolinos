@@ -28,6 +28,6 @@ test('Manifest, home page, and PWA cache contain consistent icons',()=>{
  const html=read('index.html').toString('utf8');
  assert.ok(html.includes('rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png"'));
  const sw=read('service-worker.js').toString('utf8');
- assert.ok(sw.includes("torremolinos-v33"));
+ assert.ok(/const CACHE='torremolinos-v(?:3[3-9]|[4-9]\d|\d{3,})';/.test(sw));
  for(const p of ['icons/apple-touch-icon.png','icons/icon-192.png','icons/icon-512.png'])assert.ok(sw.includes("'./"+p+"'"));
 });

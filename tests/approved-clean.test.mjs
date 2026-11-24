@@ -43,7 +43,7 @@ test('translated cards and headings cover all six supported languages',()=>{
 test('PWA includes updated UI and brand asset without breaking offline fallback',()=>{
  for(const name of ['approved-clean-2026.css','approved-clean-2026.js','torremolinos-logo-clean.svg','offline.html'])
   assert.ok(sw.includes(name),name);
- assert.ok(sw.includes('torremolinos-v33'));
+ assert.ok(/const CACHE='torremolinos-v(?:3[3-9]|[4-9]\d|\d{3,})';/.test(sw));
 });
 
 test('chosen Sound image exists, is WebP, and is disclosed as an AI illustration',()=>{

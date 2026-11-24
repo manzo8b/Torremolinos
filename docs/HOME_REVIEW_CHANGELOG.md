@@ -85,3 +85,6 @@ MF chiede più respiro e superfici autonome, superando il sabbia obbligatorio e 
 
 ### Rilascio v34 — sezioni autonome
 MF: «Wowww ottimo lavoro. Procedi pure» dopo le anteprime effettive. Run 45407003653 PASS 15/15, axe color-contrast 0, controlli statici 45407003656 PASS, product contract 45407003529 PASS. Autorizzato rilascio delle sole rifiniture approvate; cache PWA v34. Home, contenuti, dataset e foto invariati. Disponibilità delle foto esterne, verifica Safari reale e audit finale ancora da completare. Rollback mediante revert del merge.
+
+### Hotfix v35 — Home mobile
+MF segnala screenshot iPhone (24 novembre) con fascia sabbia tra trust e card. Causa: il confine bianco/sabbia era a fine trust solo fino a 950 px. Esteso a fine #clean-access a tutte le larghezze; nessuna modifica a geometria, immagini, navigazione o testi. Cache v35; test browser ora richiede confine dopo le card anche su mobile. Adeguate asserzioni cache legacy ferme a v33 per non bloccare rilasci futuri. Esito workflow post-rilascio da confermare; controllo Safari reale da MF.
