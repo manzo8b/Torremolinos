@@ -1,0 +1,64 @@
+name: TORREMOLINOS — inner palette audit
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'inner-palette-2026.css'
+      - 'tests/inner-palette*'
+      - '.github/workflows/inner-palette.yml'
+permissions:
+  contents: read
+jobs:
+  palette:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 1c2e64a5835b93643afc8793bc1ad8effc6e94bc
+          path: baseline
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          path: candidate
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check exact HTML source changes and Home integrity
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          old=Path('baseline')
+          new=Path('candidate')
+          pages=list(new.glob('**/*.html'))
+          count=0
+          for p in pages:
+              rel=p.relative_to(new)
+              if not (old/rel).exists(): continue
+              b=(old/rel).read_bytes()
+              a=p.read_bytes()
+              if b==a: continue
+              normalized=re.sub(rb' data-torre-palette="[^"]+"',b'',a)
+              normalized=re.sub(rb'<link rel="stylesheet" href="(?:\.\./)*inner-palette-2026\.css">\n',b'',normalized)
+              assert b==normalized, f'Non-palette markup change: {rel}'
+              count+=1
+          assert count==24,count
+          for p in old.glob('assets/**/*'):
+              if p.is_file(): assert p.read_bytes()==(new/p.relative_to(old)).read_bytes(),p
+          print('24 pages changed only by palette opt-in; all original assets unchanged')
+          PY
+          node --test candidate/tests/inner-palette.test.mjs
+      - name: Install browser and contrast tools
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.57.0 axe-core@4.10.3
+          npx playwright install --with-deps chromium
+      - name: Compare inner pages at 375 and 1280 pixels
+        run: node candidate/tests/inner-palette-browser.mjs
+      - name: Preserve before and after evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: torremolinos-inner-palette-before-after
+          path: artifacts/inner-palette/
+          retention-days: 30
