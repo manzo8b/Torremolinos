@@ -132,3 +132,16 @@ test('Sound review restores approved image from original, native player only, no
  assert.ok(sw.includes('sound-headphones-800.webp'));
  assert.ok(page.includes('id="heroMusicBtn"'));
 });
+
+test('Essentials preserves three service cards and one consent-driven map, with feedback in navy footer',()=>{
+ const section=page.match(/<section[^>]*id="useful"[\s\S]*?<\/section>/)[0];
+ assert.equal((section.match(/class="infocard"/g)||[]).length,3);
+ assert.match(section,/href="tel:112"/);
+ assert.match(section,/renfe\.com/);assert.match(section,/turismotorremolinos\.es/);
+ assert.equal((page.match(/id="loadMap"/g)||[]).length,1);
+ assert.doesNotMatch(page,/id="mapStart"/);
+ assert.match(section,/id="mapHolder"[^>]*hidden/);
+ assert.doesNotMatch(section,/<iframe\b/);
+ assert.doesNotMatch(page,/<section class="editorial-bridge shell"|<div class="community">/);
+ assert.match(page,/data-footer="feedback">Invia un suggerimento/);
+});

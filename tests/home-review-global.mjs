@@ -50,6 +50,8 @@ try{
    await p.locator('#stories').screenshot({path:out+'/'+label+'-stories-'+width+'.png',animations:'disabled'});
    if(label==='after')await p.locator('#homeAgendaEvents[aria-busy="false"]').waitFor();
    await p.locator('#agenda-home').screenshot({path:out+'/'+label+'-agenda-'+width+'.png',animations:'disabled'});
+   await p.locator('#useful').screenshot({path:out+'/'+label+'-essentials-'+width+'.png',animations:'disabled'});
+   await p.locator('#site-footer').screenshot({path:out+'/'+label+'-footer-'+width+'.png',animations:'disabled'});
    await p.locator('#sound').screenshot({path:out+'/'+label+'-sound-'+width+'.png',animations:'disabled'});
    if(label==='before')await p.locator('.gallery-feature').screenshot({path:out+'/before-gallery-banner-'+width+'.png',animations:'disabled'});
    if(label==='after'){
@@ -59,6 +61,12 @@ try{
     if(tiles.length!==4||tiles.some(x=>!x.loaded||Math.abs(x.ratio-1.5)>.03))report.errors.push('Explore photo contract '+width+': '+JSON.stringify(tiles));
     if(await p.locator('#cards .place').count()!==6)report.errors.push('Featured places count '+width);
     if(await p.locator('#pride').count())report.errors.push('Open to all still present '+width);
+    const ess=await p.locator('#useful').evaluate(e=>({cards:[...e.querySelectorAll('.infocard')].map(x=>getComputedStyle(x).backgroundColor),buttons:e.querySelectorAll('#loadMap').length,iframe:e.querySelectorAll('iframe').length,footer:getComputedStyle(document.getElementById('site-footer')).backgroundColor,suggestion:document.querySelector('[data-footer="feedback"]')?.textContent,duplicates:!!document.querySelector('.editorial-bridge,.community,#mapStart')}));
+    if(ess.cards.length!==3||new Set(ess.cards).size!==3||ess.buttons!==1||ess.iframe||ess.footer!=='rgb(16, 36, 75)'||ess.suggestion!=='Invia un suggerimento'||ess.duplicates)report.errors.push('Essentials/footer contract '+width+': '+JSON.stringify(ess));
+    await p.locator('#loadMap').click();
+    if(await p.locator('#mapHolder iframe').count()!==1||await p.locator('#loadMap').getAttribute('aria-expanded')!=='true')report.errors.push('Map activation '+width);
+    await p.locator('#loadMap').click();
+    if(await p.locator('#mapHolder').isVisible())report.errors.push('Map collapse '+width);
     const sound=await p.locator('#sound').evaluate(el=>{const a=el.querySelector('audio'),img=el.querySelector('.music-album-art'),credit=el.querySelector('.approved-sound-credit'),more=el.querySelector('.approved-music-more');return {players:el.querySelectorAll('audio[controls]').length,duplicate:!!el.querySelector('#approvedSoundPlay'),paused:a.paused,autoplay:a.autoplay,preload:a.preload,loaded:img.complete&&img.naturalWidth>=800,src:img.currentSrc,credit:credit?.textContent,creditVisible:!!credit?.getClientRects().length,more:!!more&&!more.open,links:more?.querySelectorAll('a').length,navy:getComputedStyle(el.querySelector('.music-shell')).backgroundColor}});
     if(sound.players!==1||sound.duplicate||!sound.paused||sound.autoplay||sound.preload!=='none'||!sound.loaded||!sound.src.includes('sound-headphones-')||!sound.creditVisible||!sound.credit?.includes('IA')||!sound.more||sound.links!==3||sound.navy!=='rgb(16, 36, 75)')report.errors.push('Sound contract '+width+': '+JSON.stringify(sound));
     const ag=await p.locator('#agenda-home').evaluate(el=>({ids:[...el.querySelectorAll('[data-event-id]')].map(x=>x.dataset.eventId),dates:[...el.querySelectorAll('[data-start]')].map(x=>x.dataset.start),verified:el.querySelector('#homeAgendaVerified')?.textContent,photos:el.querySelectorAll('img').length,cta:el.querySelectorAll('.agenda-home-btn').length}));

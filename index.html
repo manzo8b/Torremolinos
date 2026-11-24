@@ -144,14 +144,7 @@ Tu navegador no admite la reproducción de audio
 <div class="review-agenda-grid" id="homeAgendaEvents" aria-busy="true" aria-live="polite"><p class="review-agenda-status" data-home-agenda="loading">Cargando agenda…</p></div>
 <div class="review-agenda-footer"><p id="homeAgendaVerified" class="review-agenda-verification"></p><a href="agenda/" class="agenda-home-btn" data-home-agenda="cta">Ver eventos y agenda ↗</a></div>
 </section>
-<section class="editorial-bridge shell" aria-labelledby="editorial-bridge-title">
-  <div class="editorial-bridge-copy">
-    <span class="editorial-bridge-eyebrow" data-t="bridgeEyebrow">La città è anche tua</span>
-    <h2 id="editorial-bridge-title" data-t="bridgeTitle">Non devi vedere tutto per vivere davvero</h2>
-    <p data-t="bridgeText">Segui ciò che ti incuriosisce. Conserva i luoghi in cui vorresti tornare. La tua Torremolinos nasce da piccole scelte e momenti da ricordare.</p>
-  </div>
-  <a href="#plan" class="editorial-bridge-action" data-t="bridgeAction">Crea il tuo percorso</a>
-</section>
+
 <section class="section shell product-planner" id="plan" aria-labelledby="plan-title">
   <div class="plan-head">
     <div class="plan-lead">
@@ -191,9 +184,9 @@ Tu navegador no admite la reproducción de audio
     </div>
   </div>
 </section>
-<section class="section shell" id="useful"><div class="sectop"><div><span class="eyebrow coral">ESSENTIALS</span><h2 data-t="usefulTitle">Lo importante, sin rodeos</h2></div><p data-t="usefulLead">Información que conviene tener a mano, respaldada por fuentes oficiales. Los servicios pueden cambiar.</p></div><div class="info-grid"><article class="infocard"><span class="big">🚆</span><h3 data-t="airportTitle">Desde el aeropuerto</h3><p data-t="airportText">La línea C1 de Cercanías enlaza el aeropuerto de Málaga con Torremolinos y otras localidades.</p><a href="https://www.renfe.com/es/es/cercanias/cercanias-malaga" target="_blank" rel="noopener noreferrer" data-t="airportLink">Consulta Renfe ↗</a></article><article class="infocard"><span class="big">🆘</span><h3 data-t="emergencyTitle">Emergencias</h3><p data-t="emergencyText">En España, el 112 es el número gratuito de emergencias. Solo para situaciones reales.</p><a href="tel:112" data-t="emergencyLink">Llamar al 112</a></article><article class="infocard"><span class="big">♿</span><h3 data-t="accessTitle">Moverse por la ciudad</h3><p data-t="accessText">Del centro a la playa hay desniveles y escaleras. Consulta los accesos disponibles antes de bajar.</p><a href="https://turismotorremolinos.es/es/" target="_blank" rel="noopener noreferrer" data-t="accessLink">Turismo oficial ↗</a></article></div></section>
-<section class="section shell"><div class="mapbox"><div><span class="eyebrow coral">CITY MAP</span><h3 data-t="mapTitle">Torremolinos en el mapa</h3><p data-t="mapLead">Activa el mapa cuando lo necesites. Usamos OpenStreetMap, sin rastrear tu ubicación desde esta app.</p><button class="darkbtn" id="loadMap" data-t="loadMap">Mostrar mapa ↗</button><p class="note-small" data-t="mapPrivacy">Al activarlo se cargarán contenidos de OpenStreetMap.</p></div><div id="mapHolder" class="map-placeholder"><button id="mapStart" data-t="mapStart">🗺️ Ver mapa de la ciudad</button></div></div></section>
-<section class="section shell"><div class="community"><div><span class="eyebrow coral">LOCAL CONNECTION</span><h2 data-t="communityTitle">La ciudad también es tuya</h2><p data-t="communityText">Esta guía independiente quiere sumar voces locales, información comprobada y recomendaciones transparentes. Los acuerdos comerciales nunca se presentarán como reseñas imparciales.</p></div><a class="darkbtn" href="https://github.com/manzo8b/Torremolinos/issues" target="_blank" rel="noopener noreferrer" data-t="feedback">Enviar sugerencias ↗</a></div></section>
+<section class="section shell" id="useful" ><div class="sectop"><div><span class="eyebrow coral">ESSENTIALS</span><h2 data-t="usefulTitle">Lo importante, sin rodeos</h2></div><p data-t="usefulLead">Información que conviene tener a mano, respaldada por fuentes oficiales. Los servicios pueden cambiar.</p></div><div class="info-grid"><article class="infocard"><span class="big">🚆</span><h3 data-t="airportTitle">Desde el aeropuerto</h3><p data-t="airportText">La línea C1 de Cercanías enlaza el aeropuerto de Málaga con Torremolinos y otras localidades.</p><a href="https://www.renfe.com/es/es/cercanias/cercanias-malaga" target="_blank" rel="noopener noreferrer" data-t="airportLink">Consulta Renfe ↗</a></article><article class="infocard"><span class="big">🆘</span><h3 data-t="emergencyTitle">Emergencias</h3><p data-t="emergencyText">En España, el 112 es el número gratuito de emergencias. Solo para situaciones reales.</p><a href="tel:112" data-t="emergencyLink">Llamar al 112</a></article><article class="infocard"><span class="big">♿</span><h3 data-t="accessTitle">Moverse por la ciudad</h3><p data-t="accessText">Del centro a la playa hay desniveles y escaleras. Consulta los accesos disponibles antes de bajar.</p><a href="https://turismotorremolinos.es/es/" target="_blank" rel="noopener noreferrer" data-t="accessLink">Turismo oficial ↗</a></article></div><div class="review-essential-map"><p class="note-small" data-t="mapPrivacy">Al activarlo se cargarán contenidos de OpenStreetMap.</p><button class="darkbtn" id="loadMap" type="button" aria-controls="mapHolder" aria-expanded="false" data-t="loadMap">Mostrar mapa ↗</button><div id="mapHolder" class="map-placeholder" hidden></div></div></section>
+
+
 </main>
 <footer class="footer footer-pro" id="site-footer" aria-label="Informazioni sul progetto TORREMOLINOS">
   <div class="shell footer-pro-main">
@@ -204,7 +197,7 @@ Tu navegador no admite la reproducción de audio
       <p class="footer-pro-intro" data-footer="intro">Torremolinos, a modo tuo. Una guida indipendente per scoprire luoghi, sapori, eventi e storie della Costa del Sol.</p>
       <p class="footer-pro-disclaimer" data-footer="disclaimer">Progetto editoriale indipendente, non affiliato al Comune di Torremolinos.</p>
       <a class="footer-pro-action" href="https://github.com/manzo8b/Torremolinos/issues/new" target="_blank" rel="noopener noreferrer">
-        <span data-footer="feedback">Proponi una correzione</span>
+        <span data-footer="feedback">Invia un suggerimento</span>
         <span class="footer-pro-action-arrow" aria-hidden="true">↗</span>
       </a>
     </div>
@@ -364,7 +357,7 @@ function route(){
  }
 }
 
-function loadMap(){if($('#mapHolder iframe'))return;var iframe=document.createElement('iframe');iframe.loading='lazy';iframe.title='OpenStreetMap Torremolinos';iframe.referrerPolicy='no-referrer';iframe.src='https://www.openstreetmap.org/export/embed.html?bbox=-4.535%2C36.601%2C-4.461%2C36.650&layer=mapnik&marker=36.624%2C-4.502';$('#mapHolder').replaceChildren(iframe)}
+function loadMap(){var holder=$('#mapHolder'),button=$('#loadMap');if(holder.querySelector('iframe')){holder.hidden=!holder.hidden;button.setAttribute('aria-expanded',String(!holder.hidden));return}var iframe=document.createElement('iframe');iframe.loading='lazy';iframe.title='OpenStreetMap Torremolinos';iframe.referrerPolicy='no-referrer';iframe.src='https://www.openstreetmap.org/export/embed.html?bbox=-4.535%2C36.601%2C-4.461%2C36.650&layer=mapnik&marker=36.624%2C-4.502';holder.replaceChildren(iframe);holder.hidden=false;button.setAttribute('aria-expanded','true')}
 $('#lang').addEventListener('change',function(e){lang=e.target.value;try{localStorage.setItem('torremolinos.lang',lang)}catch(e){}var url=new URL(location.href);url.searchParams.set('lang',lang);history.replaceState(null,'',url);setLang();updateHeroMusic()});
 all('[data-filter]').forEach(function(b){b.addEventListener('click',function(){query='';$('#search').value='';setFilter(b.dataset.filter)})});
 all('[data-shortcut]').forEach(function(b){b.addEventListener('click',function(){query='';$('#search').value='';setFilter(filter===b.dataset.shortcut?'all':b.dataset.shortcut)})});
@@ -374,7 +367,7 @@ $('#sharePlan').addEventListener('click',function(){var url=new URL(location.hre
 
 $('#search').addEventListener('input',function(e){query=e.target.value.trim().toLocaleLowerCase();filter='all';render()});
 $('#searchForm').addEventListener('submit',function(e){e.preventDefault();$('#explore').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})});
-$('#loadMap').addEventListener('click',loadMap);$('#mapStart').addEventListener('click',loadMap);
+$('#loadMap').addEventListener('click',loadMap);
 all('[data-jump]').forEach(function(b){b.addEventListener('click',function(){all('[data-jump]').forEach(function(x){x.classList.remove('active')});b.classList.add('active');document.getElementById(b.dataset.jump).scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})})});
 var heroMusicButton=$('#heroMusicBtn'), heroMusicAudio=$('#torremolinos-audio'), heroMusicHint=$('#heroMusicHint');
 function updateHeroMusic(){if(!heroMusicButton||!heroMusicAudio)return;var playing=!heroMusicAudio.paused;heroMusicButton.textContent=msg(playing?'heroMusicPause':'heroMusicBtn');heroMusicButton.setAttribute('aria-pressed',String(playing))}

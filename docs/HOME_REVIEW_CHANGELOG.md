@@ -42,5 +42,10 @@ Baseline main d8c92b1c6a9e8d1d6893020834c7c3f1d6d4836b. PR #21 separata, non inc
 
 - MF: «ottimo procedi». Approvata Agenda del commit 3d68dcf; esito tecnico separato.
 
-## §8 — Sound · in attesa di validazione MF
+## §8 — Sound · approvazione estetica MF, 24 novembre 2026
 - Recuperata dalla Libreria l'immagine originale approvata «Cuffie avorio sul Mediterraneo сия.png», 1536×1024, confrontata visivamente con asset WebP precedente 480×320 (11698 byte). Riesportazione identica nei contenuti, senza generazione o upscale: 800×533 (94358 byte) e 1536×1024 (240378 byte), SHA Git verificati; mantenuto originale vecchio nel repo. Srcset responsive, dimensioni esplicite, lazy, variante 800 in cache. Navy esistente, fascia compatta e media senza vuoti. Rimosso il pulsante custom dal markup e handler duplicato; player nativo unico nella sezione, preload none, niente autoplay, scorciatoia Hero invariata. Credito IA sempre visibile fuori immagine, alt/label localizzati, Altri ascolti e tre destinazioni preservati. Test automatici e screenshot dedicati quattro larghezze. Nessuna modifica alle sezioni approvate, no merge/deploy.
+
+- MF: «procediamo al prossimo traguardo». Sound approvato per passaggio alla sezione 9; test precedente 45376306805 fallito per dimensione naturale corretta per densità srcset, non per mancato caricamento. Test ora decodifica bitmap reale e verifica pixel effettivi.
+
+## §9 — Essenziale + mappa + footer · in attesa di validazione MF
+- Tre card conservate con fonti Renfe/112/turismo ufficiale, tonalità esistenti l8-paper, l8-warm-soft e l8-green-soft; griglia 3 desktop/tablet e stack mobile. Un solo pulsante mappa sotto card, nessun iframe prima dell'azione, aria-expanded e chiusura riapribile. Rimosse entrambe le fasce ridondanti La città è anche tua / Local connection. Footer navy esistente, testo sabbia, logo originale su piccola superficie chiara, struttura/colonne/link/policy invariati; azione feedback rinominata Invia un suggerimento in sei lingue con destinazione esistente. La pagina percorso resta in Home fino al punto 10. Screenshot dedicati a quattro risoluzioni, test contrattuali, nessun merge/deploy.

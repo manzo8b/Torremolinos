@@ -226,9 +226,9 @@ test('commercial storytelling is authored in all six locales and the action is f
    for(const key of keys)assert.ok(copy[lang]?.[key]?.length>12,lang+' missing '+key);
    assert.doesNotMatch(copy[lang].bridgeTitle,/[.．]\s*$/);
  }
- assert.match(home,/class="editorial-bridge shell"/);
- assert.match(home,/class="editorial-bridge-action" data-t="bridgeAction"/);
- assert.match(home,/href="#plan" class="editorial-bridge-action"/);
+ assert.doesNotMatch(home,/<section class="editorial-bridge shell"/);
+ assert.doesNotMatch(home,/<div class="community">/);
+ assert.match(home,/data-footer="feedback"/);
 });
 
 test('commercial stylesheet is present in offline shell',()=>{

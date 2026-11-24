@@ -50,18 +50,10 @@ try{
     await p.keyboard.press('Escape');assert.equal(await menu.getAttribute('open'),null);
     await trigger.tap();await panel.locator('a[href="#plan"]').tap();
     assert.equal(await menu.getAttribute('open'),null);
-    const bridge=p.locator('.editorial-bridge.shell');await bridge.scrollIntoViewIfNeeded();
-    const layout=await bridge.evaluate(e=>{
-      const r=n=>{const b=n.getBoundingClientRect();return {left:b.left,right:b.right,top:b.top,bottom:b.bottom,width:b.width,height:b.height}};
-      const copy=e.querySelector('.editorial-bridge-copy'),cta=e.querySelector('.editorial-bridge-action'),h=copy.querySelector('h2');
-      return {box:r(e),copy:r(copy),cta:r(cta),title:r(h),position:getComputedStyle(cta).position,direction:getComputedStyle(e).flexDirection};
-    });
-    assert.equal(layout.direction,'column');
-    assert.equal(layout.position,'static');
-    assert.ok(layout.cta.top>=layout.copy.bottom-1,'CTA overlaps text '+JSON.stringify(layout));
-    assert.ok(layout.copy.width>=layout.box.width-50&&layout.title.width>=layout.copy.width-2,'text squeezed '+JSON.stringify(layout));
-    assert.ok(layout.cta.left>=layout.box.left&&layout.cta.right<=layout.box.right+1,'CTA outside card');
-    await bridge.screenshot({path:'artifacts/screenshots/iphone-bridge-'+width+'.png',animations:'disabled'});
+    assert.equal(await p.locator('.editorial-bridge,.community').count(),0,'redundant banners remain');
+    const layout=await p.locator('#useful').evaluate(e=>({width:e.clientWidth,scroll:e.scrollWidth,cards:e.querySelectorAll('.infocard').length}));
+    assert.equal(layout.cards,3);assert.ok(layout.scroll<=layout.width+1,'essential cards overflow');
+    await p.locator('#useful').screenshot({path:'artifacts/screenshots/iphone-essentials-'+width+'.png',animations:'disabled'});
     if(width===375){
       for(const lang of ['es','en','it','de','fr','ru']){
         await p.locator('#lang').selectOption(lang);
@@ -156,7 +148,7 @@ try{
         craftCss:[...document.styleSheets].some(sheet=>sheet.href?.includes('craft-finish.css'))
       };
     });
-    assert.equal(whiteCraft.footer,'rgb(255, 255, 255)','footer is not white at '+width);
+    assert.equal(whiteCraft.footer,'rgb(16, 36, 75)','Home footer navy at '+width);
 
     const footerPro = await page.evaluate(() => {
       const footer=document.querySelector('#site-footer');
@@ -176,7 +168,7 @@ try{
       };
     });
     assert.equal(footerPro.exists,true,'professional footer missing at '+width);
-    assert.equal(footerPro.surface,'rgb(255, 255, 255)','footer must be white at '+width);
+    assert.equal(footerPro.surface,'rgb(16, 36, 75)','Home footer navy at '+width);
     assert.equal(footerPro.cols,3,'footer must have three grouped link columns at '+width);
     assert.ok(footerPro.buttons>=17,'footer navigation links missing at '+width);
     assert.ok(footerPro.logoReady,'footer brand mark not loaded at '+width);
@@ -187,7 +179,7 @@ try{
       await page.locator('#lang').selectOption('en');
       assert.equal((await page.locator('#site-footer [data-footer="project"]').innerText()).trim(),'Project & sources','English footer language incorrect');
       await page.locator('#lang').selectOption('es');
-      assert.equal((await page.locator('#site-footer [data-footer="feedback"]').innerText()).trim(),'Proponer una corrección','Spanish footer language incorrect');
+      assert.equal((await page.locator('#site-footer [data-footer="feedback"]').innerText()).trim(),'Enviar una sugerencia','Spanish footer language incorrect');
       await page.locator('#lang').selectOption('it');
       assert.equal((await page.locator('#site-footer [data-footer="explore"]').innerText()).trim(),'Esplora','Italian footer not restored');
     }
@@ -211,7 +203,7 @@ try{
         const h=host.getBoundingClientRect(),p=x.getBoundingClientRect(),q=y.getBoundingClientRect();
         return {outer:h.width,one:p.width,two:q.width,gap:Math.abs(q.left-p.right)};
       }
-      const bridge=css('.editorial-bridge'),bridgeText=css('.editorial-bridge h2'),
+      const bridge=css('#useful .infocard:first-child'),bridgeText=css('#useful .infocard:first-child h3'),
         agenda=css('.agenda-home'),music=css('.music-shell'),gallery=css('.gallery-feature');
       return {
         v6:[...document.styleSheets].some(x=>x.href?.includes('product-v6.css')),
@@ -219,12 +211,12 @@ try{
         agendaBg:agenda?.backgroundColor,musicBg:music?.backgroundColor,
         galleryImg:touch('#photodiary figure img'),musicCover:touch('.music-album-art:not([hidden])')||touch('.music-album-fallback:not([hidden])'),
         agendaCards:document.querySelectorAll('#homeAgendaEvents .review-agenda-card').length,agendaNoPhoto:!document.querySelector('#agenda-home img'),agendaStatus:document.querySelector('#homeAgendaEvents')?.getAttribute('aria-busy'),
-        ctaRadius:css('.editorial-bridge-action')?.borderTopLeftRadius,
+        ctaRadius:css('#loadMap')?.borderTopLeftRadius,
         galleryBg:gallery?.backgroundColor
       };
     });
     assert.ok(premium.v6,'product v6 stylesheet missing at '+width);
-    assert.equal(premium.bridgeBg,'rgb(251, 248, 242)','review warm card surface at '+width);
+    assert.equal(premium.bridgeBg,'rgb(255, 255, 255)','airport card retained neutral tone at '+width);
     assert.equal(premium.bridgeText,'rgb(16, 36, 75)','editorial bridge text must be legible at '+width);
     assert.equal(premium.agendaBg,'rgb(244, 239, 230)','review sand agenda at '+width);
     assert.equal(premium.musicBg,'rgb(16, 36, 75)','review navy Sound at '+width);
@@ -247,7 +239,7 @@ try{
       const stylesheet=[...document.styleSheets].some(sheet=>sheet.href?.includes('narrative-v7.css'));
       const sourceCards=q('#cards'),figs=[...document.querySelectorAll('#photodiary .photo-diary-grid figure img')];
       const featured=q('#stories .magazine-card.primary'),small=q('#stories .magazine-card:not(.primary)');
-      const action=q('.editorial-bridge-action'),aCss=action&&getComputedStyle(action);
+      const action=q('#loadMap'),aCss=action&&getComputedStyle(action);
       const rail=q('.v7-rail-controls');
       return {
         stylesheet,
@@ -313,7 +305,7 @@ try{
         const el=document.querySelector(selector),css=el&&getComputedStyle(el);
         return css?{text:css.color,bg:css.backgroundColor}:null;
       }
-      return {gallery:props('#photodiary .gallery-promo-link a'),feedback:props('.community .darkbtn'),credit:props('.music-body .approved-sound-credit')};
+      return {gallery:props('#photodiary .gallery-promo-link a'),feedback:props('#site-footer .footer-pro-action'),credit:props('.music-body .approved-sound-credit')};
     });
     assert.deepEqual(ctas.gallery,{text:'rgb(255, 255, 255)',bg:'rgb(9, 107, 203)'},'gallery contrast '+width);
     assert.deepEqual(ctas.feedback,{text:'rgb(255, 255, 255)',bg:'rgb(9, 107, 203)'},'feedback CTA contrast '+width);
@@ -341,9 +333,7 @@ try{
         return (img?.naturalWidth>0&&!img.hidden) || (fallback&&!fallback.hidden);
       });
       assert.ok(mediaOk,'music cover and offline poster both missing at '+width);
-      const approvedSound=await page.locator('#sound .music-album-art').evaluate(img=>({
-        src:img.currentSrc,width:img.naturalWidth,height:img.naturalHeight,complete:img.complete
-      }));
+      const approvedSound=await page.locator('#sound .music-album-art').evaluate(async img=>{await img.decode();const response=await fetch(img.currentSrc);const bitmap=await createImageBitmap(await response.blob());const result={src:img.currentSrc,width:bitmap.width,height:bitmap.height,complete:img.complete};bitmap.close();return result;});
       assert.ok(approvedSound.src.includes('sound-headphones-'),'old Sound image at '+width);
       assert.ok(approvedSound.complete&&approvedSound.width>=800&&approvedSound.height>=533,
         'approved Sound image did not load at '+width+': '+JSON.stringify(approvedSound));
