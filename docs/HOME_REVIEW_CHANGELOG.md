@@ -117,3 +117,6 @@ Single-source build projects the existing localized DOM copy into static HTML fo
 
 ### v42 — Christmas article format correction (user request)
 All six editions now use the standard Stories masthead, full-width editorial photo, prose column, side index and shared footer, with 15 events as flat editorial entries rather than nested cards. Three key-date summaries, all 11 references, photo and captions, original copy, canonical/hreflang retained. No changes to other articles or Home layout. Validated by dedicated structure checks and browser smoke. Included in v42 to avoid release divergence.
+
+### Sprint 43 — Agenda localization, first tranche
+27 dated entries and five watchlist items: translated notes, reasons and periods in five additional languages; localize descriptive titles, venue qualifiers, status counters, form labels and calendar export descriptions. Preserve original dates, source URLs and editorial status; proper event/venue names remain original. Exact-source lookup ensures edited entries require new review. Agenda remains noindex for non-Spanish editions until residual UI, new source updates and browser validation complete. Stacked branch, not published. No native-language certification or new source verification.

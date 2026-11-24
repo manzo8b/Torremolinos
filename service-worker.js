@@ -1,7 +1,7 @@
 // TORREMOLINOS — Scoped offline cache. May be content-hashed in deployment builds.
 // Never delete caches belonging to other applications hosted on github.io.
 const CACHE_PREFIX='torremolinos-';
-const CACHE='torremolinos-v42';
+const CACHE='torremolinos-v43';
 const SCOPE_URL=new URL(self.registration.scope);
 const FILES=[
   './','./index.html','./offline.html','./locale-accessibility.js','./approved-clean-2026.css','./inner-palette-2026.css','./inner-refinement-2026.css','./approved-clean-2026.js','./footer-professional-2026.css','./footer-professional-2026.js','./brand/torremolinos-logo-clean.svg','./apple-premium.css','./craft-refinement.css','./commercial-experience.css','./product-v6.css','./product-v6.js','./narrative-v7.css','./narrative-v7.js','./luminosity-v8.css','./luminosity-v8.js','./craft-finish.css','./apple-runtime.js','./craft-runtime.js','./design-system-2026.css','./editorial.css','./favicon.svg','./manifest.webmanifest','./icons/apple-touch-icon.png','./icons/icon-192.png','./icons/icon-512.png',
@@ -21,7 +21,7 @@ const FILES=[
   './assets/photos/paseo-palmeras.webp',
   './assets/photos/costa-torremolinos.webp',
   './assets/photos/paseo-centro.webp',
-  './stories/','./stories/article.css','./stories/language.js','./stories/index-language.css','./stories/en.html','./stories/it.html','./stories/de.html','./stories/fr.html','./stories/ru.html','./agenda/', './agenda/styles.css', './agenda/app.js', './agenda/events.json','./home-agenda.js', './comer/', './comer/styles.css', './comer/data.js', './comer/app.js',
+  './stories/','./stories/article.css','./stories/language.js','./stories/index-language.css','./stories/en.html','./stories/it.html','./stories/de.html','./stories/fr.html','./stories/ru.html','./agenda/', './agenda/styles.css', './agenda/app.js','./agenda/locale-data.js', './agenda/events.json','./home-agenda.js', './comer/', './comer/styles.css', './comer/data.js', './comer/app.js',
   './stories/torremolinos-mucho-mas-que-sol-y-playa.html',
   './stories/torremolinos-mucho-mas-que-sol-y-playa-en.html','./stories/torremolinos-mucho-mas-que-sol-y-playa-it.html','./stories/torremolinos-mucho-mas-que-sol-y-playa-de.html','./stories/torremolinos-mucho-mas-que-sol-y-playa-fr.html','./stories/torremolinos-mucho-mas-que-sol-y-playa-ru.html',
   './stories/la-nogalera-donde-la-noche-tiene-historia.html',
