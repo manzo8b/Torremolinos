@@ -23,3 +23,12 @@ test('Sound has six crawlable translated pages with reciprocal SEO links',()=>{
  }
  assert.ok(read('service-worker.js').includes("'./listen/language.js'"));
 });
+
+test('Gallery captions, alt text and viewer controls exist in all six languages',()=>{
+ const ctx={window:{}};vm.runInNewContext(read('gallery/data.js'),ctx);
+ const d=ctx.window.TORREMOLINOS_GALLERY;
+ for(const item of d.images)for(const l of langs){assert.ok(item.title[l],item.id+' title '+l);assert.ok(item.alt[l],item.id+' alt '+l)}
+ for(const l of langs)for(const k of ['previous','next','language','categories','navigation','heroAlt'])assert.ok(d.translations[l][k],l+' '+k);
+ assert.equal(d.images.filter(x=>x.publicationStatus==='pending_review').length,2);
+ new vm.Script(read('gallery/app.js'));
+});
