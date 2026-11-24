@@ -1,0 +1,33 @@
+name: TORREMOLINOS — Fase 3B Lighthouse
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  lighthouse:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build clean candidate
+        run: python3 scripts/build_portable_site.py --out dist --report artifacts/performance/build.json
+      - name: Install pinned Lighthouse and use runner Chrome
+        run: |
+          npm install --no-save --ignore-scripts lighthouse@13.6.0
+          node --version
+          google-chrome --version
+      - name: Measure mobile and desktop candidate
+        run: node tests/release-lighthouse.mjs
+      - name: Archive local lab reports (not deployed)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: torremolinos-fase3b-lighthouse
+          path: artifacts/performance/
+          if-no-files-found: error
+          retention-days: 30

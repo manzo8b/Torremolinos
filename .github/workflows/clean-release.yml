@@ -32,20 +32,23 @@ jobs:
           python3 scripts/audit_release_candidate.py --dist dist --site-base https://manzo8b.github.io/Torremolinos/ --report artifacts/release/candidate-current.json
           python3 scripts/audit_release_candidate.py --dist dist-preview --site-base https://preview.example/guide/ --report artifacts/release/candidate-preview.json
       - name: Stage both path prefixes for browser smoke
+        id: stage
         run: |
           mkdir -p artifacts/portability/hosts/current/Torremolinos
           mkdir -p artifacts/portability/hosts/preview/guide
           cp -a dist/. artifacts/portability/hosts/current/Torremolinos/
           cp -a dist-preview/. artifacts/portability/hosts/preview/guide/
       - name: Install consistent Chromium and PNG comparison runtime
+        id: chromium
         run: |
           npm install --no-save --ignore-scripts playwright@1.57.0 pngjs@7.0.0
           npx playwright install --with-deps chromium
       - name: Smoke-test two origin/path configurations
         run: node tests/portable-browser-smoke.mjs
-      - name: Verify service worker update, offline fallback and scope
+      - name: Verify fresh service worker installation, offline fallback and scope
         run: node tests/release-pwa-browser.mjs
       - name: Compare source and clean dist pixels on key routes
+        if: ${{ !cancelled() && steps.stage.outcome == 'success' && steps.chromium.outcome == 'success' }}
         run: node tests/clean-release-visual.mjs
       - name: Upload clean public package and detailed QA proof (no deployment)
         if: always()

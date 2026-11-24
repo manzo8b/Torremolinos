@@ -21,6 +21,11 @@ try{
   assert.equal(state.scope,base);
   assert.ok(state.keys.some(k=>k.startsWith('torremolinos-')));
   assert.ok(state.keys.includes('other-project-release-sentinel'));
+  // Page-level offline emulation may not cut off service-worker network fetches.
+  // Stop the actual origin and prove the server is unreachable before testing.
+  const stopped=new Promise(resolve=>server.once('exit',resolve));server.kill('SIGTERM');await stopped;
+  let reachable=true;try{await fetch(base,{signal:AbortSignal.timeout(2000)})}catch{reachable=false}
+  assert.equal(reachable,false,'Origin must really be unreachable');
   await ctx.setOffline(true);
   await page.goto(base+'comer/',{waitUntil:'domcontentloaded'});assert.ok((await page.title()).includes('TORREMOLINOS'));
   await page.goto(base+'not-cached/deep/',{waitUntil:'domcontentloaded'});
@@ -32,6 +37,6 @@ try{
   await ctx.close();
  }
  mkdirSync('artifacts/release',{recursive:true});
- writeFileSync('artifacts/release/pwa-offline.json',JSON.stringify({results,note:'Chromium fresh installation and offline simulation; existing installed-client update and Safari remain manual.'},null,2)+'\n');
+ writeFileSync('artifacts/release/pwa-offline.json',JSON.stringify({results,note:'Chromium fresh installation and real local origin outage plus offline emulation; existing installed-client update and Safari remain manual.'},null,2)+'\n');
  console.log('PASS scoped offline',results.length);
 }finally{if(browser)await browser.close();servers.forEach(s=>s.kill('SIGTERM'))}
