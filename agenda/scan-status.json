@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "snapshotDate": "2026-11-23",
+  "scanner": {
+    "checkedAtUTC": "2026-11-23T18:09:18Z",
+    "runUrl": "https://github.com/manzo8b/Torremolinos/actions/runs/45235268131",
+    "runId": 45235268131,
+    "conclusion": "success",
+    "limitation": "Successful execution does not mean all external sources were verified.",
+    "sources": {
+      "madbear": {
+        "access": "reachable",
+        "change": "same",
+        "note": "Festival headline only; older year material present"
+      },
+      "madbearhub": {
+        "access": "reachable",
+        "change": "no_new_titles"
+      },
+      "infinity": {
+        "access": "unverified",
+        "httpStatus": 202
+      },
+      "acogat": {
+        "access": "unverified",
+        "httpStatus": 202
+      }
+    }
+  },
+  "editorial": {
+    "verifiedThrough": "2026-11-02",
+    "provenance": "agenda/events.json editorialUpdated and per-event verifiedOn",
+    "reviewRequired": true,
+    "publicationPolicy": "No event dates are updated automatically from scanner results"
+  }
+}

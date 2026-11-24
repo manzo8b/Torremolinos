@@ -81,7 +81,7 @@ test("app keeps native focus, reduced motion, and tactile hit targets",()=>{
  assert.match(craft,/grid-template-columns:1fr!important/);
 });
 test("PWA revs its version and caches the finishing assets",()=>{
- assert.match(sw,/torremolinos-v28/);
+ assert.match(sw,/torremolinos-v35/);
  assert.match(sw,/\.\/craft-finish\.css/);
  assert.match(sw,/\.\/craft-runtime\.js/);
 });

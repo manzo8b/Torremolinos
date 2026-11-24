@@ -399,3 +399,23 @@ body[data-coast="sand"] .index-list .l8-season-story .story-text h2{
  body.torre-home #stories .l8-season-promo-copy strong{font-size:36px!important}
  body.torre-home #stories .l8-season-promo-copy em{width:100%;justify-content:center}
 }
+
+/* Fase 3B.2 — contrast findings in Lighthouse v34. Existing hues, no geometry. */
+body.torre-agenda main section.wrap .hero-copy > .eyebrow,
+body.torre-comer main section.hero .hero-body .hero-copy > .eyebrow,
+body[data-coast="green"] main.wrap section.transparency > .eyebrow{color:#086C47!important;opacity:1!important}
+body.torre-agenda main .wrap .secthead > p,
+body.torre-agenda main #calendar :is(#dataStatus,#count,#agendaPageScanStatus),
+body.torre-agenda main #calendar #agendaPageScanStatus :is(span,strong,a),
+body.torre-agenda main .event-list article.event .detail > p.event-note,
+body.torre-agenda main #watchlist article.watchitem > p,
+body.torre-comer main #results .secthead > p,
+body.torre-comer main #results #moreSection > p,
+body.torre-comer main #results #moreCards .other > p,
+body.torre-comer main #results article.card .card-body .fineprint,
+body.torre-comer main #results article.card .card-body .fineprint :is(a,span),
+body[data-coast="sand"] main.page section.index-list a.story-card.l8-season-story > .photo-credit{color:#465E5C!important;opacity:1!important}
+body.torre-agenda main #watchlist article.watchitem > :is(small,a),
+body.torre-comer main #results #moreCards .other > small,
+body[data-coast="sand"] main.page section.index-list a.story-card.l8-season-story .story-text > small{color:#854529!important;opacity:1!important}
+body.torre-comer main #results article.card .card-body .cardlinks > a:not(.primary){color:#086C47!important;opacity:1!important}

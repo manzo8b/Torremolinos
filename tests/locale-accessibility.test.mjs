@@ -27,13 +27,14 @@ test('six UI languages have accessible labels without external dependencies',()=
   assert.match(locale,/addEventListener\('change',update\)/);
 });
 test('offline PWA uses a transparent and navigable fallback, not a misleading home page',()=>{
-  assert.match(sw,/torremolinos-v28/);
+  assert.match(sw,/torremolinos-v35/);
   assert.match(sw,/\.\/offline\.html/);
   assert.match(sw,/\.\/locale-accessibility\.js/);
   assert.match(sw,/req\.mode==='navigate'\?caches\.match\('\.\/offline\.html'\)/);
   assert.doesNotMatch(sw,/req\.mode==='navigate'\?caches\.match\('\.\/index\.html'\)/);
   assert.match(offline,/name="robots" content="noindex,nofollow"/);
-  assert.match(offline,/href="\/Torremolinos\/"/);
+  assert.match(offline,/href="\.\/" id="home"/);
+  assert.match(offline,/worker\.scriptURL/);
   assert.match(offline,/prefers-reduced-motion:reduce/);
   for(const code of ['es','en','it','de','fr','ru'])assert.match(offline,new RegExp('\\b'+code+':\\['));
   const scripts=[...offline.matchAll(/<script>([\s\S]*?)<\/script>/g)];

@@ -13,7 +13,7 @@ function makeEvents(){
  const events={};
  const deleted=[];
  const claimed=[];
- let cacheNames=['torremolinos-v27','torremolinos-v28','lune-x-v4','manzo-ai-v5','shared-other-cache'];
+ let cacheNames=['torremolinos-v27','torremolinos-v35','lune-x-v4','manzo-ai-v5','shared-other-cache'];
  const context={
    URL,
    caches:{
@@ -77,7 +77,7 @@ test('PWA still has a relative manifest and explicit offline fallback',()=>{
  assert.equal(manifest.scope,'./');
  assert.match(sw,/req\.mode/);
  assert.match(sw,/offline\.html/);
- assert.match(sw,/torremolinos-v28/);
+ assert.match(sw,/torremolinos-v35/);
 });
 test('Build-time cache revision depends on precache bytes and stays deterministic',()=>{
  const folder=join(root,'artifacts','sw-cache-fixture');

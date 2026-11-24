@@ -5,7 +5,7 @@
  'use strict';
  const T = {
  it:{
-  home:'Home',food:'Mangiare',agenda:'Agenda',gallery:'Gallery',stories:'Stories',
+  home:'Home',menu:'Menu',menuNav:'Navigazione completa',food:'Mangiare',agenda:'Agenda',gallery:'Gallery',stories:'Stories',
   foodSub:'Ristoranti, tapas e sapori locali',agendaSub:'Eventi, concerti e appuntamenti',
   gallerySub:'La città attraverso le fotografie',storiesSub:'Curiosità, luoghi e ispirazioni',
   tagline:'Mare, sapori, eventi e storie sulla Costa del Sol',
@@ -18,7 +18,7 @@
   photoCredit:'Fotografia d’archivio TORREMOLINOS',musicCredit:'Immagine illustrativa generata con IA · Musica LUNE_X'
  },
  es:{
-  home:'Inicio',food:'Comer',agenda:'Agenda',gallery:'Gallery',stories:'Stories',
+  home:'Inicio',menu:'Menú',menuNav:'Navegación completa',food:'Comer',agenda:'Agenda',gallery:'Gallery',stories:'Stories',
   foodSub:'Restaurantes, tapas y sabores locales',agendaSub:'Eventos, conciertos y actividades',
   gallerySub:'La ciudad a través de las fotografías',storiesSub:'Curiosidades, lugares e inspiración',
   tagline:'Mar, sabores, eventos e historias de la Costa del Sol',
@@ -30,7 +30,7 @@
   photoCredit:'Fotografía del archivo TORREMOLINOS',musicCredit:'Imagen ilustrativa generada con IA · Música LUNE_X'
  },
  en:{
-  home:'Home',food:'Food',agenda:'Events',gallery:'Gallery',stories:'Stories',
+  home:'Home',menu:'Menu',menuNav:'Full navigation',food:'Food',agenda:'Events',gallery:'Gallery',stories:'Stories',
   foodSub:'Restaurants, tapas and local flavours',agendaSub:'Events, concerts and activities',
   gallerySub:'The city through its photographs',storiesSub:'Stories, places and inspiration',
   tagline:'Sea, flavours, events and stories on the Costa del Sol',
@@ -42,7 +42,7 @@
   photoCredit:'TORREMOLINOS archive photograph',musicCredit:'AI-generated illustrative image · Music by LUNE_X'
  },
  de:{
-  home:'Startseite',food:'Essen',agenda:'Termine',gallery:'Galerie',stories:'Stories',
+  home:'Startseite',menu:'Menü',menuNav:'Vollständige Navigation',food:'Essen',agenda:'Termine',gallery:'Galerie',stories:'Stories',
   foodSub:'Restaurants, Tapas und lokale Küche',agendaSub:'Events, Konzerte und Aktivitäten',
   gallerySub:'Die Stadt in Bildern',storiesSub:'Geschichten, Orte und Inspiration',
   tagline:'Meer, Genuss, Veranstaltungen und Geschichten an der Costa del Sol',
@@ -53,7 +53,7 @@
   photoCredit:'Foto aus dem TORREMOLINOS-Archiv',musicCredit:'KI-generierte Illustration · Musik LUNE_X'
  },
  fr:{
-  home:'Accueil',food:'Restaurants',agenda:'Agenda',gallery:'Galerie',stories:'Stories',
+  home:'Accueil',menu:'Menu',menuNav:'Navigation complète',food:'Restaurants',agenda:'Agenda',gallery:'Galerie',stories:'Stories',
   foodSub:'Restaurants, tapas et saveurs locales',agendaSub:'Événements, concerts et activités',
   gallerySub:'La ville à travers les photos',storiesSub:'Histoires, lieux et inspirations',
   tagline:'Mer, saveurs, événements et histoires sur la Costa del Sol',
@@ -64,7 +64,7 @@
   photoCredit:'Photo des archives TORREMOLINOS',musicCredit:'Illustration générée par IA · Musique LUNE_X'
  },
  ru:{
-  home:'Главная',food:'Рестораны',agenda:'События',gallery:'Галерея',stories:'Истории',
+  home:'Главная',menu:'Меню',menuNav:'Полная навигация',food:'Рестораны',agenda:'События',gallery:'Галерея',stories:'Истории',
   foodSub:'Рестораны, тапас и местная кухня',agendaSub:'События, концерты и встречи',
   gallerySub:'Город в фотографиях',storiesSub:'Истории, места и впечатления',
   tagline:'Море, кухня, события и истории Коста-дель-Соль',
@@ -140,6 +140,8 @@
   })[lang]||'AI-generated illustrative image of headphones beside the sea';
   const title=document.querySelector('#clean-access');
   if(title)title.setAttribute('aria-label',lang==='it'?'Esplora le sezioni della guida':lang==='es'?'Explora las secciones de la guía':lang==='en'?'Explore guide sections':'Guide sections');
+  const mobilePanel=document.querySelector('.tm-mobile-menu .tm-mobile-panel');
+  if(mobilePanel)mobilePanel.setAttribute('aria-label',t.menuNav);
   // Keep the language-specific URLs already controlled by the application.
  }
  function renderPlay(){
@@ -159,6 +161,21 @@
  }
  const init=()=>{
   movePhotoCredits();keepPlaceLabelsOutsidePhotos();translate();renderPlay();
+  const mobileMenu=document.querySelector('.tm-mobile-menu');
+  if(mobileMenu){
+    mobileMenu.addEventListener('click',event=>{
+      if(event.target.closest('.tm-mobile-panel a'))mobileMenu.open=false;
+    });
+    document.addEventListener('keydown',event=>{
+      if(event.key==='Escape'&&mobileMenu.open){
+        mobileMenu.open=false;
+        mobileMenu.querySelector('summary')?.focus();
+      }
+    });
+    document.addEventListener('pointerdown',event=>{
+      if(mobileMenu.open&&!mobileMenu.contains(event.target))mobileMenu.open=false;
+    });
+  }
   const placeHost=document.getElementById('cards');
   if(placeHost)new MutationObserver(keepPlaceLabelsOutsidePhotos).observe(placeHost,{childList:true,subtree:true});
   new MutationObserver(()=>{translate();renderPlay()})

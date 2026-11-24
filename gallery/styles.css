@@ -33,3 +33,12 @@
 @media(prefers-reduced-motion:reduce){.image-button img{transition:none}.viewer img{animation:none!important}}
 .results:empty{display:none}
 @media(max-width:660px){.nav .brand{flex-basis:calc(100% - 76px);margin:0;order:0}.nav .lang{order:1;margin-left:auto}.nav>a:not(.brand){order:2}.filterbar{padding-bottom:20px}.gallery-grid{padding-top:0}}
+
+/* Fase 3B.2: loading status available to assistive technology without moving the grid. */
+.results:not(:empty){position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:0!important;overflow:hidden!important;clip-path:inset(50%);white-space:nowrap}
+.gallery-card[aria-busy="true"] .image-button{cursor:progress}
+@media(max-width:660px){.nav .brand{min-width:0}.nav .lang{flex:0 0 auto}.nav>a:not(.brand){white-space:nowrap}}
+
+/* Stable initial frames exist in HTML before JavaScript; loading/errors do not remove geometry. */
+.gallery-card[data-image-unavailable="true"] .image-button{cursor:default}
+.gallery-card .image-button:disabled{opacity:1}
