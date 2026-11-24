@@ -1062,3 +1062,60 @@ body.torre-home main#main #stories.magazine.review-stories .story-banner{
  body.torre-home main#main #stories.magazine.review-stories .l8-season-promo-photo{min-height:0!important;height:180px!important;flex:0 0 180px!important}
  body.torre-home main#main #stories.magazine.review-stories .magazine-top .magazine-link{margin-top:14px!important}
 }
+
+/* HOME REVIEW §7 · agenda, no imagery; source-driven calendar preview. */
+body.torre-home main#main > #agenda-home.agenda-home.shell.review-agenda{
+ display:flex!important;flex-direction:column!important;align-items:stretch!important;
+ background:var(--review-sand)!important;padding:0!important;gap:18px!important;
+ min-height:0!important;height:auto!important;max-height:none!important;
+ border:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important;
+}
+body.torre-home main#main #agenda-home.review-agenda .agenda-home-copy{
+ display:block!important;background:transparent!important;padding:0!important;
+ min-height:0!important;width:100%!important;max-width:none!important;
+}
+body.torre-home main#main #agenda-home.review-agenda .agenda-home-copy :is(h2,p,.eyebrow){
+ color:var(--ac-ink)!important;opacity:1!important;
+}
+body.torre-home main#main #agenda-home.review-agenda .agenda-home-copy h2{margin:8px 0!important}
+body.torre-home main#main #agenda-home.review-agenda .agenda-home-copy p{margin:0!important}
+body.torre-home main#main #agenda-home.review-agenda .review-agenda-grid{
+ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ gap:clamp(12px,1.5vw,20px)!important;align-items:stretch!important;min-height:176px;
+}
+body.torre-home main#main #agenda-home.review-agenda .review-agenda-card{
+ display:flex;flex-direction:column;gap:10px;min-width:0;padding:20px;
+ background:var(--review-card);color:var(--ac-ink);border:1px solid var(--ac-line);
+ border-radius:18px;overflow-wrap:anywhere;
+}
+body.torre-home main#main #agenda-home.review-agenda .review-agenda-card .review-agenda-date{
+ color:var(--ac-blue-dark)!important;font-size:14px!important;font-weight:750!important;
+ line-height:1.4!important;display:block;
+}
+body.torre-home main#main #agenda-home.review-agenda .review-agenda-card h3{
+ margin:0!important;color:var(--ac-ink)!important;font-size:clamp(18px,1.7vw,25px)!important;
+ line-height:1.22!important;letter-spacing:-.01em!important;
+}
+body.torre-home main#main #agenda-home.review-agenda .review-agenda-card p{
+ margin:0!important;color:var(--ac-ink)!important;font-size:14px!important;line-height:1.5!important;
+}
+body.torre-home main#main #agenda-home.review-agenda .review-agenda-footer{
+ display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;
+}
+body.torre-home main#main #agenda-home.review-agenda .review-agenda-verification,
+body.torre-home main#main #agenda-home.review-agenda .review-agenda-status{
+ color:var(--ac-ink)!important;font-size:13px!important;line-height:1.5!important;
+ margin:0!important;opacity:1!important;
+}
+body.torre-home main#main #agenda-home.review-agenda .review-agenda-status{grid-column:1/-1;padding:16px}
+body.torre-home main#main #agenda-home.review-agenda .agenda-home-btn{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ width:fit-content!important;max-width:100%!important;min-height:44px!important;
+ padding:12px 20px!important;border-radius:999px!important;
+ color:var(--ac-paper)!important;background:var(--ac-blue)!important;
+ border:1px solid var(--ac-blue)!important;box-shadow:none!important;
+}
+@media(max-width:760px){
+ body.torre-home main#main #agenda-home.review-agenda .review-agenda-grid{grid-template-columns:minmax(0,1fr)!important}
+ body.torre-home main#main #agenda-home.review-agenda .review-agenda-footer{align-items:flex-start;flex-direction:column}
+}

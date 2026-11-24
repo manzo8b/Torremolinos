@@ -96,7 +96,7 @@
   });
   const pairs=[
    ['.nogalera-feature-photo small','.nogalera-feature-copy'],
-   ['.agenda-home-photo small','.agenda-home-copy'],
+
 
    ['#sound .music-art .approved-sound-credit','#sound .music-body']
   ];

@@ -97,3 +97,20 @@ test('Home review Stories keeps three articles and seasonal dossier, without red
  assert.match(section,/Tyk · CC BY-SA 3\.0 · 2010/);
  assert.match(section,/BernardaAlba · CC0 · 2024/);
 });
+
+test('Home Agenda derives the next three confirmed future events and real editorial date',()=>{
+ const sandbox={module:{exports:{}}};vm.runInNewContext(read('home-agenda.js'),sandbox);
+ const {upcoming,localDay,validDate}=sandbox.module.exports;
+ const data=JSON.parse(read('agenda/events.json'));
+ const ids=(input,now)=>Array.from(upcoming(input,new Date(now)),x=>x.id);
+ assert.deepEqual(ids(data,'2026-11-24T09:00:00+01:00'),['drag-mariquita-28nov26','fetish-awards-4dec26','ellas-12dec26']);
+ assert.deepEqual(ids(data,'2028-01-01T00:00:00Z'),[]);
+ assert.equal(localDay(new Date('2026-11-24T23:30:00Z')),'2026-11-25');
+ assert.equal(validDate('2026-02-30'),false);
+ assert.deepEqual(ids({events:[{id:'pending',status:'pending',start:'2027-01-01',title:'Pending',venue:'Test'},{id:'past',status:'confirmed',start:'2026-11-23',title:'Past',venue:'Test'},{id:'future',status:'confirmed',start:'2026-11-25',title:'Future',venue:'Test'}]},'2026-11-24T09:00:00Z'),['future']);
+ const section=page.match(/<section[^>]*id="agenda-home"[\s\S]*?<\/section>/)[0];
+ assert.doesNotMatch(section,/<img\b/);
+ assert.equal((section.match(/class="agenda-home-btn"/g)||[]).length,1);
+ assert.match(read('home-agenda.js'),/data\.editorialUpdated/);
+ assert.ok(sw.includes("'./home-agenda.js'"));
+});

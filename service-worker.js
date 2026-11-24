@@ -21,7 +21,7 @@ const FILES=[
   './assets/photos/paseo-palmeras.webp',
   './assets/photos/costa-torremolinos.webp',
   './assets/photos/paseo-centro.webp',
-  './stories/','./stories/article.css','./agenda/', './agenda/styles.css', './agenda/app.js', './agenda/events.json', './comer/', './comer/styles.css', './comer/data.js', './comer/app.js',
+  './stories/','./stories/article.css','./agenda/', './agenda/styles.css', './agenda/app.js', './agenda/events.json','./home-agenda.js', './comer/', './comer/styles.css', './comer/data.js', './comer/app.js',
   './stories/torremolinos-mucho-mas-que-sol-y-playa.html',
   './stories/la-nogalera-donde-la-noche-tiene-historia.html',
   './stories/pasaje-begona-memoria-de-libertad.html',

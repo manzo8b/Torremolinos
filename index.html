@@ -138,9 +138,10 @@ Tu navegador no admite la reproducción de audio
 </a>
 <p class="story-disclosure" data-t="storiesNote">Artículos originales en español con fuentes identificadas. Traducciones en preparación y revisión.</p>
 <div class="story-banner"><span class="initial" aria-hidden="true">✦</span><div><strong data-t="editorPromise">Una guía independiente, una redacción responsable</strong><p data-t="editorEthics">Sin testimonios inventados, anuncios camuflados ni horarios no verificados.</p></div></div></section>
-<section class="agenda-home shell" id="agenda-home">
-<div class="agenda-home-copy"><span class="eyebrow coral">LIVE THE CITY / AGENDA</span><h2 data-t="agendaTitle">La ciudad no se detiene</h2><p data-t="agendaLead">Cultura, actividades y encuentros con fuentes oficiales. Descubre una selección de próximos eventos con fecha de comprobación y acceso al programa completo.</p><a href="agenda/" class="agenda-home-btn" data-t="agendaCTA">Ver eventos y agenda ↗</a><small data-t="agendaDisclaimer">Selección editorial consultada el 2 de noviembre de 2026. Comprueba los detalles con los organizadores.</small></div>
-<div class="agenda-home-photo"><img src="assets/photos/album/palmeras-sol.webp" loading="lazy" width="864" height="1536" alt="Paseo con palmeras junto al mar en Torremolinos, fotografía original"><small>© Archivo fotográfico TORREMOLINOS</small></div>
+<section class="agenda-home shell review-agenda" id="agenda-home" aria-labelledby="review-agenda-heading">
+<div class="agenda-home-copy"><span class="eyebrow" data-home-agenda="label">AGENDA</span><h2 id="review-agenda-heading" data-home-agenda="title">Próximos eventos</h2><p data-home-agenda="lead">Las próximas fechas de nuestra selección editorial.</p></div>
+<div class="review-agenda-grid" id="homeAgendaEvents" aria-busy="true" aria-live="polite"><p class="review-agenda-status" data-home-agenda="loading">Cargando agenda…</p></div>
+<div class="review-agenda-footer"><p id="homeAgendaVerified" class="review-agenda-verification"></p><a href="agenda/" class="agenda-home-btn" data-home-agenda="cta">Ver eventos y agenda ↗</a></div>
 </section>
 <section class="editorial-bridge shell" aria-labelledby="editorial-bridge-title">
   <div class="editorial-bridge-copy">
@@ -396,4 +397,5 @@ if('serviceWorker' in navigator&&location.protocol.startsWith('http'))navigator.
 <script src="apple-runtime.js" defer></script><script src="craft-runtime.js" defer></script><script src="product-v6.js" defer></script><script src="narrative-v7.js" defer></script>
 <script src="luminosity-v8.js" defer></script><script src="locale-accessibility.js" defer></script><script src="approved-clean-2026.js" defer></script>
 <script src="footer-professional-2026.js" defer></script>
+<script src="home-agenda.js" defer></script>
 </body></html>

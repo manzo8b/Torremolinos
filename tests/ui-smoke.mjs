@@ -218,8 +218,7 @@ try{
         bridgeBg:bridge?.backgroundColor,bridgeText:bridgeText?.color,
         agendaBg:agenda?.backgroundColor,musicBg:music?.backgroundColor,
         galleryImg:touch('#photodiary figure img'),musicCover:touch('.music-album-art:not([hidden])')||touch('.music-album-fallback:not([hidden])'),
-        agendaPhoto:touch('.agenda-home-photo'),restaurantStyle:css('.directory-teaser')?.borderTopLeftRadius,
-        agendaSeam:seam('.agenda-home','.agenda-home-copy','.agenda-home-photo'),
+        agendaCards:document.querySelectorAll('#homeAgendaEvents .review-agenda-card').length,agendaNoPhoto:!document.querySelector('#agenda-home img'),agendaStatus:document.querySelector('#homeAgendaEvents')?.getAttribute('aria-busy'),
         ctaRadius:css('.editorial-bridge-action')?.borderTopLeftRadius,
         galleryBg:gallery?.backgroundColor
       };
@@ -227,15 +226,13 @@ try{
     assert.ok(premium.v6,'product v6 stylesheet missing at '+width);
     assert.equal(premium.bridgeBg,'rgb(251, 248, 242)','review warm card surface at '+width);
     assert.equal(premium.bridgeText,'rgb(16, 36, 75)','editorial bridge text must be legible at '+width);
-    assert.equal(premium.agendaBg,'rgb(251, 248, 242)','review warm agenda card at '+width);
+    assert.equal(premium.agendaBg,'rgb(244, 239, 230)','review sand agenda at '+width);
     assert.equal(premium.musicBg,'rgb(16, 36, 75)','review navy Sound at '+width);
     assert.ok(premium.galleryImg?.h>=100,'gallery image collapsed at '+width);
-    assert.ok(premium.agendaPhoto?.h>=240,'agenda photograph collapsed at '+width);
+    assert.ok(premium.agendaNoPhoto,'agenda must not contain photos at '+width);
+    assert.ok(premium.agendaCards<=3,'agenda card limit '+width);
     assert.ok(premium.musicCover?.h>=100,'music artwork collapsed at '+width);
     assert.ok(parseFloat(premium.ctaRadius)>=20,'action lost pill shape at '+width);
-    if(width>=768){
-      assert.ok(premium.agendaSeam?.gap<8,'agenda disconnected halves at '+width+': '+JSON.stringify(premium.agendaSeam));
-    }
 
     assert.ok(whiteCraft.craftCss,'craft stylesheet missing at '+width);
 

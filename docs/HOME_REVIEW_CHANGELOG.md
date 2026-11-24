@@ -32,5 +32,10 @@ Baseline main d8c92b1c6a9e8d1d6893020834c7c3f1d6d4836b. PR #21 separata, non inc
 
 - MF: «Gallery validato procediamo». Approvata sezione 5 incluse tre fotografie e didascalie del commit 966419e. Gate tecnico globale non ancora superato, nessun deploy.
 
-## §6 — Stories · in attesa di validazione MF
+## §6 — Stories · approvazione estetica MF, 24 novembre 2026
 - Conservati i tre articoli indicati e dossier Natale a due ritmi; rimossi solo dalla Home San Miguel e banner gastronomico ridondante. Indice Stories, articoli, fonti e licenze invariati. Crediti spostati direttamente nella parte testuale, senza bordo/outline decorativo, focus vero su link conservato. Link di lettura e dossier secondari testuali, unico pulsante pieno per indice Stories; titoli e spazi ridotti. Tradotti alt e restanti etichette nelle sei lingue. Foto esistenti mantenute come da brief, nessuna generazione. Screenshot e nuovi test di contratto. Il run precedente 45374158586 aveva static/product PASS, Lighthouse 65→66/97/100, ma gate globale fallito per contrasto e 23/2 pixel su area protetta: non dichiarato validato. Risolti in Stories i link a contrasto insufficiente, etichette verdi ancora in attesa della decisione MF sul token. Nessun merge/deploy.
+
+- MF: «ottimo lavoro. procedi». Approvata impostazione Stories del commit 389c1df; collaudo tecnico globale distinto.
+
+## §7 — Agenda · in attesa di validazione MF
+- Sostituita la promozione foto+testo con un unico blocco di max tre eventi dinamici, letti esclusivamente da agenda/events.json. Solo status confirmed e start >= giorno locale Europe/Madrid, in ordine cronologico; eventi già iniziati esclusi, watchlist esclusa. Data editoriale reale editorialUpdated, non data di scansione o di visita; nessuna falsa riconferma. Titoli e luoghi originali del dataset, UI e date localizzate 6 lingue, stato vuoto/errore, ricalcolo al cambio giorno/lingua e al ritorno nella pagina. Nessuna foto; un solo CTA agenda con lingua. Script separato in precache. Dataset e pagina Agenda interna invariati. Test deterministico al 24/11: Gala Drag 28/11, Fetish Awards 4–8/12, Ellas Party 12/12. Ultima verifica registrata 02/11/2026. Screenshot quattro risoluzioni e controllo automatico richiesti; nessun merge/deploy.
