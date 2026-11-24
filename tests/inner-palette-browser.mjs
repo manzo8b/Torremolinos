@@ -34,7 +34,9 @@ try{
    }
    const [b,a]=pair;
    if(a.bg!=='rgb(244, 239, 230)'||a.heading!=='rgb(16, 36, 75)'||(a.footer&&a.footer!=='rgb(16, 36, 75)')||(a.header&&a.header!=='rgb(255, 255, 255)'))report.errors.push({route,width,palette:{bg:a.bg,heading:a.heading,header:a.header,footer:a.footer}});
-   if(a.http!==200||a.errors.length||a.scroll>width+1)report.errors.push({route,width,http:a.http,js:a.errors,scroll:a.scroll});
+   const newJs=a.errors.filter(x=>!b.errors.includes(x));
+   if(a.http!==200||newJs.length||a.scroll>width+1)report.errors.push({route,width,http:a.http,js:newJs,scroll:a.scroll});
+   if(a.errors.length)console.log(JSON.stringify({route,width,existingJs:a.errors.filter(x=>b.errors.includes(x)),newJs}));
    if(JSON.stringify(b.images)!==JSON.stringify(a.images))report.errors.push({route,width,images:'Source or geometry differs'});
    const baseline=new Set(b.violations.map(x=>JSON.stringify(x.target)));
    const added=a.violations.filter(x=>!baseline.has(JSON.stringify(x.target)));

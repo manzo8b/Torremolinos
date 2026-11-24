@@ -102,3 +102,13 @@ html body[data-torre-palette="comer"]:not(.torre-home) .hero .hero-actions .btn.
 html body[data-torre-palette="agenda"]:not(.torre-home) .hero .hero-links a.alt{color:var(--tp-dark)!important;background-color:var(--tp-white)!important}
 html body[data-torre-palette="legal"]:not(.torre-home) :is(.legal-card,.notice,.notice.pending){background-color:var(--tp-card)!important;color:var(--tp-navy)!important}
 html body[data-torre-palette="legal"]:not(.torre-home) .status.pending{background-color:var(--tp-sand)!important;color:var(--tp-navy)!important}
+
+/* Pre-release axe findings: final overrides for inherited legacy colours. */
+html body[data-torre-palette="agenda"]:not(.torre-home) .stats .stat p{color:var(--tp-muted)!important;opacity:1!important}
+html body[data-torre-palette]:not(.torre-home) :is(footer,.footer,.foot,.bottom) .ai-footer{
+ background:var(--tp-navy)!important;color:var(--tp-sand)!important
+}
+html body[data-torre-palette]:not(.torre-home) :is(footer,.footer,.foot,.bottom) .ai-footer a{
+ color:var(--tp-sand)!important
+}
+html body[data-torre-palette="stories"]:not(.torre-home) .season-resources li a{color:var(--tp-dark)!important}
