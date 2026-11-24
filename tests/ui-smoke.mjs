@@ -398,7 +398,7 @@ try{
     const style=await page.evaluate(()=>[...document.styleSheets].some(sheet=>sheet.href?.includes('apple-premium.css')));
     assert.ok(style,'premium CSS not loaded on '+path);
     const color=await page.evaluate(()=>getComputedStyle(document.querySelector('footer')).backgroundColor);
-    assert.equal(color,'rgb(255, 255, 255)','dark footer remains on '+path);
+    assert.equal(color,'rgb(16, 36, 75)','approved navy footer missing on '+path);
 
     const layout=await page.evaluate(()=>({
       viewport:window.innerWidth,
