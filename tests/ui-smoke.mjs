@@ -469,6 +469,21 @@ try{
   await page.locator('#lang').selectOption('fr');
   await page.waitForURL('**/listen/fr.html');
   console.log('PASS Sound six localized static pages and language switch');
+  for(const lang of ['es','en','it','de','fr','ru']){
+    const errors=[];const story=await context.newPage();story.on('pageerror',e=>errors.push(e.message));
+    const path='stories/'+(lang==='es'?'':lang+'.html');
+    assert.equal((await story.goto(base+'/'+path,{waitUntil:'domcontentloaded'})).status(),200);
+    assert.equal(await story.locator('html').getAttribute('lang'),lang);
+    assert.equal(await story.locator('.index-list .story-card').count(),6);
+    assert.equal(await story.locator('#lang').inputValue(),lang);
+    assert.equal(await story.locator('link[rel=alternate][hreflang]').count(),7);
+    assert.deepEqual(errors,[],'Stories JS '+lang);
+    assert.ok(await story.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+3),'Stories overflow '+lang);
+    await story.close();
+  }
+  await page.goto(base+'/stories/?lang=it',{waitUntil:'domcontentloaded'});await page.waitForURL('**/stories/it.html');
+  await page.locator('#lang').selectOption('fr');await page.waitForURL('**/stories/fr.html');
+  console.log('PASS Stories six localized indices and language switch');
   const seasonal='stories/navidad-ano-nuevo-torremolinos-malaga-2026-2027.html';
   const holidayResponse=await page.goto(base+'/'+seasonal,{waitUntil:'domcontentloaded',timeout:30000});
   assert.equal(holidayResponse.status(),200,'seasonal article is unavailable');
