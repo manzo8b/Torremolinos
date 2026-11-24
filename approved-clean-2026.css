@@ -724,3 +724,101 @@ body.torre-home .tm-mobile-menu{display:none!important}
  body.torre-home .tm-mobile-menu-trigger{min-width:44px!important}
  body.torre-home .topbar .topinner > .brand-logo-link{min-width:0!important}
 }
+
+/* HOME REVIEW G1–G5 · proposal · in attesa di validazione MF
+   No rules target header, hero, hero-tools, trust, bottom nav or footer.
+   The canvas starts after the protected trust row; measured by review JS. */
+body.torre-home main#main{
+ --review-sand:#F4EFE6;--review-card:#FBF8F2;
+ background:linear-gradient(to bottom,var(--ac-paper) 0 var(--review-start,100%),var(--review-sand) var(--review-start,100%) 100%)!important;
+}
+body.torre-home main#main > section.shell:not(.hero):not(.hero-tools):not(#clean-access){
+ margin-block-start:clamp(64px,7vw,100px)!important;margin-block-end:0!important;
+}
+body.torre-home main#main > :is(#discover,#explore,#photodiary,#stories,#useful){
+ background:var(--review-sand)!important;background-image:none!important;
+ padding-block:0!important;box-shadow:none!important;
+}
+body.torre-home main#main > section#clean-access{background:transparent!important}
+body.torre-home main#main > :is(#discover,#explore,#photodiary,#stories,#useful,#plan,#pride,.editorial-bridge,.gallery-feature,.nogalera-feature,#agenda-home,#sound) h2{
+ font-size:clamp(29px,3.5vw,50px)!important;letter-spacing:-.012em!important;line-height:1.14!important;
+}
+body.torre-home main#main > section#sound.music-intro .music-shell .music-body h2#sound-heading{
+ font-size:clamp(26px,2.5vw,34px)!important;letter-spacing:-.012em!important;
+}
+body.torre-home main#main > section:not(.hero):not(.hero-tools) :is(.approved-feature-card,.approved-feature-caption,.shortcut,.place,.directory-teaser,.mapbox,.community,.magazine-card,.magazine-text,.l8-season-promo,.l8-season-promo-copy){
+ background:var(--review-card)!important;color:var(--ac-ink)!important;background-image:none!important;
+}
+body.torre-home main#main #photodiary .photo-diary-grid figure figcaption,
+body.torre-home main#main #plan :is(.plan-head,.plan-workspace,.plan-choice){
+ background:var(--review-card)!important;color:var(--ac-ink)!important;
+}
+body.torre-home main#main > section.editorial-bridge.shell,
+body.torre-home main#main > section.gallery-feature.shell,
+body.torre-home main#main > section.gallery-feature.shell .gallery-feature-body,
+body.torre-home main#main #agenda-home.agenda-home.shell,
+body.torre-home main#main #agenda-home .agenda-home-copy,
+body.torre-home main#main #pride.section.shell .feature,
+body.torre-home main#main #pride.section.shell .feature .feature-copy{
+ background:var(--review-card)!important;color:var(--ac-ink)!important;background-image:none!important;
+}
+body.torre-home main#main .nogalera-feature.shell,
+body.torre-home main#main .nogalera-feature.shell .nogalera-feature-copy,
+body.torre-home main#main #sound.music-intro .music-shell,
+body.torre-home main#main #sound.music-intro .music-shell .music-body{
+ background:var(--ac-ink)!important;color:var(--review-sand)!important;background-image:none!important;
+}
+body.torre-home main#main .nogalera-feature.shell .nogalera-feature-copy :is(h2,p,small,span,.eyebrow),
+body.torre-home main#main #sound.music-intro .music-shell .music-body :is(h2,p,small,label,span,summary,a:not(.music-links a)),
+body.torre-home main#main #sound.music-intro .music-shell .music-body .music-links a{
+ color:var(--review-sand)!important;opacity:1!important;text-shadow:none!important;
+}
+body.torre-home main#main .nogalera-feature-copy a{border:1px solid var(--review-sand)!important}
+body.torre-home main#main #sound.music-intro .music-shell .music-body .music-links a{background:transparent!important;text-decoration:underline!important}
+/* Keep the current effective accent of the light chapter labels until MF
+   approves the green contrast correction. Do not introduce an unapproved hue. */
+body.torre-home main#main > section:not(.hero):not(.hero-tools) :is(.zone,.plan-section-kicker){
+ color:var(--ac-blue-dark)!important;opacity:1!important;
+}
+/* G2: native player is the single visible Sound control. Existing hero shortcut stays. */
+body.torre-home main#main #sound.music-intro .music-shell .approved-sound-play{display:none!important}
+body.torre-home main#main #sound.music-intro .music-shell audio{display:block!important}
+body.torre-home main#main #mapStart{display:none!important}
+body.torre-home main#main .mapbox:not(:has(iframe)){grid-template-columns:1fr!important}
+body.torre-home main#main .mapbox #mapHolder:not(:has(iframe)){display:none!important}
+/* G3: no top inset above the existing media; no initial scroll-reveal offset. */
+body.torre-home main#main > :is(.nogalera-feature.shell,.gallery-feature.shell,#agenda-home.agenda-home.shell){
+ padding:0!important;gap:0!important;align-items:stretch!important;
+ grid-template-rows:auto!important;min-height:0!important;opacity:1!important;transform:none!important;
+}
+body.torre-home main#main :is(.nogalera-feature-photo,.gallery-feature-img,#agenda-home .agenda-home-photo){
+ align-self:stretch!important;padding:0!important;margin:0!important;min-width:0!important;position:relative!important;
+}
+body.torre-home main#main :is(.nogalera-feature-photo,.gallery-feature-img,#agenda-home .agenda-home-photo) img{
+ position:absolute!important;display:block!important;inset:0!important;width:100%!important;height:100%!important;
+ margin:0!important;padding:0!important;object-fit:cover!important;transform:none!important;
+}
+@media(max-width:760px){
+ body.torre-home main#main :is(.nogalera-feature-photo,.gallery-feature-img,#agenda-home .agenda-home-photo){
+  height:clamp(245px,70vw,310px)!important;min-height:245px!important;max-height:none!important;
+ }
+ body.torre-home main#main > :is(#discover,#explore,#photodiary,#stories,#useful,#plan,#pride,.editorial-bridge,.gallery-feature,.nogalera-feature,#agenda-home) h2{
+  font-size:clamp(27px,7.5vw,34px)!important;
+ }
+}
+/* G4: decorative, non-focusable credits only. Real keyboard focus rings stay. */
+body.torre-home main#main #stories .magazine-text span.photoattribution,
+body.torre-home main#main #stories .magazine-text span.cover-label{
+ border:0!important;outline:0!important;box-shadow:none!important;border-radius:0!important;
+ background:transparent!important;color:var(--ac-muted)!important;opacity:1!important;
+}
+body.torre-home main#main #stories .magazine-text span.cover-label{color:var(--ac-blue-dark)!important}
+/* G5: source and map remain real links; Add to plan is the only filled place action. */
+body.torre-home main#main #explore.section.shell .placefoot a,
+body.torre-home main#main #explore.section.shell .placefoot a:is(:hover,:focus-visible){
+ color:var(--ac-blue-dark)!important;background:transparent!important;border:0!important;
+ box-shadow:none!important;opacity:1!important;padding:6px 5px!important;
+ min-height:44px!important;text-decoration:underline!important;text-underline-offset:3px!important;
+}
+body.torre-home main#main #explore.section.shell .placefoot .source{font-weight:650!important}
+body.torre-home main#main #explore.section.shell .placefoot .place-add{background:var(--ac-blue)!important;color:var(--ac-paper)!important}

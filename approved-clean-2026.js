@@ -187,3 +187,14 @@
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
  else init();
 })();
+
+/* G1: keep the entire protected hero + tools + three trust labels on the
+   original white background. The review canvas is below this boundary only. */
+(()=>{const main=document.querySelector('body.torre-home main#main');
+ if(!main)return;const trust=main.querySelector('.trust.shell');if(!trust)return;
+ const update=()=>{const bottom=trust.getBoundingClientRect().bottom-main.getBoundingClientRect().top;
+  main.style.setProperty('--review-start',Math.ceil(bottom+1)+'px')};
+ update();if('ResizeObserver'in window){const ro=new ResizeObserver(update);
+  for(const e of main.querySelectorAll(':scope > .hero,:scope > .hero-tools,:scope > .trust'))ro.observe(e);
+ }window.addEventListener('resize',update,{passive:true});document.fonts?.ready.then(update);
+})();

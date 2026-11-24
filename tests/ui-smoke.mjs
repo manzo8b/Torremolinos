@@ -118,7 +118,7 @@ try{
       nogalera:getComputedStyle(document.querySelector('.nogalera-feature-copy')).backgroundColor,
       pride:getComputedStyle(document.querySelector('#pride .feature-art')).backgroundColor
     }));
-    assert.equal(cleanScenes.nogalera,'rgb(244, 248, 252)','green La Nogalera billboard remains at '+width);
+    assert.equal(cleanScenes.nogalera,'rgb(16, 36, 75)','review navy Nogalera surface at '+width);
     assert.equal(cleanScenes.pride,'rgb(234, 243, 251)','orange Pride billboard remains at '+width);
     const editorialPolish=await page.evaluate(()=>{
       const badge=document.querySelector('#galleryTeaserProvenance');
@@ -197,8 +197,8 @@ try{
       });
     }
 
-    assert.equal(whiteCraft.music,'rgb(16, 36, 75)','music title lacks dark-on-light contrast at '+width);
-    assert.equal(whiteCraft.nogalera,'rgb(16, 36, 75)','Nogalera title must be readable on the approved light panel at '+width);
+    assert.equal(whiteCraft.music,'rgb(244, 239, 230)','Sound title must use sand on navy at '+width);
+    assert.equal(whiteCraft.nogalera,'rgb(244, 239, 230)','Nogalera title must use sand on navy at '+width);
     assert.equal(whiteCraft.photos,10,'place gallery should have 10 documentary photos at '+width);
 
     const premium=await page.evaluate(()=>{
@@ -225,10 +225,10 @@ try{
       };
     });
     assert.ok(premium.v6,'product v6 stylesheet missing at '+width);
-    assert.equal(premium.bridgeBg,'rgb(244, 248, 252)','editorial bridge must use approved light surface at '+width);
+    assert.equal(premium.bridgeBg,'rgb(251, 248, 242)','review warm card surface at '+width);
     assert.equal(premium.bridgeText,'rgb(16, 36, 75)','editorial bridge text must be legible at '+width);
-    assert.equal(premium.agendaBg,'rgb(244, 248, 252)','agenda still has orange chapter at '+width);
-    assert.equal(premium.musicBg,'rgb(236, 243, 250)','Sound is not the approved compact blue-light surface at '+width);
+    assert.equal(premium.agendaBg,'rgb(251, 248, 242)','review warm agenda card at '+width);
+    assert.equal(premium.musicBg,'rgb(16, 36, 75)','review navy Sound at '+width);
     assert.ok(premium.galleryImg?.h>=240,'gallery image collapsed at '+width);
     assert.ok(premium.agendaPhoto?.h>=240,'agenda photograph collapsed at '+width);
     assert.ok(premium.musicCover?.h>=100,'music artwork collapsed at '+width);
@@ -284,11 +284,11 @@ try{
       };
     });
     assert.ok(daylight.sheet,'v8 daylight style missing at '+width);
-    assert.equal(daylight.discover,'rgb(255, 255, 255)','discovery must be white');
-    assert.equal(daylight.explore,'rgb(255, 255, 255)','explore must be white');
-    assert.equal(daylight.stories,'rgb(255, 255, 255)','stories must be white');
-    assert.equal(daylight.photos,'rgb(255, 255, 255)','local lens must be white');
-    assert.equal(daylight.useful,'rgb(255, 255, 255)','utilities must be white');
+    assert.equal(daylight.discover,'rgb(244, 239, 230)','discovery review sand canvas');
+    assert.equal(daylight.explore,'rgb(244, 239, 230)','explore review sand canvas');
+    assert.equal(daylight.stories,'rgb(244, 239, 230)','stories review sand canvas');
+    assert.equal(daylight.photos,'rgb(244, 239, 230)','local lens review sand canvas');
+    assert.equal(daylight.useful,'rgb(244, 239, 230)','utilities review sand canvas');
     assert.ok(daylight.christmas,'Christmas editorial feature missing at '+width);
 
     for(const [key,value] of Object.entries({
@@ -319,7 +319,7 @@ try{
     });
     assert.deepEqual(ctas.gallery,{text:'rgb(255, 255, 255)',bg:'rgb(9, 107, 203)'},'gallery contrast '+width);
     assert.deepEqual(ctas.feedback,{text:'rgb(255, 255, 255)',bg:'rgb(9, 107, 203)'},'feedback CTA contrast '+width);
-    assert.equal(ctas.credit?.text,'rgb(16, 36, 75)','Sound credit must be outside photo and strongly legible at '+width);
+    assert.equal(ctas.credit?.text,'rgb(244, 239, 230)','Sound credit must be outside photo and strongly legible at '+width);
     if(width===390||width===1440){
       // Full-page screenshots do not automatically reveal lazy images. Simulate
       // a real visitor scrolling through the whole catalog, then validate.
