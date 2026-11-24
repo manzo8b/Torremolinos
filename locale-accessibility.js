@@ -88,6 +88,10 @@
         });
       }
     }
+    if(document.body.classList.contains('torre-home')){
+      const seasonal=document.querySelector('a.l8-season-promo');
+      if(seasonal)seasonal.setAttribute('href','stories/navidad-ano-nuevo-torremolinos-malaga-2026-2027'+(lang==='es'?'':'-'+lang)+'.html');
+    }
     const description = document.querySelector('meta[name="description"]');
     if(description) description.setAttribute('content',t.description);
   }

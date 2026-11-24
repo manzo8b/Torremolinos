@@ -108,3 +108,6 @@ Full translations, preserving five sections, original photo and licence, citatio
 
 ### v40 — San Miguel
 Full translations of the six-section dossier into EN/IT/DE/FR/RU, preserving source URLs, dates, distinctions between Romería, Feria and procession, original photo and image-rights caveats. No new dates for 2027. Index and related links localized, canonical and reciprocal hreflang, sitemap 49 URLs, PWA v40. Editorial translation assisted, not native-certified; source facts not newly researched. Publication pending QA.
+
+### v41 — Christmas and New Year 2026–2027
+Editorial refresh 24 November: official Torremolinos programme and Málaga press releases 16/20 November supersede previous pending items. Fifteen selected event cards, six static language editions, six source-equivalent dossiers, official links, photo and seasonal layout preserved. The original historical sources are retained as background; announcement does not guarantee actual event delivery. Index cards and Home seasonal link localized; sitemap 54 URLs and PWA cache v41. No native language certification. No changes to photo assets or Home design. Draft pending QA.

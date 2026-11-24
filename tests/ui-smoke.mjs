@@ -520,6 +520,15 @@ try{
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+3),'San Miguel overflow '+lang);
   }
   console.log('PASS San Miguel in six languages');
+  for(const lang of ['es','en','it','de','fr','ru']){
+    const path='stories/navidad-ano-nuevo-torremolinos-malaga-2026-2027'+(lang==='es'?'':'-'+lang)+'.html';
+    assert.equal((await page.goto(base+'/'+path,{waitUntil:'domcontentloaded'})).status(),200);
+    assert.equal(await page.locator('html').getAttribute('lang'),lang);
+    assert.equal(await page.locator('.season-event').count(),15);
+    assert.equal(await page.locator('.article-languages a').count(),6);
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+3),'Seasonal dossier overflow '+lang);
+  }
+  console.log('PASS updated seasonal dossier in six languages');
   const seasonal='stories/navidad-ano-nuevo-torremolinos-malaga-2026-2027.html';
   const holidayResponse=await page.goto(base+'/'+seasonal,{waitUntil:'domcontentloaded',timeout:30000});
   assert.equal(holidayResponse.status(),200,'seasonal article is unavailable');
