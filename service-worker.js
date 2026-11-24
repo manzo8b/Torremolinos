@@ -1,7 +1,7 @@
 // TORREMOLINOS — Scoped offline cache. May be content-hashed in deployment builds.
 // Never delete caches belonging to other applications hosted on github.io.
 const CACHE_PREFIX='torremolinos-';
-const CACHE='torremolinos-v39';
+const CACHE='torremolinos-v40';
 const SCOPE_URL=new URL(self.registration.scope);
 const FILES=[
   './','./index.html','./offline.html','./locale-accessibility.js','./approved-clean-2026.css','./inner-palette-2026.css','./inner-refinement-2026.css','./approved-clean-2026.js','./footer-professional-2026.css','./footer-professional-2026.js','./brand/torremolinos-logo-clean.svg','./apple-premium.css','./craft-refinement.css','./commercial-experience.css','./product-v6.css','./product-v6.js','./narrative-v7.css','./narrative-v7.js','./luminosity-v8.css','./luminosity-v8.js','./craft-finish.css','./apple-runtime.js','./craft-runtime.js','./design-system-2026.css','./editorial.css','./favicon.svg','./manifest.webmanifest','./icons/apple-touch-icon.png','./icons/icon-192.png','./icons/icon-512.png',
@@ -29,6 +29,7 @@ const FILES=[
   './stories/pasaje-begona-memoria-de-libertad.html',
   './stories/pasaje-begona-memoria-de-libertad-en.html','./stories/pasaje-begona-memoria-de-libertad-it.html','./stories/pasaje-begona-memoria-de-libertad-de.html','./stories/pasaje-begona-memoria-de-libertad-fr.html','./stories/pasaje-begona-memoria-de-libertad-ru.html',
   './stories/san-miguel-la-fiesta-que-saca-torremolinos-a-la-calle.html',
+  './stories/san-miguel-la-fiesta-que-saca-torremolinos-a-la-calle-en.html','./stories/san-miguel-la-fiesta-que-saca-torremolinos-a-la-calle-it.html','./stories/san-miguel-la-fiesta-que-saca-torremolinos-a-la-calle-de.html','./stories/san-miguel-la-fiesta-que-saca-torremolinos-a-la-calle-fr.html','./stories/san-miguel-la-fiesta-que-saca-torremolinos-a-la-calle-ru.html',
   './stories/navidad-ano-nuevo-torremolinos-malaga-2026-2027.html'
 ];
 self.addEventListener('install',event=>{

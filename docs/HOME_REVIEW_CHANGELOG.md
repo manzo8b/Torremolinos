@@ -105,3 +105,6 @@ La Nogalera: full six language editions, same five sections, source URLs, photog
 
 ### v39 — Pasaje Begoña
 Full translations, preserving five sections, original photo and licence, citations, historical dates, documented differing figures and explicit methodological caveats. Sitemap 44 URLs. Tests extended, no publication until QA. No new research or native linguistic certification.
+
+### v40 — San Miguel
+Full translations of the six-section dossier into EN/IT/DE/FR/RU, preserving source URLs, dates, distinctions between Romería, Feria and procession, original photo and image-rights caveats. No new dates for 2027. Index and related links localized, canonical and reciprocal hreflang, sitemap 49 URLs, PWA v40. Editorial translation assisted, not native-certified; source facts not newly researched. Publication pending QA.
