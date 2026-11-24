@@ -1,0 +1,25 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import vm from 'node:vm';
+const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
+const langs=['es','en','it','de','fr','ru'],base='https://manzo8b.github.io/Torremolinos/listen/';
+const url=l=>base+(l==='es'?'':l+'.html');
+test('Sound has six crawlable translated pages with reciprocal SEO links',()=>{
+ const ctx={window:{}};vm.runInNewContext(read('listen/content.js'),ctx);
+ const dict=ctx.window.TORREMOLINOS_LISTEN_I18N;
+ new vm.Script(read('listen/language.js'));
+ for(const l of langs){
+  const p=read('listen/'+(l==='es'?'index':l)+'.html');
+  assert.ok(p.includes('<html lang="'+l+'">'));
+  assert.ok(p.includes('rel="canonical" href="'+url(l)+'"'));
+  for(const k of langs)assert.ok(p.includes('hreflang="'+k+'" href="'+url(k)+'"'));
+  assert.ok(p.includes('hreflang="x-default" href="'+base+'"'));
+  assert.ok(p.includes(dict[l].headline.replaceAll('&','&amp;')));
+  const article=p.match(/<div id="articleText"[^>]*>([\s\S]*?)<\/div>/)[1];
+  assert.equal((article.match(/<p>/g)||[]).length,4);
+  assert.ok(p.includes('src="language.js"'));
+  assert.ok(read('sitemap.xml').includes('<loc>'+url(l)+'</loc>'));
+ }
+ assert.ok(read('service-worker.js').includes("'./listen/language.js'"));
+});

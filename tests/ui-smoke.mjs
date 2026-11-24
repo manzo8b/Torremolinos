@@ -451,6 +451,24 @@ try{
     console.log('PASS route '+path);
   }
 
+  // Sound: verify actual localized editorial content, not merely the HTTP response.
+  for(const lang of ['es','en','it','de','fr','ru']){
+    const errors=[];const sound=await context.newPage();sound.on('pageerror',e=>errors.push(e.message));
+    const path='listen/'+(lang==='es'?'':lang+'.html');
+    assert.equal((await sound.goto(base+'/'+path,{waitUntil:'domcontentloaded'})).status(),200);
+    assert.equal(await sound.locator('html').getAttribute('lang'),lang);
+    assert.equal(await sound.locator('#articleText p').count(),4);
+    assert.equal(await sound.locator('#lang').inputValue(),lang);
+    assert.deepEqual(errors,[],'Sound JavaScript error '+lang);
+    assert.ok(await sound.locator('audio[controls]').count());
+    assert.equal(await sound.locator('link[rel=alternate][hreflang]').count(),7);
+    await sound.close();
+  }
+  await page.goto(base+'/listen/?lang=it',{waitUntil:'domcontentloaded'});
+  await page.waitForURL('**/listen/it.html');
+  await page.locator('#lang').selectOption('fr');
+  await page.waitForURL('**/listen/fr.html');
+  console.log('PASS Sound six localized static pages and language switch');
   const seasonal='stories/navidad-ano-nuevo-torremolinos-malaga-2026-2027.html';
   const holidayResponse=await page.goto(base+'/'+seasonal,{waitUntil:'domcontentloaded',timeout:30000});
   assert.equal(holidayResponse.status(),200,'seasonal article is unavailable');
