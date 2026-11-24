@@ -279,7 +279,7 @@ try{
       return {
         sheet,discover:color('#discover'),explore:color('#explore'),
         stories:color('#stories'),photos:color('#photodiary'),useful:color('#useful'),
-        christmas:!!document.querySelector('#stories .l8-season-promo')
+        christmas:!!document.querySelector('#stories .l8-season-promo'),storyCount:document.querySelectorAll('#stories .magazine-card').length,removedExtras:!document.querySelector('#stories .magazine-extra,.directory-teaser')
       };
     });
     assert.ok(daylight.sheet,'v8 daylight style missing at '+width);
@@ -289,6 +289,8 @@ try{
     assert.equal(daylight.photos,'rgb(244, 239, 230)','local lens review sand canvas');
     assert.equal(daylight.useful,'rgb(244, 239, 230)','utilities review sand canvas');
     assert.ok(daylight.christmas,'Christmas editorial feature missing at '+width);
+    assert.equal(daylight.storyCount,3,'Stories article count '+width);
+    assert.ok(daylight.removedExtras,'redundant seasonal/dining content '+width);
 
     for(const [key,value] of Object.entries({
       explore:v7.spaceExplore,sound:v7.spaceSound,

@@ -86,3 +86,14 @@ test('Gallery strip uses all six supplied WebP variants and caches the small ver
  assert.equal((section.match(/width="800" height="533"/g)||[]).length,3);
  assert.doesNotMatch(section,/palmeras-sol\.webp|el-bajondillo-letrero\.webp|paseo-palmeras\.webp/);
 });
+
+test('Home review Stories keeps three articles and seasonal dossier, without redundant dining/San Miguel blocks',()=>{
+ const section=page.match(/<section[^>]*id="stories"[\s\S]*?<\/section>/)[0];
+ assert.equal((section.match(/class="magazine-card(?: primary)?"/g)||[]).length,3);
+ assert.equal((section.match(/class="l8-season-promo"/g)||[]).length,1);
+ assert.doesNotMatch(section,/class="magazine-extra"/);
+ assert.doesNotMatch(page,/class="directory-teaser"/);
+ assert.equal((section.match(/class="photoattribution"/g)||[]).length,3);
+ assert.match(section,/Tyk · CC BY-SA 3\.0 · 2010/);
+ assert.match(section,/BernardaAlba · CC0 · 2024/);
+});

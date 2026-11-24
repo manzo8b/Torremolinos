@@ -47,6 +47,7 @@ try{
    await p.locator('#discover').screenshot({path:out+'/'+label+'-explore-'+width+'.png',animations:'disabled'});
    await p.locator('.nogalera-feature').screenshot({path:out+'/'+label+'-nogalera-'+width+'.png',animations:'disabled'});
    await p.locator('#photodiary').screenshot({path:out+'/'+label+'-gallery-'+width+'.png',animations:'disabled'});
+   await p.locator('#stories').screenshot({path:out+'/'+label+'-stories-'+width+'.png',animations:'disabled'});
    if(label==='before')await p.locator('.gallery-feature').screenshot({path:out+'/before-gallery-banner-'+width+'.png',animations:'disabled'});
    if(label==='after'){
     const cardPhotos=await p.locator('#clean-access img[data-review-photo]').evaluateAll(imgs=>imgs.map(i=>({key:i.dataset.reviewPhoto,src:i.currentSrc,loaded:i.complete&&i.naturalWidth>0,ratio:i.getBoundingClientRect().width/i.getBoundingClientRect().height,alt:i.alt})));
@@ -55,6 +56,8 @@ try{
     if(tiles.length!==4||tiles.some(x=>!x.loaded||Math.abs(x.ratio-1.5)>.03))report.errors.push('Explore photo contract '+width+': '+JSON.stringify(tiles));
     if(await p.locator('#cards .place').count()!==6)report.errors.push('Featured places count '+width);
     if(await p.locator('#pride').count())report.errors.push('Open to all still present '+width);
+    const st=await p.locator('#stories').evaluate(el=>({articles:el.querySelectorAll('.magazine-card').length,season:el.querySelectorAll('.l8-season-promo').length,extras:!!document.querySelector('.directory-teaser,.magazine-extra'),credits:[...el.querySelectorAll('.photoattribution')].map(x=>({border:getComputedStyle(x).borderTopWidth,outline:getComputedStyle(x).outlineWidth,inCopy:!!x.closest('.magazine-text')})),reads:[...el.querySelectorAll('.readmore,.l8-season-promo-copy em')].map(x=>getComputedStyle(x).backgroundColor)}));
+    if(st.articles!==3||st.season!==1||st.extras||st.credits.length!==3||st.credits.some(x=>x.border!=='0px'||x.outline!=='0px'||!x.inCopy)||st.reads.some(x=>x!=='rgba(0, 0, 0, 0)'))report.errors.push('Stories contract '+width+': '+JSON.stringify(st));
     const strip=await p.locator('#photodiary').evaluate(el=>({photos:[...el.querySelectorAll('figure img')].map(img=>({src:img.getAttribute('src'),loaded:img.complete&&img.naturalWidth>0,ratio:img.getBoundingClientRect().width/img.getBoundingClientRect().height,alt:img.alt})),credits:[...el.querySelectorAll('figcaption small')].map(x=>x.textContent),links:el.querySelectorAll('a[href="gallery/"]').length,banner:!!document.querySelector('.gallery-feature')}));
     if(strip.photos.length!==3||strip.photos.some(x=>!x.loaded||Math.abs(x.ratio-1.5)>.03||!x.alt||!x.src.startsWith('assets/photos/home-review/gallery-'))||strip.credits.length!==3||strip.credits.some(x=>!x.includes('© Archivo fotográfico TORREMOLINOS'))||strip.links!==1||strip.banner)report.errors.push('Gallery strip contract '+width+': '+JSON.stringify(strip));
     const n=await p.locator('.nogalera-feature').evaluate(el=>({primary:el.querySelectorAll('.review-nogalera-main').length,links:[...el.querySelectorAll('.review-nogalera-stories a')].map(a=>({href:a.getAttribute('href'),background:getComputedStyle(a).backgroundColor})),photo:el.querySelector('img').getAttribute('src')}));
