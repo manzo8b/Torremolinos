@@ -15,7 +15,9 @@ jobs:
         with:
           node-version: '22'
       - name: Build clean candidate
-        run: python3 scripts/build_portable_site.py --out dist --report artifacts/performance/build.json
+        run: |
+          python3 scripts/build_portable_site.py --out dist --report artifacts/performance/build.json
+          python3 scripts/build_portable_site.py --unoptimized --out artifacts/lighthouse-control/site --report artifacts/performance/control-build.json
       - name: Install pinned Lighthouse and use runner Chrome
         run: |
           npm install --no-save --ignore-scripts lighthouse@13.6.0

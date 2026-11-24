@@ -43,6 +43,8 @@ jobs:
         run: |
           npm install --no-save --ignore-scripts playwright@1.57.0 pngjs@7.0.0
           npx playwright install --with-deps chromium
+      - name: Verify Home CSS request reduction and computed design parity
+        run: node tests/home-css-browser.mjs
       - name: Smoke-test two origin/path configurations
         run: node tests/portable-browser-smoke.mjs
       - name: Verify fresh service worker installation, offline fallback and scope
