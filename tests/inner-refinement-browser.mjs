@@ -38,6 +38,12 @@ try{
         intro:style(route==='stories'?'.index-hero':'.hero','backgroundColor'),
         filter:style(route==='gallery'?'.filterbar':'.toolbox','backgroundColor'),
         dates:styles('#events .date','backgroundColor'),
+        introPad:style(route==='stories'?'.index-hero':'.hero','paddingLeft'),
+        introGap:style(route==='stories'?'.index-hero':'.hero','marginBottom'),
+        gridGap:style(route==='stories'?'.index-list':'#galleryGrid','rowGap'),
+        gridBg:style(route==='stories'?'.index-list':'#galleryGrid','backgroundColor'),
+        noteBg:style('.editorial-note','backgroundColor'),
+        cardBorders:styles(route==='stories'?'.index-list .story-card':'#galleryGrid .gallery-card','borderTopWidth'),
         photos:[...document.querySelectorAll('main img')].map(x=>[x.getAttribute('src'),x.getAttribute('srcset'),x.getAttribute('alt')]),
         links:[...document.querySelectorAll('main a')].map(x=>x.getAttribute('href')),
         contrast:contrast.violations.flatMap(v=>v.nodes.map(n=>({target:n.target,summary:n.failureSummary})))};
@@ -50,12 +56,17 @@ try{
    const [b,a]=pair,old=new Set(b.contrast.map(x=>JSON.stringify(x.target)));
    const added=a.contrast.filter(x=>!old.has(JSON.stringify(x.target)));
    if(a.http!==200||a.scroll>width+1||a.errors.length)report.errors.push({route,width,http:a.http,scroll:a.scroll,overflowNodes:a.overflowNodes,errors:a.errors});
-   if(a.bg!=='rgb(244, 239, 230)'||a.heading!=='rgb(16, 36, 75)'||!a.cards.length||a.cards.some(x=>x!=='rgb(251, 248, 242)')||parseFloat(a.padding)<18)report.errors.push({route,width,colors:a.cards,bg:a.bg,heading:a.heading,padding:a.padding});
-   if(route!=='agenda'&&a.intro!=='rgba(0, 0, 0, 0)')report.errors.push({route,width,intro:a.intro});
+   if(a.heading!=='rgb(16, 36, 75)'||!a.cards.length)report.errors.push({route,width,heading:a.heading,cards:a.cards});
+   if(route==='agenda'&&(a.bg!=='rgb(244, 239, 230)'||a.cards.some(x=>x!=='rgb(251, 248, 242)')||parseFloat(a.padding)<18))report.errors.push({route,width,colors:a.cards,bg:a.bg,padding:a.padding});
+   if(route!=='agenda'){
+     const expectedIntro=route==='stories'?'rgb(236, 243, 250)':'rgb(244, 239, 230)';
+     const expectedGrid=route==='stories'?'rgba(0, 0, 0, 0)':'rgb(236, 243, 250)';
+     if(a.bg!=='rgb(255, 255, 255)'||a.intro!==expectedIntro||a.gridBg!==expectedGrid||parseFloat(a.introPad)<26||parseFloat(a.introGap)<32||parseFloat(a.gridGap)<28||a.cards.some(x=>x!=='rgba(0, 0, 0, 0)')||a.cardBorders.some(x=>x!=='0px')||(route==='stories'&&a.noteBg!=='rgb(244, 239, 230)'))report.errors.push({route,width,sectionComposition:{bg:a.bg,intro:a.intro,grid:a.gridBg,pad:a.introPad,gap:a.introGap,gridGap:a.gridGap,cards:a.cards,borders:a.cardBorders,note:a.noteBg}});
+   }
    if(route==='gallery'&&a.filter!=='rgba(0, 0, 0, 0)')report.errors.push({route,width,filter:a.filter});
    if(route==='agenda'&&a.dates.some(x=>x!=='rgb(16, 36, 75)'))report.errors.push({route,width,dates:a.dates});
    if(JSON.stringify(a.photos)!==JSON.stringify(b.photos)||JSON.stringify(a.links)!==JSON.stringify(b.links))report.errors.push({route,width,sourceChange:true});
-   if(added.length)report.errors.push({route,width,newContrast:added});
+   if(a.contrast.length)report.errors.push({route,width,contrast:a.contrast});
    console.log(JSON.stringify({route,width,contrastBefore:b.contrast.length,contrastAfter:a.contrast.length,padding:a.padding,cards:a.cards.length}));
   }
  }
