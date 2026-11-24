@@ -1208,3 +1208,8 @@ body.torre-home main#main #photodiary.review-gallery-strip .photo-diary-head .co
 body.torre-home main#main #stories.magazine.review-stories .magazine-top .coral.eyebrow,
 body.torre-home main#main #stories.magazine.review-stories [data-review-story="season"],
 body.torre-home main#main #useful.section.shell .sectop .coral.eyebrow{color:var(--ac-blue-dark)!important;opacity:1!important}
+
+/* Final AA corrections — existing dark blue, no new palette. */
+body.torre-home main#main #stories.magazine.review-stories .l8-season-promo-copy > small,
+body.torre-home main#main #stories.magazine.review-stories .l8-season-promo-copy > small span,
+body.torre-home .mobilebar span[data-t="mobHome"]{color:var(--ac-blue-dark)!important;opacity:1!important}
