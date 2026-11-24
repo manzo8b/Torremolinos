@@ -20,8 +20,10 @@ test('each home control has a unique id', () => {
 });
 
 test('signature journey keeps the complete interactive flow', () => {
-  const ids = ['plan', 'plan-title', 'moods', 'route', 'directions', 'planCount', 'planStatus', 'planEmpty', 'sharePlan', 'resetPlan', 'filters', 'cards', 'lang', 'searchForm'];
-  ids.forEach(id => assert.match(html, new RegExp('id="' + id + '"')));
+  const planner=file('tu-torremolinos/index.html');
+  const ids = ['plan', 'plan-title', 'moods', 'route', 'directions', 'planCount', 'planStatus', 'planEmpty', 'sharePlan', 'resetPlan'];
+  ids.forEach(id => assert.match(planner, new RegExp('id="' + id + '"')));
+  ['filters','cards','lang','searchForm'].forEach(id=>assert.match(html,new RegExp('id="'+id+'"')));
   assert.match(html, /function addToPlan\(/);
   assert.match(html, /function editPlan\(/);
   assert.match(html, /function persistPlan\(/);
@@ -120,12 +122,12 @@ test('narrative copy and punctuation-free titles in all six languages', () => {
   assert.match(runtime,/cleanHeading/);
   assert.match(runtime,/MutationObserver/);
   assert.match(runtime,/NodeFilter\.SHOW_TEXT/);
-  assert.match(html,/data-plan-t="promiseTitle"/);
+  assert.match(file("tu-torremolinos/index.html"),/data-plan-t="promiseTitle"/);
 });
 
 test('offline cache contains the modern UI and two actual hero photographs', () => {
   const sw=file('service-worker.js');
-  assert.match(sw,/torremolinos-v30/);
+  assert.match(sw,/torremolinos-v31/);
   ['apple-premium.css','apple-runtime.js','hero-apple-2026.webp','hero-apple-2026-mobile.webp'].forEach(x=>assert.ok(sw.includes(x),x+' missing from offline cache'));
   assert.doesNotThrow(()=>new Script(sw));
 });
@@ -139,7 +141,7 @@ test('craft refinements are last, consistent, and offline-available',()=>{
     assert.match(page,/craft-refinement\.css/,path+' refinement not loaded');
     assert.ok(page.indexOf('craft-refinement.css')>page.indexOf('craft-finish.css'),path+' craft css must override prior craft layer');
   }
-  assert.match(file('service-worker.js'),/torremolinos-v30/);
+  assert.match(file('service-worker.js'),/torremolinos-v31/);
   assert.match(file('service-worker.js'),/craft-refinement\.css/);
   assert.equal((craft.match(/\{/g)||[]).length,(craft.match(/\}/g)||[]).length);
   assert.match(craft,/prefers-reduced-motion/);
@@ -226,14 +228,14 @@ test('commercial storytelling is authored in all six locales and the action is f
    for(const key of keys)assert.ok(copy[lang]?.[key]?.length>12,lang+' missing '+key);
    assert.doesNotMatch(copy[lang].bridgeTitle,/[.．]\s*$/);
  }
- assert.match(home,/class="editorial-bridge shell"/);
- assert.match(home,/class="editorial-bridge-action" data-t="bridgeAction"/);
- assert.match(home,/href="#plan" class="editorial-bridge-action"/);
+ assert.doesNotMatch(home,/<section class="editorial-bridge shell"/);
+ assert.doesNotMatch(home,/<div class="community">/);
+ assert.match(home,/data-footer="feedback"/);
 });
 
 test('commercial stylesheet is present in offline shell',()=>{
  const sw=file('service-worker.js');
- assert.match(sw,/torremolinos-v30/);
+ assert.match(sw,/torremolinos-v31/);
  assert.match(sw,/commercial-experience\.css/);
  assert.match(file('index.html'),/apple-runtime\.js/);
 });
@@ -271,7 +273,7 @@ test('v6 hierarchy and critical screenshot contrast repairs exist',()=>{
 });
 test('v6 offline shell includes its stylesheet and original supplied hero',()=>{
  const sw=file('service-worker.js');
- assert.match(sw,/torremolinos-v30/);
+ assert.match(sw,/torremolinos-v31/);
  assert.match(sw,/product-v6\.css/);
  assert.match(sw,/product-v6\.js/);
  assert.match(file('index.html'),/product-v6\.js/);
@@ -298,7 +300,7 @@ test('v7 narrative system is loaded last on all core and editorial pages',()=>{
  }
  assert.match(file('index.html'),/narrative-v7\.js/);
  const sw=file('service-worker.js');
- assert.match(sw,/torremolinos-v30/);
+ assert.match(sw,/torremolinos-v31/);
  assert.match(sw,/narrative-v7\.css/);
  assert.match(sw,/narrative-v7\.js/);
 });
@@ -368,7 +370,7 @@ test('v8 loads after v7 on all public pages, and narrative asset cached offline'
    assert.ok(h.lastIndexOf('luminosity-v8.css')>h.lastIndexOf('narrative-v7.css'),'v8 cascade missing '+path);
  }
  const sw=file('service-worker.js');
- assert.match(sw,/torremolinos-v30/);
+ assert.match(sw,/torremolinos-v31/);
  assert.match(sw,/luminosity-v8.css/);
  assert.match(sw,/luminosity-v8.js/);
  assert.match(sw,/navidad-ano-nuevo-torremolinos-malaga-2026-2027.html/);

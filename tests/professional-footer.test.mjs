@@ -50,9 +50,10 @@ test('Six localization maps update all footer keys without altering the rest of 
   assert.ok(js.includes(key+':'),key+' translation missing');
  }
 });
-test('White-and-blue footer works on mobile and is cached offline',()=>{
+test('Navy Home footer works on mobile and is cached offline',()=>{
  assert.match(css,/body\.torre-home footer\.footer\.footer-pro/);
- assert.match(css,/#FFFFFF/);
+ assert.match(css,/background:var\(--ac-ink,#10244B\)!important/);
+ assert.match(markup,/data-footer="feedback">Invia un suggerimento/);
  assert.match(css,/#096BCB/);
  assert.match(css,/@media\(max-width:620px\)/);
  assert.match(css,/focus-visible/);
@@ -62,5 +63,5 @@ test('White-and-blue footer works on mobile and is cached offline',()=>{
   assert.ok(home.includes(name),name+' missing from Home');
   assert.ok(sw.includes('./'+name),name+' missing from service worker cache');
  }
- assert.match(sw,/torremolinos-v30/);
+ assert.match(sw,/torremolinos-v31/);
 });

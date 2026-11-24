@@ -335,3 +335,20 @@ body.torre-home footer.footer.footer-pro a:focus-visible{
     transform:none!important;
   }
 }
+
+/* HOME REVIEW §9: navy Home footer only, same structure, routes and logo.
+   Small light logo tile preserves the original artwork and contrast. */
+body.torre-home footer.footer.footer-pro{
+ --fp-ink:var(--review-sand,#F4EFE6);
+ --fp-muted:var(--review-sand,#F4EFE6);
+ --fp-line:rgba(244,239,230,.35);
+ background:var(--ac-ink,#10244B)!important;color:var(--fp-ink)!important;
+}
+body.torre-home footer.footer.footer-pro .footer-pro-brandlink{
+ background:var(--review-card,#FBF8F2)!important;border-radius:8px!important;
+ padding:8px 10px!important;max-width:100%!important;
+}
+body.torre-home footer.footer.footer-pro .footer-pro-brandlink .brand-logo-img{max-width:100%!important}
+body.torre-home footer.footer.footer-pro :is(.footer-pro-column>a:hover,.footer-pro-column>a:focus-visible,.footer-pro-top,.footer-pro-top span,.footer-pro-dot){color:var(--fp-ink)!important}
+body.torre-home footer.footer.footer-pro .footer-pro-column>a.footer-pro-out:after{color:var(--fp-ink)!important}
+body.torre-home footer.footer.footer-pro a:focus-visible{outline-color:var(--fp-ink)!important}

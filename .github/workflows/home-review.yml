@@ -1,0 +1,76 @@
+name: TORREMOLINOS — Home review G1-G6
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'tu-torremolinos/**'
+      - 'assets/photos/home-review/**'
+      - 'approved-clean-2026.css'
+      - 'approved-clean-2026.js'
+      - 'tests/home-review-global.mjs'
+      - '.github/workflows/home-review.yml'
+permissions:
+  contents: read
+jobs:
+  before-after:
+    if: github.head_ref == 'home-review'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: d8c92b1c6a9e8d1d6893020834c7c3f1d6d4836b
+          path: baseline
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          path: candidate
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser and visual audit tools
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.57.0 pngjs@7.0.0 axe-core@4.10.3 lighthouse@13.6.0
+          npx playwright install --with-deps chromium
+      - name: Four-width before/after pixel proof and contrast
+        run: node candidate/tests/home-review-global.mjs
+      - name: Final mobile and desktop route audit
+        if: '!cancelled()'
+        run: node candidate/tests/final-review-browser.mjs
+      - name: Lighthouse mobile before and after
+        if: "!cancelled()"
+        run: |
+          mkdir -p artifacts/home-review
+          python3 -m http.server 18765 --bind 127.0.0.1 --directory baseline >/tmp/baseline.log 2>&1 &
+          python3 -m http.server 18766 --bind 127.0.0.1 --directory candidate >/tmp/candidate.log 2>&1 &
+          export CHROME_PATH="$(command -v google-chrome)"
+          for i in 1 2 3; do
+            for spec in before:18765 after:18766; do
+              label="${spec%:*}"
+              port="${spec#*:}"
+              npx lighthouse "http://127.0.0.1:$port/?lang=it" --only-categories=performance,accessibility,seo --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --output=json --output-path="artifacts/home-review/lighthouse-$label-$i.json" --quiet
+            done
+          done
+          python3 - <<'PY'
+          import json,statistics,pathlib
+          root=pathlib.Path('artifacts/home-review')
+          metrics={}
+          for label in ('before','after'):
+              reports=[json.loads(p.read_text()) for p in sorted(root.glob(f'lighthouse-{label}-*.json'))]
+              assert len(reports)==3
+              metrics[label]={k:round(statistics.median(r['categories'][k]['score']*100 for r in reports),2) for k in ('performance','accessibility','seo')}
+          metrics['regressions']=[k for k in metrics['before'] if metrics['after'][k]<metrics['before'][k]]
+          (root/'lighthouse-comparison.json').write_text(json.dumps(metrics,indent=2))
+          print(json.dumps(metrics))
+          assert not metrics['regressions'], 'Lighthouse regression'
+          PY
+      - name: Preserve all review evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: home-review-G1-G6-before-after
+          path: |
+            artifacts/home-review/
+            artifacts/final-review/
+          retention-days: 90

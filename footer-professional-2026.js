@@ -7,7 +7,7 @@
     es: {
       intro:'Torremolinos, a tu manera. Una guía independiente para descubrir lugares, sabores, eventos e historias de la Costa del Sol.',
       disclaimer:'Proyecto editorial independiente, no afiliado al Ayuntamiento de Torremolinos.',
-      feedback:'Proponer una corrección',explore:'Explorar',food:'Dónde comer',events:'Agenda',listen:'Sound & Music',
+      feedback:'Enviar una sugerencia',explore:'Explorar',food:'Dónde comer',events:'Agenda',listen:'Sound & Music',
       project:'Proyecto y fuentes',editorial:'Política editorial',verification:'Cómo verificamos los eventos',
       credits:'Créditos y derechos',ai:'Transparencia IA',tourism:'Turismo Torremolinos',
       information:'Información',legal:'Información legal',privacy:'Privacidad',cookies:'Cookies y preferencias',
@@ -18,7 +18,7 @@
     en: {
       intro:'Torremolinos, your way. An independent guide to the places, flavours, events and stories of the Costa del Sol.',
       disclaimer:'Independent editorial project, not affiliated with Torremolinos City Council.',
-      feedback:'Suggest a correction',explore:'Explore',food:'Where to eat',events:'Events',listen:'Sound & Music',
+      feedback:'Send a suggestion',explore:'Explore',food:'Where to eat',events:'Events',listen:'Sound & Music',
       project:'Project & sources',editorial:'Editorial policy',verification:'How we verify events',
       credits:'Credits & copyright',ai:'AI transparency',tourism:'Torremolinos Tourism',
       information:'Information',legal:'Legal information',privacy:'Privacy',cookies:'Cookies & preferences',
@@ -29,7 +29,7 @@
     it: {
       intro:'Torremolinos, a modo tuo. Una guida indipendente per scoprire luoghi, sapori, eventi e storie della Costa del Sol.',
       disclaimer:'Progetto editoriale indipendente, non affiliato al Comune di Torremolinos.',
-      feedback:'Proponi una correzione',explore:'Esplora',food:'Mangiare',events:'Agenda',listen:'Sound & Music',
+      feedback:'Invia un suggerimento',explore:'Esplora',food:'Mangiare',events:'Agenda',listen:'Sound & Music',
       project:'Progetto e fonti',editorial:'Politica editoriale',verification:'Come verifichiamo gli eventi',
       credits:'Crediti e diritti',ai:'Trasparenza IA',tourism:'Turismo Torremolinos',
       information:'Informazioni',legal:'Note legali',privacy:'Privacy',cookies:'Cookie e preferenze',
@@ -40,7 +40,7 @@
     de: {
       intro:'Torremolinos auf deine Art. Ein unabhängiger Reiseführer zu Orten, Genüssen, Veranstaltungen und Geschichten der Costa del Sol.',
       disclaimer:'Unabhängiges redaktionelles Projekt, nicht mit der Stadtverwaltung Torremolinos verbunden.',
-      feedback:'Korrektur vorschlagen',explore:'Entdecken',food:'Essen & Trinken',events:'Veranstaltungen',listen:'Musik',
+      feedback:'Vorschlag senden',explore:'Entdecken',food:'Essen & Trinken',events:'Veranstaltungen',listen:'Musik',
       project:'Projekt & Quellen',editorial:'Redaktionsrichtlinien',verification:'So prüfen wir Veranstaltungen',
       credits:'Bildnachweise & Rechte',ai:'KI-Transparenz',tourism:'Tourismus Torremolinos',
       information:'Informationen',legal:'Rechtliche Hinweise',privacy:'Datenschutz',cookies:'Cookies & Einstellungen',
@@ -51,7 +51,7 @@
     fr: {
       intro:'Torremolinos à votre façon. Un guide indépendant des lieux, saveurs, événements et histoires de la Costa del Sol.',
       disclaimer:'Projet éditorial indépendant, sans affiliation à la mairie de Torremolinos.',
-      feedback:'Proposer une correction',explore:'Explorer',food:'Où manger',events:'Agenda',listen:'Musique',
+      feedback:'Envoyer une suggestion',explore:'Explorer',food:'Où manger',events:'Agenda',listen:'Musique',
       project:'Projet et sources',editorial:'Politique éditoriale',verification:'Comment nous vérifions les événements',
       credits:'Crédits et droits',ai:'Transparence IA',tourism:'Tourisme Torremolinos',
       information:'Informations',legal:'Mentions légales',privacy:'Confidentialité',cookies:'Cookies et préférences',
@@ -62,7 +62,7 @@
     ru: {
       intro:'Торремолинос по-вашему. Независимый гид по местам, вкусам, событиям и историям Коста-дель-Соль.',
       disclaimer:'Независимый редакционный проект, не связанный с администрацией Торремолиноса.',
-      feedback:'Предложить исправление',explore:'Исследовать',food:'Где поесть',events:'События',listen:'Музыка',
+      feedback:'Отправить предложение',explore:'Исследовать',food:'Где поесть',events:'События',listen:'Музыка',
       project:'Проект и источники',editorial:'Редакционная политика',verification:'Как мы проверяем события',
       credits:'Авторские права и источники',ai:'Прозрачность ИИ',tourism:'Туризм Торремолинос',
       information:'Информация',legal:'Правовая информация',privacy:'Конфиденциальность',cookies:'Cookie и настройки',

@@ -48,20 +48,12 @@ try{
     assert.ok(await panel.getByText('Mangiare',{exact:true}).isVisible());
     await p.screenshot({path:'artifacts/screenshots/iphone-menu-'+width+'.png',animations:'disabled'});
     await p.keyboard.press('Escape');assert.equal(await menu.getAttribute('open'),null);
-    await trigger.tap();await panel.locator('a[href="#plan"]').tap();
+    await trigger.tap();await panel.locator('a[href^="tu-torremolinos/"]').tap();await p.waitForURL('**/tu-torremolinos/**');await p.goBack();await trigger.waitFor({state:'visible'});
     assert.equal(await menu.getAttribute('open'),null);
-    const bridge=p.locator('.editorial-bridge.shell');await bridge.scrollIntoViewIfNeeded();
-    const layout=await bridge.evaluate(e=>{
-      const r=n=>{const b=n.getBoundingClientRect();return {left:b.left,right:b.right,top:b.top,bottom:b.bottom,width:b.width,height:b.height}};
-      const copy=e.querySelector('.editorial-bridge-copy'),cta=e.querySelector('.editorial-bridge-action'),h=copy.querySelector('h2');
-      return {box:r(e),copy:r(copy),cta:r(cta),title:r(h),position:getComputedStyle(cta).position,direction:getComputedStyle(e).flexDirection};
-    });
-    assert.equal(layout.direction,'column');
-    assert.equal(layout.position,'static');
-    assert.ok(layout.cta.top>=layout.copy.bottom-1,'CTA overlaps text '+JSON.stringify(layout));
-    assert.ok(layout.copy.width>=layout.box.width-50&&layout.title.width>=layout.copy.width-2,'text squeezed '+JSON.stringify(layout));
-    assert.ok(layout.cta.left>=layout.box.left&&layout.cta.right<=layout.box.right+1,'CTA outside card');
-    await bridge.screenshot({path:'artifacts/screenshots/iphone-bridge-'+width+'.png',animations:'disabled'});
+    assert.equal(await p.locator('.editorial-bridge,.community').count(),0,'redundant banners remain');
+    const layout=await p.locator('#useful').evaluate(e=>({width:e.clientWidth,scroll:e.scrollWidth,cards:e.querySelectorAll('.infocard').length}));
+    assert.equal(layout.cards,3);assert.ok(layout.scroll<=layout.width+1,'essential cards overflow');
+    await p.locator('#useful').screenshot({path:'artifacts/screenshots/iphone-essentials-'+width+'.png',animations:'disabled'});
     if(width===375){
       for(const lang of ['es','en','it','de','fr','ru']){
         await p.locator('#lang').selectOption(lang);
@@ -116,21 +108,22 @@ try{
     if(width===1440)assert.equal(heroSurface.navVisible,5,'desktop primary navigation lost two destinations');
     const cleanScenes=await page.evaluate(()=>({
       nogalera:getComputedStyle(document.querySelector('.nogalera-feature-copy')).backgroundColor,
-      pride:getComputedStyle(document.querySelector('#pride .feature-art')).backgroundColor
+      prideRemoved:!document.querySelector('#pride'),heritageLinks:document.querySelectorAll('.review-nogalera-stories a').length
     }));
-    assert.equal(cleanScenes.nogalera,'rgb(244, 248, 252)','green La Nogalera billboard remains at '+width);
-    assert.equal(cleanScenes.pride,'rgb(234, 243, 251)','orange Pride billboard remains at '+width);
+    assert.equal(cleanScenes.nogalera,'rgb(16, 36, 75)','review navy Nogalera surface at '+width);
+    assert.ok(cleanScenes.prideRemoved,'redundant Open to all remains at '+width);
+    assert.equal(cleanScenes.heritageLinks,2,'missing LGBTQ+ history links at '+width);
     const editorialPolish=await page.evaluate(()=>{
       const badge=document.querySelector('#galleryTeaserProvenance');
       const sound=document.querySelector('#sound .music-shell');
       return {
-        badgeInCopy:!!badge?.closest('.gallery-feature-body'),
-        badgePosition:badge?getComputedStyle(badge).position:null,
+        galleryBannerRemoved:!document.querySelector('.gallery-feature')&&!badge,
+        galleryCount:document.querySelectorAll('#photodiary figure').length,
         soundHeight:sound?.getBoundingClientRect().height||0
       };
     });
-    assert.ok(editorialPolish.badgeInCopy,'AI provenance is not attached to Gallery editorial copy at '+width);
-    assert.equal(editorialPolish.badgePosition,'static','stray AI badge still floats over the Home at '+width);
+    assert.ok(editorialPolish.galleryBannerRemoved,'redundant AI Gallery banner remains at '+width);
+    assert.equal(editorialPolish.galleryCount,3,'documentary Gallery must contain three photos at '+width);
     assert.ok(editorialPolish.soundHeight<(width<=950?650:width<=1100?430:365),'Sound did not become compact at '+width+' ('+Math.round(editorialPolish.soundHeight)+'px)');
     if(width>=1024){
       const photoFill=await page.evaluate(()=>{
@@ -155,7 +148,7 @@ try{
         craftCss:[...document.styleSheets].some(sheet=>sheet.href?.includes('craft-finish.css'))
       };
     });
-    assert.equal(whiteCraft.footer,'rgb(255, 255, 255)','footer is not white at '+width);
+    assert.equal(whiteCraft.footer,'rgb(16, 36, 75)','Home footer navy at '+width);
 
     const footerPro = await page.evaluate(() => {
       const footer=document.querySelector('#site-footer');
@@ -175,7 +168,7 @@ try{
       };
     });
     assert.equal(footerPro.exists,true,'professional footer missing at '+width);
-    assert.equal(footerPro.surface,'rgb(255, 255, 255)','footer must be white at '+width);
+    assert.equal(footerPro.surface,'rgb(16, 36, 75)','Home footer navy at '+width);
     assert.equal(footerPro.cols,3,'footer must have three grouped link columns at '+width);
     assert.ok(footerPro.buttons>=17,'footer navigation links missing at '+width);
     assert.ok(footerPro.logoReady,'footer brand mark not loaded at '+width);
@@ -186,7 +179,7 @@ try{
       await page.locator('#lang').selectOption('en');
       assert.equal((await page.locator('#site-footer [data-footer="project"]').innerText()).trim(),'Project & sources','English footer language incorrect');
       await page.locator('#lang').selectOption('es');
-      assert.equal((await page.locator('#site-footer [data-footer="feedback"]').innerText()).trim(),'Proponer una corrección','Spanish footer language incorrect');
+      assert.equal((await page.locator('#site-footer [data-footer="feedback"]').innerText()).trim(),'Enviar una sugerencia','Spanish footer language incorrect');
       await page.locator('#lang').selectOption('it');
       assert.equal((await page.locator('#site-footer [data-footer="explore"]').innerText()).trim(),'Esplora','Italian footer not restored');
     }
@@ -197,9 +190,9 @@ try{
       });
     }
 
-    assert.equal(whiteCraft.music,'rgb(16, 36, 75)','music title lacks dark-on-light contrast at '+width);
-    assert.equal(whiteCraft.nogalera,'rgb(16, 36, 75)','Nogalera title must be readable on the approved light panel at '+width);
-    assert.equal(whiteCraft.photos,10,'place gallery should have 10 documentary photos at '+width);
+    assert.equal(whiteCraft.music,'rgb(244, 239, 230)','Sound title must use sand on navy at '+width);
+    assert.equal(whiteCraft.nogalera,'rgb(244, 239, 230)','Nogalera title must use sand on navy at '+width);
+    assert.equal(whiteCraft.photos,6,'Home must show six featured places at '+width);
 
     const premium=await page.evaluate(()=>{
       function css(sel){const e=document.querySelector(sel);return e?getComputedStyle(e):null;}
@@ -210,33 +203,28 @@ try{
         const h=host.getBoundingClientRect(),p=x.getBoundingClientRect(),q=y.getBoundingClientRect();
         return {outer:h.width,one:p.width,two:q.width,gap:Math.abs(q.left-p.right)};
       }
-      const bridge=css('.editorial-bridge'),bridgeText=css('.editorial-bridge h2'),
+      const bridge=css('#useful .infocard:first-child'),bridgeText=css('#useful .infocard:first-child h3'),
         agenda=css('.agenda-home'),music=css('.music-shell'),gallery=css('.gallery-feature');
       return {
         v6:[...document.styleSheets].some(x=>x.href?.includes('product-v6.css')),
         bridgeBg:bridge?.backgroundColor,bridgeText:bridgeText?.color,
         agendaBg:agenda?.backgroundColor,musicBg:music?.backgroundColor,
-        galleryImg:touch('.gallery-feature-img'),musicCover:touch('.music-album-art:not([hidden])')||touch('.music-album-fallback:not([hidden])'),
-        agendaPhoto:touch('.agenda-home-photo'),restaurantStyle:css('.directory-teaser')?.borderTopLeftRadius,
-        gallerySeam:seam('.gallery-feature','.gallery-feature-img','.gallery-feature-body'),
-        agendaSeam:seam('.agenda-home','.agenda-home-copy','.agenda-home-photo'),
-        ctaRadius:css('.editorial-bridge-action')?.borderTopLeftRadius,
+        galleryImg:touch('#photodiary figure img'),musicCover:touch('.music-album-art:not([hidden])')||touch('.music-album-fallback:not([hidden])'),
+        agendaCards:document.querySelectorAll('#homeAgendaEvents .review-agenda-card').length,agendaNoPhoto:!document.querySelector('#agenda-home img'),agendaStatus:document.querySelector('#homeAgendaEvents')?.getAttribute('aria-busy'),
+        ctaRadius:css('#loadMap')?.borderTopLeftRadius,
         galleryBg:gallery?.backgroundColor
       };
     });
     assert.ok(premium.v6,'product v6 stylesheet missing at '+width);
-    assert.equal(premium.bridgeBg,'rgb(244, 248, 252)','editorial bridge must use approved light surface at '+width);
+    assert.equal(premium.bridgeBg,'rgb(255, 255, 255)','airport card retained neutral tone at '+width);
     assert.equal(premium.bridgeText,'rgb(16, 36, 75)','editorial bridge text must be legible at '+width);
-    assert.equal(premium.agendaBg,'rgb(244, 248, 252)','agenda still has orange chapter at '+width);
-    assert.equal(premium.musicBg,'rgb(236, 243, 250)','Sound is not the approved compact blue-light surface at '+width);
-    assert.ok(premium.galleryImg?.h>=240,'gallery image collapsed at '+width);
-    assert.ok(premium.agendaPhoto?.h>=240,'agenda photograph collapsed at '+width);
+    assert.equal(premium.agendaBg,'rgb(244, 239, 230)','review sand agenda at '+width);
+    assert.equal(premium.musicBg,'rgb(16, 36, 75)','review navy Sound at '+width);
+    assert.ok(premium.galleryImg?.h>=100,'gallery image collapsed at '+width);
+    assert.ok(premium.agendaNoPhoto,'agenda must not contain photos at '+width);
+    assert.ok(premium.agendaCards<=3,'agenda card limit '+width);
     assert.ok(premium.musicCover?.h>=100,'music artwork collapsed at '+width);
     assert.ok(parseFloat(premium.ctaRadius)>=20,'action lost pill shape at '+width);
-    if(width>=768){
-      assert.ok(premium.gallerySeam?.gap<8,'gallery disconnected halves at '+width+': '+JSON.stringify(premium.gallerySeam));
-      assert.ok(premium.agendaSeam?.gap<8,'agenda disconnected halves at '+width+': '+JSON.stringify(premium.agendaSeam));
-    }
 
     assert.ok(whiteCraft.craftCss,'craft stylesheet missing at '+width);
 
@@ -251,14 +239,14 @@ try{
       const stylesheet=[...document.styleSheets].some(sheet=>sheet.href?.includes('narrative-v7.css'));
       const sourceCards=q('#cards'),figs=[...document.querySelectorAll('#photodiary .photo-diary-grid figure img')];
       const featured=q('#stories .magazine-card.primary'),small=q('#stories .magazine-card:not(.primary)');
-      const action=q('.editorial-bridge-action'),aCss=action&&getComputedStyle(action);
+      const action=q('#loadMap'),aCss=action&&getComputedStyle(action);
       const rail=q('.v7-rail-controls');
       return {
         stylesheet,
         spaceDiscover:gap('#discover','#explore'),
         spaceExplore:gap('#explore','.nogalera-feature'),
         spaceSound:gap('#clean-access','#sound'),
-        spaceStories:gap('.gallery-feature','#stories'),
+        spaceStories:gap('#photodiary','#stories'),
         spaceAgenda:gap('#stories','#agenda-home'),
         photoLead:figs[0]?.getBoundingClientRect().height||0,
         photoDetail:figs[1]?.getBoundingClientRect().height||0,
@@ -280,24 +268,26 @@ try{
       return {
         sheet,discover:color('#discover'),explore:color('#explore'),
         stories:color('#stories'),photos:color('#photodiary'),useful:color('#useful'),
-        christmas:!!document.querySelector('#stories .l8-season-promo')
+        christmas:!!document.querySelector('#stories .l8-season-promo'),storyCount:document.querySelectorAll('#stories .magazine-card').length,removedExtras:!document.querySelector('#stories .magazine-extra,.directory-teaser')
       };
     });
     assert.ok(daylight.sheet,'v8 daylight style missing at '+width);
-    assert.equal(daylight.discover,'rgb(255, 255, 255)','discovery must be white');
-    assert.equal(daylight.explore,'rgb(255, 255, 255)','explore must be white');
-    assert.equal(daylight.stories,'rgb(255, 255, 255)','stories must be white');
-    assert.equal(daylight.photos,'rgb(255, 255, 255)','local lens must be white');
-    assert.equal(daylight.useful,'rgb(255, 255, 255)','utilities must be white');
+    assert.equal(daylight.discover,'rgb(244, 239, 230)','discovery review sand canvas');
+    assert.equal(daylight.explore,'rgb(244, 239, 230)','explore review sand canvas');
+    assert.equal(daylight.stories,'rgb(244, 239, 230)','stories review sand canvas');
+    assert.equal(daylight.photos,'rgb(244, 239, 230)','local lens review sand canvas');
+    assert.equal(daylight.useful,'rgb(244, 239, 230)','utilities review sand canvas');
     assert.ok(daylight.christmas,'Christmas editorial feature missing at '+width);
+    assert.equal(daylight.storyCount,3,'Stories article count '+width);
+    assert.ok(daylight.removedExtras,'redundant seasonal/dining content '+width);
 
     for(const [key,value] of Object.entries({
-      discover:v7.spaceDiscover,explore:v7.spaceExplore,sound:v7.spaceSound,
+      explore:v7.spaceExplore,sound:v7.spaceSound,
       stories:v7.spaceStories,agenda:v7.spaceAgenda
     })){
       assert.ok(value>=(key==='sound'?18:50),'chapters visually stuck together at '+width+' '+key+' '+value+'px');
     }
-    assert.ok(v7.photoLead>v7.photoDetail,'photo hierarchy collapsed at '+width);
+    assert.ok(Math.abs(v7.photoLead-v7.photoDetail)<=2,'gallery strip images must have equal height at '+width);
     assert.ok(v7.actions>=5,'coordinated arrows missing at '+width);
     assert.ok(v7.reading,'scroll progress indicator absent at '+width);
     assert.ok(parseFloat(v7.ctaRadius)>20,'oval CTA lost at '+width);
@@ -315,15 +305,15 @@ try{
         const el=document.querySelector(selector),css=el&&getComputedStyle(el);
         return css?{text:css.color,bg:css.backgroundColor}:null;
       }
-      return {gallery:props('.gallery-feature-body a'),feedback:props('.community .darkbtn'),credit:props('.music-body .approved-sound-credit')};
+      return {gallery:props('#photodiary .gallery-promo-link a'),feedback:props('#site-footer .footer-pro-action'),credit:props('.music-body .approved-sound-credit')};
     });
     assert.deepEqual(ctas.gallery,{text:'rgb(255, 255, 255)',bg:'rgb(9, 107, 203)'},'gallery contrast '+width);
     assert.deepEqual(ctas.feedback,{text:'rgb(255, 255, 255)',bg:'rgb(9, 107, 203)'},'feedback CTA contrast '+width);
-    assert.equal(ctas.credit?.text,'rgb(16, 36, 75)','Sound credit must be outside photo and strongly legible at '+width);
+    assert.equal(ctas.credit?.text,'rgb(244, 239, 230)','Sound credit must be outside photo and strongly legible at '+width);
     if(width===390||width===1440){
       // Full-page screenshots do not automatically reveal lazy images. Simulate
       // a real visitor scrolling through the whole catalog, then validate.
-      for(let i=0;i<10;i++){
+      for(let i=0;i<6;i++){
         const img=page.locator('#cards .place-photo').nth(i);
         await img.scrollIntoViewIfNeeded();
         await img.evaluate(node=>new Promise((resolve,reject)=>{
@@ -343,15 +333,13 @@ try{
         return (img?.naturalWidth>0&&!img.hidden) || (fallback&&!fallback.hidden);
       });
       assert.ok(mediaOk,'music cover and offline poster both missing at '+width);
-      const approvedSound=await page.locator('#sound .music-album-art').evaluate(img=>({
-        src:img.currentSrc,width:img.naturalWidth,height:img.naturalHeight,complete:img.complete
-      }));
-      assert.ok(approvedSound.src.includes('sound-headphones-torremolinos.webp'),'old Sound image at '+width);
-      assert.ok(approvedSound.complete&&approvedSound.width>=480&&approvedSound.height>=320,
+      const approvedSound=await page.locator('#sound .music-album-art').evaluate(async img=>{await img.decode();const response=await fetch(img.currentSrc);const bitmap=await createImageBitmap(await response.blob());const result={src:img.currentSrc,width:bitmap.width,height:bitmap.height,complete:img.complete};bitmap.close();return result;});
+      assert.ok(approvedSound.src.includes('sound-headphones-'),'old Sound image at '+width);
+      assert.ok(approvedSound.complete&&approvedSound.width>=800&&approvedSound.height>=533,
         'approved Sound image did not load at '+width+': '+JSON.stringify(approvedSound));
       await page.locator('#cards').evaluate(el=>el.scrollLeft=0);
       await page.evaluate(()=>window.scrollTo(0,0));
-      assert.equal(await page.locator('#cards .place-photo').count(),10,'broken place photo');
+      assert.equal(await page.locator('#cards .place-photo').count(),6,'broken featured place photo');
     }
     await page.screenshot({path:'artifacts/screenshots/home-'+width+'.png',fullPage:true,animations:'disabled'});
     if(width===390){
@@ -361,14 +349,24 @@ try{
       assert.ok(offset>0,'Next place arrow does not move the rail');
       await prev.click();
       await page.locator('#cards').evaluate(el=>el.scrollLeft=0);
+      await page.locator('.hero-cta-secondary').click();
+      await page.waitForURL('**/tu-torremolinos/**');
       await page.locator('[data-mood="taste"]').click();
       assert.ok((await page.locator('#route').innerText()).includes('La Carihuela'),'mood route did not change');
       const steps=await page.locator('#route li').count();
       assert.ok(steps>=2,'planner rendered no stops');
       await page.locator('#route li .route-control').last().click();
       assert.equal(await page.locator('#route li').count(),steps-1,'cannot remove a stop');
-      await page.locator('[data-filter="lgbt"]').click();
-      assert.ok(await page.locator('#cards .place').count()>=1,'catalog filter failed');
+      const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem('torremolinos.plan')));
+      await page.reload();assert.equal(await page.locator('#route li').count(),saved.length);
+      await page.locator('#plannerHome').click();await page.waitForURL('**/?lang=*');
+      await page.locator('[data-shortcut="lgbt"]').click();
+      assert.equal(await page.locator('#cards .place').count(),2,'LGBTQ+ photo filter failed');
+      await page.locator('[data-shortcut="practical"]').click();
+      assert.equal(await page.locator('#cards .place[data-place-id="c1"]').count(),1);
+      assert.equal(await page.locator('#cards .place[data-place-id="c1"] img').count(),0,'C1 must not display people');
+      await page.locator('[data-filter="all"]').click();
+      assert.equal(await page.locator('#cards .place').count(),6);
       await page.locator('#search').fill('Pasaje');
       assert.ok(await page.locator('#cards .place').count()>=1,'search failed');
       await page.locator('#search').fill('');

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tu Torremolinos · TORREMOLINOS</title><meta name="description" content="Crea tu recorrido personal de Torremolinos, elige y ordena las paradas de la guía."><link rel="canonical" href="https://manzo8b.github.io/Torremolinos/tu-torremolinos/"><link rel="icon" href="../favicon.svg"><link rel="stylesheet" href="../explore/catalog.css"><link rel="stylesheet" href="planner.css"><script src="../explore/catalog.js" defer></script><script src="../locale-accessibility.js" defer></script><script src="planner.js" defer></script></head>
+<body class="review-planner"><header><a id="plannerHomeLogo" href="../"><img src="../brand/torremolinos-logo-clean.svg" width="220" height="36" alt="TORREMOLINOS"></a><nav><a id="plannerHome" href="../">Inicio</a><a id="plannerExplore" href="../explore/" data-plan-t="browse">Explorar todos los lugares ↗</a></nav><select id="lang" aria-label="Language"><option value="es">ES</option><option value="it">IT</option><option value="en">EN</option><option value="de">DE</option><option value="fr">FR</option><option value="ru">RU</option></select></header><main id="main"><section class="section shell product-planner" id="plan" aria-labelledby="plan-title">
+  <div class="plan-head">
+    <div class="plan-lead">
+      <span class="plan-section-kicker" data-plan-t="edition">La città, come vuoi tu</span>
+      <h1 id="plan-title" data-plan-t="title">Tu Torremolinos</h1>
+      <p data-plan-t="lead">Non una lista da seguire. Un percorso da inventare: scegli un'atmosfera, modifica le tappe, salva il tuo itinerario.</p>
+    </div>
+    <div class="plan-promise"><strong data-plan-t="promiseTitle">LA CITTÀ, COME LA VIVI TU</strong><span data-plan-t="promise">Luoghi della guida, senza login e senza disponibilità inventate.</span></div>
+  </div>
+  <div class="plan-workspace">
+    <div class="plan-choice" aria-labelledby="plan-choice-title">
+      <h3 id="plan-choice-title" data-plan-t="choose">Da dove vuoi cominciare?</h3>
+      <p data-plan-t="chooseLead">Quattro modi di vivere la città. Il percorso cambia subito, senza attese.</p>
+      <div class="moods" id="moods" role="group" aria-label="Tipos de recorrido">
+        <button class="mood-btn" type="button" data-mood="sea" aria-pressed="true" data-plan-t="sea">Mare & passeggiate</button>
+        <button class="mood-btn" type="button" data-mood="pride" aria-pressed="false" data-plan-t="pride">Cultura LGBTQ+</button>
+        <button class="mood-btn" type="button" data-mood="taste" aria-pressed="false" data-plan-t="taste">Sapori locali</button>
+        <button class="mood-btn" type="button" data-mood="slow" aria-pressed="false" data-plan-t="slow">Senza fretta</button>
+      </div>
+      <p class="plan-choice-tip" data-plan-t="tip">Vuoi una tappa diversa? Aggiungila direttamente dai luoghi nella sezione Esplora.</p>
+      <a class="plan-explore-link" href="../explore/" data-plan-t="browse">Esplora tutti i luoghi ↗</a>
+    </div>
+    <div class="plan-journey" aria-labelledby="plan-journey-title">
+      <div class="plan-journey-header">
+        <div><span class="plan-journey-label" data-plan-t="journey">Il tuo percorso</span><h3 id="plan-journey-title" data-plan-t="routeTitle">Il tuo viaggio prende forma</h3></div>
+        <output id="planCount" aria-live="polite">3 tappe</output>
+      </div>
+      <ol class="route-list" id="route" aria-label="Paradas del recorrido"></ol>
+      <p id="planEmpty" class="plan-empty" data-plan-t="empty" hidden>Il percorso è vuoto. Scegli un'atmosfera o aggiungi luoghi da Esplora.</p>
+      <div class="plan-actions">
+        <a id="directions" class="plan-map-link darkbtn" href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer" data-plan-t="openMap">Apri in Maps ↗</a>
+        <button id="sharePlan" class="plan-share" type="button" data-plan-t="share">Condividi percorso</button>
+        <button id="resetPlan" class="plan-reset" type="button" data-plan-t="reset">Ricomincia</button>
+      </div>
+      <p id="planStatus" class="plan-status" role="status" aria-live="polite"></p>
+      <p class="plan-disclaimer" data-plan-t="disclaimer">Itinerario orientativo. Verifica accessibilità, orari e trasporti prima di partire.</p>
+    </div>
+  </div>
+</section></main><footer>© TORREMOLINOS · <a href="../legal/" id="plannerLegal">Info</a></footer></body></html>

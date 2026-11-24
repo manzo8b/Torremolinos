@@ -14,7 +14,7 @@ test('approved clean Home has four real navigation cards and the compact audio s
  assert.equal((page.match(/id="sound"/g)||[]).length,1);
 });
 test('approved design never replaces the visitor planner or original documentary hero assets',()=>{
- for(const id of ['id="cards"','id="filters"','id="lang"','id="plan"','id="route"','id="loadMap"'])
+ for(const id of ['id="cards"','id="filters"','id="lang"','href="tu-torremolinos/"','id="loadMap"'])
   assert.ok(page.includes(id),id);
  for(const item of ['hero-apple-2026.webp','hero-apple-2026-mobile.webp'])
   assert.ok(page.includes(item)||css.includes(item));
@@ -43,7 +43,7 @@ test('translated cards and headings cover all six supported languages',()=>{
 test('PWA includes updated UI and brand asset without breaking offline fallback',()=>{
  for(const name of ['approved-clean-2026.css','approved-clean-2026.js','torremolinos-logo-clean.svg','offline.html'])
   assert.ok(sw.includes(name),name);
- assert.ok(sw.includes('torremolinos-v30'));
+ assert.ok(sw.includes('torremolinos-v31'));
 });
 
 test('chosen Sound image exists, is WebP, and is disclosed as an AI illustration',()=>{
@@ -51,9 +51,99 @@ test('chosen Sound image exists, is WebP, and is disclosed as an AI illustration
  assert.ok(photo.length>10000,'missing or corrupt Sound image');
  assert.equal(photo.toString('ascii',0,4),'RIFF');
  assert.equal(photo.toString('ascii',8,12),'WEBP');
- assert.match(page,/src="assets\/photos\/sound-headphones-torremolinos\.webp"/);
+ assert.match(page,/src="assets\/photos\/home-review\/sound-headphones-800\.webp"/);
  assert.match(page,/Immagine illustrativa generata con IA/);
  assert.doesNotMatch(page,/src="assets\/photos\/mar-mediterraneo\.webp"/);
  assert.match(sw,/\.\/assets\/photos\/sound-headphones-torremolinos\.webp/);
  assert.equal((page.match(/id="torremolinos-audio"/g)||[]).length,1);
 });
+
+// Review §2: independent photographic sources, real WebP files, responsive markup.
+test('review Home cards use four supplied documentary photos and valid responsive sources',()=>{
+ const section=page.match(/<section id="clean-access"[\s\S]*?<\/section>/)[0];
+ const assets=["assets/photos/home-review/home-mangiare-800.webp","assets/photos/home-review/home-mangiare-1600.webp","assets/photos/home-review/home-agenda-672.webp","assets/photos/home-review/home-gallery-800.webp","assets/photos/home-review/home-gallery-1600.webp","assets/photos/home-review/home-stories-800.webp","assets/photos/home-review/home-stories-1600.webp"];
+ for(const name of assets){const bytes=readFileSync(new URL('../'+name,import.meta.url));assert.equal(bytes.toString('ascii',0,4),'RIFF');assert.equal(bytes.toString('ascii',8,12),'WEBP');assert.ok(bytes.length>10000&&bytes.length<=250000,name);assert.ok(section.includes(name),name);}
+ assert.equal((section.match(/data-review-photo=/g)||[]).length,4);
+ assert.doesNotMatch(section,/sunset-ai\.webp/);
+ assert.match(section,/data-review-credit/);
+ for(const name of assets.filter(x=>!x.includes('-1600.')))assert.ok(sw.includes(name),'missing offline card '+name);
+});
+
+test('Home review Gallery is one three-photo documentary strip with one action',()=>{
+ const section=page.match(/<section[^>]*id="photodiary"[\s\S]*?<\/section>/)[0];
+ assert.equal((section.match(/<figure>/g)||[]).length,3);
+ assert.equal((section.match(/© Archivo fotográfico TORREMOLINOS/g)||[]).length,3);
+ assert.equal((section.match(/href="gallery\/"/g)||[]).length,1);
+ assert.doesNotMatch(page,/<section class="gallery-feature shell"/);
+ assert.doesNotMatch(page,/tryImage\('assets\/photos\/album\/blue-hour-ai\.webp'/);
+});
+
+test('Gallery strip uses all six supplied WebP variants and caches the small versions',()=>{
+ const section=page.match(/<section[^>]*id="photodiary"[\s\S]*?<\/section>/)[0];
+ const assets=["assets/photos/home-review/gallery-forme-800.webp","assets/photos/home-review/gallery-forme-1600.webp","assets/photos/home-review/gallery-luce-800.webp","assets/photos/home-review/gallery-luce-1600.webp","assets/photos/home-review/gallery-dettagli-800.webp","assets/photos/home-review/gallery-dettagli-1152.webp"];
+ for(const path of assets){const b=readFileSync(new URL('../'+path,import.meta.url));assert.equal(b.toString('ascii',0,4),'RIFF');assert.equal(b.toString('ascii',8,12),'WEBP');assert.ok(b.length>10000&&b.length<=250000,path);assert.ok(section.includes(path),path);if(path.endsWith('-800.webp'))assert.ok(sw.includes(path));}
+ assert.equal((section.match(/srcset=/g)||[]).length,3);
+ assert.equal((section.match(/width="800" height="533"/g)||[]).length,3);
+ assert.doesNotMatch(section,/palmeras-sol\.webp|el-bajondillo-letrero\.webp|paseo-palmeras\.webp/);
+});
+
+test('Home review Stories keeps three articles and seasonal dossier, without redundant dining/San Miguel blocks',()=>{
+ const section=page.match(/<section[^>]*id="stories"[\s\S]*?<\/section>/)[0];
+ assert.equal((section.match(/class="magazine-card(?: primary)?"/g)||[]).length,3);
+ assert.equal((section.match(/class="l8-season-promo"/g)||[]).length,1);
+ assert.doesNotMatch(section,/class="magazine-extra"/);
+ assert.doesNotMatch(page,/class="directory-teaser"/);
+ assert.equal((section.match(/class="photoattribution"/g)||[]).length,3);
+ assert.match(section,/Tyk · CC BY-SA 3\.0 · 2010/);
+ assert.match(section,/BernardaAlba · CC0 · 2024/);
+});
+
+test('Home Agenda derives the next three confirmed future events and real editorial date',()=>{
+ const sandbox={module:{exports:{}}};vm.runInNewContext(read('home-agenda.js'),sandbox);
+ const {upcoming,localDay,validDate}=sandbox.module.exports;
+ const data=JSON.parse(read('agenda/events.json'));
+ const ids=(input,now)=>Array.from(upcoming(input,new Date(now)),x=>x.id);
+ assert.deepEqual(ids(data,'2026-11-24T09:00:00+01:00'),['drag-mariquita-28nov26','fetish-awards-4dec26','ellas-12dec26']);
+ assert.deepEqual(ids(data,'2028-01-01T00:00:00Z'),[]);
+ assert.equal(localDay(new Date('2026-11-24T23:30:00Z')),'2026-11-25');
+ assert.equal(validDate('2026-02-30'),false);
+ assert.deepEqual(ids({events:[{id:'pending',status:'pending',start:'2027-01-01',title:'Pending',venue:'Test'},{id:'past',status:'confirmed',start:'2026-11-23',title:'Past',venue:'Test'},{id:'future',status:'confirmed',start:'2026-11-25',title:'Future',venue:'Test'}]},'2026-11-24T09:00:00Z'),['future']);
+ const section=page.match(/<section[^>]*id="agenda-home"[\s\S]*?<\/section>/)[0];
+ assert.doesNotMatch(section,/<img\b/);
+ assert.equal((section.match(/class="agenda-home-btn"/g)||[]).length,1);
+ assert.match(read('home-agenda.js'),/data\.editorialUpdated/);
+ assert.ok(sw.includes("'./home-agenda.js'"));
+});
+
+test('Sound review restores approved image from original, native player only, no autoplay',()=>{
+ const section=page.match(/<section[^>]*id="sound"[\s\S]*?<\/section>/)[0];
+ for(const name of ['sound-headphones-800.webp','sound-headphones-1536.webp']){
+  const bytes=readFileSync(new URL('../assets/photos/home-review/'+name,import.meta.url));
+  assert.equal(bytes.toString('ascii',0,4),'RIFF');
+  assert.equal(bytes.toString('ascii',8,12),'WEBP');
+  assert.ok(bytes.length<=250000,name);
+  assert.ok(section.includes(name),name);
+ }
+ assert.equal((section.match(/<audio\b/g)||[]).length,1);
+ assert.match(section,/<audio[^>]*\bcontrols\b[^>]*preload="none"/);
+ assert.doesNotMatch(section,/\bautoplay\b|id="approvedSoundPlay"/);
+ assert.match(section,/Immagine illustrativa generata con IA · Musica LUNE_X/);
+ assert.match(section,/class="approved-music-more"/);
+ assert.ok(sw.includes('sound-headphones-800.webp'));
+ assert.ok(page.includes('id="heroMusicBtn"'));
+});
+
+test('Essentials preserves three service cards and one consent-driven map, with feedback in navy footer',()=>{
+ const section=page.match(/<section[^>]*id="useful"[\s\S]*?<\/section>/)[0];
+ assert.equal((section.match(/class="infocard"/g)||[]).length,3);
+ assert.match(section,/href="tel:112"/);
+ assert.match(section,/renfe\.com/);assert.match(section,/turismotorremolinos\.es/);
+ assert.equal((page.match(/id="loadMap"/g)||[]).length,1);
+ assert.doesNotMatch(page,/id="mapStart"/);
+ assert.match(section,/id="mapHolder"[^>]*hidden/);
+ assert.doesNotMatch(section,/<iframe\b/);
+ assert.doesNotMatch(page,/<section class="editorial-bridge shell"|<div class="community">/);
+ assert.match(page,/data-footer="feedback">Invia un suggerimento/);
+});
+
+test('Standalone planner preserves the existing route storage, catalog, legacy URLs and offline shell',()=>{const planner=read('tu-torremolinos/index.html'),js=read('tu-torremolinos/planner.js');new vm.Script(js);assert.doesNotMatch(page,/<section[^>]*id="plan"/);for(const id of ['plan','route','moods','sharePlan','resetPlan','directions'])assert.ok(planner.includes('id="'+id+'"'));assert.match(js,/torremolinos\.plan/);assert.match(page,/torremolinos\.favs/);assert.match(js,/TORREMOLINOS_PLACES/);assert.match(page,/location\.replace\(target\.href\)/);assert.ok(sw.includes("'./tu-torremolinos/'"));assert.ok(read('sitemap.xml').includes('/tu-torremolinos/'));});

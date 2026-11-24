@@ -76,13 +76,12 @@
  }
  };
  const audio=document.getElementById('torremolinos-audio');
- const button=document.getElementById('approvedSoundPlay');
- const note=document.querySelector('#sound .approved-sound-note');
+
  const titles={
   story1:'#stories .magazine-card.primary h3',
   story2:'#stories .magazine-card[href*="la-nogalera"] h3',
   story3:'#stories .magazine-card[href*="pasaje-begona"] h3',
-  sanmiguel:'#stories .magazine-extra h3'
+  // San Miguel remains available in the Stories index, not on Home.
  };
  function movePhotoCredits(){
   document.querySelectorAll('#stories .magazine-card').forEach(card=>{
@@ -96,9 +95,9 @@
   });
   const pairs=[
    ['.nogalera-feature-photo small','.nogalera-feature-copy'],
-   ['.agenda-home-photo small','.agenda-home-copy'],
-   ['.gallery-feature-img .ai-badge','.gallery-feature-body'],
-   ['#sound .music-art .approved-sound-credit','#sound .music-body']
+
+
+
   ];
   pairs.forEach(([from,to])=>{
    const item=document.querySelector(from),target=document.querySelector(to);
@@ -115,10 +114,16 @@
  }
  function translate(){
   const lang=(document.documentElement.lang||'es').slice(0,2);
+  const storyReview={"es":{"culture":"LGBTQ+ / CULTURA","memory":"HISTORIA / MEMORIA","people":"PERSONAS / LUGARES","season":"NAVIDAD 2026–2027","alts":["Fotografía original de la costa de Torremolinos desde el paseo marítimo","La Nogalera fotografiada en 2010","Fotografía del Pasaje Begoña tomada en 2024","Paseo mediterráneo con palmeras en Torremolinos, fotografía de ambiente, no del alumbrado"]},"it":{"culture":"LGBTQ+ / CULTURA","memory":"STORIA / MEMORIA","people":"PERSONE / LUOGHI","season":"NATALE 2026–2027","alts":["Fotografia originale della costa di Torremolinos dal lungomare","La Nogalera fotografata nel 2010","Fotografia di Pasaje Begoña del 2024","Passeggiata mediterranea con palme a Torremolinos, fotografia d’ambiente, non delle luminarie"]},"en":{"culture":"LGBTQ+ / CULTURE","memory":"HISTORY / MEMORY","people":"PEOPLE / PLACES","season":"CHRISTMAS 2026–2027","alts":["Original photograph of the Torremolinos coast from the promenade","La Nogalera photographed in 2010","Photograph of Pasaje Begoña taken in 2024","Palm-lined Mediterranean promenade in Torremolinos, atmospheric photograph, not the Christmas lights"]},"de":{"culture":"LGBTQ+ / KULTUR","memory":"GESCHICHTE / ERINNERUNG","people":"MENSCHEN / ORTE","season":"WEIHNACHTEN 2026–2027","alts":["Originalfoto der Küste von Torremolinos von der Strandpromenade","La Nogalera, fotografiert 2010","Foto der Pasaje Begoña von 2024","Mediterrane Palmenpromenade in Torremolinos, Stimmungsfoto, keine Weihnachtsbeleuchtung"]},"fr":{"culture":"LGBTQ+ / CULTURE","memory":"HISTOIRE / MÉMOIRE","people":"PERSONNES / LIEUX","season":"NOËL 2026–2027","alts":["Photographie originale de la côte de Torremolinos depuis la promenade","La Nogalera photographiée en 2010","Photographie du Pasaje Begoña prise en 2024","Promenade méditerranéenne bordée de palmiers à Torremolinos, photo d’ambiance, pas des illuminations"]},"ru":{"culture":"ЛГБТК+ / КУЛЬТУРА","memory":"ИСТОРИЯ / ПАМЯТЬ","people":"ЛЮДИ / МЕСТА","season":"РОЖДЕСТВО 2026–2027","alts":["Авторская фотография побережья Торремолиноса с набережной","Ла Ногалера на фотографии 2010 года","Фотография Пасахе Бегонья 2024 года","Средиземноморская набережная с пальмами в Торремолиносе, атмосферное фото, не праздничная иллюминация"]}};
+  const sr=storyReview[lang]||storyReview.es;
+  document.querySelectorAll('[data-review-story]').forEach(el=>{if(sr[el.dataset.reviewStory])el.textContent=sr[el.dataset.reviewStory];});
+  document.querySelectorAll('#stories .magazine-card .cover img,#stories .l8-season-promo-photo img').forEach((img,i)=>{if(sr.alts[i])img.alt=sr.alts[i];});
+  const galleryAlt={"es":["Escultura de dos figuras con brazos elevados, entre edificios y palmeras","Playa enmarcada por palmeras, con el mar y el cielo azul al fondo","Fachada roja con balcón de flores y una figura decorativa bajo un paraguas amarillo"],"it":["Scultura di due figure con le braccia alzate, tra edifici e palme","Spiaggia incorniciata da palme, con mare e cielo azzurro sullo sfondo","Facciata rossa con balcone fiorito e una figura decorativa sotto un ombrello giallo"],"en":["Sculpture of two figures with raised arms, between buildings and palm trees","Beach framed by palm trees, with blue sea and sky in the background","Red façade with a flower-filled balcony and decorative figure beneath a yellow umbrella"],"de":["Skulptur zweier Figuren mit erhobenen Armen zwischen Gebäuden und Palmen","Strand zwischen Palmen mit blauem Meer und Himmel im Hintergrund","Rote Fassade mit Blumenbalkon und einer Dekorationsfigur unter einem gelben Schirm"],"fr":["Sculpture de deux figures aux bras levés, entre bâtiments et palmiers","Plage encadrée de palmiers avec la mer et le ciel bleu en arrière-plan","Façade rouge au balcon fleuri et figure décorative sous un parapluie jaune"],"ru":["Скульптура двух фигур с поднятыми руками среди зданий и пальм","Пляж в обрамлении пальм на фоне моря и голубого неба","Красный фасад с цветочным балконом и декоративной фигурой под жёлтым зонтом"]};
+  ['photoDiary1','photoDiary2','photoDiary3'].forEach((id,i)=>{const img=document.getElementById(id);if(img)img.alt=(galleryAlt[lang]||galleryAlt.es)[i];});
   const t=T[lang]||T.es;
   document.querySelectorAll('[data-clean]').forEach(el=>{
    const k=el.getAttribute('data-clean');
-   const txt= k==='listen' && audio && !audio.paused?t.pause:t[k];
+   const txt=t[k];
    if(txt)el.textContent=txt;
   });
   const hero=document.querySelector('.hero-tagline');
@@ -129,6 +134,7 @@
   });
   const body=document.querySelector('#sound .approved-sound-credit');
   if(body)body.textContent=t.musicCredit;
+  if(audio){const label=document.querySelector('#sound .player-label');if(label)audio.setAttribute('aria-label',label.textContent.trim());}
   const image=document.querySelector('#sound .music-album-art');
   if(image)image.alt=({
    es:'Auriculares color marfil sobre rocas junto al Mediterráneo, imagen ilustrativa generada con IA',
@@ -142,25 +148,17 @@
   if(title)title.setAttribute('aria-label',lang==='it'?'Esplora le sezioni della guida':lang==='es'?'Explora las secciones de la guía':lang==='en'?'Explore guide sections':'Guide sections');
   const mobilePanel=document.querySelector('.tm-mobile-menu .tm-mobile-panel');
   if(mobilePanel)mobilePanel.setAttribute('aria-label',t.menuNav);
+  const reviewNogalera={"es":{"heritage":"La historia LGBTQ+ de Torremolinos se cuenta también entre La Nogalera y el histórico Pasaje Begoña.","nogalera":"La Nogalera: historia ↗","pasaje":"Pasaje Begoña: memoria ↗"},"it":{"heritage":"La storia LGBTQ+ di Torremolinos vive anche tra La Nogalera e lo storico Pasaje Begoña.","nogalera":"La storia di La Nogalera ↗","pasaje":"Pasaje Begoña: memoria ↗"},"en":{"heritage":"Torremolinos’ LGBTQ+ history lives on in La Nogalera and the historic Pasaje Begoña.","nogalera":"La Nogalera: its history ↗","pasaje":"Pasaje Begoña: memory ↗"},"de":{"heritage":"Die LGBTQ+-Geschichte von Torremolinos lebt in La Nogalera und der historischen Pasaje Begoña weiter.","nogalera":"La Nogalera: Geschichte ↗","pasaje":"Pasaje Begoña: Erinnerung ↗"},"fr":{"heritage":"L’histoire LGBTQ+ de Torremolinos se poursuit à La Nogalera et dans le passage historique Begoña.","nogalera":"La Nogalera : histoire ↗","pasaje":"Pasaje Begoña : mémoire ↗"},"ru":{"heritage":"История ЛГБТК+ в Торремолиносе живёт в Ла Ногалере и историческом Пасахе Бегонья.","nogalera":"История Ла Ногалеры ↗","pasaje":"Пасахе Бегонья: память ↗"}};
+  document.querySelectorAll('[data-review-nogalera]').forEach(el=>{const value=(reviewNogalera[lang]||reviewNogalera.es)[el.dataset.reviewNogalera];if(value)el.textContent=value;});
+  const reviewPhotoAlt={"mangiare":{"it":"Espetos di sardine cotti sulla brace in una barca tradizionale","es":"Espetos de sardinas asándose a las brasas en una barca tradicional","en":"Sardine skewers grilling over embers in a traditional boat","de":"Sardinenspieße auf der Glut in einem traditionellen Boot","fr":"Brochettes de sardines grillant sur les braises dans une barque traditionnelle","ru":"Сардины на шампурах над углями в традиционной лодке"},"agenda":{"it":"Insegna di San Miguel, Torremolinos 2026, fotografia d’archivio","es":"Cartel de San Miguel, Torremolinos 2026, fotografía de archivo","en":"San Miguel sign, Torremolinos 2026, archival photograph","de":"Schild von San Miguel, Torremolinos 2026, Archivfoto","fr":"Panneau de San Miguel, Torremolinos 2026, photographie d’archive","ru":"Вывеска Сан-Мигель, Торремолинос 2026, архивная фотография"},"gallery":{"it":"Insegna in ceramica di El Bajondillo circondata da vasi di terracotta","es":"Cartel de cerámica de El Bajondillo rodeado de macetas de terracota","en":"El Bajondillo ceramic sign surrounded by terracotta flowerpots","de":"Keramikschild von El Bajondillo, umgeben von Terrakottatöpfen","fr":"Panneau en céramique d’El Bajondillo entouré de pots en terre cuite","ru":"Керамическая табличка Эль-Бахондильо в окружении терракотовых горшков"},"stories":{"it":"Palazzo bianco e giallo con finestre ad arco e balconi a balaustra","es":"Edificio blanco y amarillo con ventanas de arco y balcones con balaustradas","en":"White and yellow building with arched windows and balustraded balconies","de":"Weiß-gelbes Gebäude mit Bogenfenstern und Balustradenbalkonen","fr":"Bâtiment blanc et jaune aux fenêtres cintrées et balcons à balustrades","ru":"Белое здание с жёлтой отделкой, арочными окнами и балконами с балюстрадами"}};
+  const reviewPhotoCredit={"es":"© Archivo fotográfico TORREMOLINOS · Derechos reservados","it":"© Archivio fotografico TORREMOLINOS · Tutti i diritti riservati","en":"© TORREMOLINOS photographic archive · All rights reserved","de":"© Fotoarchiv TORREMOLINOS · Alle Rechte vorbehalten","fr":"© Archives photographiques TORREMOLINOS · Tous droits réservés","ru":"© Фотоархив TORREMOLINOS · Все права защищены"};
+  document.querySelectorAll('#clean-access img[data-review-photo]').forEach(img=>{const a=reviewPhotoAlt[img.dataset.reviewPhoto];if(a)img.alt=a[lang]||a.es;});
+  const reviewCredit=document.querySelector('#clean-access [data-review-credit]');
+  if(reviewCredit)reviewCredit.textContent=reviewPhotoCredit[lang]||reviewPhotoCredit.es;
   // Keep the language-specific URLs already controlled by the application.
  }
- function renderPlay(){
-  if(!button||!audio)return;
-  const lang=(document.documentElement.lang||'es').slice(0,2);
-  const t=T[lang]||T.es;
-  button.textContent=audio.paused?t.listen:t.pause;
-  button.setAttribute('aria-pressed',String(!audio.paused));
- }
- if(button&&audio){
-  button.addEventListener('click',()=>{
-   if(audio.paused){const task=audio.play();if(task&&typeof task.catch==='function'){
-    task.catch(()=>{if(note)note.textContent=(T[document.documentElement.lang]||T.es).listenError;renderPlay()});
-   }}else audio.pause();
-  });
-  ['play','pause','ended'].forEach(ev=>audio.addEventListener(ev,renderPlay));
- }
  const init=()=>{
-  movePhotoCredits();keepPlaceLabelsOutsidePhotos();translate();renderPlay();
+  movePhotoCredits();keepPlaceLabelsOutsidePhotos();translate();
   const mobileMenu=document.querySelector('.tm-mobile-menu');
   if(mobileMenu){
     mobileMenu.addEventListener('click',event=>{
@@ -178,12 +176,26 @@
   }
   const placeHost=document.getElementById('cards');
   if(placeHost)new MutationObserver(keepPlaceLabelsOutsidePhotos).observe(placeHost,{childList:true,subtree:true});
-  new MutationObserver(()=>{translate();renderPlay()})
+  new MutationObserver(()=>{translate()})
     .observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
   document.getElementById('lang')?.addEventListener('change',()=>{
-    queueMicrotask(()=>{translate();renderPlay()});
+    queueMicrotask(()=>{translate()});
   });
  };
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
  else init();
 })();
+
+/* G1: keep the entire protected hero + tools + three trust labels on the
+   original white background. The review canvas is below this boundary only. */
+(()=>{const main=document.querySelector('body.torre-home main#main');
+ if(!main)return;const trust=main.querySelector('.trust.shell');if(!trust)return;
+ const update=()=>{const bottom=trust.getBoundingClientRect().bottom-main.getBoundingClientRect().top;
+  main.style.setProperty('--review-start',Math.ceil(bottom+1)+'px')};
+ update();if('ResizeObserver'in window){const ro=new ResizeObserver(update);
+  for(const e of main.querySelectorAll(':scope > .hero,:scope > .hero-tools,:scope > .trust'))ro.observe(e);
+ }window.addEventListener('resize',update,{passive:true});document.fonts?.ready.then(update);
+})();
+
+/* §3 translated directory link and credit; category copy uses existing data-t dictionary. */
+(()=>{const words={"es":{"all":"Todos los lugares","saved":"♡ Guardados","more":"Ver todos los lugares","credit":"© Archivo fotográfico TORREMOLINOS · Derechos reservados","title":"Explora todos los lugares","intro":"Elige un lugar, consulta sus fuentes y añádelo a tu recorrido.","home":"Inicio","plan":"Mi recorrido","search":"Buscar lugares","source":"Fuente oficial","map":"Mapa","add":"Añadir al plan","added":"Añadido al plan","limit":"Máximo 8 paradas","empty":"No hay lugares que coincidan","results":"lugares","cats":["Todos","LGBTQ+","Playas","Gastronomía","Cultura","Noche","Práctico","Guardados"],"titles":["Mar","La Nogalera","Sabores","Primeros pasos"],"subs":["Playas y paseos","Cultura y vida nocturna","Cocina local","Para sentirte en casa"]},"it":{"all":"Tutti i luoghi","saved":"♡ Salvati","more":"Vedi tutti i luoghi","credit":"© Archivio fotografico TORREMOLINOS · Tutti i diritti riservati","title":"Esplora tutti i luoghi","intro":"Scegli un luogo, consulta le fonti e aggiungilo al tuo percorso.","home":"Home","plan":"Il mio giro","search":"Cerca luoghi","source":"Fonte ufficiale","map":"Mappa","add":"Aggiungi al piano","added":"Aggiunto al piano","limit":"Massimo 8 tappe","empty":"Nessun luogo corrispondente","results":"luoghi","cats":["Tutti","LGBTQ+","Spiagge","Gastronomia","Cultura","Notte","Primi passi","Salvati"],"titles":["Mare","La Nogalera","Sapori","Primi passi"],"subs":["Spiagge e passeggiate","Cultura e vita notturna","Cucina locale","Per sentirti a casa"]},"en":{"all":"All places","saved":"♡ Saved","more":"See all places","credit":"© TORREMOLINOS photographic archive · All rights reserved","title":"Explore all places","intro":"Choose a place, check its sources and add it to your route.","home":"Home","plan":"My plan","search":"Search places","source":"Official source","map":"Map","add":"Add to plan","added":"Added to plan","limit":"Maximum 8 stops","empty":"No matching places","results":"places","cats":["All","LGBTQ+","Beaches","Food","Culture","Nightlife","Practical","Saved"],"titles":["Sea","La Nogalera","Flavours","First steps"],"subs":["Beaches and walks","Culture and nightlife","Local cuisine","Feel at home"]},"de":{"all":"Alle Orte","saved":"♡ Gemerkt","more":"Alle Orte ansehen","credit":"© Fotoarchiv TORREMOLINOS · Alle Rechte vorbehalten","title":"Alle Orte entdecken","intro":"Wähle einen Ort, prüfe die Quellen und füge ihn deiner Route hinzu.","home":"Startseite","plan":"Mein Plan","search":"Orte suchen","source":"Offizielle Quelle","map":"Karte","add":"Zum Plan hinzufügen","added":"Zum Plan hinzugefügt","limit":"Maximal 8 Stopps","empty":"Keine passenden Orte","results":"Orte","cats":["Alle","LGBTQ+","Strände","Gastronomie","Kultur","Nachtleben","Praktisch","Gemerkt"],"titles":["Meer","La Nogalera","Genuss","Erste Schritte"],"subs":["Strände und Spaziergänge","Kultur und Nachtleben","Lokale Küche","Wie zu Hause"]},"fr":{"all":"Tous les lieux","saved":"♡ Favoris","more":"Voir tous les lieux","credit":"© Archives photographiques TORREMOLINOS · Tous droits réservés","title":"Explorer tous les lieux","intro":"Choisissez un lieu, consultez les sources et ajoutez-le à votre parcours.","home":"Accueil","plan":"Mon parcours","search":"Rechercher des lieux","source":"Source officielle","map":"Carte","add":"Ajouter au parcours","added":"Ajouté au parcours","limit":"8 étapes maximum","empty":"Aucun lieu correspondant","results":"lieux","cats":["Tous","LGBTQ+","Plages","Gastronomie","Culture","Vie nocturne","Pratique","Favoris"],"titles":["Mer","La Nogalera","Saveurs","Premiers pas"],"subs":["Plages et promenades","Culture et vie nocturne","Cuisine locale","Comme chez soi"]},"ru":{"all":"Все места","saved":"♡ Избранное","more":"Посмотреть все места","credit":"© Фотоархив TORREMOLINOS · Все права защищены","title":"Все места города","intro":"Выберите место, проверьте источники и добавьте его в маршрут.","home":"Главная","plan":"Мой маршрут","search":"Поиск мест","source":"Официальный источник","map":"Карта","add":"Добавить в маршрут","added":"Добавлено в маршрут","limit":"Не более 8 остановок","empty":"Подходящих мест нет","results":"мест","cats":["Все","ЛГБТК+","Пляжи","Кухня","Культура","Ночная жизнь","Практическое","Избранное"],"titles":["Море","Ла-Ногалера","Вкусы","Первые шаги"],"subs":["Пляжи и прогулки","Культура и ночная жизнь","Местная кухня","Почувствуйте себя дома"]}};function update(){const lang=document.documentElement.lang||'es',t=words[lang]||words.es;document.querySelectorAll('[data-review-explore]').forEach(el=>{el.textContent=t[el.dataset.reviewExplore]||''});const a=document.querySelector('.review-all-places');if(a){a.href='explore/?lang='+encodeURIComponent(lang);}}update();new MutationObserver(update).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});})();
