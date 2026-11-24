@@ -76,8 +76,7 @@
  }
  };
  const audio=document.getElementById('torremolinos-audio');
- const button=document.getElementById('approvedSoundPlay');
- const note=document.querySelector('#sound .approved-sound-note');
+
  const titles={
   story1:'#stories .magazine-card.primary h3',
   story2:'#stories .magazine-card[href*="la-nogalera"] h3',
@@ -98,7 +97,7 @@
    ['.nogalera-feature-photo small','.nogalera-feature-copy'],
 
 
-   ['#sound .music-art .approved-sound-credit','#sound .music-body']
+
   ];
   pairs.forEach(([from,to])=>{
    const item=document.querySelector(from),target=document.querySelector(to);
@@ -124,7 +123,7 @@
   const t=T[lang]||T.es;
   document.querySelectorAll('[data-clean]').forEach(el=>{
    const k=el.getAttribute('data-clean');
-   const txt= k==='listen' && audio && !audio.paused?t.pause:t[k];
+   const txt=t[k];
    if(txt)el.textContent=txt;
   });
   const hero=document.querySelector('.hero-tagline');
@@ -135,6 +134,7 @@
   });
   const body=document.querySelector('#sound .approved-sound-credit');
   if(body)body.textContent=t.musicCredit;
+  if(audio){const label=document.querySelector('#sound .player-label');if(label)audio.setAttribute('aria-label',label.textContent.trim());}
   const image=document.querySelector('#sound .music-album-art');
   if(image)image.alt=({
    es:'Auriculares color marfil sobre rocas junto al Mediterráneo, imagen ilustrativa generada con IA',
@@ -157,23 +157,8 @@
   if(reviewCredit)reviewCredit.textContent=reviewPhotoCredit[lang]||reviewPhotoCredit.es;
   // Keep the language-specific URLs already controlled by the application.
  }
- function renderPlay(){
-  if(!button||!audio)return;
-  const lang=(document.documentElement.lang||'es').slice(0,2);
-  const t=T[lang]||T.es;
-  button.textContent=audio.paused?t.listen:t.pause;
-  button.setAttribute('aria-pressed',String(!audio.paused));
- }
- if(button&&audio){
-  button.addEventListener('click',()=>{
-   if(audio.paused){const task=audio.play();if(task&&typeof task.catch==='function'){
-    task.catch(()=>{if(note)note.textContent=(T[document.documentElement.lang]||T.es).listenError;renderPlay()});
-   }}else audio.pause();
-  });
-  ['play','pause','ended'].forEach(ev=>audio.addEventListener(ev,renderPlay));
- }
  const init=()=>{
-  movePhotoCredits();keepPlaceLabelsOutsidePhotos();translate();renderPlay();
+  movePhotoCredits();keepPlaceLabelsOutsidePhotos();translate();
   const mobileMenu=document.querySelector('.tm-mobile-menu');
   if(mobileMenu){
     mobileMenu.addEventListener('click',event=>{
@@ -191,10 +176,10 @@
   }
   const placeHost=document.getElementById('cards');
   if(placeHost)new MutationObserver(keepPlaceLabelsOutsidePhotos).observe(placeHost,{childList:true,subtree:true});
-  new MutationObserver(()=>{translate();renderPlay()})
+  new MutationObserver(()=>{translate()})
     .observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
   document.getElementById('lang')?.addEventListener('change',()=>{
-    queueMicrotask(()=>{translate();renderPlay()});
+    queueMicrotask(()=>{translate()});
   });
  };
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});

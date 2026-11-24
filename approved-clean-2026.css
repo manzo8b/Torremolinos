@@ -1119,3 +1119,57 @@ body.torre-home main#main #agenda-home.review-agenda .agenda-home-btn{
  body.torre-home main#main #agenda-home.review-agenda .review-agenda-grid{grid-template-columns:minmax(0,1fr)!important}
  body.torre-home main#main #agenda-home.review-agenda .review-agenda-footer{align-items:flex-start;flex-direction:column}
 }
+
+/* HOME REVIEW §8 · approved original Sound image, single native player.
+   Keep the independent Hero shortcut and existing music destinations. */
+body.torre-home main#main #sound.review-sound .music-shell{
+ display:grid!important;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)!important;
+ grid-template-rows:auto!important;gap:0!important;align-items:stretch!important;
+ background:var(--ac-ink)!important;overflow:hidden!important;min-height:0!important;max-height:none!important;
+}
+body.torre-home main#main #sound.review-sound .music-shell .music-body{
+ display:flex!important;flex-direction:column!important;justify-content:center!important;
+ align-items:flex-start!important;gap:7px!important;min-width:0!important;min-height:0!important;
+ padding:clamp(18px,2.6vw,30px)!important;
+}
+body.torre-home main#main #sound.review-sound .music-shell .music-body h2#sound-heading{margin:0!important}
+body.torre-home main#main #sound.review-sound .music-shell .music-body :is(.approved-sound-lead,.approved-sound-note){
+ margin:0!important;line-height:1.4!important;
+}
+body.torre-home main#main #sound.review-sound .music-shell .music-art{
+ position:relative!important;min-width:0!important;min-height:210px!important;height:auto!important;
+ align-self:stretch!important;overflow:hidden!important;padding:0!important;margin:0!important;border-radius:0!important;
+}
+body.torre-home main#main #sound.review-sound .music-shell .music-art img.music-album-art{
+ position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+ object-fit:cover!important;object-position:center!important;transform:none!important;
+}
+body.torre-home main#main #sound.review-sound .music-shell .music-body audio{
+ display:block!important;width:100%!important;max-width:420px!important;height:44px!important;
+ margin:4px 0 0!important;
+}
+body.torre-home main#main #sound.review-sound .music-shell .music-body .approved-music-more{
+ margin:0!important;width:100%!important;
+}
+body.torre-home main#main #sound.review-sound .music-shell .music-body .approved-music-more summary{
+ min-height:44px!important;color:var(--review-sand)!important;font-size:13px!important;
+}
+body.torre-home main#main #sound.review-sound .music-shell .music-body .music-links a{
+ min-height:44px!important;color:var(--review-sand)!important;border:1px solid var(--review-sand)!important;
+ background:transparent!important;box-shadow:none!important;
+}
+body.torre-home main#main #sound.review-sound .music-shell .music-body small.approved-sound-credit{
+ display:block!important;position:static!important;clip-path:none!important;width:auto!important;height:auto!important;
+ color:var(--review-sand)!important;background:transparent!important;opacity:1!important;
+ font-size:11px!important;line-height:1.4!important;margin:0!important;padding:0!important;
+ white-space:normal!important;
+}
+@media(max-width:950px){
+ body.torre-home main#main #sound.review-sound .music-shell{
+  display:flex!important;flex-direction:column-reverse!important;
+ }
+ body.torre-home main#main #sound.review-sound .music-shell .music-art{
+  width:100%!important;height:clamp(170px,38vw,240px)!important;min-height:170px!important;
+ }
+ body.torre-home main#main #sound.review-sound .music-shell .music-body{padding:18px 20px!important}
+}

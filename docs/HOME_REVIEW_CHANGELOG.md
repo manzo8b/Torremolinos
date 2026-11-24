@@ -37,5 +37,10 @@ Baseline main d8c92b1c6a9e8d1d6893020834c7c3f1d6d4836b. PR #21 separata, non inc
 
 - MF: «ottimo lavoro. procedi». Approvata impostazione Stories del commit 389c1df; collaudo tecnico globale distinto.
 
-## §7 — Agenda · in attesa di validazione MF
+## §7 — Agenda · approvazione estetica MF, 24 novembre 2026
 - Sostituita la promozione foto+testo con un unico blocco di max tre eventi dinamici, letti esclusivamente da agenda/events.json. Solo status confirmed e start >= giorno locale Europe/Madrid, in ordine cronologico; eventi già iniziati esclusi, watchlist esclusa. Data editoriale reale editorialUpdated, non data di scansione o di visita; nessuna falsa riconferma. Titoli e luoghi originali del dataset, UI e date localizzate 6 lingue, stato vuoto/errore, ricalcolo al cambio giorno/lingua e al ritorno nella pagina. Nessuna foto; un solo CTA agenda con lingua. Script separato in precache. Dataset e pagina Agenda interna invariati. Test deterministico al 24/11: Gala Drag 28/11, Fetish Awards 4–8/12, Ellas Party 12/12. Ultima verifica registrata 02/11/2026. Screenshot quattro risoluzioni e controllo automatico richiesti; nessun merge/deploy.
+
+- MF: «ottimo procedi». Approvata Agenda del commit 3d68dcf; esito tecnico separato.
+
+## §8 — Sound · in attesa di validazione MF
+- Recuperata dalla Libreria l'immagine originale approvata «Cuffie avorio sul Mediterraneo сия.png», 1536×1024, confrontata visivamente con asset WebP precedente 480×320 (11698 byte). Riesportazione identica nei contenuti, senza generazione o upscale: 800×533 (94358 byte) e 1536×1024 (240378 byte), SHA Git verificati; mantenuto originale vecchio nel repo. Srcset responsive, dimensioni esplicite, lazy, variante 800 in cache. Navy esistente, fascia compatta e media senza vuoti. Rimosso il pulsante custom dal markup e handler duplicato; player nativo unico nella sezione, preload none, niente autoplay, scorciatoia Hero invariata. Credito IA sempre visibile fuori immagine, alt/label localizzati, Altri ascolti e tre destinazioni preservati. Test automatici e screenshot dedicati quattro larghezze. Nessuna modifica alle sezioni approvate, no merge/deploy.

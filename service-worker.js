@@ -13,7 +13,7 @@ const FILES=[
   './album-motion.js','./coastal-light.css','./refinement.css','./v06.css','./listen/','./listen/content.js','./legal/','./legal/styles.css','./legal/app.js','./legal/data.js',
   './assets/photos/home-review/home-mangiare-800.webp','./assets/photos/home-review/home-agenda-672.webp','./assets/photos/home-review/home-gallery-800.webp','./assets/photos/home-review/home-stories-800.webp',
   './assets/photos/home-review/gallery-forme-800.webp','./assets/photos/home-review/gallery-luce-800.webp','./assets/photos/home-review/gallery-dettagli-800.webp',
-  './assets/photos/hero-apple-2026.webp','./assets/photos/hero-apple-2026-mobile.webp','./assets/photos/sound-headphones-torremolinos.webp',
+  './assets/photos/hero-apple-2026.webp','./assets/photos/hero-apple-2026-mobile.webp','./assets/photos/sound-headphones-torremolinos.webp','./assets/photos/home-review/sound-headphones-800.webp',
   './assets/photos/hero-torremolinos-desktop.webp',
   './assets/photos/hero-torremolinos-mobile.webp',
   './assets/photos/playa-palmeras-panorama.webp',

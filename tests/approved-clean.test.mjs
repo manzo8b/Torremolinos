@@ -51,7 +51,7 @@ test('chosen Sound image exists, is WebP, and is disclosed as an AI illustration
  assert.ok(photo.length>10000,'missing or corrupt Sound image');
  assert.equal(photo.toString('ascii',0,4),'RIFF');
  assert.equal(photo.toString('ascii',8,12),'WEBP');
- assert.match(page,/src="assets\/photos\/sound-headphones-torremolinos\.webp"/);
+ assert.match(page,/src="assets\/photos\/home-review\/sound-headphones-800\.webp"/);
  assert.match(page,/Immagine illustrativa generata con IA/);
  assert.doesNotMatch(page,/src="assets\/photos\/mar-mediterraneo\.webp"/);
  assert.match(sw,/\.\/assets\/photos\/sound-headphones-torremolinos\.webp/);
@@ -113,4 +113,22 @@ test('Home Agenda derives the next three confirmed future events and real editor
  assert.equal((section.match(/class="agenda-home-btn"/g)||[]).length,1);
  assert.match(read('home-agenda.js'),/data\.editorialUpdated/);
  assert.ok(sw.includes("'./home-agenda.js'"));
+});
+
+test('Sound review restores approved image from original, native player only, no autoplay',()=>{
+ const section=page.match(/<section[^>]*id="sound"[\s\S]*?<\/section>/)[0];
+ for(const name of ['sound-headphones-800.webp','sound-headphones-1536.webp']){
+  const bytes=readFileSync(new URL('../assets/photos/home-review/'+name,import.meta.url));
+  assert.equal(bytes.toString('ascii',0,4),'RIFF');
+  assert.equal(bytes.toString('ascii',8,12),'WEBP');
+  assert.ok(bytes.length<=250000,name);
+  assert.ok(section.includes(name),name);
+ }
+ assert.equal((section.match(/<audio\b/g)||[]).length,1);
+ assert.match(section,/<audio[^>]*\bcontrols\b[^>]*preload="none"/);
+ assert.doesNotMatch(section,/\bautoplay\b|id="approvedSoundPlay"/);
+ assert.match(section,/Immagine illustrativa generata con IA · Musica LUNE_X/);
+ assert.match(section,/class="approved-music-more"/);
+ assert.ok(sw.includes('sound-headphones-800.webp'));
+ assert.ok(page.includes('id="heroMusicBtn"'));
 });

@@ -344,8 +344,8 @@ try{
       const approvedSound=await page.locator('#sound .music-album-art').evaluate(img=>({
         src:img.currentSrc,width:img.naturalWidth,height:img.naturalHeight,complete:img.complete
       }));
-      assert.ok(approvedSound.src.includes('sound-headphones-torremolinos.webp'),'old Sound image at '+width);
-      assert.ok(approvedSound.complete&&approvedSound.width>=480&&approvedSound.height>=320,
+      assert.ok(approvedSound.src.includes('sound-headphones-'),'old Sound image at '+width);
+      assert.ok(approvedSound.complete&&approvedSound.width>=800&&approvedSound.height>=533,
         'approved Sound image did not load at '+width+': '+JSON.stringify(approvedSound));
       await page.locator('#cards').evaluate(el=>el.scrollLeft=0);
       await page.evaluate(()=>window.scrollTo(0,0));
