@@ -19,9 +19,27 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install international build browser
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.57.0
+          npx playwright install --with-deps chromium
+      - name: Build and verify all international editions
+        run: |
+          node scripts/build-international.mjs
+          node scripts/check-international.mjs
+      - name: Preserve international build report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: international-release-report
+          path: artifacts/international-report.json
+          if-no-files-found: ignore
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: artifacts/international-site
       # Give the Actions artifact API time to index the uploaded github-pages artifact.
       # Prevents the observed 2026-11-24 metadata lookup race on the first deployment.
       - name: Wait for Pages artifact indexing

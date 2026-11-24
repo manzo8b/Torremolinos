@@ -1,6 +1,6 @@
 /* MANZO Web Production v1.3 — multilingual accessibility layer.
    Accessible labels and browser metadata follow the selected UI language.
-   The canonical page remains Spanish; this does not create language-specific SEO URLs.
+   The source template remains Spanish; the international build generates self-canonical editions.
    No tracking, external requests or additional dependencies. */
 (() => {
   'use strict';
