@@ -484,6 +484,15 @@ try{
   await page.goto(base+'/stories/?lang=it',{waitUntil:'domcontentloaded'});await page.waitForURL('**/stories/it.html');
   await page.locator('#lang').selectOption('fr');await page.waitForURL('**/stories/fr.html');
   console.log('PASS Stories six localized indices and language switch');
+  for(const lang of ['es','en','it','de','fr','ru']){
+    const path='stories/torremolinos-mucho-mas-que-sol-y-playa'+(lang==='es'?'':'-'+lang)+'.html';
+    assert.equal((await page.goto(base+'/'+path,{waitUntil:'domcontentloaded'})).status(),200);
+    assert.equal(await page.locator('html').getAttribute('lang'),lang);
+    assert.equal(await page.locator('.prose h2[id^="section-"]').count(),5);
+    assert.equal(await page.locator('.article-languages a').count(),6);
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+3),'Dossier overflow '+lang);
+  }
+  console.log('PASS first full dossier in six languages');
   const seasonal='stories/navidad-ano-nuevo-torremolinos-malaga-2026-2027.html';
   const holidayResponse=await page.goto(base+'/'+seasonal,{waitUntil:'domcontentloaded',timeout:30000});
   assert.equal(holidayResponse.status(),200,'seasonal article is unavailable');

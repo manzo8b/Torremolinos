@@ -23,6 +23,7 @@ const FILES=[
   './assets/photos/paseo-centro.webp',
   './stories/','./stories/article.css','./stories/language.js','./stories/index-language.css','./stories/en.html','./stories/it.html','./stories/de.html','./stories/fr.html','./stories/ru.html','./agenda/', './agenda/styles.css', './agenda/app.js', './agenda/events.json','./home-agenda.js', './comer/', './comer/styles.css', './comer/data.js', './comer/app.js',
   './stories/torremolinos-mucho-mas-que-sol-y-playa.html',
+  './stories/torremolinos-mucho-mas-que-sol-y-playa-en.html','./stories/torremolinos-mucho-mas-que-sol-y-playa-it.html','./stories/torremolinos-mucho-mas-que-sol-y-playa-de.html','./stories/torremolinos-mucho-mas-que-sol-y-playa-fr.html','./stories/torremolinos-mucho-mas-que-sol-y-playa-ru.html',
   './stories/la-nogalera-donde-la-noche-tiene-historia.html',
   './stories/pasaje-begona-memoria-de-libertad.html',
   './stories/san-miguel-la-fiesta-que-saca-torremolinos-a-la-calle.html',
