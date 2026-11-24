@@ -46,10 +46,18 @@
    const dest=localize(a.getAttribute('href'),lang,location.href,root);
    if(dest&&a.href!==dest.href)a.href=dest.href;
  };
+ function restoreMetadata(){
+   if(document.title!==metaTitle)document.title=metaTitle;
+   const m=document.querySelector('meta[name="description"]');
+   if(description&&m&&m.content!==description)m.content=description;
+ }
  function ready(){
    const clean=new URL(location.href);clean.searchParams.delete('lang');history.replaceState(history.state,'',clean.href);
-   document.title=metaTitle;
-   if(description)document.querySelector('meta[name="description"]')?.setAttribute('content',description);
+   restoreMetadata();
+   const title=document.querySelector('title'),m=document.querySelector('meta[name="description"]');
+   const observer=new MutationObserver(restoreMetadata);
+   if(title)observer.observe(title,{childList:true,characterData:true,subtree:true});
+   if(m)observer.observe(m,{attributes:true,attributeFilter:['content']});
    document.querySelectorAll('a[href]').forEach(rewrite);
  }
  // Capture before the app's own in-place language listener. Same-origin
@@ -62,5 +70,5 @@
    if(target){try{localStorage.setItem('torremolinos.lang',select.value)}catch{}location.assign(target.href)}
  },true);
  document.addEventListener('click',event=>rewrite(event.target.closest?.('a[href]')),true);
- document.addEventListener('DOMContentLoaded',()=>queueMicrotask(ready),{once:true});
+ document.addEventListener('DOMContentLoaded',()=>setTimeout(ready,0),{once:true});
 })();

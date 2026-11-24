@@ -27,7 +27,8 @@ try{
      assert.equal(response.status(),200,dest);
      await page.waitForFunction(l=>document.documentElement.lang===l&&!new URL(location.href).searchParams.has('lang'),lang,{timeout:10000});
      assert.equal(await page.locator('#lang,#language').inputValue(),lang,dest+' language selection');
-     assert.equal(await page.title(),META[route.path][lang][0],dest+' metadata title');
+     await page.waitForFunction(t=>document.title===t,META[route.path][lang][0]);
+     assert.equal(await page.locator('meta[name=description]').getAttribute('content'),META[route.path][lang][1],dest+' metadata description');
      assert.equal(await page.locator('link[rel=canonical]').getAttribute('href'),BASE+dest);
      assert.equal(await page.locator('link[rel=alternate][hreflang]').count(),route.index?7:0);
      assert.equal(await page.locator('meta[name=robots]').getAttribute('content'),route.index||lang==='es'?'index,follow':'noindex,follow');
@@ -37,11 +38,11 @@ try{
      report.checks.push({path:dest,width,pass:true});
    }
    // Same-origin preferences, planner state and legacy query URLs.
-   await page.goto(base+'?lang=it',{waitUntil:'domcontentloaded'});await page.waitForURL(base+'it.html');
+   await page.goto(base+'?lang=it',{waitUntil:'domcontentloaded'}).catch(e=>{if(!String(e).includes('ERR_ABORTED'))throw e});await page.waitForURL(base+'it.html');
    await page.evaluate(()=>localStorage.setItem('torremolinos.favs',JSON.stringify(['nogalera'])));
    await page.locator('#lang').selectOption('fr');await page.waitForURL(base+'fr.html');
    assert.equal(await page.evaluate(()=>localStorage.getItem('torremolinos.favs')),'["nogalera"]');
-   await page.goto(base+'tu-torremolinos/?lang=it&plan=nogalera,bajondillo',{waitUntil:'domcontentloaded'});
+   await page.goto(base+'tu-torremolinos/?lang=it&plan=nogalera,bajondillo',{waitUntil:'domcontentloaded'}).catch(e=>{if(!String(e).includes('ERR_ABORTED'))throw e});
    await page.waitForURL(u=>u.pathname.endsWith('/tu-torremolinos/it.html'));
    assert.equal(new URL(page.url()).searchParams.get('plan'),'nogalera,bajondillo');
    await page.locator('#lang').selectOption('de');

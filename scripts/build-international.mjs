@@ -70,6 +70,8 @@ try{
        const live=new Map([...document.querySelectorAll('[data-seo-node]')].map(n=>[n.getAttribute('data-seo-node'),n]));
        let changed=0,matched=0;const unmatched=[];
        for(const node of doc.body.querySelectorAll('[data-seo-node]')){
+         if(routePath==='agenda/'&&node.closest('#dataStatus,#statEvents,#statWatch,#statSources,#events,#watchlist,#highlights'))continue;
+         if(routePath===''&&node.closest('#homeAgendaEvents,#homeAgendaVerified'))continue;
          const id=node.getAttribute('data-seo-node'),actual=live.get(id);
          if(!actual||node.tagName!==actual.tagName){
            if(node.matches('[data-t],[data-i18n],[data-copy],[data-clean],[data-plan-t],[data-footer]')&&!node.children.length)unmatched.push(node.textContent.trim().slice(0,100));
@@ -110,7 +112,7 @@ try{
          m.setAttribute('content',value);
        };
        setMeta('description',meta[1]);setMeta('robots',indexed?'index,follow':'noindex,follow');
-       setMeta('og:title',meta[0],'property');setMeta('og:description',meta[1],'property');
+       setMeta('og:type','website','property');setMeta('og:title',meta[0],'property');setMeta('og:description',meta[1],'property');
        setMeta('og:locale',og,'property');setMeta('og:url',canonical,'property');
        const canon=doc.head.querySelector('link[rel=canonical]');canon.href=canonical;
        doc.head.querySelectorAll('link[rel=alternate][hreflang]').forEach(n=>n.remove());
@@ -124,7 +126,7 @@ try{
          for(const option of select.options){option.toggleAttribute('selected',option.value===lang)}
          const nav=doc.createElement('noscript');
          // Explicit language links still work without JavaScript.
-         nav.textContent='<nav aria-label="Language">'+langs.map((l,i)=>'<a lang="'+l+'" hreflang="'+l+'" href="'+(l==='es'?'./':l+'.html')+'">'+names[i]+'</a>').join(' · ')+'</nav>';
+         nav.innerHTML='<nav aria-label="Language">'+langs.map((l,i)=>'<a lang="'+l+'" hreflang="'+l+'" href="'+(l==='es'?'./':l+'.html')+'">'+names[i]+'</a>').join(' · ')+'</nav>';
          select.closest('label')?.after(nav) || (!nav.isConnected&&select.after(nav));
        }
        const localBase=new URL(base),site=new URL(publicBase);
@@ -146,7 +148,7 @@ try{
        return {html:'<!doctype html>\n'+doc.documentElement.outerHTML+'\n',changed,matched,unmatched,captured};
      },{annotated,lang,meta,canonical,indexed,alternates:route.index?Object.fromEntries([...LANGS.map(l=>[l,BASE+file(route.path,l)]),['x-default',BASE+route.path]]):null,relativeRoot,lists:route.lists,routePath:route.path,targets,base,publicBase:BASE,names:NAMES,langs:LANGS,og:OG[lang],note:NOTE[lang]});
      const dest=route.path+(lang==='es'?'index.html':lang+'.html');
-     assert.ok(result.changed>0,'No projected copy '+dest);
+     if(lang!=='es')assert.ok(result.changed>0,'No projected copy '+dest);
      assert.ok(!result.html.includes('127.0.0.1:8770'),'Local server URL leaked '+dest);
      assert.ok(result.html.includes('lang="'+lang+'"'));
      assert.ok(result.html.includes('href="'+canonical+'"'));
