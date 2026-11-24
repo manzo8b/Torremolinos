@@ -40,7 +40,7 @@ test('Only TORREMOLINOS caches are ever evicted, never other projects',async()=>
  let operation;
  events.activate({waitUntil:p=>{operation=p}});
  await operation;
- assert.deepEqual(deleted,['torremolinos-v28']);
+ assert.deepEqual(deleted,['torremolinos-v28','torremolinos-v29']);
  assert.equal(claimed.length,1);
  assert.match(sw,/CACHE_PREFIX='torremolinos-'/);
  assert.match(sw,/keys\.filter\(key=>key\.startsWith\(CACHE_PREFIX\)&&key!==CACHE\)/);
@@ -77,7 +77,7 @@ test('PWA still has a relative manifest and explicit offline fallback',()=>{
  assert.equal(manifest.scope,'./');
  assert.match(sw,/req\.mode/);
  assert.match(sw,/offline\.html/);
- assert.match(sw,/torremolinos-v29/);
+ assert.match(sw,/torremolinos-v30/);
 });
 test('Build-time cache revision depends on precache bytes and stays deterministic',()=>{
  const folder=join(root,'artifacts','sw-cache-fixture');
