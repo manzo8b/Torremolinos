@@ -24,7 +24,7 @@ REQUIRED={
  "offline.html","manifest.webmanifest","service-worker.js",
  "sitemap.xml","robots.txt",".nojekyll",
  "footer-professional-2026.css","footer-professional-2026.js",
- "approved-clean-2026.css","approved-clean-2026.js","home-render.css",
+ "approved-clean-2026.css","approved-clean-2026.js","home-render.css","gallery-render.css","home-initial.js",
  "assets/photos/sound-headphones-torremolinos.webp"
 }
 FORBIDDEN={

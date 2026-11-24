@@ -6,7 +6,7 @@ from html.parser import HTMLParser
 from xml.etree import ElementTree as ET
 from urllib.parse import urljoin
 from audit_clean_release import local_target
-from build_portable_site import distribution_files,BUNDLE
+from build_portable_site import distribution_files,BUNDLE,GENERATED
 
 class Meta(HTMLParser):
  def __init__(self):
@@ -59,7 +59,7 @@ def audit(dist,base):
  require(set(expected)==set(actual),'distribution file inventory differs from expected optimized sources')
  for name in set(expected)&set(actual):
   require(actual[name].read_bytes()==expected[name],'unexpected bytes '+name)
- require('./'+BUNDLE in precache,'bundle missing from precache')
+ for name in GENERATED:require('./'+name in precache,'generated file missing from precache '+name)
  require(optimization['homeLocalStylesAfter']==1,'Home bundle count mismatch')
  require('href="/Torremolinos/' not in (dist/'offline.html').read_text('utf8'),'hardcoded offline route')
  sizes=sorted([{'path':name,'bytes':p.stat().st_size} for name,p in actual.items()],key=lambda x:x['bytes'],reverse=True)

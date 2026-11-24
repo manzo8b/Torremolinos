@@ -11,7 +11,7 @@ const categories=['performance','accessibility','best-practices','seo'];
 const targets={performance:90,accessibility:95,'best-practices':95,seo:95,LCPms:2500,CLS:.1,TBTms:200};
 const plans=[{name:'home-control',route:'',mode:'mobile',runs:3,control:true},{name:'home',route:'',mode:'mobile',runs:3},{name:'home',route:'',mode:'desktop',runs:3},
  {name:'comer',route:'comer/',mode:'mobile',runs:1},{name:'agenda',route:'agenda/',mode:'mobile',runs:1},
- {name:'gallery',route:'gallery/',mode:'mobile',runs:1},{name:'listen',route:'listen/',mode:'mobile',runs:1},
+ {name:'gallery-control',route:'gallery/',mode:'mobile',runs:3,control:true},{name:'gallery',route:'gallery/',mode:'mobile',runs:3},{name:'listen',route:'listen/',mode:'mobile',runs:1},
  {name:'stories',route:'stories/',mode:'mobile',runs:1},{name:'nogalera',route:'explore/la-nogalera/',mode:'mobile',runs:1}];
 const records=[],errors=[];
 const median=xs=>{const a=[...xs].sort((x,y)=>x-y);return a[Math.floor(a.length/2)]};
@@ -49,7 +49,11 @@ try{
  const candidate=records.find(r=>r.name==='home'&&r.mode==='mobile')?.median;
  const comparison=control&&candidate?{control,candidate,performanceDelta:candidate.performance-control.performance,LCPDeltaMs:candidate.LCPms-control.LCPms,CLSDelta:candidate.CLS-control.CLS}:null;
  console.log('HOME CSS A/B '+JSON.stringify(comparison));
- writeFileSync(dir+'/summary.json',JSON.stringify({targets,records,errors,comparison,fieldINP:null,fieldStatus:'not measured; CrUX/Search Console access not verified',method:'Local dist, Lighthouse simulated throttling, external resources allowed, Home control and bundled mobile medians of three independent cold runs each, sequential in the same runner; desktop three and other routes one run; targets are diagnostic until reviewed. TBT is not INP. No real-user telemetry.',source:process.env.GITHUB_SHA||null},null,2)+'\n');
+ const galleryControl=records.find(r=>r.name==='gallery-control')?.median;
+ const galleryCandidate=records.find(r=>r.name==='gallery')?.median;
+ const galleryComparison=galleryControl&&galleryCandidate?{control:galleryControl,candidate:galleryCandidate,performanceDelta:galleryCandidate.performance-galleryControl.performance,LCPDeltaMs:galleryCandidate.LCPms-galleryControl.LCPms,CLSDelta:galleryCandidate.CLS-galleryControl.CLS}:null;
+ console.log('GALLERY A/B '+JSON.stringify(galleryComparison));
+ writeFileSync(dir+'/summary.json',JSON.stringify({targets,records,errors,comparison,galleryComparison,fieldINP:null,fieldStatus:'not measured; CrUX/Search Console access not verified',method:'Local dist, Lighthouse simulated throttling, external resources allowed, Home control and bundled mobile medians of three independent cold runs each, sequential in the same runner; desktop three, Gallery control/candidate three each, other routes one run; targets are diagnostic until reviewed. TBT is not INP. No real-user telemetry.',source:process.env.GITHUB_SHA||null},null,2)+'\n');
  assert.equal(errors.length,0,JSON.stringify(errors));
  console.log('Measured '+records.length+' route/device groups. Below-target metrics require triage before release; baseline workflow fails on missing measurements, not target misses.');
 }finally{server.kill('SIGTERM');controlServer.kill('SIGTERM')}

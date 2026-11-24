@@ -6,6 +6,7 @@ Only project canonical/schema/OG/sitemap links are moved; LUNE_X stays external.
 import argparse
 import hashlib
 import gzip
+import tinycss2
 import json
 import os
 import re
@@ -56,12 +57,63 @@ HOME_CSS=("editorial.css","v06.css","refinement.css","coastal-light.css",
           "narrative-v7.css","luminosity-v8.css","approved-clean-2026.css",
           "footer-professional-2026.css")
 BUNDLE="home-render.css"
+GALLERY_BUNDLE="gallery-render.css"
+HOME_RUNTIME="home-initial.js"
+GALLERY_CSS=HOME_CSS[3:12]
+GENERATED={BUNDLE,GALLERY_BUNDLE,HOME_RUNTIME}
 CSS_LINK=re.compile(r'<link rel="stylesheet" href="([^"]+\.css)">')
 UNSAFE_AT=re.compile(r"@(?:import|charset|namespace)\b",re.I)
 
+# A token-aware selector split is essential: commas inside :is(), :not(),
+# attribute values and other functions are not selector-list separators.
+def route_css(css,body_class,coast):
+    import re
+    def incompatible(tokens):
+        s=tinycss2.serialize(tokens).strip()
+        # Only test an explicit leading body compound, never a descendant.
+        if not re.match(r"^body(?=[.\[:#\s>+~]|$)",s,re.I):return False
+        rest=s[4:]
+        # Match only the contiguous compound immediately following body.
+        # Deliberately retain uncertain/complex selectors instead of guessing.
+        while rest:
+            m=re.match(r"^\.(torre-home|torre-comer|torre-agenda|torre-seasonal)(?![\w-])",rest)
+            if m:
+                if m.group(1)!=body_class:return True
+                rest=rest[m.end():];continue
+            m=re.match(r"^\[data-coast\s*=\s*(['\"]?)([a-z-]+)\1\]",rest,re.I)
+            if m:
+                if m.group(2)!=coast:return True
+                rest=rest[m.end():];continue
+            if rest.startswith("[data-coast]"):
+                rest=rest[len("[data-coast]"):];continue
+            if rest.startswith(":not(.torre-home)"):
+                if body_class=="torre-home":return True
+                rest=rest[len(":not(.torre-home)"):];continue
+            break
+        return False
+    def split(tokens):
+        groups=[[]]
+        for t in tokens:
+            if t.type=="literal" and t.value==",":groups.append([])
+            else:groups[-1].append(t)
+        return groups
+    def visit(rules):
+        out=[]
+        for r in rules:
+            if r.type=="error":raise ValueError("CSS parse error: "+r.message)
+            if r.type=="qualified-rule":
+                selectors=[tinycss2.serialize(s).strip() for s in split(r.prelude) if not incompatible(s)]
+                if selectors:out.append(",".join(selectors)+"{"+tinycss2.serialize(r.content)+"}")
+            elif r.type=="at-rule" and r.content is not None and r.lower_at_keyword in {"media","supports","container","layer"}:
+                body=visit(tinycss2.parse_rule_list(r.content,skip_comments=True,skip_whitespace=True))
+                if body:out.append("@"+r.at_keyword+tinycss2.serialize(r.prelude)+"{"+body+"}")
+            else:out.append(tinycss2.serialize([r]))
+        return "\n".join(out)
+    return visit(tinycss2.parse_stylesheet(css,skip_comments=True,skip_whitespace=True))
+
 def distribution_files(site, optimize=True):
     sources={p.relative_to(ROOT).as_posix():p for p in source_files()}
-    if BUNDLE in sources:raise ValueError("Generated bundle must not be committed in source")
+    if GENERATED.intersection(sources):raise ValueError("Generated files must not be committed in source")
     files={}
     for name,p in sources.items():
         value=p.read_bytes()
@@ -77,26 +129,53 @@ def distribution_files(site, optimize=True):
     # link, remove the other 13 links. All styles follow the inline Home CSS.
     if head.rfind("</style>")>head.index(CSS_LINK.search(head).group(0)):
         raise ValueError("Inline style interleaved with bundle inputs")
-    chunks=[]
-    for name in HOME_CSS:
-        css=files[name].decode("utf8")
-        if UNSAFE_AT.search(css):raise ValueError("CSS at-rule requires manual handling: "+name)
-        chunks.append("/* TORREMOLINOS: "+name+" */\n"+css+"\n")
-    combined="\n".join(chunks).encode("utf8")
+    # Route-aware CSS: remove only selectors provably excluded by the fixed
+    # body class or data-coast value; no coverage-based removal or async CSS.
+    def combine(names,body_class,coast):
+        chunks=[]
+        for name in names:
+            css=files[name].decode("utf8")
+            if UNSAFE_AT.search(css):raise ValueError("CSS at-rule requires manual handling: "+name)
+            chunks.append("/* "+name+" */\n"+route_css(css,body_class,coast))
+        return "\n".join(chunks).encode("utf8")
+    combined=combine(HOME_CSS,"torre-home","green")
     count=0
     def link(match):
         nonlocal count
         count+=1
         return '<link rel="stylesheet" href="'+BUNDLE+'">' if count==1 else ''
     head=CSS_LINK.sub(link,head)
+    # Main inline script was executed before deferred album-motion and the
+    # remaining runtime scripts. Preserve that order with external defer.
+    inline=re.compile(r'<script>([\s\S]*?)</script>')
+    matches=list(inline.finditer(tail))
+    if len(matches)!=1:raise ValueError("Unexpected Home inline scripts")
+    script=matches[0].group(1)
+    album='<script src="album-motion.js" defer></script>'
+    if head.count(album)!=1:raise ValueError("Unexpected album-motion script")
+    head=head.replace(album,"")
+    tail=inline.sub('<script src="'+HOME_RUNTIME+'" defer></script>'+album,tail,count=1)
     files["index.html"]=(head+"</head>"+tail).encode("utf8")
+    files[HOME_RUNTIME]=script.encode("utf8")
     files[BUNDLE]=combined
+    gallery=files["gallery/index.html"].decode("utf8")
+    gh,gt=gallery.split("</head>",1)
+    links=re.compile(r'<link rel="stylesheet" href="\.\./([^"]+\.css)">')
+    if tuple(links.findall(gh))!=GALLERY_CSS:raise ValueError("Unexpected Gallery cascade")
+    gallery_combined=combine(GALLERY_CSS,None,"blue")
+    gcount=0
+    def gallery_link(match):
+        nonlocal gcount
+        gcount+=1
+        return '<link rel="stylesheet" href="../'+GALLERY_BUNDLE+'">' if gcount==1 else ''
+    files["gallery/index.html"]=(links.sub(gallery_link,gh)+"</head>"+gt).encode("utf8")
+    files[GALLERY_BUNDLE]=gallery_combined
     # Dist uses its own deterministic revision, including all assets and SW
     # logic. Source remains the separately testable v35. Avoid stale bundles
     # on upgrade or rollback without touching caches of other projects.
     sw=files["service-worker.js"].decode("utf8")
     if "const FILES=[" not in sw:raise ValueError("Missing precache array")
-    sw=sw.replace("const FILES=[","const FILES=[\n  './"+BUNDLE+"',",1)
+    sw=sw.replace("const FILES=[","const FILES=[\n  "+",".join("'./"+n+"'" for n in sorted(GENERATED))+",",1)
     files["service-worker.js"]=sw.encode("utf8")
     digest=hashlib.sha256()
     for name,value in sorted(files.items()):
@@ -110,7 +189,10 @@ def distribution_files(site, optimize=True):
       "bundleGzipBytes":len(gzip.compress(combined,mtime=0)),
       "originalCssBytes":sum(len(files[n]) for n in HOME_CSS),
       "originalCssGzipBytes":sum(len(gzip.compress(files[n],mtime=0)) for n in HOME_CSS),
-      "cache":cache,"generated":[BUNDLE],"transformed":["index.html","service-worker.js"]})
+      "cache":cache,"generated":sorted(GENERATED),"transformed":["index.html","gallery/index.html","service-worker.js"],
+      "galleryBundleBytes":len(gallery_combined),"galleryOriginalCssBytes":sum(len(files[n]) for n in GALLERY_CSS),
+      "galleryLocalStylesBefore":len(GALLERY_CSS)+1,"galleryLocalStylesAfter":2,
+      "homeExternalRuntimeBytes":len(files[HOME_RUNTIME]),"homeHtmlBytes":len(files["index.html"])})
     return files,details
 
 def build(origin,base,out,report,optimize=True):

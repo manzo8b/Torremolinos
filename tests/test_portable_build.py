@@ -28,13 +28,22 @@ class Portability(unittest.TestCase):
             meta=json.loads(report.read_text("utf8"))
             self.assertEqual(meta["siteBase"],CURRENT)
             self.assertGreater(meta["fileCount"],75)
-            self.assertEqual(set(meta["rewritten"]),{"index.html","service-worker.js","home-render.css"})
+            self.assertEqual(set(meta["rewritten"]),{"index.html","gallery/index.html","service-worker.js","home-render.css","gallery-render.css","home-initial.js"})
             opt=meta["optimization"]
             self.assertEqual(opt["homeLocalStylesBefore"],14)
             self.assertEqual(opt["homeLocalStylesAfter"],1)
             self.assertEqual(opt["bundleInputs"],re.findall(r'<link rel="stylesheet" href="([^"]+\.css)">',(ROOT/"index.html").read_text("utf8").split("</head>")[0]))
-            expected="\n".join("/* TORREMOLINOS: "+n+" */\n"+(ROOT/n).read_text("utf8")+"\n" for n in opt["bundleInputs"])
-            self.assertEqual((out/"home-render.css").read_text("utf8"),expected)
+            self.assertLess(opt["bundleBytes"],opt["originalCssBytes"])
+            self.assertLess(opt["galleryBundleBytes"],opt["galleryOriginalCssBytes"])
+            self.assertEqual(opt["galleryLocalStylesAfter"],2)
+            source=(ROOT/"index.html").read_text("utf8")
+            initial=re.search(r'<script>([\s\S]*?)</script>',source).group(1)
+            self.assertEqual((out/"home-initial.js").read_text("utf8"),initial)
+            html=(out/"index.html").read_text("utf8")
+            self.assertNotIn(initial,html)
+            self.assertIn('src="home-initial.js" defer',html)
+            self.assertLess(html.index('src="home-initial.js"'),html.index('src="album-motion.js"'))
+            self.assertIn('href="../gallery-render.css"',(out/"gallery/index.html").read_text("utf8"))
             self.assertEqual(hashlib.sha256((out/"home-render.css").read_bytes()).hexdigest(),opt["bundleSHA256"])
             self.assertIn("./home-render.css",(out/"service-worker.js").read_text("utf8"))
             self.assertRegex(opt["cache"],r"^torremolinos-h[0-9a-f]{16}$")
@@ -91,6 +100,21 @@ class Portability(unittest.TestCase):
                 self.assertEqual(result.returncode,0,result.stderr)
             self.assertEqual((root/"a"/"service-worker.js").read_bytes(),(root/"b"/"service-worker.js").read_bytes())
             self.assertEqual((root/"a"/"home-render.css").read_bytes(),(root/"b"/"home-render.css").read_bytes())
+
+    def test_route_css_only_removes_provably_impossible_selectors(self):
+        sys.path.insert(0,str(ROOT/"scripts"))
+        from build_portable_site import route_css
+        css='body.torre-home .a,body[data-coast="blue"] :is(.b,.c),.universal{color:red}@media(max-width:660px){body[data-coast]:not(.torre-home) .d{color:blue}body.torre-home .e{color:green}}@keyframes x{from{opacity:0}to{opacity:1}}'
+        home=route_css(css,"torre-home","green")
+        gallery=route_css(css,None,"blue")
+        self.assertIn('body.torre-home .a',home)
+        self.assertIn('.universal',home)
+        self.assertNotIn('body[data-coast="blue"]',home)
+        self.assertNotIn('body[data-coast]:not(.torre-home)',home)
+        self.assertIn('body[data-coast="blue"] :is(.b,.c)',gallery)
+        self.assertNotIn('body.torre-home .a',gallery)
+        self.assertIn('@keyframes x',gallery)
+        self.assertIn('.universal',gallery)
 
     def test_refuse_invalid_targets(self):
         with tempfile.TemporaryDirectory() as tmp:
