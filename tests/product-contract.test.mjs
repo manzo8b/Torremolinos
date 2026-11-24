@@ -375,7 +375,7 @@ test('v8 loads after v7 on all public pages, and narrative asset cached offline'
  assert.match(sw,/luminosity-v8.js/);
  assert.match(sw,/navidad-ano-nuevo-torremolinos-malaga-2026-2027.html/);
 });
-test('sourced seasonal article separates verified 2026 facts from unconfirmed 2025 programme',()=>{
+test('sourced seasonal article uses published 2026 programmes and identifies 2025 history',()=>{
  const path='stories/navidad-ano-nuevo-torremolinos-malaga-2026-2027.html';
  const html=file(path);
  const h1=[...html.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/g)];
@@ -389,7 +389,9 @@ test('sourced seasonal article separates verified 2026 facts from unconfirmed 20
  assert.match(html,/(?:Nochevieja|Tardevieja|31 diciembre)/);
  assert.match(html,/Campamentos deportivos/);
  assert.match(html,/programa municipal integral 2026–2027/);
- assert.match(html,/PROGRAMA 2026 PENDIENTE/);
+ assert.match(html,/Torremolinos_Programa-Navidad-2026\.pdf/);
+ assert.match(html,/180383\/COMUNICADO\.pdf/);
+ assert.doesNotMatch(html,/class="season-status pending"/);
  assert.match(html,/malaga\.eu\/el-ayuntamiento\/notas-de-prensa/);
  assert.match(html,/torremolinoscultura\.es\/eventos/);
  assert.match(html,/deportes\.torremolinos\.es\/campamentos/);
