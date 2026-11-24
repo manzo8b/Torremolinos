@@ -35,6 +35,9 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Four-width before/after pixel proof and contrast
         run: node candidate/tests/home-review-global.mjs
+      - name: Final mobile and desktop route audit
+        if: '!cancelled()'
+        run: node candidate/tests/final-review-browser.mjs
       - name: Lighthouse mobile before and after
         if: "!cancelled()"
         run: |
@@ -67,5 +70,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: home-review-G1-G6-before-after
-          path: artifacts/home-review/
+          path: |
+            artifacts/home-review/
+            artifacts/final-review/
           retention-days: 90
