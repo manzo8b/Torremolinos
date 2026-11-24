@@ -38,14 +38,21 @@ async function screenshot(port,route,width){
   else await request.abort();
  });
  const page=await context.newPage();
- const link='http://127.0.0.1:'+port+'/'+route;
+ const link='http://127.0.0.1:'+port+'/'+route+'?lang=es';
  const resp=await page.goto(link,{waitUntil:'domcontentloaded',timeout:30000});
  assert.equal(resp?.status(),200,link+' status');
  await page.evaluate(async()=>{
   if(document.fonts?.ready)await document.fonts.ready;
   window.scrollTo({top:0,left:0,behavior:'instant'});
  });
- await page.waitForTimeout(180);
+ await page.waitForLoadState('networkidle');
+ await page.evaluate(async()=>{
+  if(document.fonts?.ready)await document.fonts.ready;
+  const visible=[...document.images].filter(i=>{const r=i.getBoundingClientRect();return r.width&&r.height&&r.top<innerHeight&&r.bottom>0});
+  await Promise.all(visible.map(i=>i.decode().catch(()=>{})));
+  await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+ });
+ await page.waitForTimeout(250);
  const errors=[];
  const pageWidth=await page.evaluate(()=>document.documentElement.scrollWidth);
  assert.ok(pageWidth<=width+3,'horizontal overflow at '+route+' '+width);

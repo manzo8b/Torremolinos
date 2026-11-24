@@ -47,6 +47,9 @@ jobs:
         run: node tests/portable-browser-smoke.mjs
       - name: Verify fresh service worker installation, offline fallback and scope
         run: node tests/release-pwa-browser.mjs
+      - name: Test gallery reservation, Sound languages, headings and real Wikimedia images
+        if: ${{ !cancelled() && steps.stage.outcome == 'success' && steps.chromium.outcome == 'success' }}
+        run: node tests/release-perf-browser.mjs
       - name: Compare source and clean dist pixels on key routes
         if: ${{ !cancelled() && steps.stage.outcome == 'success' && steps.chromium.outcome == 'success' }}
         run: node tests/clean-release-visual.mjs

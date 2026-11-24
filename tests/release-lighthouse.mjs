@@ -29,14 +29,17 @@ try{
     const scores=Object.fromEntries(categories.map(c=>[c,Math.round(l.categories[c].score*100)]));
     const values={...scores,LCPms:l.audits['largest-contentful-paint'].numericValue,CLS:l.audits['cumulative-layout-shift'].numericValue,TBTms:l.audits['total-blocking-time'].numericValue};
     if(Object.values(values).some(v=>!Number.isFinite(v)))throw Error('Missing metric');
-    samples.push({id,values,version:l.lighthouseVersion,fetchTime:l.fetchTime,environment:l.environment,warnings:l.runWarnings||[],report:out});
+    const diagnostics=Object.fromEntries(['render-blocking-insight','cls-culprits-insight','lcp-discovery-insight','long-tasks','color-contrast','third-party-cookies','inspector-issues','errors-in-console'].map(key=>{
+      const a=l.audits[key];return [key,{score:a?.score??null,displayValue:a?.displayValue??null,items:Array.isArray(a?.details?.items)?a.details.items.length:null}];
+    }));
+    samples.push({id,values,diagnostics,version:l.lighthouseVersion,fetchTime:l.fetchTime,environment:l.environment,warnings:l.runWarnings||[],report:out});
    }catch(e){errors.push({id,error:e.message})}
   }
   if(samples.length!==p.runs){records.push({...p,samples,status:'incomplete'});continue;}
   const values=Object.fromEntries(Object.keys(targets).map(k=>[k,median(samples.map(s=>s.values[k]))]));
   const missed=Object.keys(targets).filter(k=>k.endsWith('ms')||k==='CLS'?values[k]>targets[k]:values[k]<targets[k]);
   records.push({...p,samples,median:values,missed,status:missed.length?'below-target':'target-met'});
-  console.log(JSON.stringify({page:p.name,mode:p.mode,median:values,missed}));
+  console.log(JSON.stringify({page:p.name,mode:p.mode,median:values,missed,diagnostics:samples[0].diagnostics}));
  }
  writeFileSync(dir+'/summary.json',JSON.stringify({targets,records,errors,fieldINP:null,fieldStatus:'not measured; CrUX/Search Console access not verified',method:'Local dist, Lighthouse simulated throttling, external resources allowed, Home medians of three independent cold runs, other routes one run; targets are diagnostic until reviewed. TBT is not INP. No real-user telemetry.',source:process.env.GITHUB_SHA||null},null,2)+'\n');
  assert.equal(errors.length,0,JSON.stringify(errors));
