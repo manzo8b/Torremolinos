@@ -39,7 +39,8 @@ function render(){
  verified.textContent=(validDate(data.editorialUpdated)?t.last+': '+full.format(asDate(data.editorialUpdated)):t.unknown)+'. '+t.check;
  const events=upcoming(data);
  if(!events.length){host.append(el('p','review-agenda-status',t.empty));return}
- for(const e of events){
+ for(const raw of events){
+  const e=window.TORRE_AGENDA_LOCALE?.entry(raw,lang)||raw;
   const card=el('article','review-agenda-card');card.dataset.eventId=e.id;card.dataset.start=e.start;
   const date=el('div','review-agenda-date');
   const start=el('time','',df.format(asDate(e.start)));start.dateTime=e.start;date.append(start);
