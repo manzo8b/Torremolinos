@@ -104,6 +104,14 @@ try{
     });
     assert.equal(heroSurface.background,'rgb(255, 255, 255)','legacy green hero remains at '+width);
     assert.equal(heroSurface.headingBg,'rgb(255, 255, 255)','hero heading still has a tinted panel at '+width);
+    await page.waitForFunction(()=>{
+      const main=document.querySelector('body.torre-home main#main');
+      const boundary=document.querySelector(matchMedia('(min-width: 951px)').matches?'#clean-access':'.trust.shell');
+      const expected=Math.ceil(boundary.getBoundingClientRect().bottom-main.getBoundingClientRect().top+1);
+      return Math.abs(parseFloat(getComputedStyle(main).getPropertyValue('--review-start'))-expected)<=1;
+    });
+    const canvas=await page.locator('main#main').evaluate(el=>getComputedStyle(el).backgroundImage);
+    assert.ok(canvas.includes('rgb(255, 255, 255)')&&canvas.includes('rgb(244, 239, 230)'),'white/sand canvas lost at '+width);
     assert.ok(heroSurface.height<800,'hero retained legacy giant min-height at '+width);
     if(width===1440)assert.equal(heroSurface.navVisible,5,'desktop primary navigation lost two destinations');
     const cleanScenes=await page.evaluate(()=>({
