@@ -17,6 +17,8 @@ on:
       - '**/*.js'
       - 'manifest.webmanifest'
       - 'tests/**'
+      - 'scripts/**'
+      - '.github/workflows/pages.yml'
       - '.github/workflows/torremolinos-product-checks.yml'
   workflow_dispatch:
 jobs:
@@ -55,5 +57,35 @@ jobs:
         with:
           name: torremolinos-visual-review
           path: artifacts/screenshots
+          if-no-files-found: ignore
+          retention-days: 7
+
+  international-build:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install international build browser
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.57.0
+          npx playwright install --with-deps chromium
+      - name: Generate and validate international artifact
+        run: |
+          node scripts/build-international.mjs
+          node scripts/check-international.mjs
+      - name: Preserve generated HTML and audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: torremolinos-international-review
+          path: |
+            artifacts/international-site/**/*.html
+            artifacts/international-site/sitemap.xml
+            artifacts/international-report.json
           if-no-files-found: ignore
           retention-days: 7
