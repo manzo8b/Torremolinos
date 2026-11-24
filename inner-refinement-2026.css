@@ -1,0 +1,262 @@
+/* TORREMOLINOS · editorial refinement
+   Agenda, Stories index and Gallery only. Existing photos, links and data unchanged.
+   Strong scope wins over legacy alternating card washes and overline styles. */
+body[data-coast][data-torre-palette]:not(.torre-home){
+ --ref-white:#fff;--ref-sand:#F4EFE6;--ref-card:#FBF8F2;--ref-navy:#10244B;
+ --ref-blue:#096BCB;--ref-dark:#0758AE;--ref-muted:#596579;--ref-line:#E3EAF3;
+ --ref-radius:24px;--ref-gap:clamp(18px,2.4vw,32px);
+ --ref-section:clamp(52px,6.5vw,96px);
+ --ref-font:"DM Sans",system-ui,sans-serif;
+}
+body[data-coast][data-torre-palette]:not(.torre-home)>header{
+ background:#fff!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+body[data-coast][data-torre-palette]:not(.torre-home)>main :is(.eyebrow,.kicker){
+ color:var(--ref-dark)!important;letter-spacing:.075em!important;font:700 12px/1.5 var(--ref-font)!important;
+}
+/* 1 · Agenda: a calm editorial opening, then consistent calendar surfaces. */
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]{
+ background:var(--ref-sand)!important;color:var(--ref-navy)!important;
+}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .hero.wrap{
+ background:var(--ref-card)!important;border:0!important;border-radius:var(--ref-radius)!important;
+ margin-top:clamp(20px,3vw,42px)!important;gap:0!important;overflow:hidden!important;
+ min-height:0!important;box-shadow:none!important;
+}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .hero .hero-copy{
+ padding:clamp(28px,4.6vw,64px)!important;background:var(--ref-card)!important;
+ border:0!important;border-radius:0!important;
+}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .hero .hero-copy h1{
+ font:720 clamp(42px,5.5vw,76px)/1.06 var(--ref-font)!important;
+ letter-spacing:-.045em!important;color:var(--ref-navy)!important;margin:18px 0 22px!important;
+}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .hero h1 :is(em,span){
+ font-style:normal!important;color:var(--ref-navy)!important;
+}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .hero .hero-copy p{
+ font-size:clamp(16px,1.3vw,19px)!important;line-height:1.6!important;color:var(--ref-navy)!important;margin:0 0 24px!important;
+}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .hero .hero-photo{min-height:420px!important}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .hero-links a.cta,
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .search-row a.cta{
+ min-height:44px!important;border-radius:999px!important;background:var(--ref-blue)!important;color:#fff!important;border:1px solid var(--ref-blue)!important;
+}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .hero-links a.cta.alt,
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .search-row a.cta.alt{
+ background:#fff!important;color:var(--ref-dark)!important;border-color:var(--ref-dark)!important;
+}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .trust{padding:18px 0!important;color:var(--ref-muted)!important;border-color:#D4CFC5!important}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .trust i{color:var(--ref-dark)!important}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .stats{gap:clamp(10px,1.5vw,20px)!important;margin-top:22px!important}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .stats .stat{
+ background:var(--ref-card)!important;border:1px solid var(--ref-line)!important;border-radius:18px!important;
+ padding:clamp(16px,2.1vw,26px)!important;box-shadow:none!important;
+}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .stats .stat strong{
+ font:700 clamp(27px,3vw,40px)/1.1 var(--ref-font)!important;color:var(--ref-navy)!important;
+}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .stats .stat p{
+ font:500 13px/1.5 var(--ref-font)!important;color:var(--ref-muted)!important;margin-top:7px!important;
+}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .section{
+ padding-top:var(--ref-section)!important;background:transparent!important;border:0!important;box-shadow:none!important;
+ scroll-margin-top:105px;
+}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .section .secthead{
+ background:transparent!important;border:0!important;padding:0!important;
+ gap:24px!important;margin:0 0 clamp(24px,3vw,36px)!important;align-items:end!important;
+}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .section .secthead h2{
+ font:710 clamp(32px,4.2vw,57px)/1.1 var(--ref-font)!important;letter-spacing:-.035em!important;
+ color:var(--ref-navy)!important;margin:10px 0 0!important;
+}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .section .secthead p{color:var(--ref-muted)!important;line-height:1.6!important;font-size:15px!important;margin:0!important}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main #highlights{gap:var(--ref-gap)!important;align-items:stretch!important}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main #highlights .highlight:nth-child(n){
+ background:var(--ref-card)!important;color:var(--ref-navy)!important;
+ border:1px solid var(--ref-line)!important;border-radius:var(--ref-radius)!important;box-shadow:none!important;
+ padding:clamp(22px,2.8vw,36px)!important;min-height:250px!important;gap:20px!important;
+}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main #highlights .highlight strong{
+ font:690 clamp(24px,2.6vw,36px)/1.15 var(--ref-font)!important;letter-spacing:-.025em!important;color:var(--ref-navy)!important;margin:0 0 12px!important;
+}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main #highlights .highlight small{
+ font:700 12px/1.5 var(--ref-font)!important;color:var(--ref-dark)!important;letter-spacing:.025em!important;
+}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main #highlights .highlight p{font-size:14px!important;color:var(--ref-muted)!important;margin:0!important}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main #highlights .highlight .go{
+ color:var(--ref-dark)!important;font-size:14px!important;font-weight:650!important;
+}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .toolbox{
+ padding:clamp(18px,2.4vw,30px)!important;border-radius:var(--ref-radius)!important;
+ background:var(--ref-card)!important;border:1px solid var(--ref-line)!important;box-shadow:none!important;
+ margin:0 0 24px!important;
+}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .search-row{gap:12px!important}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .search-row :is(label,select){min-height:46px!important;border-radius:12px!important;border-color:#A5B1C2!important;background:#fff!important}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .chips{gap:9px!important;margin-top:18px!important}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .chips button{
+ min-height:44px!important;border-radius:999px!important;border:1px solid #A5B1C2!important;
+ background:#fff!important;color:var(--ref-navy)!important;font:600 13px/1.3 var(--ref-font)!important;
+}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .chips button[aria-pressed=true]{
+ background:var(--ref-blue)!important;color:white!important;border-color:var(--ref-blue)!important;
+}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main :is(#dataStatus,#count){color:var(--ref-muted)!important;font-size:13px!important}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .event-month{margin:32px 0 40px!important}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .event-month>h3{
+ font:700 clamp(25px,3vw,38px)/1.15 var(--ref-font)!important;color:var(--ref-navy)!important;
+ letter-spacing:-.025em!important;border-color:#D4CFC5!important;padding-bottom:16px!important;margin-bottom:20px!important;
+}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .event-list{gap:var(--ref-gap)!important}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main #events .event:nth-child(n),
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main #watchlist .watchitem{
+ background:var(--ref-card)!important;border:1px solid var(--ref-line)!important;
+ border-radius:var(--ref-radius)!important;box-shadow:none!important;padding:clamp(20px,2.4vw,30px)!important;gap:18px!important;
+}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main #events .event .date{
+ background:var(--ref-navy)!important;color:var(--ref-sand)!important;border-radius:16px!important;
+}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main #events .event .date strong{
+ font:700 32px/1.15 var(--ref-font)!important;color:var(--ref-sand)!important;
+}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main #events .event .date small{color:var(--ref-sand)!important}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main #events .event .detail h4,
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main #watchlist .watchitem h3{
+ color:var(--ref-navy)!important;font:700 clamp(20px,2.1vw,28px)/1.2 var(--ref-font)!important;letter-spacing:-.02em!important;margin:10px 0 12px!important;
+}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main #events .event :is(.meta,.event-note),
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main #watchlist .watchitem p{color:var(--ref-muted)!important;font-size:13px!important;line-height:1.6!important}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main #events .event .badge{
+ background:#E7EFF8!important;color:var(--ref-navy)!important;border-radius:999px!important;
+ padding:4px 8px!important;letter-spacing:.025em!important;font-size:11px!important;
+}
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main #events .actionlinks a,
+html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main #watchlist .watchitem a{
+ background:transparent!important;color:var(--ref-dark)!important;border:0!important;box-shadow:none!important;
+ text-decoration:underline!important;text-underline-offset:3px!important;display:inline-flex!important;align-items:center!important;min-height:44px!important;font-size:13px!important;
+}
+/* 2 · Stories: no oversized white intro card; equal editorial rhythm. */
+html body[data-coast][data-torre-palette="stories"]>main.page .index-hero{
+ background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;
+ padding:clamp(42px,6vw,84px) 0 clamp(26px,3.5vw,44px)!important;gap:clamp(20px,4vw,60px)!important;
+}
+html body[data-coast][data-torre-palette="stories"]>main.page .index-hero h1{
+ font:720 clamp(48px,7vw,94px)/1.05 var(--ref-font)!important;letter-spacing:-.05em!important;margin:12px 0 0!important;
+}
+html body[data-coast][data-torre-palette="stories"]>main.page .index-hero p{
+ font-size:clamp(16px,1.5vw,20px)!important;color:var(--ref-navy)!important;line-height:1.65!important;margin:0!important;
+}
+html body[data-coast][data-torre-palette="stories"]>main.page .index-list{
+ grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:var(--ref-gap)!important;margin:0 0 var(--ref-section)!important;
+ align-items:stretch!important;
+}
+html body[data-coast][data-torre-palette="stories"]>main.page .index-list .story-card:nth-child(n){
+ display:flex!important;flex-direction:column!important;min-width:0!important;
+ background:var(--ref-card)!important;border:1px solid var(--ref-line)!important;border-radius:var(--ref-radius)!important;overflow:hidden!important;
+ box-shadow:none!important;transform-style:flat!important;
+}
+html body[data-coast][data-torre-palette="stories"]>main.page .index-list .story-card>img{
+ width:100%!important;height:auto!important;aspect-ratio:16/10!important;object-fit:cover!important;
+ border-radius:0!important;display:block!important;
+}
+html body[data-coast][data-torre-palette="stories"]>main.page .index-list .story-card>.photo-credit{
+ background:transparent!important;margin:0!important;padding:12px clamp(18px,2vw,26px) 0!important;
+ min-height:3.7em!important;color:var(--ref-muted)!important;font:400 11px/1.5 var(--ref-font)!important;
+}
+html body[data-coast][data-torre-palette="stories"]>main.page .index-list .story-card .story-text{
+ display:flex!important;flex-direction:column!important;flex:1!important;gap:12px!important;
+ background:transparent!important;padding:clamp(18px,2.1vw,28px)!important;color:var(--ref-navy)!important;
+}
+html body[data-coast][data-torre-palette="stories"]>main.page .index-list .story-card .story-text h2{
+ font:700 clamp(23px,2.3vw,32px)/1.17 var(--ref-font)!important;color:var(--ref-navy)!important;
+ letter-spacing:-.025em!important;margin:0!important;overflow-wrap:anywhere!important;
+}
+html body[data-coast][data-torre-palette="stories"]>main.page .index-list .story-card .story-text p{
+ color:var(--ref-muted)!important;font:400 15px/1.6 var(--ref-font)!important;margin:0!important;
+}
+html body[data-coast][data-torre-palette="stories"]>main.page .index-list .story-card .story-text small{
+ color:var(--ref-dark)!important;font:650 11px/1.5 var(--ref-font)!important;letter-spacing:.03em!important;
+}
+html body[data-coast][data-torre-palette="stories"]>main.page .index-list .story-card .story-text small:last-child{
+ margin-top:auto!important;padding-top:12px!important;font-size:14px!important;letter-spacing:0!important;text-transform:none!important;
+}
+/* 3 · Gallery: unboxed title and filters, two-column photographic album.
+   Existing initial HTML frames remain in place for stable hydration. */
+html body[data-coast][data-torre-palette="gallery"]>main.shell .hero{
+ background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;
+ padding:clamp(36px,5vw,72px) 0 24px!important;margin:0!important;
+}
+html body[data-coast][data-torre-palette="gallery"]>main.shell .hero h1{
+ font:720 clamp(48px,6.5vw,84px)/1.08 var(--ref-font)!important;letter-spacing:-.045em!important;margin:0 0 16px!important;
+}
+html body[data-coast][data-torre-palette="gallery"]>main.shell .hero p{
+ color:var(--ref-navy)!important;font:500 clamp(17px,1.8vw,23px)/1.5 var(--ref-font)!important;
+ margin:0!important;
+}
+html body[data-coast][data-torre-palette="gallery"]>main.shell .filterbar{
+ background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;
+ padding:4px 0 26px!important;gap:10px!important;margin:0!important;
+}
+html body[data-coast][data-torre-palette="gallery"]>main.shell .filterbar button{
+ background:#fff!important;color:var(--ref-navy)!important;border:1px solid #A5B1C2!important;
+ border-radius:999px!important;min-height:44px!important;font:600 13px/1.3 var(--ref-font)!important;
+}
+html body[data-coast][data-torre-palette="gallery"]>main.shell .filterbar button[aria-pressed=true]{
+ background:var(--ref-blue)!important;color:#fff!important;border-color:var(--ref-blue)!important;
+}
+html body[data-coast][data-torre-palette="gallery"]>main.shell #galleryGrid{
+ gap:var(--ref-gap)!important;align-items:start!important;
+}
+html body[data-coast][data-torre-palette="gallery"]>main.shell #galleryGrid .gallery-card:nth-child(n){
+ background:var(--ref-card)!important;border:1px solid var(--ref-line)!important;border-radius:var(--ref-radius)!important;
+ overflow:hidden!important;box-shadow:none!important;transform-style:flat!important;
+}
+html body[data-coast][data-torre-palette="gallery"]>main.shell #galleryGrid .image-button{
+ border-radius:var(--ref-radius) var(--ref-radius) 0 0!important;background:#E7EFF8!important;
+}
+html body[data-coast][data-torre-palette="gallery"]>main.shell #galleryGrid .gallery-card .gallery-copy{
+ display:flex!important;flex-direction:column!important;align-items:flex-start!important;
+ gap:5px!important;padding:18px 22px 22px!important;background:transparent!important;
+}
+html body[data-coast][data-torre-palette="gallery"]>main.shell #galleryGrid .gallery-title{
+ color:var(--ref-navy)!important;font:650 20px/1.3 var(--ref-font)!important;letter-spacing:-.015em!important;
+}
+html body[data-coast][data-torre-palette="gallery"]>main.shell #galleryGrid .gallery-credit{
+ display:block!important;color:var(--ref-muted)!important;font:400 12px/1.5 var(--ref-font)!important;
+}
+/* Discreet, CSS-only interaction; no scroll reveal or JS animation. */
+html body[data-coast][data-torre-palette]:not(.torre-home)>main :is(.highlight,.story-card,.gallery-card){
+ transition:transform .24s ease,box-shadow .24s ease!important;
+}
+@media(hover:hover) and (pointer:fine){
+ html body[data-coast][data-torre-palette]:not(.torre-home)>main :is(.highlight,.story-card,.gallery-card):hover{
+ transform:translateY(-3px)!important;box-shadow:0 10px 28px #10244B12!important;
+ }
+}
+html body[data-coast][data-torre-palette]:not(.torre-home)>main :is(a,button,input,select):focus-visible{
+ outline:3px solid var(--ref-dark)!important;outline-offset:3px!important;
+}
+html body[data-coast][data-torre-palette="gallery"]>main #galleryGrid .gallery-card:focus-within{outline-color:var(--ref-dark)!important}
+@media(max-width:950px){
+ html body[data-coast][data-torre-palette="stories"]>main.page .index-list{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:760px){
+ html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .hero .hero-photo{height:265px!important;min-height:265px!important}
+ html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .hero .hero-copy{padding:28px 24px!important}
+ html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .hero .hero-copy h1{font-size:clamp(42px,10vw,60px)!important}
+ html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .stats{grid-template-columns:1fr!important}
+ html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .stats .stat{display:flex!important;align-items:center!important;gap:16px!important}
+ html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .stats .stat p{margin:0!important}
+ html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main .search-row{grid-template-columns:minmax(0,1fr)!important}
+ html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main #events .event{gap:12px!important;padding:18px!important}
+ html body.torre-agenda[data-coast][data-torre-palette="agenda"]>main #highlights .highlight:nth-child(n){min-height:210px!important}
+ html body[data-coast][data-torre-palette="stories"]>main.page .index-hero{display:block!important}
+ html body[data-coast][data-torre-palette="stories"]>main.page .index-hero p{margin-top:18px!important}
+ html body[data-coast][data-torre-palette="stories"]>main.page .index-list{grid-template-columns:minmax(0,1fr)!important}
+ html body[data-coast][data-torre-palette="stories"]>main.page .index-list .story-card>.photo-credit{min-height:0!important}
+}
+@media(prefers-reduced-motion:reduce){
+ html body[data-coast][data-torre-palette]:not(.torre-home)>main :is(.highlight,.story-card,.gallery-card,.image-button img){transition:none!important;transform:none!important;animation:none!important}
+}
