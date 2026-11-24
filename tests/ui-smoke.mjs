@@ -25,6 +25,55 @@ try{
   await waitForServer();
   browser=await chromium.launch({headless:true,args:['--disable-dev-shm-usage']});
   mkdirSync('artifacts/screenshots',{recursive:true});
+  // iPhone-focused hotfix regression: widths 320, 375 and 414 CSS pixels.
+  // Browser emulation, not a claim of testing a physical iPhone.
+  for(const width of [320,375,414]){
+    const ctx=await browser.newContext({viewport:{width,height:812},deviceScaleFactor:1,isMobile:true,hasTouch:true,locale:'it-IT',reducedMotion:'reduce'});
+    await ctx.route('**/*',r=>new URL(r.request().url()).hostname==='127.0.0.1'?r.continue():r.abort());
+    const p=await ctx.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));
+    await p.goto(base+'/?lang=it',{waitUntil:'domcontentloaded'});
+    const menu=p.locator('.tm-mobile-menu'),trigger=menu.locator('summary'),panel=menu.locator('nav');
+    await trigger.waitFor({state:'visible'});
+    assert.equal(await panel.isVisible(),false,'closed menu visible '+width);
+    assert.equal(await panel.locator('a').count(),9);
+    await trigger.tap();
+    await panel.waitFor({state:'visible'});
+    const header=await p.evaluate(()=>{
+      const r=s=>{const b=document.querySelector(s).getBoundingClientRect();return {left:b.left,right:b.right,top:b.top,bottom:b.bottom,width:b.width,height:b.height}};
+      return {viewport:innerWidth,logo:r('.topbar .brand-logo-link'),lang:r('.topbar .langwrap'),trigger:r('.tm-mobile-menu-trigger'),panel:r('.tm-mobile-panel')};
+    });
+    assert.ok(header.trigger.height>=44&&header.trigger.width>=44,'tap target '+width);
+    assert.ok(header.logo.right<=header.lang.left+1&&header.lang.right<=header.trigger.left+1,'header overlaps '+JSON.stringify(header));
+    assert.ok(header.panel.left>=-1&&header.panel.right<=header.viewport+1,'menu clipped '+JSON.stringify(header));
+    assert.ok(await panel.getByText('Mangiare',{exact:true}).isVisible());
+    await p.screenshot({path:'artifacts/screenshots/iphone-menu-'+width+'.png',animations:'disabled'});
+    await p.keyboard.press('Escape');assert.equal(await menu.getAttribute('open'),null);
+    await trigger.tap();await panel.locator('a[href="#plan"]').tap();
+    assert.equal(await menu.getAttribute('open'),null);
+    const bridge=p.locator('.editorial-bridge.shell');await bridge.scrollIntoViewIfNeeded();
+    const layout=await bridge.evaluate(e=>{
+      const r=n=>{const b=n.getBoundingClientRect();return {left:b.left,right:b.right,top:b.top,bottom:b.bottom,width:b.width,height:b.height}};
+      const copy=e.querySelector('.editorial-bridge-copy'),cta=e.querySelector('.editorial-bridge-action'),h=copy.querySelector('h2');
+      return {box:r(e),copy:r(copy),cta:r(cta),title:r(h),position:getComputedStyle(cta).position,direction:getComputedStyle(e).flexDirection};
+    });
+    assert.equal(layout.direction,'column');
+    assert.equal(layout.position,'static');
+    assert.ok(layout.cta.top>=layout.copy.bottom-1,'CTA overlaps text '+JSON.stringify(layout));
+    assert.ok(layout.copy.width>=layout.box.width-50&&layout.title.width>=layout.copy.width-2,'text squeezed '+JSON.stringify(layout));
+    assert.ok(layout.cta.left>=layout.box.left&&layout.cta.right<=layout.box.right+1,'CTA outside card');
+    await bridge.screenshot({path:'artifacts/screenshots/iphone-bridge-'+width+'.png',animations:'disabled'});
+    if(width===375){
+      for(const lang of ['es','en','it','de','fr','ru']){
+        await p.locator('#lang').selectOption(lang);
+        await p.waitForFunction(l=>document.documentElement.lang===l,lang);
+        assert.ok((await trigger.innerText()).trim().length>0,'missing menu label '+lang);
+        assert.ok((await panel.getAttribute('aria-label')).length>4);
+      }
+    }
+    assert.deepEqual(errors,[],'mobile JS errors '+width);
+    console.log('PASS iPhone hotfix '+width+' '+JSON.stringify(layout));
+    await ctx.close();
+  }
   const sizes=[360,390,768,1024,1440];
   for(const width of sizes){
     const context=await browser.newContext({viewport:{width,height:860},deviceScaleFactor:1,locale:'it-IT',reducedMotion:'reduce'});
