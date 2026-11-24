@@ -28,7 +28,11 @@ try{
       const style=(s,prop)=>{const el=document.querySelector(s);return el?getComputedStyle(el)[prop]:null};
       const styles=(s,prop)=>[...document.querySelectorAll(s)].map(el=>getComputedStyle(el)[prop]);
       const contrast=await axe.run(document,{runOnly:{type:'rule',values:['color-contrast']}});
-      return {scroll:document.documentElement.scrollWidth,bg:style('body','backgroundColor'),heading:style('h1','color'),
+      const viewport=document.documentElement.clientWidth;
+      const overflowNodes=[...document.querySelectorAll('body *')].map(el=>({el,rect:el.getBoundingClientRect()}))
+        .filter(({el,rect})=>rect.width>0&&(rect.right>viewport+1||rect.left< -1)&&getComputedStyle(el).position!=='fixed')
+        .map(({el,rect})=>({tag:el.tagName,id:el.id,cls:String(el.className).slice(0,140),left:Math.round(rect.left),right:Math.round(rect.right)})).slice(0,30);
+      return {scroll:document.documentElement.scrollWidth,overflowNodes,bg:style('body','backgroundColor'),heading:style('h1','color'),
         cards:styles(route==='agenda'?'#highlights .highlight,#events .event,#watchlist .watchitem':route==='stories'?'.index-list .story-card':'#galleryGrid .gallery-card','backgroundColor'),
         padding:style(route==='agenda'?'#highlights .highlight':route==='stories'?'.story-text':'.gallery-copy','paddingLeft'),
         intro:style(route==='stories'?'.index-hero':'.hero','backgroundColor'),
@@ -45,7 +49,7 @@ try{
    }
    const [b,a]=pair,old=new Set(b.contrast.map(x=>JSON.stringify(x.target)));
    const added=a.contrast.filter(x=>!old.has(JSON.stringify(x.target)));
-   if(a.http!==200||a.scroll>width+1||a.errors.length)report.errors.push({route,width,http:a.http,scroll:a.scroll,errors:a.errors});
+   if(a.http!==200||a.scroll>width+1||a.errors.length)report.errors.push({route,width,http:a.http,scroll:a.scroll,overflowNodes:a.overflowNodes,errors:a.errors});
    if(a.bg!=='rgb(244, 239, 230)'||a.heading!=='rgb(16, 36, 75)'||!a.cards.length||a.cards.some(x=>x!=='rgb(251, 248, 242)')||parseFloat(a.padding)<18)report.errors.push({route,width,colors:a.cards,bg:a.bg,heading:a.heading,padding:a.padding});
    if(route!=='agenda'&&a.intro!=='rgba(0, 0, 0, 0)')report.errors.push({route,width,intro:a.intro});
    if(route==='gallery'&&a.filter!=='rgba(0, 0, 0, 0)')report.errors.push({route,width,filter:a.filter});
