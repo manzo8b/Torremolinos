@@ -11,23 +11,30 @@ try{
  browser=await chromium.launch({headless:true,args:['--disable-dev-shm-usage']});
  const ctx=await browser.newContext({viewport:{width:390,height:850},serviceWorkers:'block',reducedMotion:'reduce'});
  const p=await ctx.newPage();const errors=[];p.on('pageerror',e=>errors.push(e.message));
- let unblock;const held=new Promise(resolve=>unblock=resolve);
+ let unblock,allowScripts;const held=new Promise(resolve=>unblock=resolve),scriptGate=new Promise(resolve=>allowScripts=resolve);
  await ctx.route('**/*',async route=>{
   const u=new URL(route.request().url());
   if(u.hostname!=='127.0.0.1')return route.abort();
+  if(u.pathname==='/gallery/app.js'||u.pathname==='/gallery/data.js')await scriptGate;
   if(u.pathname.endsWith('/album/palmeras-sol.webp'))await held;
   return route.continue();
  });
- await p.goto(base+'gallery/?lang=es',{waitUntil:'domcontentloaded'});
+ await p.goto(base+'gallery/?lang=es',{waitUntil:'commit'});
+ await p.locator('footer.footer').waitFor({state:'attached'});
+ await p.waitForFunction(()=>document.querySelector('.gallery-card')?.getBoundingClientRect().height>100);
+ const footerBefore=(await p.locator('footer.footer').boundingBox()).y;
+ allowScripts();await p.waitForLoadState('domcontentloaded');
  assert.equal(await p.locator('.gallery-card:not([hidden])').count(),7);
  const first=p.locator('.gallery-card:not([hidden])').first();
  assert.ok(await first.getAttribute('aria-busy'));
  const before=await first.boundingBox();assert.ok(before&&before.height>100);
+ const footerHydrated=(await p.locator('footer.footer').boundingBox()).y;
+ assert.ok(Math.abs(footerBefore-footerHydrated)<1,'Gallery footer moved during hydration: '+footerBefore+' -> '+footerHydrated);
  unblock();
  await p.waitForFunction(()=>!document.querySelector('.gallery-card .image-button').disabled);
  const after=await first.boundingBox();assert.ok(Math.abs(before.height-after.height)<1,'Loaded image must preserve reserved card height');
  await first.locator('.image-button').click();await p.locator('#viewer[open]').waitFor();
- await p.keyboard.press('Escape');records.push({galleryVisibleWhileLoading:7,reservedHeight:before.height,loadedHeight:after.height,lightbox:true});
+ await p.keyboard.press('Escape');records.push({galleryVisibleWhileLoading:7,reservedHeight:before.height,loadedHeight:after.height,footerBefore,footerHydrated,lightbox:true});
  await p.goto(base+'listen/?lang=it',{waitUntil:'domcontentloaded'});
  for(const lang of ['it','de','fr','ru','en','es']){
   await p.locator('#lang').selectOption(lang);

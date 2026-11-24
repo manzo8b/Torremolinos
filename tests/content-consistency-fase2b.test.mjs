@@ -78,3 +78,15 @@ test('C-17 licensed image credits directly link to source and license without as
   assert.match(html,/<time datetime="2026-11-02">2 noviembre 2026<\/time>/);
  }
 });
+
+test('Gallery initial HTML matches published data, avoids hydration layout insertion and excludes pending art',()=>{
+ const html=read('gallery/index.html');
+ const initial=html.match(/<div id="galleryGrid" class="gallery-grid">([\s\S]*?)<div id="empty"/)?.[1];
+ assert.ok(initial);
+ const visible=gallery.images.filter(e=>e.publicationStatus!=='pending_review');
+ assert.deepEqual([...initial.matchAll(/data-gallery-id="([^"]+)"/g)].map(x=>x[1]),visible.map(e=>e.id));
+ for(const e of visible)assert.ok(initial.includes('src="'+e.src+'"'),e.id);
+ for(const e of gallery.images.filter(e=>e.publicationStatus==='pending_review'))assert.ok(!initial.includes(e.src));
+ assert.doesNotMatch(galleryApp,/main\.append\(article\)/);
+ assert.match(initial,/loading="eager" decoding="async" fetchpriority="high"/);
+});

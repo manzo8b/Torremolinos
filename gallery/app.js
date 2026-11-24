@@ -37,7 +37,7 @@ function creditKey(entry){
 }
 function update(){
  const ready=source.images.filter(e=>state.get(e.id)==="ready");
- const available=source.images.filter(e=>state.get(e.id)==="ready"||state.get(e.id)==="loading");
+ const available=source.images.filter(e=>cards.has(e.id));
  const pending=source.images.some(e=>state.get(e.id)==="loading");
  if(filter!=="all"&&!available.some(e=>belongs(e,filter)))filter="all";
  document.querySelectorAll("[data-filter]").forEach(btn=>{
@@ -50,7 +50,7 @@ function update(){
  source.images.forEach(e=>{
    const node=cards.get(e.id);
    if(!node)return;
-   const visible=state.get(e.id)!=="missing"&&belongs(e,filter);
+   const visible=belongs(e,filter);
    node.hidden=!visible;
    if(visible)shown++;
  });
@@ -72,19 +72,20 @@ function setLang(next){
 }
 function item(entry){
  if(entry.publicationStatus==="pending_review")return;
- const article=document.createElement("article");article.className="gallery-card";article.dataset.type=entry.category;article.dataset.provenance=entry.provenance;
- article.hidden=false;article.setAttribute("aria-busy","true");state.set(entry.id,"loading");
- const button=document.createElement("button");button.type="button";button.className="image-button";button.setAttribute("aria-label",label(entry,"title"));
- const img=document.createElement("img");img.alt=label(entry,"alt");img.loading=cards.size===0?"eager":"lazy";img.decoding="async";
- if(cards.size===0)img.fetchPriority="high";button.disabled=true;
- img.addEventListener("load",()=>{state.set(entry.id,"ready");article.removeAttribute("aria-busy");button.disabled=false;update()});
- img.addEventListener("error",()=>{state.set(entry.id,"missing");article.removeAttribute("aria-busy");update()});
- button.append(img);button.addEventListener("click",()=>open(entry));
- const info=document.createElement("div");info.className="gallery-copy";
- const title=document.createElement("strong");title.className="gallery-title";title.textContent=label(entry,"title");
- const credit=document.createElement("small");credit.className="gallery-credit";credit.textContent=tr(creditKey(entry));
- info.append(title,credit);article.append(button,info);main.append(article);cards.set(entry.id,article);
- img.src=entry.src;
+ const article=[...main.querySelectorAll("[data-gallery-id]")].find(n=>n.dataset.galleryId===entry.id);
+ if(!article)throw Error("Missing static Gallery card: "+entry.id);
+ const button=article.querySelector(".image-button"),img=button.querySelector("img");
+ cards.set(entry.id,article);state.set(entry.id,"loading");
+ const settle=ok=>{
+  state.set(entry.id,ok?"ready":"missing");article.removeAttribute("aria-busy");button.disabled=!ok;
+  if(!ok){article.dataset.imageUnavailable="true";img.alt=label(entry,"alt");}
+  update();
+ };
+ img.addEventListener("load",()=>settle(true),{once:true});
+ img.addEventListener("error",()=>settle(false),{once:true});
+ button.addEventListener("click",()=>open(entry));
+ if(img.complete&&img.naturalWidth>0)settle(true);
+ else if(img.complete&&img.getAttribute("loading")!=="lazy")settle(false);
 }
 function visibleEntries(){return source.images.filter(e=>state.get(e.id)==="ready"&&belongs(e,filter))}
 function open(entry){
