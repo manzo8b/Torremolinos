@@ -1,0 +1,58 @@
+name: TORREMOLINOS — inner refinement audit
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'inner-refinement-2026.css'
+      - 'tests/inner-refinement-browser.mjs'
+      - '.github/workflows/inner-refinement.yml'
+permissions:
+  contents: read
+jobs:
+  refinement:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: d3ddf818e05359eac8989433b66c1c850942d28e
+          path: baseline
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          path: candidate
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify unchanged photos, datasets and HTML content
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          b=Path('baseline')
+          c=Path('candidate')
+          for p in b.glob('**/*.html'):
+              rel=p.relative_to(b)
+              expected=p.read_bytes()
+              actual=(c/rel).read_bytes()
+              if str(rel) in ['agenda/index.html','stories/index.html','gallery/index.html']:
+                  actual=actual.replace(b'<link rel="stylesheet" href="../inner-refinement-2026.css">\n',b'')
+              assert actual==expected,rel
+          for root in ['assets','brand','agenda','gallery','stories']:
+              for p in (b/root).rglob('*'):
+                  if p.is_file() and p.suffix!='.html':
+                      assert p.read_bytes()==(c/p.relative_to(b)).read_bytes(),p
+          print('Original photos, data, links and Home unchanged')
+          PY
+      - name: Install browser and accessibility checks
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.57.0 axe-core@4.10.3
+          npx playwright install --with-deps chromium
+      - name: Compare at five viewport widths
+        run: node candidate/tests/inner-refinement-browser.mjs
+      - name: Preserve visual evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: inner-refinement-before-after
+          path: artifacts/inner-refinement/
+          retention-days: 30
